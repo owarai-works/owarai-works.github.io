@@ -53,8 +53,10 @@ def ok(v):
 def key(v):
     rn = v.get("rn") or 0
     return (-(v.get("score") or 0), -((v.get("rsum") or 0) / rn if rn else 0), -(v.get("likes") or 0), -(v.get("at") or 0))
+PICS = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "odai_pics.json"), encoding="utf-8"))
 def slim(v):
-    return {"odai": str(v.get("ctx") or "")[:60], "text": str(v.get("text") or "")[:60], "score": v.get("score") or 0, "likes": v.get("likes") or 0, "kind": v.get("kind") or "", "at": v.get("at") or 0}
+    pic = PICS.get(str(v.get("sid") or ""))
+    return {"pic": ("assets/img/odai/" + pic) if pic else "", "odai": str(v.get("ctx") or "")[:60], "text": str(v.get("text") or "")[:60], "score": v.get("score") or 0, "likes": v.get("likes") or 0, "kind": v.get("kind") or "", "at": v.get("at") or 0}
 def hall_list(rows): return [slim(v) for v in sorted(filter(ok, rows), key=key)[:30]]
 hall_all = []
 for p in glob.glob(os.path.join(dump, "hall", "*.json")):

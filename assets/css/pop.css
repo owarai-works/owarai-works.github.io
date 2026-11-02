@@ -954,3 +954,14 @@ body{background:transparent!important}
 .hc-t{font-size:clamp(17px,1.7vw,20px)}
 .hc.big .hc-t{font-size:clamp(19px,2vw,24px)}
 .hc-o{font-size:13px}
+
+/* 殿堂の回答：読みやすい書体（Noto Sans JP）・ふち取りや影なし */
+.hc-t,.hc.big .hc-t,.rk-hall p{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif!important;font-weight:700!important;letter-spacing:.02em;line-height:1.6;-webkit-text-stroke:0!important;text-shadow:none!important;color:#1c1012}
+.hc-o,.rk-hall small{font-family:"Noto Sans JP",sans-serif;font-weight:500}
+/* お題の絵 */
+.hc-pic{margin:0 0 4px;border:2px solid var(--ink);border-radius:8px;overflow:hidden;background:#000}
+.hc-pic img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.hc.big .hc-pic img{aspect-ratio:16/10}
+.rk-hall li.has-pic{grid-template-columns:30px 84px 1fr}
+.rk-pic{width:84px;height:63px;object-fit:cover;border:2px solid var(--ink);border-radius:6px}
+.hl-top{align-items:start}
