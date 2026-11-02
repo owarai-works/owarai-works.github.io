@@ -103,7 +103,7 @@ body[data-page="support"] .fb-open{display:none}
       add(esc(q), "me"); history.push({role: "user", text: q});
       const t = add("…", "bot typing");
       await new Promise(r => setTimeout(r, 450));
-      const f = find(q); let ans = f ? f.a : null;
+      const f = find(q); let ans = f ? f.a : null; window.owTrack && owTrack("bot_ask", {answered: !!f, topic: f ? f.q : "unknown"});
       if (!ans && window.SITE && SITE.aiEndpoint) {
         try { const r = await fetch(SITE.aiEndpoint, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({q, history: history.slice(-8)})}); const j = await r.json(); if (j && j.answer) ans = esc(j.answer).replace(/\n/g, "<br>"); } catch (e) {}
       }

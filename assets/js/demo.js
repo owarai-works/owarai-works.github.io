@@ -60,7 +60,7 @@ window.owDemoMount = () => {
   const choicesHTML = list => `<div class="dm-ch">${list.map((c, i) => `<button type="button" data-i="${i}"><i>${"ABCD"[i]}</i><span>${esc(c[0])}</span></button>`).join("")}</div>`;
   const judgeHTML = p => { const [k, w, t] = JUDGE[p]; return `<div class="dm-judge s${p}"><img src="${face(k)}" alt=""><div><b>${p}点・${w}</b><small>${t}</small></div></div>`; };
   const clear = () => clearInterval(timer);
-  const share = t => `<a class="btn sm dm-share" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(t + "\n#お笑い道場なんでやねん #大喜利")}&url=${encodeURIComponent("https://owarai-works.github.io/")}">𝕏 結果をポストする</a>`;
+  const share = t => `<a class="btn sm dm-share" onclick="owTrack('share',{method:'x',content_type:'demo_result'})" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(t + "\n#お笑い道場なんでやねん #大喜利")}&url=${encodeURIComponent("https://owarai-works.github.io/")}">𝕏 結果をポストする</a>`;
   /* 結果は絵の上に重ねて出す（下に足すと画面がのびるため） */
   const place = res => { const pic = stage.querySelector(".dm-pic,.dm-card"); res.style.top = (pic ? pic.offsetTop : 60) + "px"; res.classList.add("on"); };
 
@@ -84,7 +84,7 @@ window.owDemoMount = () => {
         place(res);
       });
     };
-    const end = () => { const [r, k] = RANK(total); sfx("slap");
+    const end = () => { const [r, k] = RANK(total); sfx("slap"); owTrack("demo_finish", {mode: kind, score: total});
       stage.innerHTML = `<div class="dm-end"><img src="${face(k)}" alt=""><p class="dm-end-t">${kind === "manga" ? "漫画セリフ" : "大喜利"}の結果</p><p class="dm-end-s"><b>${total}</b>点 / 300点</p><p class="dm-end-r">${r}</p>
         <p class="dm-end-c">ゲームでは、<b>自分で考えた答え</b>をAIが100点満点で採点！<br>お題は11種類・数百問。あなたのセンスを全国にぶつけよう。</p>
         <div class="dm-end-b"><button type="button" class="btn sm dm-again">もう一回</button>${share(`「お笑い道場なんでやねん」の${kind === "manga" ? "漫画セリフ" : "大喜利"}体験で${total}点！判定は「${r}」でした😂 あなたは何点？`)}<a class="btn ghost sm" href="game.html">ゲーム紹介を見る</a></div></div>`;
@@ -120,15 +120,15 @@ window.owDemoMount = () => {
       stage.querySelectorAll(".dm-ch button").forEach(b => b.onclick = () => decide(+b.dataset.i));
       timer = setInterval(() => { left--; if (tEl.isConnected) tEl.textContent = left; if (left <= 5) tEl.parentElement.classList.add("hurry"); if (left <= 0) decide(-1); }, 1000);
     };
-    const end = () => { const win = me >= 3; sfx("slap");
+    const end = () => { const win = me >= 3; sfx("slap"); owTrack("demo_finish", {mode: "gassen", win});
       stage.innerHTML = `<div class="dm-end ${win ? "win" : ""}"><img src="${face(win ? "kineko" : "aoi")}" alt=""><p class="dm-end-t">お題合戦</p><p class="dm-end-s"><b>${win ? "勝利！" : "敗北…"}</b></p><p class="dm-end-r">${me} 本 − ${cpu} 本</p>
         <p class="dm-end-c">${win ? "やるやん！その笑いのセンス、本番で試してみ？" : "葵「まだまだやな。本番で待ってるで」"}<br>ゲームでは<b>自分で考えた答え</b>で、全国のライバルと<b>ランクマッチ</b>！</p>
         <div class="dm-end-b"><button type="button" class="btn sm dm-again">もう一回</button>${share(`「お笑い道場なんでやねん」のお題合戦で、葵に${me}本−${cpu}本で${win ? "勝利！🏆" : "敗北…😭"} あなたは勝てる？`)}<a class="btn ghost sm" href="game.html#gassen">お題合戦をくわしく</a></div></div>`;
       stage.querySelector(".dm-again").onclick = gassen; };
     stage.innerHTML = head() + `<div class="dm-start"><p class="dm-big">いざ尋常に、<b>勝負！</b></p><p>同じお題で、葵と<b>3本先取</b>の笑いの勝負。<br>1本15秒。点数が高い方が1本！</p><button type="button" class="btn dm-go">勝負をはじめる <span class="arw" aria-hidden="true">→</span></button></div>`;
-    stage.querySelector(".dm-go").onclick = round;
+    stage.querySelector(".dm-go").onclick = () => { owTrack("demo_start", {mode: "gassen"}); round(); };
   }
-  const start = () => mode === "gassen" ? gassen() : solo(mode);
+  const start = () => { owTrack("demo_open", {mode}); mode === "gassen" ? gassen() : solo(mode); };
   start();
 };
 owDemoMount();

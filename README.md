@@ -43,3 +43,8 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 - 背景に2頭身のシスターズと小物（`assets/img/fun/`、元の素材シートは `docs/homepage/gen/sheet/`）がふわふわ降る。
 - 何もないところを押すと「なんでやねん！」とハリセンの衝撃。画面上の「笑いメーター」。ときどきシスターズがひょっこり顔を出して体験コーナーへさそう。スマホは「30秒で体験する」ボタン。
 - ミニゲーム16種類の画面は `assets/img/mg/`（ゲームを動かして撮影）。
+
+## アクセス解析
+- Google アナリティクス（測定 ID `G-VZ29R3E1TW`）を全ページの `<head>` に入れた。見るのは https://analytics.google.com （あなたの Google アカウントだけ）。
+- 送っているイベント：`demo_open`・`demo_start`・`demo_finish`（体験コーナー）、`share`（結果のポスト）、`store_click`（App Store）、`movie_play`、`bot_ask`（質問ボット）、`peek_click`・`cta_demo_click`、`gate_open`、`collab_click`、`bgm_toggle`、`button_click`。
+- Search Console の確認タグは、もらったら各ページの `<head>` に入れる。

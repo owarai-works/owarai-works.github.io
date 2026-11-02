@@ -112,7 +112,7 @@
       requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("on"))); sfx("pon");
       const bye = () => { el.classList.remove("on"); setTimeout(() => el.remove(), 600); };
       el.querySelector("button").onclick = e => { e.stopPropagation(); closed = true; try { sessionStorage.setItem("ow-peek-off", "1"); } catch (x) {} bye(); };
-      el.onclick = () => { bye(); if (href[0] === "#") document.querySelector(href).scrollIntoView({behavior: "smooth"}); else { const a = document.createElement("a"); a.href = href; document.body.append(a); a.click(); a.remove(); } };
+      el.onclick = () => { bye(); window.owTrack && owTrack("peek_click", {to: href}); if (href[0] === "#") document.querySelector(href).scrollIntoView({behavior: "smooth"}); else { const a = document.createElement("a"); a.href = href; document.body.append(a); a.click(); a.remove(); } };
       setTimeout(bye, 7000);
     };
     setTimeout(peek, 14000); setInterval(peek, 32000);
@@ -121,7 +121,7 @@
   /* ---------- 5) スマホの「30秒で体験」ボタン ---------- */
   const cta = document.createElement("a"); cta.className = "fun-cta"; cta.href = "#demo-play";
   cta.innerHTML = `<small>ダウンロード不要</small>▶ 30秒で体験する`; document.body.append(cta);
-  cta.addEventListener("click", e => { const t = document.getElementById("demo-play"); if (t) { e.preventDefault(); t.scrollIntoView({behavior: "smooth"}); } else { e.preventDefault(); const a = document.createElement("a"); a.href = "index.html#demo-play"; document.body.append(a); a.click(); a.remove(); } });
+  cta.addEventListener("click", e => { window.owTrack && owTrack("cta_demo_click"); const t = document.getElementById("demo-play"); if (t) { e.preventDefault(); t.scrollIntoView({behavior: "smooth"}); } else { e.preventDefault(); const a = document.createElement("a"); a.href = "index.html#demo-play"; document.body.append(a); a.click(); a.remove(); } });
   const ctaOn = () => { const hero = document.querySelector(".hero"), demo = document.getElementById("demo-play");
     const past = hero ? hero.getBoundingClientRect().bottom < 0 : scrollY > 400;
     const inDemo = demo && (() => { const r = demo.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; })();

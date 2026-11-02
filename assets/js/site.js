@@ -2,6 +2,8 @@
    お笑い道場 なんでやねん 公式サイト  共通の動き
    ========================================================= */
 /* ★ここだけ書きかえれば、全ページに反映されます */
+/* アクセス解析のイベントを送る（Google アナリティクス） */
+window.owTrack = (name, params = {}) => { try { window.gtag && gtag("event", name, params); } catch (e) {} };
 window.SITE = {
   operator: "お笑い道場 運営",
   contact: "",            /* 問い合わせのメールアドレス。空のあいだは「準備中」と出ます */
@@ -90,6 +92,7 @@ window.SITE = {
       document.body.append(modal);
       modal.addEventListener("click", e => { if (e.target === modal || e.target.closest(".modal-x")) closeModal(); });
     }
+    owTrack("movie_play", {movie: src});
     const v = $("video", modal); v.src = src; modal.classList.add("open"); v.play().catch(() => {}); $(".modal-x", modal).focus();
   };
   function closeModal(){ if (!modal) return; modal.classList.remove("open"); const v = $("video", modal); v.pause(); }
@@ -226,7 +229,7 @@ window.SITE = {
     btn.addEventListener("click", e => {
       e.stopPropagation(); noTip();
       if (on && !playing) { play(); return; }  /* ON なのにまだ鳴っていない（ブラウザに止められた）ときは、流すだけ */
-      on = !on; set(localStorage, KEY, on ? "1" : "0"); paint();
+      on = !on; set(localStorage, KEY, on ? "1" : "0"); paint(); owTrack("bgm_toggle", {on});
       if (on) start(); else stop();
     });
     addEventListener("pagehide", () => { set(sessionStorage, POS, playing ? posNow() : 0); });
@@ -297,3 +300,6 @@ window.SITE = {
   const f = t => { const k = Math.min(1, (t - t0) / 1100); el.textContent = Math.round(n * (1 - (1 - k) ** 3)); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); }), {threshold: .6});
   const scan = () => document.querySelectorAll("[data-count]:not([data-cw])").forEach(el => { el.dataset.cw = 1; io.observe(el); });
   scan(); addEventListener("ow:page", scan); })();
+/* App Store ボタン（準備中）やお題合戦のボタンを押した数 */
+document.addEventListener("click", e => { const t = e.target.closest(".store,.og-go,.gate-go,.hero-co,.btn"); if (!t || t.matches(".dm-go,.dm-next,.dm-again,.dm-share")) return;
+  owTrack(t.matches(".store") ? "store_click" : t.matches(".og-go,.gate-go") ? "gate_open" : t.matches(".hero-co") ? "collab_click" : "button_click", {label: (t.textContent || "").trim().slice(0, 40)}); });
