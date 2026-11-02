@@ -292,3 +292,8 @@ window.SITE = {
   });
   addEventListener("popstate", () => go(location.href, false));
 })();
+/* 数字のカウントアップ（data-count） */
+(() => { const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; io.unobserve(e.target); const el = e.target, n = +el.dataset.count, t0 = performance.now();
+  const f = t => { const k = Math.min(1, (t - t0) / 1100); el.textContent = Math.round(n * (1 - (1 - k) ** 3)); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); }), {threshold: .6});
+  const scan = () => document.querySelectorAll("[data-count]:not([data-cw])").forEach(el => { el.dataset.cw = 1; io.observe(el); });
+  scan(); addEventListener("ow:page", scan); })();
