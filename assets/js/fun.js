@@ -8,6 +8,7 @@
    ・動きを減らす設定の人には、1〜4を出さない
    ========================================================= */
 (() => {
+  if (window.__owFun) return; window.__owFun = true;  /* 2回読みこまれても1回だけ動く（BGMが2つ鳴らないように） */
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const P = "assets/img/fun/";
   const CHIBI = ["k_mic", "k_jump", "k_roll", "a_hari", "a_smug", "a_shock", "m_fan", "m_sleep", "m_wave"];

@@ -13,6 +13,7 @@ window.SITE = {
 };
 
 (() => {
+  if (window.__owSite) return; window.__owSite = true;  /* 2回読みこまれても1回だけ動く（BGMが2つ鳴らないように） */
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const page = document.body.dataset.page || "";
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -257,8 +258,9 @@ window.SITE = {
     watchReveal(root);
   };
   const loaded = new Set();
-  const loadScript = src => (loaded.has(src) || $$("script[src]").some(x => x.src === src)) ? Promise.resolve() : new Promise(r => { const t = document.createElement("script"); t.src = src; t.onload = t.onerror = () => { loaded.add(src); r(); }; document.body.append(t); });
-  const loadCss = href => $$('link[rel="stylesheet"]').some(l => l.href === href) ? Promise.resolve() : new Promise(r => { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = href; l.onload = l.onerror = r; document.head.append(l); });
+  const base = u => u.split("?")[0];
+  const loadScript = src => (loaded.has(base(src)) || $$("script[src]").some(x => base(x.src) === base(src))) ? Promise.resolve() : new Promise(r => { const t = document.createElement("script"); t.src = src; t.onload = t.onerror = () => { loaded.add(base(src)); r(); }; document.body.append(t); });
+  const loadCss = href => $$('link[rel="stylesheet"]').some(l => base(l.href) === base(href)) ? Promise.resolve() : new Promise(r => { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = href; l.onload = l.onerror = r; document.head.append(l); });
   let navBusy = false;
   async function go(url, push = true){
     if (navBusy) return; navBusy = true;
@@ -297,10 +299,10 @@ window.SITE = {
   addEventListener("popstate", () => go(location.href, false));
 })();
 /* 数字のカウントアップ（data-count） */
-(() => { const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; io.unobserve(e.target); const el = e.target, n = +el.dataset.count, t0 = performance.now();
+(() => { if (window.__owCount) return; window.__owCount = true; const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; io.unobserve(e.target); const el = e.target, n = +el.dataset.count, t0 = performance.now();
   const f = t => { const k = Math.min(1, (t - t0) / 1100); el.textContent = Math.round(n * (1 - (1 - k) ** 3)); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); }), {threshold: .6});
   const scan = () => document.querySelectorAll("[data-count]:not([data-cw])").forEach(el => { el.dataset.cw = 1; io.observe(el); });
   scan(); addEventListener("ow:page", scan); })();
 /* App Store ボタン（準備中）やお題合戦のボタンを押した数 */
-document.addEventListener("click", e => { const t = e.target.closest(".store,.og-go,.gate-go,.hero-co,.btn"); if (!t || t.matches(".dm-go,.dm-next,.dm-again,.dm-share")) return;
-  owTrack(t.matches(".store") ? "store_click" : t.matches(".og-go,.gate-go") ? "gate_open" : t.matches(".hero-co") ? "collab_click" : "button_click", {label: (t.textContent || "").trim().slice(0, 40)}); });
+if (!window.__owClk) { window.__owClk = true; document.addEventListener("click", e => { const t = e.target.closest(".store,.og-go,.gate-go,.hero-co,.btn"); if (!t || t.matches(".dm-go,.dm-next,.dm-again,.dm-share")) return;
+  owTrack(t.matches(".store") ? "store_click" : t.matches(".og-go,.gate-go") ? "gate_open" : t.matches(".hero-co") ? "collab_click" : "button_click", {label: (t.textContent || "").trim().slice(0, 40)}); }); }

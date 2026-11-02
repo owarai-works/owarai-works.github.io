@@ -6,6 +6,7 @@
    ・ブラウザの決まりで、最初に1回どこかを押すまでは鳴らない
    ========================================================= */
 (() => {
+  if (window.__owSfx) return; window.__owSfx = true;  /* 2回読みこまれても1回だけ動く（BGMが2つ鳴らないように） */
   const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
   let ac = null, master = null, NB = null, ready = false;
   const on = () => !window.owBgm || owBgm.isOn();
