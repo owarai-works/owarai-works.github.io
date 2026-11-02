@@ -462,3 +462,8 @@ body::after{background:radial-gradient(900px 600px at 85% -5%,rgba(255,198,26,.3
   .fcard .fc-ph,.fcard.w4 .fc-ph,.fcard.tall .fc-ph{height:58%;right:7%}
   .fcard .in{padding-right:22px}
 }
+
+/* ゲーム紹介：コラボのカード。ロゴは小さく左上、絵は希の顔が見える位置に */
+.mc .pic img[src*="co_join"]{object-position:center 42%}
+.mc .pic img.co{position:absolute;z-index:1;left:10px;right:auto;top:10px;bottom:auto;width:42%;max-width:180px;height:auto;filter:drop-shadow(2px 2px 0 rgba(0,0,0,.6))}
+.mc:hover .pic img.co{transform:none}
