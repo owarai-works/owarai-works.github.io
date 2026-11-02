@@ -57,7 +57,7 @@ PICS = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "
 def slim(v):
     pic = PICS.get(str(v.get("sid") or ""))
     return {"pic": ("assets/img/odai/" + pic) if pic else "", "odai": str(v.get("ctx") or "")[:60], "text": str(v.get("text") or "")[:60], "score": v.get("score") or 0, "likes": v.get("likes") or 0, "kind": v.get("kind") or "", "at": v.get("at") or 0}
-def hall_list(rows): return [slim(v) for v in sorted(filter(ok, rows), key=key)[:30]]
+def hall_list(rows): return [x for x in (slim(v) for v in sorted(filter(ok, rows), key=key)) if x["pic"]][:30]  # 殿堂はイラストのあるお題だけ（ユーザーの希望）
 hall_all = []
 for p in glob.glob(os.path.join(dump, "hall", "*.json")):
     d = load(p) or {}; v = d.get("data", d); v["id"] = d.get("id", os.path.basename(p)[:-5]); hall_all.append(v)
