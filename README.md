@@ -19,7 +19,7 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 - **問い合わせのメール・運営の名前・App Store のURL**：`assets/js/site.js` のいちばん上の `SITE`。
   - `contact` を入れると、プライバシーポリシー・利用規約・サポートのページに出ます（空のあいだは「準備中」）。
   - `appStoreUrl` を入れると、「App Store 準備中」のボタンが本物のリンクに変わります。
-- **BGM**：`assets/bgm/title.mp3`（ゲームのメニュー画面の曲「開演のテーマ」）。右下のボタンで ON/OFF。最初は OFF（ブラウザは、勝手に音を出すことを止めているため）。
+- **BGM**：`assets/bgm/title.mp3`（ゲームのメニュー画面の曲「開演のテーマ」）。右下のボタンで ON/OFF。はじめから ON（ブラウザの決まりで、最初に画面をタップしたときに流れ始める）。音量は `site.js` の `VOL`（今は 0.22）。
 
 ## 絵・動画
 - `assets/img/hero.webp`：パソコンのメイン画像（Higgsfield で作成。元は `docs/homepage/gen/hero_a.png`）
