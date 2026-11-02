@@ -53,3 +53,10 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 - 運営だけ中身を見る：`https://owarai-works.github.io/?preview=nandeyanen` で開く（その端末では次から幕なし）。戻す：`?preview=off`。
 - 準備中は全ページ `<meta name="robots" content="noindex,nofollow">`（検索に出さない）。
 - **公開するとき**：`PREP = false` にして、robots を元に戻す（index.html・game.html・characters.html・news.html・support.html・privacy.html・terms.html は `index,follow,max-image-preview:large`、article.html と 404.html は `noindex,follow`）。
+
+## 番付・殿堂（ゲームと連動・毎日自動更新）
+- 表示：トップの「ゲームと連動！番付と殿堂」（`assets/js/ranking.js`）が `assets/data/ranking.json` を読む。芸名は出さない（ユーザーの希望）。
+- `assets/data/ranking.json` は **公開リポジトリ owarai-works.github.io にだけ**ある（毎日の自動更新が書く）。homepage/ からコピーするときに上書きしないよう、homepage/ には置かない。
+- 作り方：ゲームのデータベース（公開先 https://claude.ai/artifact/W4qyooRmevxFq3XxpyfxM3 ）を ArtifactData で読んで out_dir に保存 → `python3 -I tools/build_ranking.py <dump> assets/data/ranking.json`。
+  - boards（limit 1000・全部）・hall（score の降順に300件）・news/ban。
+- 毎日19時ごろ、スケジュールのタスク「お笑い道場 番付・殿堂の更新」が自動でやる。

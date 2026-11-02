@@ -281,7 +281,7 @@ window.SITE = {
       for (const t of doc.querySelectorAll("script[src]")) await loadScript(new URL(t.getAttribute("src"), url).href);
       owHydrate(m);
       for (const t of doc.querySelectorAll("script:not([src]):not([type])")) { if (t.textContent.includes("幕あけ")) continue; try { new Function(t.textContent)(); } catch (e) { console.error(e); } }
-      window.owFaqMount && owFaqMount(); window.owDemoMount && owDemoMount();
+      window.owFaqMount && owFaqMount(); window.owRankMount && owRankMount();
       dispatchEvent(new Event("ow:page"));
     } catch (e) { location.href = url; }
     navBusy = false;
