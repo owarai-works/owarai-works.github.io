@@ -424,7 +424,7 @@ body::after{background:radial-gradient(900px 600px at 85% -5%,rgba(255,198,26,.3
 .sisters{--sh:clamp(300px,46vw,560px)}
 .sis img{height:var(--sh);width:auto;max-width:none}
 .sis.a img{height:calc(var(--sh) * 1.0)}
-.sis.m img{height:calc(var(--sh) * 1.08)}
+.sis.m img{height:calc(var(--sh) * 1.135)}
 @media (max-width:760px){.sisters{--sh:clamp(230px,60vw,360px)}}
 @media (max-width:360px){.sis .plate small{display:none}}
 
