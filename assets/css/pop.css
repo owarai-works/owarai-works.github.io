@@ -544,3 +544,8 @@ body[data-page="home"] .hd:not(.solid) .hd-logo{opacity:0;pointer-events:none}
 .bzc:nth-child(2n) b{color:#fff;text-shadow:3px 3px 0 var(--shu),5px 5px 0 var(--ink)}
 .bzc .ic{font-size:38px}
 @media (max-width:760px){.bzc b{font-size:23px}}
+
+/* お題の名前：カードの幅に合わせて大きく（はみ出さない）。cqi＝カードの幅の1% */
+.odai-mini li,.od{container-type:inline-size}
+.odai-mini b,.od b,.odai-mini li b,.od > div b{font-size:clamp(14px,17cqi,34px);line-height:1.1;padding:2px 2px 6px;letter-spacing:0;white-space:nowrap;max-width:100%;-webkit-text-stroke:clamp(1.5px,1.6cqi,3px) var(--ink);text-shadow:2px 2px 0 var(--shu),4px 4px 0 var(--ink)}
+.od b{font-size:clamp(18px,15cqi,34px)}
