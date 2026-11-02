@@ -265,7 +265,7 @@ window.SITE = {
   async function go(url, push = true){
     if (navBusy) return; navBusy = true;
     try {
-      const r = await fetch(url, {credentials: "same-origin"}); if (!r.ok) throw 0;
+      const [r] = await Promise.all([fetch(url, {credentials: "same-origin"}), window.owCurtainClose ? owCurtainClose() : 0]); if (!r.ok) throw 0;
       const doc = new DOMParser().parseFromString(await r.text(), "text/html"), nm = doc.querySelector("main"); if (!nm) throw 0;
       await Promise.all([...doc.querySelectorAll('link[rel="stylesheet"]')].map(l => loadCss(new URL(l.getAttribute("href"), url).href)));
       if (push) history.pushState({ow: 1}, "", url);
@@ -284,8 +284,9 @@ window.SITE = {
       owHydrate(m);
       for (const t of doc.querySelectorAll("script:not([src]):not([type])")) { if (t.textContent.includes("幕あけ")) continue; try { new Function(t.textContent)(); } catch (e) { console.error(e); } }
       window.owFaqMount && owFaqMount(); window.owRankMount && owRankMount(); window.owPlayMount && owPlayMount(); window.owCharaPoke && owCharaPoke();
-      dispatchEvent(new Event("ow:page"));
+      dispatchEvent(new Event("ow:page")); window.owCurtainOpen && owCurtainOpen();
     } catch (e) { location.href = url; }
+    window.owCurtainOpen && owCurtainOpen();
     navBusy = false;
   }
   document.addEventListener("click", e => {
