@@ -5,7 +5,7 @@
 /* アクセス解析のイベントを送る（Google アナリティクス） */
 window.owTrack = (name, params = {}) => { try { window.gtag && gtag("event", name, params); } catch (e) {} };
 window.SITE = {
-  operator: "お笑い道場 運営",
+  operator: "ライトルーム お笑い運営部",
   contact: "",            /* 問い合わせのメールアドレス。空のあいだは「準備中」と出ます */
   appStoreUrl: "",        /* App Store のページができたら URL を入れると、ボタンがリンクになります */
   aiEndpoint: "",         /* 本物のAIで答えるサーバーのURL（あとで足す）。空のあいだは、よくある質問だけで答える */
