@@ -800,3 +800,13 @@ body[data-page="home"] .hd:not(.solid) .hd-logo{opacity:0;pointer-events:none}
 .dm-share{background:#111;color:#fff}
 /* 背景で降るシスターズが見えるように（体の地は html に任せる） */
 body{background:transparent!important}
+
+/* パンくず：押しやすいボタンに（ホームは家のアイコン） */
+.crumb{flex-wrap:wrap;align-items:center;gap:8px;font-size:14px;letter-spacing:.04em}
+.crumb a,.crumb span a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 16px 0 12px;background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);font-weight:900;transition:transform .15s,background .15s}
+.crumb > a:first-child::before{content:"";width:20px;height:20px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3 2 11.5h3V21h5.5v-6h3v6H19v-9.5h3z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3 2 11.5h3V21h5.5v-6h3v6H19v-9.5h3z'/%3E%3C/svg%3E") center/contain no-repeat}
+.crumb > a:first-child{background:var(--gold)}
+.crumb a:hover,.crumb span a:hover{color:var(--ink);background:#ffe066;transform:translate(-1px,-1px)}
+.crumb a:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.crumb span{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:900}
+.crumb span::before{content:"›";margin:0;font-size:22px;line-height:1;color:var(--shu)}
