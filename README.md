@@ -33,3 +33,8 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 - `assets/js/faq-bot.js`：よくある質問から一番近い答えを返す（お金はかからない）。全ページの左下に「質問する」ボタン、サポートのページには中に表示。
 - 答えを足す：`faq-bot.js` の `FAQ` に `{q: 見出し, k: [ひっかける言葉], a: 答え}` を1つ足す。
 - 本物のAIにする（あとで）：サーバー（例：Cloudflare Workers）で Claude API を呼ぶ口を作り、`site.js` の `SITE.aiEndpoint` にそのURLを入れる。よくある質問で答えられないときだけ `{q, history}` を POST し、`{answer}` を表示する。APIキーはサーバー側だけに置く（ページに書かない）。
+
+## ページの切りかえ（BGM を止めない）
+- `site.js` の最後：サイトの中のリンクを押すと、ページを読み直さずに `<main>` だけ入れかえる（BGM が続く）。新しいページを作ったら、`<main>` の中に中身、`<body data-page="…">` を付ける。ページ専用の `<script>`（src なし）は入れかえたあとに実行される。
+- 体験コーナー：`assets/js/demo.js`（お題合戦・大喜利・漫画セリフの四択。AIは使わない）。
+- SEO：各ページの title・description・OGP・canonical・構造化データ（JSON-LD）、`sitemap.xml`・`robots.txt`。

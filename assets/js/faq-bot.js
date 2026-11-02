@@ -81,6 +81,7 @@
 .fb-f button{padding:0 16px;border-radius:10px;border:2px solid var(--ink);background:var(--shu);color:#fff;font-weight:900;box-shadow:2px 2px 0 var(--ink)}
 .fb-note{padding:0 12px 8px;font-size:10px;color:var(--muted);background:#fff}
 .fb-inline{position:relative;left:auto;bottom:auto;width:100%;height:560px;transform:none;opacity:1;pointer-events:auto;z-index:1}
+body[data-page="support"] .fb-open{display:none}
 @media (max-width:520px){.fb-open span{display:none}.fb-open{padding:4px}.fb-open img{width:38px;height:38px}}
 `;
   const st = document.createElement("style"); st.textContent = css; document.head.append(st);
@@ -115,8 +116,9 @@
     return el;
   };
 
-  const spot = document.querySelector("[data-faq-bot]");
-  if (spot) { spot.replaceWith(build(true)); return; }  /* サポートのページは、ページの中に出す */
+  /* サポートのページは、ページの中にも出す（ページを入れかえたときも site.js から呼ぶ） */
+  window.owFaqMount = () => { const spot = document.querySelector("[data-faq-bot]"); if (spot) spot.replaceWith(build(true)); };
+  owFaqMount();
   const box = build(false); document.body.append(box);
   const op = document.createElement("button"); op.className = "fb-open"; op.type = "button";
   op.innerHTML = `<img src="assets/img/face_aoi.webp" alt=""><span><small>なんでも聞いてな</small>質問する</span>`; op.setAttribute("aria-label", "質問する（サポート担当 葵）");

@@ -127,7 +127,7 @@ window.SITE = {
      ゲームと同じしくみ（Web Audio）：頭とおしりの無音を切り、終わりの XF 秒を次の頭と重ねて（クロスフェード）切れ目なくループ。
      2MBの全体が読みこめるまでは、最初の14秒だけの小さな版（title_head.mp3）を先に鳴らし、用意できたら同じ位置からつなぎかえる */
   (() => {
-    const KEY = "ow-bgm", POS = "ow-bgm-pos", VOL = .22, XF = 1.2;  /* VOL＝音量（0〜1）、XF＝つなぎ目を重ねる秒数 */
+    const KEY = "ow-bgm", POS = "ow-bgm-pos", VOL = .11, XF = 1.2;  /* VOL＝音量（0〜1）、XF＝つなぎ目を重ねる秒数 */
     const FULL = "assets/bgm/title.mp3", HEAD = "assets/bgm/title_head.mp3";
     const get = (s, k) => { try { return s.getItem(k); } catch (e) { return null; } };
     const set = (s, k, v) => { try { s.setItem(k, v); } catch (e) {} };
@@ -227,4 +227,53 @@ window.SITE = {
   const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
   window.newsItemHTML = (n, i = 0) => `<a class="news-item rv d${Math.min(i, 4)}" href="article.html?id=${encodeURIComponent(n.id)}"><time datetime="${n.date.replace(/\./g, "-")}">${n.date}</time><span class="tag ${n.tag}">${NEWS_TAG[n.tag] || "お知らせ"}</span><h3>${esc(n.title)}</h3><span class="go" aria-hidden="true">→</span></a>`;
   $$("[data-news-latest]").forEach(el => { el.innerHTML = (window.NEWS || []).slice(0, +el.dataset.newsLatest || 3).map(newsItemHTML).join(""); watchReveal(el); });
+  /* ---------- ページを移っても BGM を止めない：リンクを押したら、ページを読み直さずに中身（main）だけ入れかえる ---------- */
+  window.owHydrate = (root = document) => {
+    $$("[data-contact]", root).forEach(el => { el.innerHTML = SITE.contact ? `<a class="contact-mail" href="mailto:${SITE.contact}">${SITE.contact}</a>` : "（メールアドレスは準備中です。決まりしだい、ここに載せます）"; });
+    $$("[data-operator]", root).forEach(el => el.textContent = SITE.operator);
+    $$("[data-store]", root).forEach(el => el.outerHTML = storeHTML(el.dataset.store || ""));
+    $$("[data-movie]", root).forEach(b => b.addEventListener("click", () => openMovie(b.dataset.movie)));
+    $$("canvas[data-petals]", root).forEach(c => petals(c, {n: +c.dataset.petals || 46}));
+    $$("[data-news-latest]", root).forEach(el => { el.innerHTML = (window.NEWS || []).slice(0, +el.dataset.newsLatest || 3).map(newsItemHTML).join(""); });
+    watchReveal(root);
+  };
+  const loaded = new Set();
+  const loadScript = src => (loaded.has(src) || $$("script[src]").some(x => x.src === src)) ? Promise.resolve() : new Promise(r => { const t = document.createElement("script"); t.src = src; t.onload = t.onerror = () => { loaded.add(src); r(); }; document.body.append(t); });
+  const loadCss = href => $$('link[rel="stylesheet"]').some(l => l.href === href) ? Promise.resolve() : new Promise(r => { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = href; l.onload = l.onerror = r; document.head.append(l); });
+  let navBusy = false;
+  async function go(url, push = true){
+    if (navBusy) return; navBusy = true;
+    try {
+      const r = await fetch(url, {credentials: "same-origin"}); if (!r.ok) throw 0;
+      const doc = new DOMParser().parseFromString(await r.text(), "text/html"), nm = doc.querySelector("main"); if (!nm) throw 0;
+      await Promise.all([...doc.querySelectorAll('link[rel="stylesheet"]')].map(l => loadCss(new URL(l.getAttribute("href"), url).href)));
+      if (push) history.pushState({ow: 1}, "", url);
+      document.title = doc.title;
+      const dsc = doc.querySelector('meta[name="description"]'), cur = document.querySelector('meta[name="description"]'); if (dsc && cur) cur.content = dsc.content;
+      const pg = doc.body.dataset.page || ""; document.body.dataset.page = pg;
+      hd.className = "hd" + (pg === "home" ? "" : " always"); onScroll();
+      $$(".hd-nav a, .sp-menu nav a").forEach(a => { const k = (NAV.find(n => n[0] === a.getAttribute("href")) || [])[3]; if (k === pg) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+      const c = document.getElementById("curtain"); if (c) c.remove();
+      document.documentElement.style.overflow = "";
+      const om = document.querySelector("main"), m = document.importNode(nm, true); om.replaceWith(m);
+      setMenu(false);
+      const u = new URL(url, location.href);
+      if (u.hash && document.getElementById(u.hash.slice(1))) document.getElementById(u.hash.slice(1)).scrollIntoView(); else scrollTo(0, 0);
+      for (const t of doc.querySelectorAll("script[src]")) await loadScript(new URL(t.getAttribute("src"), url).href);
+      owHydrate(m);
+      for (const t of doc.querySelectorAll("script:not([src]):not([type])")) { if (t.textContent.includes("幕あけ")) continue; try { new Function(t.textContent)(); } catch (e) { console.error(e); } }
+      window.owFaqMount && owFaqMount(); window.owDemoMount && owDemoMount();
+      dispatchEvent(new Event("ow:page"));
+    } catch (e) { location.href = url; }
+    navBusy = false;
+  }
+  document.addEventListener("click", e => {
+    if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest("a[href]"); if (!a || a.target || a.hasAttribute("download")) return;
+    const u = new URL(a.href, location.href); if (u.origin !== location.origin) return;
+    if (!/(\.html|\/)$/.test(u.pathname)) return;
+    if (u.pathname === location.pathname && u.search === location.search) return;  /* 同じページの中（#〜）はふつうに動く */
+    e.preventDefault(); go(u.href);
+  });
+  addEventListener("popstate", () => go(location.href, false));
 })();
