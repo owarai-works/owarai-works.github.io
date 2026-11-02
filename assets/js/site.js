@@ -28,7 +28,7 @@ window.SITE = {
   window.storeHTML = storeHTML;
 
   /* ---------- ヘッダーと下の欄 ---------- */
-  const NAV = [["index.html", "HOME", "ホーム", "home"], ["news.html", "NEWS", "お知らせ", "news"], ["game.html", "GAME", "ゲーム紹介", "game"], ["characters.html", "CHARACTER", "キャラクター", "chara"], ["banzuke.html", "RANKING", "ランキング", "banzuke"], ["hall.html", "HALL", "殿堂", "hall"], ["support.html", "SUPPORT", "サポート", "support"]];
+  const NAV = [["index.html", "HOME", "ホーム", "home"], ["news.html", "NEWS", "お知らせ", "news"], ["game.html", "GAME", "ゲーム紹介", "game"], ["characters.html", "CHARACTER", "キャラクター", "chara"], ["banzuke.html", "RANKING", "ランキング", "banzuke"], ["hall.html", "HALL", "殿堂", "hall"], ["play.html", "PLAY", "あそぶ", "play"], ["support.html", "SUPPORT", "サポート", "support"]];
   const navA = NAV.map(([h, en, jp, k]) => `<a href="${h}"${k === page ? ' aria-current="page"' : ""}><b>${en}</b><small>${jp}</small></a>`).join("");
   const hd = document.createElement("header");
   hd.className = "hd" + (page === "home" ? "" : " always");
@@ -57,7 +57,7 @@ window.SITE = {
         <nav class="ft-nav" aria-label="サイトの案内">
           <a href="index.html">ホーム</a><a href="news.html">お知らせ</a><a href="game.html">ゲーム紹介</a>
           <a href="characters.html">キャラクター</a><a href="support.html">サポート</a><a href="terms.html">利用規約</a>
-          <a href="banzuke.html">お題合戦 番付</a><a href="hall.html">みんなの殿堂</a><a href="privacy.html">プライバシーポリシー</a>
+          <a href="banzuke.html">お題合戦 番付</a><a href="hall.html">みんなの殿堂</a><a href="play.html">あそぶ</a><a href="privacy.html">プライバシーポリシー</a>
         </nav>
       </div>
       <div class="ft-bottom">
@@ -283,7 +283,7 @@ window.SITE = {
       for (const t of doc.querySelectorAll("script[src]")) await loadScript(new URL(t.getAttribute("src"), url).href);
       owHydrate(m);
       for (const t of doc.querySelectorAll("script:not([src]):not([type])")) { if (t.textContent.includes("幕あけ")) continue; try { new Function(t.textContent)(); } catch (e) { console.error(e); } }
-      window.owFaqMount && owFaqMount(); window.owRankMount && owRankMount();
+      window.owFaqMount && owFaqMount(); window.owRankMount && owRankMount(); window.owPlayMount && owPlayMount(); window.owCharaPoke && owCharaPoke();
       dispatchEvent(new Event("ow:page"));
     } catch (e) { location.href = url; }
     navBusy = false;

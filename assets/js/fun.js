@@ -129,3 +129,54 @@
     cta.classList.toggle("on", past && !inDemo && !document.querySelector(".fb.open")); };
   addEventListener("scroll", () => requestAnimationFrame(ctaOn), {passive: true}); addEventListener("ow:page", ctaOn); ctaOn();
 })();
+
+/* ---------- F：キャラ紹介で、キャラをつつくと表情が変わってしゃべる ---------- */
+window.owCharaPoke = () => {
+  const fr = document.querySelector(".cs-frame"); if (!fr || fr.dataset.poke) return; fr.dataset.poke = "1";
+  const LINES = {kineko: [["laugh", "high1", "くすぐったいって〜！"], ["surprise", "fail1", "わっ！びっくりしたやん！"], ["smile", "pass1", "もっとつついてええで♪"], ["angry", "attack", "つつきすぎやー！"]],
+    aoi: [["angry", "attack", "なにすんねん！"], ["smile", "pass1", "…まあ、ええけど"], ["surprise", "fail1", "ちょ、急につつくなや"], ["laugh", "high1", "あはは、しつこいなぁ"]],
+    momoe: [["smile", "pass1", "なぁに〜？"], ["laugh", "high1", "ふふっ、くすぐったい〜"], ["surprise", "fail1", "はわわっ"], ["angry", "attack", "も〜、いじわる〜"]]};
+  let n = 0, au = null;
+  fr.style.cursor = "pointer"; fr.title = "つついてみて！";
+  const hint = document.createElement("p"); hint.className = "poke-hint"; hint.textContent = "👆 キャラをつついてみて！"; fr.parentElement.append(hint);
+  fr.addEventListener("click", e => {
+    const tab = document.querySelector('.cs-tab[aria-selected="true"]'), k = tab ? tab.id.replace("tab-", "") : "kineko", L = LINES[k]; if (!L) return;
+    const [ex, vo, txt] = L[n++ % L.length]; hint.remove();
+    try { if (au) au.pause(); au = new Audio(`assets/vo/${k}_${vo}.mp3`); au.play().catch(() => {}); } catch (x) {}
+    window.owSfx && owSfx("pon"); window.owTrack && owTrack("chara_poke", {chara: k});
+    fr.parentElement.querySelectorAll(".poke").forEach(x => x.remove());
+    const r = fr.getBoundingClientRect(), b = document.createElement("div"); b.className = "poke";
+    b.style.left = Math.min(Math.max(e.clientX - r.left, 70), r.width - 70) + "px"; b.style.top = Math.max(e.clientY - r.top - 20, 80) + "px";
+    b.innerHTML = `<img src="assets/img/ex/${k}_${ex}0.webp" alt=""><p>${txt}</p>`;
+    fr.parentElement.append(b); fr.classList.remove("poked"); void fr.offsetWidth; fr.classList.add("poked");
+    setTimeout(() => b.remove(), 2200);
+  });
+};
+owCharaPoke();
+
+/* ---------- G：隠し要素（ロゴを5回つづけて押すと、シスターズ総出で漫才） ---------- */
+(() => {
+  if (window.__owEgg) return; window.__owEgg = true;
+  let c = 0, t = 0;
+  document.addEventListener("click", e => {
+    const lg = e.target.closest(".hd-logo,.hero-logo,.ft-logo img"); if (!lg) return;
+    const now = Date.now(); c = now - t < 900 ? c + 1 : 1; t = now;
+    if (c < 5) { if (c >= 3) { e.preventDefault(); window.owSfx && owSfx("pop"); } return; }
+    e.preventDefault(); c = 0; window.owTrack && owTrack("easter_egg");
+    const S = [["kineko", "laugh", "intro", "どうも〜！お笑いシスターズです！"], ["aoi", "smile", "intro", "ロゴを5回も押すとか、ヒマなんか？"], ["momoe", "laugh", "intro", "見つけてくれて、ありがとう〜"], ["kineko", "surprise", "high1", "隠しネタ見つけた人は、もう笑いのプロやで！"], ["aoi", "angry", "attack", "なんでやねん！"], ["momoe", "smile", "win", "もうええわ〜。ありがとうございました〜"]];
+    const ov = document.createElement("div"); ov.className = "egg"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", "隠しネタ");
+    ov.innerHTML = `<div class="egg-st"><p class="egg-t">✨ 隠しネタ発見！ ✨</p><div class="egg-row">${["kineko", "aoi", "momoe"].map(k => `<img data-k="${k}" src="assets/img/ex/${k}_smile0.webp" alt="">`).join("")}</div><p class="egg-say"></p><button type="button" class="btn sm egg-x">とじる</button></div>`;
+    document.body.append(ov); window.owSfx && owSfx("slap");
+    let i = 0, au = null, tm = 0;
+    const step = () => { if (!ov.isConnected) return; if (i >= S.length) return;
+      const [k, ex, vo, txt] = S[i++]; ov.querySelectorAll("img").forEach(im => im.classList.toggle("on", im.dataset.k === k));
+      const im = ov.querySelector(`img[data-k="${k}"]`); im.src = `assets/img/ex/${k}_${ex}0.webp`;
+      ov.querySelector(".egg-say").innerHTML = `<b>${({kineko: "気猫", aoi: "葵", momoe: "百萌"})[k]}</b>「${txt}」`;
+      if (k === "aoi" && ex === "angry") window.owSfx && owSfx("slap");
+      try { if (au) au.pause(); au = new Audio(`assets/vo/${k}_${vo}.mp3`); au.play().catch(() => {}); } catch (x) {}
+      tm = setTimeout(step, 2300); };
+    const close = () => { clearTimeout(tm); if (au) au.pause(); ov.remove(); };
+    ov.querySelector(".egg-x").onclick = close; ov.onclick = x => { if (x.target === ov) close(); };
+    step();
+  }, true);
+})();
