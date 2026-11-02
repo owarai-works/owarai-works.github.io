@@ -467,3 +467,49 @@ body::after{background:radial-gradient(900px 600px at 85% -5%,rgba(255,198,26,.3
 .mc .pic img[src*="co_join"]{object-position:center 42%}
 .mc .pic img.co{position:absolute;z-index:1;left:10px;right:auto;top:10px;bottom:auto;width:42%;max-width:180px;height:auto;filter:drop-shadow(2px 2px 0 rgba(0,0,0,.6))}
 .mc:hover .pic img.co{transform:none}
+
+/* ===== 11-02 修正：トップの左上ロゴは消す（いちばん上にいる間だけ）・キャッチはイラストの下（ロゴの上）へ ===== */
+body[data-page="home"] .hd:not(.solid) .hd-logo{opacity:0;pointer-events:none}
+.hd-logo{transition:opacity .3s}
+.hero-top{position:relative;left:auto;top:auto;transform:rotate(-3deg);transform-origin:left bottom;margin:0 0 10px;animation:pop .9s var(--ease) .15s both}
+.ht2{flex-direction:row;flex-wrap:wrap;gap:0 .2em}
+.ht2 span{font-size:min(3vw,5.4vh,52px)}
+.ht1{font-size:min(1.8vw,3.4vh,28px)}
+.hero-logo{width:clamp(240px,22vw,380px)}
+@media (max-width:760px){
+  .hero-top{position:relative;left:auto;top:auto;transform:rotate(-3deg);transform-origin:center bottom;align-items:center;width:auto;margin:0 auto 6px;animation:pop .9s var(--ease) .15s both}
+  .ht2 span{font-size:clamp(22px,7.6vw,32px)}
+  .hero-in{margin-top:-150px}
+  .hero-bubble{top:auto;bottom:calc(100% - 128px)}
+  .hero-logo{width:min(70vw,300px)}
+}
+
+/* ===== 豪華なバッジ（ゲームのアイコン＋金の縁＋光） ===== */
+.pt-more{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:56px}
+.pt-more li.pm{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 10px 16px;text-align:center;border-radius:18px;
+  background:linear-gradient(180deg,#fffdf4,#fff1c2);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink),inset 0 0 0 3px #ffd84d,inset 0 0 0 5px #fff;overflow:hidden;font-size:inherit;transition:transform .3s var(--ease),box-shadow .3s}
+.pt-more li.pm::before{content:none}
+.pt-more li.pm:nth-child(n){background:linear-gradient(180deg,#fffdf4,#fff1c2)}
+.pt-more li.pm:nth-child(2n){background:linear-gradient(180deg,#fff7fb,#ffd9e8);box-shadow:5px 5px 0 var(--ink),inset 0 0 0 3px #ff9ec4,inset 0 0 0 5px #fff}
+.pt-more li.pm::after{content:"";position:absolute;top:-60%;left:-80%;width:50%;height:220%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);transform:rotate(25deg);animation:pmShine 4.5s ease-in-out infinite}
+.pt-more li.pm:nth-child(2n)::after{animation-delay:-1.5s}.pt-more li.pm:nth-child(3n)::after{animation-delay:-3s}
+@keyframes pmShine{0%,60%{left:-80%}100%{left:160%}}
+.pt-more li.pm:hover{transform:translateY(-6px) rotate(-2deg);box-shadow:8px 9px 0 var(--shu),inset 0 0 0 3px #ffd84d,inset 0 0 0 5px #fff}
+.pm-ic{position:relative;display:grid;place-items:center;width:78px;height:78px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff7c8,#ffd84d 45%,#e09a00 100%);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink),0 0 0 5px rgba(255,216,77,.35)}
+.pm-ic::before{content:"";position:absolute;inset:-12px;border-radius:50%;background:repeating-conic-gradient(rgba(255,198,26,.55) 0 8deg,transparent 8deg 20deg);z-index:-1;animation:spin 14s linear infinite;mask:radial-gradient(circle,#000 45%,transparent 72%);-webkit-mask:radial-gradient(circle,#000 45%,transparent 72%)}
+.pm-ic img{width:56px;height:56px;object-fit:contain;filter:drop-shadow(1px 2px 0 rgba(0,0,0,.25));transition:transform .4s var(--ease)}
+.pt-more li.pm:hover .pm-ic img{transform:scale(1.15) rotate(-8deg)}
+.pm span{display:flex;flex-direction:column;line-height:1.3;position:relative;z-index:1}
+.pm small{font-size:12px;font-weight:700;color:var(--muted)}
+.pm b{font-family:var(--f-disp);font-weight:400;font-size:17px;color:var(--ink);letter-spacing:.02em}
+@media (max-width:1080px){.pt-more{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){
+  .pt-more{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:44px}
+  .pm-ic{width:64px;height:64px}.pm-ic img{width:46px;height:46px}
+  .pm b{font-size:15px}.pm small{font-size:11px}
+}
+@media (max-width:760px){
+  .ht1{font-size:15px}
+  .hero-bubble{top:-34px;bottom:auto;right:4px;transform:rotate(6deg)}
+}
