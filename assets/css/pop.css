@@ -712,3 +712,17 @@ body[data-page="home"] .hd:not(.solid) .hd-logo{opacity:0;pointer-events:none}
 .dm-vs b{white-space:nowrap}
 @media (max-width:520px){.dm-vs{padding:8px}.dm-vs > div{gap:5px}.dm-vs b{font-size:11px}.dm-pts{font-size:13px;letter-spacing:0}.dm-vs em{font-size:22px}}
 @media (min-width:1181px){.hero-co{bottom:clamp(120px,17vh,190px)}}
+
+/* BGM：ブラウザに止められているあいだ（タップ待ち） */
+.bgm.wait{background:var(--shu);animation:gatePulse 1.2s ease-in-out infinite}
+.bgm.wait .bgm-txt b,.bgm.wait .bgm-txt small{color:#fff}
+.bgm.wait .bgm-bars i{animation:none;background:#fff;height:4px}
+.bgm.wait .bgm-disc{animation:none}
+/* どのページでも、最初の1回だけの「タップで開演」 */
+.og-gate{position:fixed;inset:0;z-index:120;display:grid;place-items:center;background:rgba(28,16,18,.72);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);cursor:pointer;animation:ogIn .3s ease}
+.og-gate.out{opacity:0;transition:opacity .4s}
+@keyframes ogIn{from{opacity:0}}
+.og-box{display:flex;flex-direction:column;align-items:center;gap:16px;padding:20px}
+.og-box img{width:min(70vw,360px);filter:drop-shadow(5px 5px 0 var(--ink))}
+.og-go{min-width:min(78vw,320px);padding:16px 28px;border-radius:14px;background:var(--gold);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);font-family:var(--f-disp);font-size:clamp(22px,3vw,30px);color:var(--ink);animation:gatePulse 1.6s ease-in-out infinite}
+.og-mute{color:#fff;text-decoration:underline;font-weight:700;font-size:14px}

@@ -180,7 +180,7 @@ window.SITE = {
       if (ac.state !== "running") await Promise.race([ac.resume().catch(() => {}), new Promise(r => setTimeout(r, 300))]);
       if (ac.state !== "running") return false;  /* ブラウザに止められた */
       if (playing) return true;
-      playing = true; const g0 = ++gen; ramp(VOL, 1.2); noTip();
+      playing = true; const g0 = ++gen; ramp(VOL, 1.2); noTip(); btn.classList.remove("wait"); paint();
       const startAt = +get(sessionStorage, POS) || 0;  /* ほかのページから来たら、続きから */
       if (!full) full = load(FULL).catch(e => { full = null; throw e; });
       if (!head && !startAt) head = load(HEAD).catch(() => null);
@@ -203,9 +203,24 @@ window.SITE = {
       if (!on || playing) return offWait(); play().then(ok => { if (ok) offWait(); }); }
     const start = () => {
       EV.forEach(t => addEventListener(t, tryTap, true));  /* 先に待っておく（鳴ったら外す） */
-      play().then(ok => { if (ok) offWait(); });
-      setTimeout(() => { if (on && !playing) tip("♪ タップで曲が流れます"); }, 2000);
+      play().then(ok => { if (ok) { offWait(); btn.classList.remove("wait"); return; }
+        /* ブラウザに止められた（タップ前は音を出せない決まり）：ボタンを「タップで再生」に。
+           この訪問で最初の1回だけ、どのページでも「タップでBGMスタート」の幕を出す（トップは開演の幕があるので出さない） */
+        btn.classList.add("wait"); btn.querySelector("b").textContent = "TAP";
+        let seen = false; try { seen = sessionStorage.getItem("ow-curtain") === "1"; } catch (e) {}
+        if (!seen && !document.getElementById("curtain")) gate();
+        setTimeout(() => { if (on && !playing) tip("♪ どこかをタップすると曲が流れます"); }, 1500); });
     };
+    function gate(){
+      try { sessionStorage.setItem("ow-curtain", "1"); } catch (e) {}
+      const g = document.createElement("div"); g.className = "og-gate"; g.setAttribute("role", "dialog"); g.setAttribute("aria-label", "BGMを流す");
+      g.innerHTML = `<div class="og-box"><img src="assets/img/logo.webp" alt=""><button type="button" class="og-go">♪ タップで開演！</button><button type="button" class="og-mute">音なしで見る</button></div>`;
+      document.body.append(g);
+      const close = snd => { if (snd) { play().then(ok => { if (ok) offWait(); }); } else { on = false; set(localStorage, KEY, "0"); paint(); offWait(); } g.classList.add("out"); setTimeout(() => g.remove(), 450); };
+      g.querySelector(".og-go").onclick = () => close(true);
+      g.querySelector(".og-mute").onclick = e => { e.stopPropagation(); close(false); };
+      g.onclick = e => { if (e.target === g) close(true); };
+    }
     /* トップの「タップで開演」の幕から使う */
     window.owBgm = {isOn: () => on, play: () => { if (on) play().then(ok => { if (ok) offWait(); }); }, off: () => { if (!on) return; on = false; set(localStorage, KEY, "0"); paint(); stop(); offWait(); }};
     btn.addEventListener("click", e => {
