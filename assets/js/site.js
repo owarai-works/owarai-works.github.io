@@ -169,10 +169,14 @@ window.SITE = {
     const stopVoices = (t = .08) => { const now = ac.currentTime; voices.forEach(v => { try { v.g.gain.cancelScheduledValues(now); v.g.gain.setValueAtTime(v.g.gain.value, now); v.g.gain.linearRampToValueAtTime(0, now + t); v.n.stop(now + t + .02); } catch (e) {} }); };
     const posNow = () => { if (!cur || !ac) return 0; const L = cur.tr.end - cur.tr.start; return Math.max(0, cur.off + (ac.currentTime - cur.t0)) % L; };
     const ramp = (to, s = .9) => { if (!bus) return; const now = ac.currentTime; bus.gain.cancelScheduledValues(now); bus.gain.setValueAtTime(bus.gain.value, now); bus.gain.linearRampToValueAtTime(to, now + s); };
+    /* iPhone 用：タップの中で、音のない音を一瞬鳴らして音を出せる状態にする */
+    const unlock = () => { try { const b = ac.createBuffer(1, 1, 22050), s = ac.createBufferSource(); s.buffer = b; s.connect(ac.destination); s.start(0); } catch (e) {} };
     const play = async () => {
       if (!AC) return false;
       if (!ac) { ac = new AC(); bus = ac.createGain(); bus.gain.value = 0; bus.connect(ac.destination); }
-      if (ac.state !== "running") { try { await ac.resume(); } catch (e) {} }
+      unlock();
+      /* タップ前の resume() は返事がずっと来ないことがあるので、0.3秒で見切る */
+      if (ac.state !== "running") await Promise.race([ac.resume().catch(() => {}), new Promise(r => setTimeout(r, 300))]);
       if (ac.state !== "running") return false;  /* ブラウザに止められた */
       if (playing) return true;
       playing = true; const g0 = ++gen; ramp(VOL, 1.2); noTip();
@@ -190,14 +194,19 @@ window.SITE = {
       return true;
     };
     const stop = () => { if (!playing) return; playing = false; gen++; clearTimeout(timer); ramp(0, .4); setTimeout(() => { if (!playing) stopVoices(.05); }, 450); };
-    const start = () => play().then(ok => {
-      if (ok) return;
-      /* ブラウザに止められたら、最初のタップで流す */
-      const once = e => { if (e.target.closest && e.target.closest(".bgm")) return;  /* BGM ボタンそのものは click で扱う */
-        ["pointerdown", "keydown", "touchend"].forEach(t => removeEventListener(t, once, true)); if (on && !playing) play(); };
-      ["pointerdown", "keydown", "touchend"].forEach(t => addEventListener(t, once, true));
+    /* ブラウザに止められたら、画面をタップ（クリック・キー）するたびに試し、鳴ったらやめる。
+       スマホは「指をはなした時（touchend・click）」でないと音を出せないので、いろいろな合図で試す */
+    const EV = ["click", "touchend", "pointerup", "mousedown", "keydown"];
+    const offWait = () => EV.forEach(t => removeEventListener(t, tryTap, true));
+    function tryTap(e){ if (e && e.target && e.target.closest && e.target.closest(".bgm")) return;  /* BGM ボタンそのものは click で扱う */
+      if (!on || playing) return offWait(); play().then(ok => { if (ok) offWait(); }); }
+    const start = () => {
+      EV.forEach(t => addEventListener(t, tryTap, true));  /* 先に待っておく（鳴ったら外す） */
+      play().then(ok => { if (ok) offWait(); });
       setTimeout(() => { if (on && !playing) tip("♪ タップで曲が流れます"); }, 2000);
-    });
+    };
+    /* トップの「タップで開演」の幕から使う */
+    window.owBgm = {isOn: () => on, play: () => { if (on) play().then(ok => { if (ok) offWait(); }); }, off: () => { if (!on) return; on = false; set(localStorage, KEY, "0"); paint(); stop(); offWait(); }};
     btn.addEventListener("click", e => {
       e.stopPropagation(); noTip();
       if (on && !playing) { play(); return; }  /* ON なのにまだ鳴っていない（ブラウザに止められた）ときは、流すだけ */

@@ -23,7 +23,14 @@
 </head>
 <body data-page="home">
 
-<div class="curtain" id="curtain" aria-hidden="true"><img src="assets/img/logo.webp" alt=""></div>
+<div class="curtain" id="curtain" role="dialog" aria-label="開演">
+  <div class="gate">
+    <img src="assets/img/logo.webp" alt="お笑い道場 なんでやねん">
+    <p class="gate-catch">今日のあなたは、何点？</p>
+    <button class="gate-go" type="button" id="gateGo">タップで開演！</button>
+    <p class="gate-note">♪ ゲームの曲が流れます　<button type="button" id="gateMute">音なしで見る</button></p>
+  </div>
+</div>
 
 <main>
   <!-- メインビジュアル -->
@@ -36,10 +43,11 @@
     <canvas class="hero-fx" data-petals="54" aria-hidden="true"></canvas>
     <div class="hero-in">
       <div class="hero-copy">
-        <h1 class="hero-v"><span>ボケて、<em>ツッコんで</em>、</span><span>日本一へ。</span></h1>
+        <h1 class="hero-top"><span class="ht1">目指せ！</span><span class="ht2"><span>日本一の</span><span>お笑いマスター</span></span></h1>
         <div class="hero-main">
+          <span class="hero-bubble" aria-hidden="true">あなたの一言、<b>何点？</b></span>
           <img class="hero-logo" src="assets/img/logo.webp" alt="お笑い道場 なんでやねん" width="900" height="515">
-          <p class="hero-sub"><b>AI採点</b>スマホで遊べる お笑いゲーム</p>
+          <p class="hero-sub"><b>AI採点</b>ボケて、ツッコんで、爆笑をとれ！</p>
           <div class="hero-acts">
             <span data-store="lg"></span>
             <button class="play-pv" type="button" data-movie="assets/vid/pv.mp4"><i aria-hidden="true"></i><span><small>WATCH MOVIE</small>ムービーを見る</span></button>
@@ -52,9 +60,34 @@
   </section>
 
   <div class="marquee" aria-hidden="true"><div class="marquee-in">
-    <span>ボケろ！<i>◆</i>ツッコめ！<i>◆</i>笑わせろ！<i>◆</i>なんでやねん！<i>◆</i>目指せ日本一のお笑いマスター<i>◆</i></span>
-    <span>ボケろ！<i>◆</i>ツッコめ！<i>◆</i>笑わせろ！<i>◆</i>なんでやねん！<i>◆</i>目指せ日本一のお笑いマスター<i>◆</i></span>
+    <span>大喜利対戦が激アツ！<i>◆</i>ランクマッチ対応！<i>◆</i>目指せ！お笑いへの道モード<i>◆</i>AIが一瞬で採点！<i>◆</i>今週の番付1位は、あなたかもしれない<i>◆</i>なんでやねん！<i>◆</i></span>
+    <span>大喜利対戦が激アツ！<i>◆</i>ランクマッチ対応！<i>◆</i>目指せ！お笑いへの道モード<i>◆</i>AIが一瞬で採点！<i>◆</i>今週の番付1位は、あなたかもしれない<i>◆</i>なんでやねん！<i>◆</i></span>
   </div></div>
+
+  <!-- ここがアツい！ -->
+  <section class="sec points" id="point">
+    <div class="wrap">
+      <header class="sec-hd center rv"><span class="en" aria-hidden="true">HOT POINT</span><h2>ここがアツい！3つの売り</h2><p>ひと言で笑いをとった瞬間の、あの気持ちよさ。スマホの中で、何度でも味わえます。</p></header>
+      <div class="pts">
+        <a class="pt rv" href="game.html#taisen"><span class="pt-burst" aria-hidden="true">激アツ!!</span><figure><img src="assets/img/battle.webp" alt="" loading="lazy"></figure><div class="pt-t"><em>POINT 01</em><h3>大喜利対戦が<br><strong>激アツ！</strong></h3><p>同じお題で、笑いのガチンコ勝負！ウケた一言が相手の体力をけずる。必殺技やガードもある、まったく新しいお笑いバトル。</p></div></a>
+        <a class="pt rv d1" href="game.html#road"><span class="pt-burst" aria-hidden="true">目指せ!</span><figure><img src="assets/img/boss.webp" alt="" loading="lazy"></figure><div class="pt-t"><em>POINT 02</em><h3>目指せ！<br><strong>お笑いへの道モード</strong></h3><p>マスを進んで、中ボス・ボスを倒せ！すごろく感覚で修行するうちに、気づけばあなたもお笑いマスター。</p></div></a>
+        <a class="pt rv d2" href="game.html#taisen"><span class="pt-burst" aria-hidden="true">対応!</span><figure><img src="assets/img/cut100.webp" alt="" loading="lazy"></figure><div class="pt-t"><em>POINT 03</em><h3><strong>ランクマッチ</strong><br>対応！</h3><p>全国のライバルと腕くらべ。勝てば番付がグングン上がる！友達を招待しての対戦もできます。</p></div></a>
+      </div>
+      <ul class="pt-more rv">
+        <li>AIが100点満点で即採点</li><li>全国番付で日本一へ</li><li>週間・月間・永世の番付</li><li>シスターズと格闘バトル</li><li>道場破り</li><li>友達と勝負</li><li>殿堂入り・称号・段位</li><li>オリジナル漫画 全30話</li><li>ミニゲーム</li><li>コラボイベント</li>
+      </ul>
+      <p class="pt-nado rv">などなど、<b>笑いの修行がてんこ盛り！</b></p>
+    </div>
+  </section>
+
+  <!-- お題の種類 -->
+  <section class="sec home-odai" id="odai">
+    <div class="wrap">
+      <header class="sec-hd rv"><span class="en" aria-hidden="true">ODAI</span><h2>お題は11種類！</h2><p>ボケにツッコミ、大喜利、一発ギャグ…。毎日ちがうお題で、あなたの笑いの引き出しが増えていく。</p></header>
+      <ul class="odai-mini"><li class="rv d0"><img src="assets/img/m_boke.webp" alt="" loading="lazy"><b>ボケ</b></li><li class="rv d1"><img src="assets/img/m_tsk.webp" alt="" loading="lazy"><b>ツッコミ</b></li><li class="rv d2"><img src="assets/img/m_mix.webp" alt="" loading="lazy"><b>MIX</b></li><li class="rv d3"><img src="assets/img/m_og.webp" alt="" loading="lazy"><b>大喜利</b></li><li class="rv d0"><img src="assets/img/m_ar.webp" alt="" loading="lazy"><b>あるある</b></li><li class="rv d1"><img src="assets/img/m_sube.webp" alt="" loading="lazy"><b>突撃インタビュー</b></li><li class="rv d2"><img src="assets/img/m_adana.webp" alt="" loading="lazy"><b>あだ名つけ</b></li><li class="rv d3"><img src="assets/img/m_gag.webp" alt="" loading="lazy"><b>一発ギャグ</b></li><li class="rv d0"><img src="assets/img/m_shibari.webp" alt="" loading="lazy"><b>しばりボケ</b></li><li class="rv d1"><img src="assets/img/m_manga.webp" alt="" loading="lazy"><b>漫画セリフ</b></li><li class="rv d2"><img src="assets/img/m_all.webp" alt="" loading="lazy"><b>全部</b></li></ul>
+      <div class="center-btn rv"><a class="btn" href="game.html#odai">お題をくわしく見る <span class="arw" aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
 
   <!-- お知らせ -->
   <section class="sec" id="news">
@@ -80,6 +113,7 @@
       <div class="rv">
         <span class="kicker">ABOUT</span>
         <p class="about-lead" style="margin-top:14px">あなたのボケを、<br><em>AIが本気で採点。</em></p>
+        <p class="about-sub">1問わずか数十秒。スキマ時間が、爆笑タイムに変わる。</p>
         <p class="about-txt">「お笑い道場 なんでやねん」は、出されたお題にボケたりツッコんだりして笑いをとる、スマホのお笑いゲームです。答えはAIが100点満点で採点。お笑いシスターズといっしょに修行して、番付の頂点を目指しましょう。</p>
         <div class="ways">
           <div class="way"><i aria-hidden="true">✍️</i><b>文字で答える</b><small>自分で考えたボケを入力</small></div>
@@ -100,7 +134,7 @@
   <!-- ゲームのみどころ -->
   <section class="sec" id="game">
     <div class="wrap">
-      <header class="sec-hd rv"><span class="en" aria-hidden="true">GAME</span><h2>ゲームのみどころ</h2><p>お題・番付・対戦・ストーリー。毎日遊んでも飽きない、笑いの修行がそろっています。</p></header>
+      <header class="sec-hd rv"><span class="en" aria-hidden="true">GAME</span><h2>ゲームのみどころ</h2><p>友達より面白いのは、どっち？お題・番付・対戦・ストーリー。毎日遊んでも飽きない、笑いの修行がそろっています。</p></header>
       <div class="feat">
         <a class="fcard w7 tall rv" href="game.html#odai"><img src="assets/img/bn_chal.webp" alt="" loading="lazy"><div class="in"><span class="no">01</span><h3>11種類のお題</h3><p>ボケ・ツッコミ・大喜利・あるある・一発ギャグ・漫画セリフ…。毎日いろんなお題で腕をみがこう。</p><span class="lnk">くわしく見る →</span></div></a>
         <a class="fcard w5 tall rv d1" href="game.html#banzuke"><img src="assets/img/cut100.webp" alt="" loading="lazy" style="object-position:center 30%"><div class="in"><span class="no">02</span><h3>充実の番付</h3><p>週間・月間・永世の番付で全国のプレイヤーと点数を競う。殿堂入りを目指せ！</p><span class="lnk">くわしく見る →</span></div></a>
@@ -114,7 +148,7 @@
   <!-- キャラクター -->
   <section class="sec home-chara" id="chara">
     <div class="wrap">
-      <header class="sec-hd center rv"><span class="en" aria-hidden="true">CHARACTER</span><h2>お笑いシスターズ</h2><p>道場で修行する、3人の看板娘。それぞれの得意な笑いで、あなたを待っています。</p></header>
+      <header class="sec-hd center rv"><span class="en" aria-hidden="true">CHARACTER</span><h2>お笑いシスターズ</h2><p>3人の看板娘が、あなたのボケを待っている！それぞれの得意な笑いで、あなたを鍛えます。</p></header>
       <div class="sisters">
         <a class="sis k rv" href="characters.html#kineko"><i class="glow"></i><img src="assets/img/st_kineko.webp" alt="日向気猫" loading="lazy"><span class="plate"><small>司会・盛り上げ担当</small><b>日向気猫</b><em>KINEKO</em></span></a>
         <a class="sis a rv d1" href="characters.html#aoi"><i class="glow"></i><img src="assets/img/st_aoi.webp" alt="水野葵" loading="lazy"><span class="plate"><small>クールなツッコミ担当</small><b>水野葵</b><em>AOI</em></span></a>
@@ -143,7 +177,7 @@
     <div class="wrap rv">
       <span class="kicker">COMING SOON</span>
       <h2 style="margin-top:10px">iPhoneアプリ版<br>App Store 配信準備中！</h2>
-      <p>配信日が決まりしだい、このホームページのお知らせでお伝えします。</p>
+      <p>あなたの一言が、日本中を笑わせる日が来る。配信日が決まりしだい、このホームページのお知らせでお伝えします。</p>
       <div class="acts"><span data-store="lg"></span><a class="btn ghost" href="news.html">お知らせを見る <span class="arw" aria-hidden="true">→</span></a></div>
     </div>
   </section>
@@ -152,16 +186,25 @@
 <script src="assets/js/news-data.js"></script>
 <script src="assets/js/site.js"></script>
 <script>
-/* 幕あけ（1回の訪問で1度だけ） */
+/* 幕あけ：ゲームと同じ「タップで開演」。タップした瞬間に曲も流れる（ブラウザは、タップがないと音を出せない） */
 (() => {
   const c = document.getElementById("curtain");
-  let seen = false; try { seen = sessionStorage.getItem("ow-curtain") === "1"; sessionStorage.setItem("ow-curtain", "1"); } catch (e) {}
-  if (seen || matchMedia("(prefers-reduced-motion: reduce)").matches) { c.classList.add("done"); return; }
+  let seen = false; try { seen = sessionStorage.getItem("ow-curtain") === "1"; } catch (e) {}
+  const bgmOn = window.owBgm && owBgm.isOn();
+  if (seen || !bgmOn) {  /* 2回目、または BGM を OFF にしている人は、幕なし（OFF の人には幕だけ自動で開く） */
+    if (seen || matchMedia("(prefers-reduced-motion: reduce)").matches) { c.classList.add("done"); return; }
+    c.classList.add("auto"); requestAnimationFrame(() => c.classList.add("go")); setTimeout(() => c.classList.add("done"), 2300); return;
+  }
   document.documentElement.style.overflow = "hidden";
-  const end = () => { c.classList.add("done"); document.documentElement.style.overflow = ""; };
-  requestAnimationFrame(() => c.classList.add("go"));
-  setTimeout(end, 2300);
-  c.style.pointerEvents = "auto"; c.addEventListener("click", end);
+  const open = sound => {
+    try { sessionStorage.setItem("ow-curtain", "1"); } catch (e) {}
+    if (sound) owBgm.play(); else owBgm.off();
+    c.classList.add("go"); document.documentElement.style.overflow = "";
+    setTimeout(() => c.classList.add("done"), 1500);
+  };
+  document.getElementById("gateGo").addEventListener("click", () => open(true));
+  document.getElementById("gateMute").addEventListener("click", e => { e.stopPropagation(); open(false); });
+  c.addEventListener("click", e => { if (!e.target.closest("button")) open(true); });
 })();
 </script>
 </body>
