@@ -925,3 +925,32 @@ body{background:transparent!important}
 .hl-grid{columns:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
 .hl-grid .hc{margin-bottom:0}
 .bz-bar i{max-width:calc(100% - 64px)}
+
+/* ===== 番付・殿堂のページ：大きなヘッダーと紹介 ===== */
+.ph-big{padding-top:calc(var(--hd) + 90px);padding-bottom:90px;min-height:min(56vw,560px)}
+.ph-big .ph-bg{background-position:right 30%}
+.ph-big::after{background:linear-gradient(90deg,rgba(255,247,227,.96) 18%,rgba(255,247,227,.78) 40%,rgba(255,247,227,0) 62%),radial-gradient(circle,rgba(255,59,47,.14) 1.5px,transparent 2px) 0 0/14px 14px}
+.ph-big h1{display:inline-block;padding:4px 14px;background:#fff;border:3px solid var(--ink);border-radius:10px;box-shadow:4px 4px 0 var(--ink)}
+@media (max-width:760px){.ph-big{min-height:0;padding-top:calc(var(--hd) + 200px)}.ph-big .ph-bg{background-position:70% top;background-size:auto 260px;background-repeat:no-repeat}.ph-big::after{background:linear-gradient(180deg,transparent 150px,rgba(255,247,227,.97) 250px)}}
+.pg-ih{display:flex;flex-direction:column;align-items:center;text-align:center;font-family:var(--f-disp);font-weight:400;font-size:clamp(26px,3.4vw,38px);margin-bottom:16px}
+.pg-ih small{font-family:var(--f-en);font-size:18px;letter-spacing:.3em;color:var(--shu)}
+.pg-il{max-width:46em;margin:0 auto;text-align:center;font-weight:700;line-height:1.9}
+.pg-il b{color:var(--shu);background:linear-gradient(transparent 62%,var(--gold) 62%)}
+.pg-shots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;max-width:1000px;margin:30px auto 0}
+.pg-shots.two{grid-template-columns:repeat(2,minmax(0,260px));justify-content:center;gap:40px}
+.pg-shots figure{display:flex;flex-direction:column;align-items:center;gap:10px}
+.pg-shots img{width:100%;aspect-ratio:390/844;object-fit:cover;object-position:top;border:4px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink),0 0 0 3px var(--gold);transition:transform .3s}
+.pg-shots figure:nth-child(odd) img{transform:rotate(-2deg)}.pg-shots figure:nth-child(even) img{transform:rotate(2deg)}
+.pg-shots figure:hover img{transform:translateY(-6px)}
+.pg-shots figcaption{display:flex;align-items:center;gap:8px;font-weight:900}
+.pg-shots figcaption b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--shu);color:#fff;font-family:var(--f-en);font-size:17px;border:2px solid var(--ink)}
+.pg-pts{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:28px}
+.pg-pts li{padding:8px 16px;background:#fff;border:3px solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);font-weight:700}
+.pg-pts b{color:var(--shu)}
+@media (max-width:760px){.pg-shots{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.pg-shots.two{gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}.pg-pts li{font-size:13px;padding:6px 12px}}
+
+/* 殿堂の回答：読みやすい書体に（太い角ゴシック・字間を少し広く） */
+.hc-t,.hc.big .hc-t,.rk-hall p{font-family:var(--f-body);font-weight:900;letter-spacing:.04em;line-height:1.6;color:var(--ink)}
+.hc-t{font-size:clamp(17px,1.7vw,20px)}
+.hc.big .hc-t{font-size:clamp(19px,2vw,24px)}
+.hc-o{font-size:13px}
