@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>キャラクター紹介｜お笑い道場 なんでやねん 公式サイト</title>
-<meta name="description" content="お笑いシスターズ（日向気猫・水野葵・桜川百萌）と、ライバルの黒田茂樹・紫音を紹介します。">
+<meta name="description" content="お笑いシスターズ（日向気猫・水野葵・桜川百萌）を紹介します。">
 <meta name="theme-color" content="#ffc61a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="キャラクター紹介｜お笑い道場 なんでやねん">
@@ -53,18 +53,14 @@
     {k: "aoi", tab: "葵", grp: "OWARAI SISTERS", name: "水野葵", ruby: "みずの あおい", en: "AOI MIZUNO", role: "クールなツッコミ担当", copy: "ツッコミは、うちに任しとき。", c1: "#2f7fe0", c2: "#16b3c8",
       stat: [["年齢", "16歳"], ["性格", "クールだけど涙もろい"], ["得意なお笑い", "ツッコミ・しゃべくり漫才"], ["趣味", "昔の漫才の映像を見る"], ["苦手なもの", "早起き", 1]]},
     {k: "momoe", tab: "百萌", grp: "OWARAI SISTERS", name: "桜川百萌", ruby: "さくらがわ ももえ", en: "MOMOE SAKURAGAWA", role: "天然ボケ担当", copy: "ほな、みんなで行こか〜", c1: "#e8558f", c2: "#ff9ec4",
-      stat: [["年齢", "17歳"], ["性格", "おっとり天然のほめ上手"], ["得意なお笑い", "天然ボケ・一発ギャグ"], ["趣味", "和菓子作り・お昼寝"], ["苦手なもの", "急かされること", 1]]},
-    {k: "kuroda", tab: "黒田", grp: "RIVAL", name: "黒田茂樹", ruby: "くろだ しげき", en: "SHIGEKI KURODA", role: "スベらせ屋の貴公子", copy: "君の笑い、全部スベらせてあげよう。", c1: "#3a46a8", c2: "#e2231a",
-      stat: [["年齢", "20歳"], ["性格", "嫌味な自信家。陰の努力家"], ["得意なお笑い", "皮肉のきいたコント"], ["趣味", "蝶ネクタイ集め・髪のセット"], ["苦手なもの", "風の強い日", 1]]},
-    {k: "shion", tab: "紫音", grp: "RIVAL", name: "紫音", ruby: "しおん", en: "SHION", role: "高飛車な紫の女王", copy: "ここはワタクシの舞台よ。オホホ。", c1: "#8a3fe0", c2: "#ff4fa3",
-      stat: [["年齢", "20歳・フランス出身"], ["性格", "高飛車だけどさびしがり"], ["得意なお笑い", "エレガントな毒舌漫談"], ["趣味", "紅茶・ショッピング"], ["苦手なもの", "納豆", 1]]}
+      stat: [["年齢", "17歳"], ["性格", "おっとり天然のほめ上手"], ["得意なお笑い", "天然ボケ・一発ギャグ"], ["趣味", "和菓子作り・お昼寝"], ["苦手なもの", "急かされること", 1]]}
   ];
   const $ = s => document.querySelector(s);
   const cs = $("#cs"), tabs = $(".cs-tabs"), frame = $(".cs-frame"), thumbs = $(".cs-thumbs"), info = $(".cs-info"), en = $(".cs-en");
   const art = (c, j) => `assets/img/ch_${c.k}_${j + 1}.webp`;
   let cur = -1, pic = 0;
 
-  tabs.innerHTML = CH.map((c, i) => `${i === 3 ? '<i class="cs-sep" aria-hidden="true"></i>' : ""}<button class="cs-tab" type="button" role="tab" id="tab-${c.k}" aria-selected="false" style="--tc:${c.c1}" data-i="${i}">${i === 0 || i === 3 ? `<em class="grp">${i ? "RIVAL" : "SISTERS"}</em>` : ""}<img src="assets/img/face_${c.k}.webp" alt="" width="220" height="220"><span>${c.tab}</span></button>`).join("");
+  tabs.innerHTML = CH.map((c, i) => `<button class="cs-tab" type="button" role="tab" id="tab-${c.k}" aria-selected="false" style="--tc:${c.c1}" data-i="${i}">${i === 0 ? `<em class="grp">SISTERS</em>` : ""}<img src="assets/img/face_${c.k}.webp" alt="" width="220" height="220"><span>${c.tab}</span></button>`).join("");
   document.querySelector(".cs-cards").innerHTML = CH.map((c, i) => `<a class="cs-card rv d${i % 4}" href="#${c.k}" style="--cc:${c.c1}"><img src="${art(c, 0)}" alt="" loading="lazy"><span><small>${c.role}</small><b>${c.name}</b></span></a>`).join("");
 
   const setArt = (src, anim = true) => {
