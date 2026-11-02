@@ -32,7 +32,8 @@ window.owDemoMount = () => {
   const MG = [
     ["food", "ラーメンをひと口食べた男。吹き出しのセリフは？", [85, 21], [["大将、これ…去年の味や", 100], ["スープが熱すぎて記憶が飛んだ", 70], ["うまい！", 40], ["今日は月曜日", 10]]],
     ["wed", "結婚式の誓いの場面。花嫁の吹き出しのセリフは？", [88, 17], [["誓います…たぶん", 100], ["その前に、指輪の値段を", 70], ["はい、誓います", 40], ["お腹すいた", 10]]],
-    ["bungee", "バンジージャンプ直前の男。吹き出しのセリフは？", [70, 15], [["ロープの長さ、測りました？", 100], ["遺言、今から書いてもいい？", 70], ["こわい！", 40], ["いい景色ですね", 10]]],
+    ["train", "満員電車で寄りかかられたサラリーマン。吹き出しのセリフは？", [14, 25], [["よだれの家賃、払ってもらいます", 100], ["僕の肩、ベッドちゃうで", 70], ["重いです", 40], ["次の駅で降ります", 10]]],
+    ["biyou", "美容院で鏡を見た客。吹き出しのセリフは？", [79, 26], [["これ、髪型ちゃう。警報や", 100], ["ウニ注文してないです", 70], ["思ってたのとちがう", 40], ["お腹すいた", 10]]],
     ["dentist", "歯医者さんが口の中を見て固まった。吹き出しのセリフは？", [79, 23], [["…奥に先客がいます", 100], ["これは歯医者より考古学者ですね", 70], ["虫歯がありますね", 40], ["今日は晴れですね", 10]]],
     ["mensetsu", "面接で立ち上がった就活生。吹き出しのセリフは？", [44, 17], [["御社、ぼくが買います！", 100], ["長所は、立ち上がりが早いところです", 70], ["よろしくお願いします！", 40], ["トイレ行ってきます", 10]]],
     ["kokuhaku", "告白された女子。吹き出しのセリフは？", [67, 15], [["その手紙、宛先がお母さんよ", 100], ["審査の結果は後日郵送します", 70], ["ごめんなさい", 40], ["夕日がきれい", 10]]],
@@ -68,7 +69,7 @@ window.owDemoMount = () => {
       stage.innerHTML = `<div class="dm-head"><span class="dm-q">第${n + 1}問 / 3</span><span class="dm-sc">合計 <b>${total}</b> 点</span></div>
         ${kind === "manga" ? `<figure class="dm-pic manga"><img src="assets/img/demo/mg_${q[0]}.webp" alt="漫画のコマ"><span class="dm-bub" style="left:${q[2][0]}%;top:${q[2][1]}%"></span></figure><p class="dm-odai">${esc(q[1])}</p>`
           : `<div class="dm-card"><em>大喜利</em><p>${esc(q[0])}</p></div>`}
-        <p class="dm-guide">いちばん面白いと思う答えを選んでな！</p>${choicesHTML(list)}<div class="dm-res"></div>`;
+        <p class="dm-guide">いちばん面白いと思う答えを選んでな！<small>（ゲームではキーボードで自由に入力できるで）</small></p>${choicesHTML(list)}<div class="dm-res"></div>`;
       stage.querySelectorAll(".dm-ch button").forEach(b => b.onclick = () => {
         const c = list[+b.dataset.i], p = c[1]; total += p; sfx(p >= 70 ? "slap" : "pon");
         stage.querySelectorAll(".dm-ch button").forEach((x, i) => { x.disabled = true; x.classList.add("p" + list[i][1]); if (x === b) x.classList.add("me"); x.insertAdjacentHTML("beforeend", `<em>${list[i][1]}点</em>`); });
@@ -97,7 +98,7 @@ window.owDemoMount = () => {
       const q = pool[r % pool.length], list = shuf(q[2]); r++; let left = 15, done = false;
       stage.innerHTML = head() + `<div class="dm-round">第${r}本 <small>3本先取</small><span class="dm-time"><b>${left}</b>秒</span></div>
         <figure class="dm-pic"><img src="assets/img/demo/sc_${q[0]}.webp" alt="お題の絵"><figcaption>${esc(q[1])}</figcaption></figure>
-        <p class="dm-guide">ボケで答えろ！面白いと思う答えを選んでな</p>${choicesHTML(list)}<div class="dm-res"></div>`;
+        <p class="dm-guide">ボケで答えろ！面白いと思う答えを選んでな<small>（ゲームではキーボードで自由に入力できるで）</small></p>${choicesHTML(list)}<div class="dm-res"></div>`;
       sfx("hyoshigi");
       const tEl = stage.querySelector(".dm-time b");
       const decide = i => { if (done) return; done = true; clear();

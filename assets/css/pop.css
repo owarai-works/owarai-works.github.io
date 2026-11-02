@@ -726,3 +726,23 @@ body[data-page="home"] .hd:not(.solid) .hd-logo{opacity:0;pointer-events:none}
 .og-box img{width:min(70vw,360px);filter:drop-shadow(5px 5px 0 var(--ink))}
 .og-go{min-width:min(78vw,320px);padding:16px 28px;border-radius:14px;background:var(--gold);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);font-family:var(--f-disp);font-size:clamp(22px,3vw,30px);color:var(--ink);animation:gatePulse 1.6s ease-in-out infinite}
 .og-mute{color:#fff;text-decoration:underline;font-weight:700;font-size:14px}
+
+/* 体験コーナー：絵は小さめに固定して、スマホの縦1画面に問題と答えが入るように */
+.dm-pic{width:min(100%,calc(min(30svh,300px) * 4 / 3));margin-inline:auto}
+.dm-pic img{aspect-ratio:4/3;height:auto}
+.dm-card{padding:16px 14px}
+.dm-card p{font-size:clamp(18px,3vw,26px)}
+.dm-guide small{display:block;font-size:11px;color:var(--muted);font-weight:700}
+.dm-kb{margin-top:10px!important;padding:10px 14px;background:#fff;border:2px solid var(--ink);border-radius:12px;box-shadow:3px 3px 0 var(--ink);font-size:14px;max-width:34em}
+.dm-kb b{display:block;color:var(--shu);font-size:16px}
+@media (max-width:520px){
+  .dm-stage{padding:12px}
+  .dm-head,.dm-round{margin-bottom:8px}
+  .dm-vs{margin-bottom:8px}
+  .dm-guide{margin-top:8px}
+  .dm-ch{margin-top:8px;gap:6px}
+  .dm-ch button{min-height:44px;padding:7px 10px;font-size:13px;box-shadow:3px 3px 0 var(--ink)}
+  .dm-ch i{width:24px;height:24px;font-size:15px}
+  .dm-pic figcaption{padding:5px 10px;font-size:12px}
+  .dm-odai{margin-top:8px;font-size:14px}
+}
