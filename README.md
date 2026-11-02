@@ -47,3 +47,9 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 - Google アナリティクス（測定 ID `G-VZ29R3E1TW`）を全ページの `<head>` に入れた。見るのは https://analytics.google.com （あなたの Google アカウントだけ）。
 - 送っているイベント：`demo_open`・`demo_start`・`demo_finish`（体験コーナー）、`share`（結果のポスト）、`store_click`（App Store）、`movie_play`、`bot_ask`（質問ボット）、`peek_click`・`cta_demo_click`、`gate_open`、`collab_click`、`bgm_toggle`、`button_click`。
 - Search Console の確認タグは、もらったら各ページの `<head>` に入れる。
+
+## 準備中の幕（公開前）
+- `assets/js/prep.js` の `PREP = true` のあいだは、どのページも「ただいま準備中！」だけが出る。BGM も流さない。
+- 運営だけ中身を見る：`https://owarai-works.github.io/?preview=nandeyanen` で開く（その端末では次から幕なし）。戻す：`?preview=off`。
+- 準備中は全ページ `<meta name="robots" content="noindex,nofollow">`（検索に出さない）。
+- **公開するとき**：`PREP = false` にして、robots を元に戻す（index.html・game.html・characters.html・news.html・support.html・privacy.html・terms.html は `index,follow,max-image-preview:large`、article.html と 404.html は `noindex,follow`）。

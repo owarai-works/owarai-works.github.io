@@ -237,6 +237,7 @@ window.SITE = {
     document.addEventListener("play", e => { if (e.target.tagName === "VIDEO" && !e.target.muted && playing) ramp(VOL * .15, .4); }, true);
     document.addEventListener("pause", e => { if (e.target.tagName === "VIDEO" && !e.target.muted && playing) ramp(VOL, .6); }, true);
     paint();
+    if (window.OW_PREP) return;  /* 準備中の幕のあいだは曲を流さない */
     if (on) start();
     else if (get(sessionStorage, "ow-bgm-tip") !== "1") { set(sessionStorage, "ow-bgm-tip", "1"); tip("♪ ゲームの曲を流せます"); }
   })();
