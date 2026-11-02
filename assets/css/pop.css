@@ -1065,3 +1065,6 @@ body{background:transparent!important}
 .egg-row img{width:30%;max-width:140px;aspect-ratio:1;object-fit:cover;object-position:top;border-radius:50%;border:3px solid var(--ink);background:#fff;opacity:.55;transform:scale(.9);transition:all .3s}
 .egg-row img.on{opacity:1;transform:scale(1.08) rotate(-3deg);box-shadow:4px 4px 0 var(--ink)}
 .egg-say{min-height:56px;font-weight:900;font-size:18px;line-height:1.6}.egg-say b{color:var(--shu)}
+/* ツッコミ・タイミング：ボタンの位置は動かさず、点数はボタンの下（高さを先に取っておく） */
+.tm .tm-go{min-width:220px}
+.tm .tm-res{min-height:72px;margin:10px 0 0;display:flex;align-items:center;justify-content:center;gap:8px}

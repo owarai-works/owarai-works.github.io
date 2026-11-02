@@ -81,16 +81,17 @@ window.owPlayMount = () => {
       const BOKE = [["今日は雨やから、", "傘のかわりに天ぷら持ってきたわ"], ["最近ジム通ってんねん。", "見学専門やけど"], ["うちの猫、", "毎朝わたしを起こして家賃の話してくるねん"], ["新幹線で来たで。", "ホームまで"], ["ダイエット始めた！", "お菓子の袋を小さくした"], ["料理得意やねん。", "注文するのが"]];
       const start = () => { let r = 0, tot = 0; track("play_start", {game: "timing"});
         const round = () => { const [a, b] = BOKE[(Math.random() * BOKE.length) | 0];
-          el.innerHTML = `<div class="tm"><p class="tm-r">${r + 1} / 3 本目</p><div class="tm-stage"><img class="tm-f" src="assets/img/ex/kineko_smile0.webp" alt=""><p class="tm-b"><span>${esc(a)}</span><span class="tm-b2">${esc(b)}</span></p></div><div class="tm-bar"><i class="tm-zone"></i><i class="tm-cur"></i></div><button type="button" class="btn tm-go">なんでやねん！</button><p class="tm-hint">ボケを言い切った<b>直後</b>（緑のところ）で押せ！</p></div>`;
+          el.innerHTML = `<div class="tm"><p class="tm-r">${r + 1} / 3 本目</p><div class="tm-stage"><img class="tm-f" src="assets/img/ex/kineko_smile0.webp" alt=""><p class="tm-b"><span>${esc(a)}</span><span class="tm-b2">${esc(b)}</span></p></div><div class="tm-bar"><i class="tm-zone"></i><i class="tm-cur"></i></div><button type="button" class="btn tm-go">なんでやねん！</button><p class="tm-res" aria-live="polite"></p><p class="tm-hint">ボケを言い切った<b>直後</b>（緑のところ）で押せ！</p></div>`;
           const cur = el.querySelector(".tm-cur"), b2 = el.querySelector(".tm-b2"), f = el.querySelector(".tm-f"), dur = 2600, z0 = .62, z1 = .78, t0 = performance.now(); let done = false, raf;
           const tick = () => { const p = (performance.now() - t0) / dur; cur.style.left = Math.min(100, p * 100) + "%"; if (p > .25) b2.classList.add("on"); if (p >= 1) return hit(1.2); raf = requestAnimationFrame(tick); };
           const hit = p => { if (done) return; done = true; cancelAnimationFrame(raf); p = p ?? (performance.now() - t0) / dur;
             const c = (z0 + z1) / 2, sc = p >= z0 && p <= z1 ? Math.round(100 - Math.abs(p - c) / ((z1 - z0) / 2) * 20) : p < z0 ? Math.max(0, Math.round(60 - (z0 - p) * 200)) : Math.max(0, Math.round(60 - (p - z1) * 250));
             tot += sc; const good = sc >= 80; sfx(good ? "slap" : "pon"); f.src = `assets/img/ex/kineko_${good ? "laugh" : "surprise"}0.webp`;
             const msg = p < z0 ? "早すぎ！まだボケ途中や！" : p > z1 ? (p >= 1.2 ? "ツッコミ忘れてるで！" : "遅い！間が空いてもうた…") : sc >= 95 ? "完ぺきなタイミング！" : "ええタイミング！";
-            el.querySelector(".tm-go").outerHTML = `<p class="tm-res ${good ? "good" : ""}"><b>${sc}</b>点　${msg}</p><button type="button" class="btn sm tm-next">${r < 2 ? "次のボケ" : "結果を見る"}</button>`;
-            el.querySelector(".tm-next").onclick = () => { r++; r < 3 ? round() : end(); }; };
-          el.querySelector(".tm-go").onclick = () => hit(); requestAnimationFrame(tick); };
+            const rs = el.querySelector(".tm-res"); rs.className = "tm-res" + (good ? " good" : ""); rs.innerHTML = `<b>${sc}</b>点　${msg}`;
+            const btn = el.querySelector(".tm-go"); btn.textContent = r < 2 ? "次のボケ" : "結果を見る"; btn.classList.add("tm-next");  /* ボタンは同じ場所のまま、文字だけ変える */
+            btn.onclick = () => { r++; r < 3 ? round() : end(); }; };
+          el.querySelector(".tm-go").onclick = () => { if (!done) hit(); }; requestAnimationFrame(tick); };
         const end = () => { const r = tot >= 270 ? "ツッコミの神" : tot >= 220 ? "一流ツッコミ" : tot >= 150 ? "なかなかの相方" : "ツッコミ見習い"; voice("aoi", tot >= 220 ? "high1" : "pass1"); track("play_finish", {game: "timing", score: tot});
           el.innerHTML = `<div class="tm done"><img class="pl-face" src="assets/img/ex/aoi_${tot >= 220 ? "laugh" : "smile"}0.webp" alt=""><p class="pl-res"><b>${tot}</b>点 / 300</p><p class="pl-rank"><b>${r}</b></p><div class="pl-btns"><button type="button" class="btn sm tm-again">もう一回</button>${share(`ツッコミ・タイミングで${tot}点！「${r}」でした🪭`, "timing")}</div></div>`;
           el.querySelector(".tm-again").onclick = start; bindShare(el); };
