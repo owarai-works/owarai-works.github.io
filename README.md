@@ -36,7 +36,6 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 
 ## ページの切りかえ（BGM を止めない）
 - `site.js` の最後：サイトの中のリンクを押すと、ページを読み直さずに `<main>` だけ入れかえる（BGM が続く）。新しいページを作ったら、`<main>` の中に中身、`<body data-page="…">` を付ける。ページ専用の `<script>`（src なし）は入れかえたあとに実行される。
-- 体験コーナー：`assets/js/demo.js`（お題合戦・大喜利・漫画セリフの四択。AIは使わない）。
 - SEO：各ページの title・description・OGP・canonical・構造化データ（JSON-LD）、`sitemap.xml`・`robots.txt`。
 
 ## 見てるだけで楽しい演出（`assets/js/fun.js`）

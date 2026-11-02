@@ -3,8 +3,8 @@
    1) 背景に2頭身のシスターズと小物がふわふわ降る（文字の裏・押せない）
    2) 何もないところをクリック／タップ → 「なんでやねん！」とハリセンの衝撃
    3) 画面の上に「笑いメーター」（読み進めるほどたまる。MAXで「爆笑！」）
-   4) ときどき画面のはしからシスターズがひょっこり顔を出して、体験コーナーへさそう
-   5) スマホ：ヒーローを過ぎたら下に「30秒で体験」ボタン
+   4) ときどき画面のはしからシスターズがひょっこり顔を出して、お題合戦やミニゲームへさそう
+   5) スマホ：ヒーローを過ぎたら下に「お題合戦を見る」ボタン
    ・動きを減らす設定の人には、1〜4を出さない
    ========================================================= */
 (() => {
@@ -93,9 +93,9 @@
 
   /* ---------- 4) ひょっこり顔を出す ---------- */
   const PEEK = [
-    ["k_jump", "体験コーナーで<b>葵と勝負</b>してみ？30秒で遊べるで！", "#demo-play"],
-    ["a_smug", "うちのツッコミ、<b>お題合戦</b>で受けて立つで。", "#demo-play"],
-    ["m_wave", "大喜利の<b>四択</b>、何点取れるかな〜？", "#demo-play"],
+    ["k_jump", "一番の目玉は<b>お題合戦</b>！見ていってな！", "#gassen"],
+    ["a_smug", "うちのツッコミ、<b>お題合戦</b>で受けて立つで。", "#gassen"],
+    ["m_wave", "ミニゲームも<b>16種類</b>あるで〜", "#minigame"],
     ["k_mic", "<b>ランクマッチ</b>で日本一、目指そうや！", "game.html#gassen"],
     ["m_fan", "わたしたちの<b>アイドル姿</b>も見てってな〜", "characters.html"]
   ];
@@ -105,7 +105,7 @@
     const peek = () => {
       if (closed || document.hidden || shown >= 4 || document.querySelector(".fun-peek,.fb.open,.og-gate,.curtain:not(.done),.menu-open")) return;
       const [img, txt, href] = PEEK[pi++ % PEEK.length], side = Math.random() < .5 ? "l" : "r";
-      if (href === "#demo-play" && !document.getElementById("demo-play")) return;
+      if (href[0] === "#" && !document.querySelector(href)) return;
       const el = document.createElement("div"); el.className = "fun-peek " + side; el.setAttribute("role", "status");
       el.innerHTML = `<img src="${P}${img}.webp" alt=""><p>${txt}</p><button type="button" aria-label="とじる">×</button>`;
       document.body.append(el); shown++;
@@ -119,10 +119,10 @@
   }
 
   /* ---------- 5) スマホの「30秒で体験」ボタン ---------- */
-  const cta = document.createElement("a"); cta.className = "fun-cta"; cta.href = "#demo-play";
-  cta.innerHTML = `<small>ダウンロード不要</small>▶ 30秒で体験する`; document.body.append(cta);
-  cta.addEventListener("click", e => { window.owTrack && owTrack("cta_demo_click"); const t = document.getElementById("demo-play"); if (t) { e.preventDefault(); t.scrollIntoView({behavior: "smooth"}); } else { e.preventDefault(); const a = document.createElement("a"); a.href = "index.html#demo-play"; document.body.append(a); a.click(); a.remove(); } });
-  const ctaOn = () => { const hero = document.querySelector(".hero"), demo = document.getElementById("demo-play");
+  const cta = document.createElement("a"); cta.className = "fun-cta"; cta.href = "#gassen";
+  cta.innerHTML = `<small>一番の目玉</small>▶ お題合戦を見る`; document.body.append(cta);
+  cta.addEventListener("click", e => { window.owTrack && owTrack("cta_demo_click"); const t = document.getElementById("gassen"); if (t) { e.preventDefault(); t.scrollIntoView({behavior: "smooth"}); } else { e.preventDefault(); const a = document.createElement("a"); a.href = "game.html#gassen"; document.body.append(a); a.click(); a.remove(); } });
+  const ctaOn = () => { const hero = document.querySelector(".hero"), demo = document.getElementById("gassen");
     const past = hero ? hero.getBoundingClientRect().bottom < 0 : scrollY > 400;
     const inDemo = demo && (() => { const r = demo.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; })();
     cta.classList.toggle("on", past && !inDemo && !document.querySelector(".fb.open")); };
