@@ -122,41 +122,95 @@ window.SITE = {
   };
   $$("canvas[data-petals]").forEach(c => petals(c, {n: +c.dataset.petals || 46}));
 
-  /* ---------- BGM（ゲームのメニュー画面の曲「開演のテーマ」） ---------- */
+  /* ---------- BGM（ゲームのメニュー画面の曲「開演のテーマ」） ----------
+     ゲームと同じしくみ（Web Audio）：頭とおしりの無音を切り、終わりの XF 秒を次の頭と重ねて（クロスフェード）切れ目なくループ。
+     2MBの全体が読みこめるまでは、最初の14秒だけの小さな版（title_head.mp3）を先に鳴らし、用意できたら同じ位置からつなぎかえる */
   (() => {
-    const KEY = "ow-bgm", POS = "ow-bgm-pos";
+    const KEY = "ow-bgm", POS = "ow-bgm-pos", VOL = .22, XF = 1.2;  /* VOL＝音量（0〜1）、XF＝つなぎ目を重ねる秒数 */
+    const FULL = "assets/bgm/title.mp3", HEAD = "assets/bgm/title_head.mp3";
     const get = (s, k) => { try { return s.getItem(k); } catch (e) { return null; } };
     const set = (s, k, v) => { try { s.setItem(k, v); } catch (e) {} };
-    const au = new Audio("assets/bgm/title.mp3"); au.loop = true; au.preload = "none"; au.volume = 0;
+    const AC = window.AudioContext || window.webkitAudioContext;
     const btn = document.createElement("button");
     btn.className = "bgm"; btn.type = "button";
     btn.innerHTML = `<span class="bgm-disc" aria-hidden="true"></span><span class="bgm-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="bgm-txt"><small>BGM</small><b>OFF</b></span>`;
     document.body.append(btn);
-    const VOL = .22;  /* BGM の音量（0〜1） */
-    let on = get(localStorage, KEY) !== "0", fadeT = 0;  /* はじめから ON（OFF にした人だけ OFF） */
-    const fade = (to, ms = 900, done) => { clearInterval(fadeT); const from = au.volume, t0 = performance.now(); fadeT = setInterval(() => { const k = Math.min(1, (performance.now() - t0) / ms); au.volume = from + (to - from) * k; if (k >= 1) { clearInterval(fadeT); done && done(); } }, 30); };
+    let on = get(localStorage, KEY) !== "0";  /* はじめから ON（OFF にした人だけ OFF） */
+    let ac = null, bus = null, voices = [], timer = 0, gen = 0, playing = false, full = null, head = null, cur = null;
+    const tip = txt => { if (btn.querySelector(".bgm-tip")) return; const t = document.createElement("span"); t.className = "bgm-tip"; t.textContent = txt; btn.append(t); setTimeout(() => t.remove(), 6000); };
+    const noTip = () => { const t = btn.querySelector(".bgm-tip"); if (t) t.remove(); };
     const paint = () => { btn.classList.toggle("on", on); btn.querySelector("b").textContent = on ? "ON" : "OFF"; btn.setAttribute("aria-pressed", on); btn.setAttribute("aria-label", on ? "BGMを止める" : "BGMを流す"); };
-    const play = () => { const p = +get(sessionStorage, POS) || 0; if (p && !au.currentTime) { try { au.currentTime = p; } catch (e) {} } return au.play().then(() => { fade(VOL); const t = btn.querySelector(".bgm-tip"); if (t) t.remove(); }); };
-    const start = () => play().catch(() => {
+    /* 頭の無音（小さなノイズも）とおしりの無音を切る（ゲームの trimTrack と同じ） */
+    const trim = buf => {
+      const chs = [...Array(buf.numberOfChannels)].map((_, i) => buf.getChannelData(i)), n = buf.length, sr = buf.sampleRate, W = Math.round(sr * .05);
+      const rms = i => { let q = 0, m = 0; for (const c of chs) for (let j = i; j < Math.min(n, i + W); j += 4) { q += c[j] * c[j]; m++; } return Math.sqrt(q / Math.max(1, m)); };
+      let s = 0, e = n - 1;
+      while (s < n - W && s < sr * 8 && !(rms(s) > .02 && rms(s + W) > .02)) s += Math.round(W / 5);
+      if (s >= sr * 8) s = 0;
+      while (s > 0 && chs.some(c => Math.abs(c[s]) >= .03)) s--;
+      s = Math.max(0, s - Math.round(sr * .01));
+      while (e > s && chs.every(c => Math.abs(c[e]) < .01)) e--;
+      return {buf, start: s / sr, end: (e + 1) / sr};
+    };
+    const load = src => fetch(src).then(r => { if (!r.ok) throw 0; return r.arrayBuffer(); }).then(a => new Promise((res, rej) => ac.decodeAudioData(a, res, rej))).then(trim);
+    /* 1回分を鳴らし、終わる XF 秒前に次の1回を重ねて始める */
+    const voice = (tr, when, fadeIn, g0, off = 0, loop = true) => {
+      const len = tr.end - tr.start - off, g = ac.createGain(), n = ac.createBufferSource();
+      n.buffer = tr.buf; n.connect(g); g.connect(bus);
+      if (fadeIn) { g.gain.setValueAtTime(0, when); g.gain.linearRampToValueAtTime(1, when + fadeIn); } else g.gain.setValueAtTime(1, when);
+      const endAt = when + len;
+      g.gain.setValueAtTime(1, Math.max(when + (fadeIn || 0), endAt - XF)); g.gain.linearRampToValueAtTime(0, endAt);
+      n.start(when, tr.start + off, len); n.stop(endAt + .05);
+      const v = {n, g, tr, t0: when, off}; voices.push(v); n.onended = () => { voices = voices.filter(x => x !== v); };
+      cur = v;
+      if (loop) { clearTimeout(timer); timer = setTimeout(() => { if (g0 === gen && playing) voice(tr, endAt - XF, XF, g0); }, Math.max(0, (endAt - XF - ac.currentTime - 1.5) * 1000)); }
+      return v;
+    };
+    const stopVoices = (t = .08) => { const now = ac.currentTime; voices.forEach(v => { try { v.g.gain.cancelScheduledValues(now); v.g.gain.setValueAtTime(v.g.gain.value, now); v.g.gain.linearRampToValueAtTime(0, now + t); v.n.stop(now + t + .02); } catch (e) {} }); };
+    const posNow = () => { if (!cur || !ac) return 0; const L = cur.tr.end - cur.tr.start; return Math.max(0, cur.off + (ac.currentTime - cur.t0)) % L; };
+    const ramp = (to, s = .9) => { if (!bus) return; const now = ac.currentTime; bus.gain.cancelScheduledValues(now); bus.gain.setValueAtTime(bus.gain.value, now); bus.gain.linearRampToValueAtTime(to, now + s); };
+    const play = async () => {
+      if (!AC) return false;
+      if (!ac) { ac = new AC(); bus = ac.createGain(); bus.gain.value = 0; bus.connect(ac.destination); }
+      if (ac.state !== "running") { try { await ac.resume(); } catch (e) {} }
+      if (ac.state !== "running") return false;  /* ブラウザに止められた */
+      if (playing) return true;
+      playing = true; const g0 = ++gen; ramp(VOL, 1.2); noTip();
+      const startAt = +get(sessionStorage, POS) || 0;  /* ほかのページから来たら、続きから */
+      if (!full) full = load(FULL).catch(e => { full = null; throw e; });
+      if (!head && !startAt) head = load(HEAD).catch(() => null);
+      let w = null; try { w = await Promise.race([full.then(t => ({f: t})), ...(head ? [head.then(t => t ? {h: t} : new Promise(() => {}))] : [])]); } catch (e) { playing = false; return false; }
+      if (g0 !== gen) return true;
+      if (w.f) { const L = w.f.end - w.f.start; voice(w.f, ac.currentTime + .02, .6, g0, startAt % L); return true; }
+      /* 先に小さな版を鳴らし、全体が来たら同じ位置からつなぎかえる */
+      const h = w.h, t0 = ac.currentTime + .02; voice(h, t0, .4, g0, 0, false);
+      full.then(t => { if (g0 !== gen || !playing) return; const now = ac.currentTime, el = now + .06 - t0;
+        const off = el < h.end - h.start - XF ? Math.max(0, h.start + el - t.start) : 0;
+        stopVoices(.08); voice(t, now + .06, off ? .05 : .4, g0, off); }).catch(() => {});
+      return true;
+    };
+    const stop = () => { if (!playing) return; playing = false; gen++; clearTimeout(timer); ramp(0, .4); setTimeout(() => { if (!playing) stopVoices(.05); }, 450); };
+    const start = () => play().then(ok => {
+      if (ok) return;
       /* ブラウザに止められたら、最初のタップで流す */
       const once = e => { if (e.target.closest && e.target.closest(".bgm")) return;  /* BGM ボタンそのものは click で扱う */
-        ["pointerdown", "keydown", "touchend"].forEach(t => removeEventListener(t, once, true)); if (on && au.paused) play().catch(() => {}); };
+        ["pointerdown", "keydown", "touchend"].forEach(t => removeEventListener(t, once, true)); if (on && !playing) play(); };
       ["pointerdown", "keydown", "touchend"].forEach(t => addEventListener(t, once, true));
+      setTimeout(() => { if (on && !playing) tip("♪ タップで曲が流れます"); }, 2000);
     });
     btn.addEventListener("click", e => {
-      e.stopPropagation();
-      if (on && au.paused) { au.preload = "auto"; play().catch(() => {}); return; }  /* ON なのにまだ鳴っていない（ブラウザに止められた）ときは、流すだけ */
+      e.stopPropagation(); noTip();
+      if (on && !playing) { play(); return; }  /* ON なのにまだ鳴っていない（ブラウザに止められた）ときは、流すだけ */
       on = !on; set(localStorage, KEY, on ? "1" : "0"); paint();
-      const tip = btn.querySelector(".bgm-tip"); if (tip) tip.remove();
-      if (on) { au.preload = "auto"; start(); } else fade(0, 400, () => au.pause());
+      if (on) start(); else stop();
     });
-    addEventListener("pagehide", () => { if (!au.paused) set(sessionStorage, POS, au.currentTime); });
+    addEventListener("pagehide", () => { set(sessionStorage, POS, playing ? posNow() : 0); });
     /* 動画を見るあいだは小さく */
-    document.addEventListener("play", e => { if (e.target.tagName === "VIDEO" && !e.target.muted && on) fade(.06, 400); }, true);
-    document.addEventListener("pause", e => { if (e.target.tagName === "VIDEO" && !e.target.muted && on && !au.paused) fade(VOL, 600); }, true);
+    document.addEventListener("play", e => { if (e.target.tagName === "VIDEO" && !e.target.muted && playing) ramp(VOL * .15, .4); }, true);
+    document.addEventListener("pause", e => { if (e.target.tagName === "VIDEO" && !e.target.muted && playing) ramp(VOL, .6); }, true);
     paint();
-    if (on) { au.preload = "auto"; start(); setTimeout(() => { if (on && au.paused && !btn.querySelector(".bgm-tip")) { const t = document.createElement("span"); t.className = "bgm-tip"; t.textContent = "♪ タップで曲が流れます"; btn.append(t); setTimeout(() => t.remove(), 6000); } }, 2600); }
-    else if (get(sessionStorage, "ow-bgm-tip") !== "1") { set(sessionStorage, "ow-bgm-tip", "1"); const t = document.createElement("span"); t.className = "bgm-tip"; t.textContent = "♪ ゲームの曲を流せます"; btn.append(t); setTimeout(() => t.remove(), 7000); }
+    if (on) start();
+    else if (get(sessionStorage, "ow-bgm-tip") !== "1") { set(sessionStorage, "ow-bgm-tip", "1"); tip("♪ ゲームの曲を流せます"); }
   })();
 
   /* ---------- お知らせ ---------- */

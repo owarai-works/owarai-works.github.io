@@ -1,0 +1,324 @@
+/* =========================================================
+   明るい「爆笑お笑い」テーマ（ほかのCSSのあとに読む）
+   クリームの地・黄色・朱・ピンク、漫画の太いふち＋ずらした影、集中線・網点
+   ========================================================= */
+:root{
+  --bg:#fff7e3; --bg2:#ffefc4; --panel:#ffffff; --panel2:#fff6dc;
+  --ink:#1c1012; --text:#1c1012; --muted:#6a5048; --dim:#97817a;
+  --line:#1c1012; --line2:rgba(28,16,18,.14);
+  --gold:#ffc61a; --gold-hi:#ffd84d; --gold-d:#e09a00;
+  --shu:#ff3b2f; --shu-d:#d81f17; --sakura:#ff7fb0; --sakura-d:#ff4f97;
+  --pop:3px solid var(--ink); --sh:5px 5px 0 var(--ink); --sh-s:3px 3px 0 var(--ink);
+}
+html,body{background:var(--bg)}
+body{color:var(--text)}
+/* 地紋：網点＋うすい集中線 */
+body::before{opacity:1;background:
+  radial-gradient(circle,rgba(255,59,47,.13) 1.6px,transparent 2.2px) 0 0/22px 22px,
+  radial-gradient(circle,rgba(255,198,26,.18) 1.6px,transparent 2.2px) 11px 11px/22px 22px}
+body::after{background:radial-gradient(900px 600px at 85% -5%,rgba(255,198,26,.35),transparent 60%),radial-gradient(800px 500px at -5% 40%,rgba(255,127,176,.18),transparent 60%)}
+::selection{background:var(--gold);color:var(--ink)}
+:focus-visible{outline-color:var(--shu)}
+
+/* ---------- ヘッダー ---------- */
+.hd.solid,.hd.always{background:rgba(255,255,255,.95);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 3px 0 var(--ink)}
+.hd:not(.solid):not(.always) .hd-nav a b{color:#fff;text-shadow:0 2px 0 var(--ink),0 0 10px rgba(0,0,0,.4)}
+.hd:not(.solid):not(.always) .hd-nav a small{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.hd-nav a b{color:var(--ink)}
+.hd-nav a small{color:var(--muted)}
+.hd-nav a::after{height:4px;background:var(--shu);border-radius:2px}
+.hd-nav a[aria-current="page"] b{color:var(--shu)}
+.hd-menu{background:#fff;border:var(--pop);box-shadow:var(--sh-s)}
+.hd-menu i{background:var(--ink)}
+.menu-open .hd-menu{background:var(--gold)}
+
+/* App Store ボタン */
+.store{background:var(--gold);border:var(--pop);box-shadow:var(--sh-s);color:var(--ink)}
+.store svg{color:var(--ink)}
+.store small{color:#5a3d12}
+.store em{background:var(--shu);border:2px solid var(--ink)}
+
+/* スマホのメニュー */
+.sp-menu nav a{border-bottom-color:rgba(255,255,255,.35)}
+.sp-menu nav a b{text-shadow:3px 3px 0 var(--ink)}
+.sp-menu nav a small{color:var(--gold-hi)}
+
+/* ---------- 見出し ---------- */
+.sec-hd .en{color:var(--gold);-webkit-text-stroke:2.5px var(--ink);paint-order:stroke fill;text-shadow:6px 6px 0 var(--shu);opacity:1;letter-spacing:.03em}
+.sec-hd h2{color:var(--ink);margin-top:.15em}
+.sec-hd h2::before{background:var(--shu);box-shadow:0 0 0 3px var(--ink)}
+.sec-hd p{color:var(--muted)}
+.kicker{color:var(--shu);font-weight:700}
+.kicker::before{background:var(--shu);height:3px}
+
+/* ---------- ボタン ---------- */
+.btn{border:var(--pop);box-shadow:var(--sh);background:linear-gradient(180deg,#ff5a45,var(--shu-d));text-shadow:0 2px 0 rgba(0,0,0,.25)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.btn.ghost{background:#fff;color:var(--ink);box-shadow:var(--sh);text-shadow:none}
+.btn .arw{background:var(--gold);color:var(--ink);border:2px solid var(--ink)}
+
+/* ---------- 流れる帯 ---------- */
+.marquee{background:var(--gold);border-block:3px solid var(--ink);box-shadow:0 8px 0 var(--shu)}
+.marquee span{color:var(--ink);text-shadow:none}
+.marquee span i{color:var(--shu)}
+
+/* ---------- お知らせ ---------- */
+.news-item{background:#fff;border:var(--pop);box-shadow:var(--sh);border-radius:12px}
+.news-item:hover{background:#fffdf3;transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.news-item time{color:var(--shu)}
+.news-item .go{border:2px solid var(--ink);color:var(--ink);background:var(--gold)}
+.news-item:hover .go{background:var(--shu);color:#fff}
+.tag{border:2px solid var(--ink)}
+.tag.update{background:#2f7fe0}
+.nf button{background:#fff;border:2px solid var(--ink);color:var(--ink)}
+.nf button[aria-pressed="true"]{background:var(--gold);box-shadow:var(--sh-s)}
+.news-empty{border-color:var(--ink);background:#fff}
+
+/* ---------- 下層ページの上の帯 ---------- */
+.ph{border-bottom:3px solid var(--ink)}
+.ph::after{background:linear-gradient(90deg,rgba(255,247,227,.97) 15%,rgba(255,247,227,.75) 50%,rgba(255,247,227,.1)),radial-gradient(circle,rgba(255,59,47,.18) 1.5px,transparent 2px) 0 0/14px 14px}
+.ph .en{color:var(--gold);-webkit-text-stroke:3px var(--ink);paint-order:stroke fill;text-shadow:7px 7px 0 var(--shu);opacity:1}
+.ph h1{color:var(--ink)}
+.ph p{color:var(--muted)}
+.crumb{color:var(--muted)}
+.crumb a:hover{color:var(--shu)}
+
+/* ---------- 下の欄 ---------- */
+.ft{background:var(--gold);border-top:3px solid var(--ink);color:var(--ink)}
+.ft::before{height:10px;top:-13px;background:repeating-linear-gradient(90deg,var(--shu) 0 30px,#fff 30px 60px);border-block:3px solid var(--ink);opacity:1}
+.ft-logo p,.ft-nav a{color:var(--ink)}
+.ft-nav a{font-weight:700}
+.ft-nav a::before{background:var(--shu)}
+.ft-nav a:hover{color:var(--shu)}
+.ft-bottom{border-top:2px dashed rgba(28,16,18,.35);color:#5a3d12}
+
+/* ---------- 小物 ---------- */
+.phone{background:linear-gradient(145deg,#2b2b2b,#0d0d0d 40%,#2b2b2b);box-shadow:0 0 0 3px var(--ink),8px 10px 0 var(--ink),0 30px 50px -20px rgba(0,0,0,.5)}
+
+/* BGM ボタン */
+.bgm{background:#fff;border:var(--pop);box-shadow:var(--sh-s);backdrop-filter:none}
+.bgm:hover{border-color:var(--ink);transform:translate(-1px,-1px)}
+.bgm-disc{background:radial-gradient(circle,var(--gold) 0 3px,#1a0d0f 4px 6px,transparent 7px),repeating-radial-gradient(circle,#333 0 2px,#111 2px 4px)}
+.bgm.on{background:var(--gold)}
+.bgm.on .bgm-disc{box-shadow:0 0 0 2px var(--ink)}
+.bgm-bars i{background:#bbb}
+.bgm.on .bgm-bars i{background:var(--shu)}
+.bgm-txt small{color:var(--muted)}
+.bgm.on .bgm-txt small{color:#5a3d12}
+.bgm.on .bgm-txt b{color:var(--ink)}
+.bgm-tip{background:var(--shu);color:#fff;border:2px solid var(--ink);box-shadow:var(--sh-s)}
+.bgm-tip::after{border-top-color:var(--shu)}
+
+/* 書類のページ */
+.doc-toc{background:#fff;border:var(--pop);box-shadow:var(--sh)}
+.doc-toc b{color:var(--shu)}
+.doc-toc a{color:var(--ink)}
+.doc-toc a:hover{background:var(--bg2);color:var(--shu)}
+.paper{background:#fff;border:var(--pop);box-shadow:8px 8px 0 var(--ink);border-radius:10px}
+.paper .lead{border-bottom-color:var(--shu)}
+
+/* 記事 */
+.art-meta time{color:var(--shu)}
+.art h1{border-bottom:3px solid var(--ink)}
+.art-img{border:var(--pop);box-shadow:var(--sh)}
+.art-body a{color:var(--shu)}
+.art-pager a{background:#fff;border:var(--pop);box-shadow:var(--sh-s)}
+.art-pager a:hover{border-color:var(--ink);background:var(--gold)}
+.art-pager small{color:var(--shu)}
+
+/* サポート */
+.faq details{background:#fff;border:var(--pop);box-shadow:var(--sh-s)}
+.faq details[open]{border-color:var(--ink);box-shadow:var(--sh)}
+.faq summary::after{color:var(--shu);font-weight:900}
+.faq .a{color:var(--muted)}
+.faq .a::before{color:var(--gold-d)}
+.contact-box{background:var(--gold);border:var(--pop);box-shadow:8px 8px 0 var(--ink)}
+.contact-box img{border-color:var(--ink);background:#fff}
+.contact-box p,.contact-box ul{color:#4a3214}
+.contact-box .mail{color:var(--ink)}
+.contact-box .mail a{color:var(--shu-d)}
+.links3 a{background:#fff;border:var(--pop);box-shadow:var(--sh-s)}
+.links3 a:hover{border-color:var(--ink);background:var(--gold)}
+.links3 a small{color:var(--shu)}
+
+/* 動画の小窓はそのまま暗く */
+.modal{background:rgba(28,16,18,.88)}
+
+/* =========================================================
+   HOME
+   ========================================================= */
+.hero{background:var(--gold)}
+.hero::before{background:
+  linear-gradient(90deg,rgba(255,247,227,.55) 0%,rgba(255,247,227,.15) 24%,transparent 40%),
+  linear-gradient(0deg,var(--bg) 0%,rgba(255,247,227,.65) 14%,transparent 34%)}
+.hero-light{mix-blend-mode:soft-light;opacity:.9}
+/* ロゴの後ろに漫画の集中線（ドーン！） */
+.hero-main{position:relative}
+.hero-main::before{content:"";position:absolute;left:50%;top:22%;width:160%;aspect-ratio:1;transform:translate(-50%,-50%);z-index:-1;pointer-events:none;
+  background:repeating-conic-gradient(from 0deg,rgba(255,216,77,.95) 0 4deg,transparent 4deg 11deg);
+  mask:radial-gradient(circle,#000 18%,transparent 62%);-webkit-mask:radial-gradient(circle,#000 18%,transparent 62%);animation:spinC 40s linear infinite}
+@keyframes spinC{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.hero-logo{filter:drop-shadow(6px 6px 0 var(--ink)) drop-shadow(0 10px 20px rgba(0,0,0,.25))}
+.hero-v{color:var(--ink);text-shadow:-2px -2px 0 #fff,2px -2px 0 #fff,-2px 2px 0 #fff,2px 2px 0 #fff,0 0 14px #fff}
+.hero-v em{color:var(--shu)}
+.hero-sub{background:#fff;border:var(--pop);box-shadow:var(--sh-s);color:var(--ink)}
+.hero-sub b{border:2px solid var(--ink)}
+.play-pv{color:var(--ink);text-shadow:0 0 8px #fff,0 0 3px #fff}
+.play-pv i{background:var(--shu);border:var(--pop);box-shadow:var(--sh-s)}
+.play-pv i::before{border-left-color:#fff}
+.play-pv i::after{border-color:var(--shu)}
+.play-pv small{color:var(--shu-d)}
+.hero-scroll{color:var(--ink)}
+.hero-scroll i{background:linear-gradient(var(--ink),transparent)}
+.hero-scroll i::after{background:var(--shu)}
+.hero-side span{color:rgba(28,16,18,.55)}
+
+/* 開幕の幕：明るく */
+.curtain{background:transparent}
+
+/* ピックアップ */
+.pickup{border:var(--pop);box-shadow:8px 8px 0 var(--ink)}
+.pickup-in .kicker{color:var(--gold-hi)}
+.pickup-in .kicker::before{background:var(--gold-hi)}
+.pickup-in h3{color:#fff;text-shadow:2px 2px 0 var(--ink)}
+
+/* はじめに */
+.about-ph .burst{background:repeating-conic-gradient(from 0deg,rgba(255,198,26,.55) 0 6deg,transparent 6deg 14deg)}
+.about-ph .ffuki{border:var(--pop);box-shadow:var(--sh)}
+.about-ph .ffuki::after{display:none}
+.about-ph .score{box-shadow:0 0 0 3px var(--ink),6px 6px 0 var(--ink)}
+.about-lead em{color:var(--shu);background:linear-gradient(transparent 62%,var(--gold) 62%)}
+.about-txt{color:var(--muted)}
+.way{background:#fff;border:var(--pop);box-shadow:var(--sh-s)}
+.way i{background:var(--gold);border:2px solid var(--ink)}
+.way small{color:var(--muted)}
+
+/* みどころ */
+.fcard{border:var(--pop);box-shadow:8px 8px 0 var(--ink)}
+.fcard:hover{border-color:var(--ink);transform:translate(-3px,-5px) rotate(-.6deg);box-shadow:12px 12px 0 var(--shu)}
+.fcard::after{background:linear-gradient(0deg,rgba(28,16,18,.92) 8%,rgba(28,16,18,.25) 55%,transparent)}
+.fcard .no{color:var(--gold);-webkit-text-stroke:2px var(--ink);paint-order:stroke fill;text-shadow:4px 4px 0 var(--shu)}
+.fcard h3{text-shadow:2px 2px 0 var(--ink)}
+.fcard .lnk{color:var(--gold-hi)}
+
+/* キャラ */
+.home-chara{background:radial-gradient(70% 60% at 50% 75%,rgba(255,198,26,.45),transparent 70%)}
+.home-chara::before{content:"";position:absolute;left:50%;top:62%;width:1400px;aspect-ratio:1;transform:translate(-50%,-50%);z-index:-1;pointer-events:none;
+  background:repeating-conic-gradient(from 0deg,rgba(255,198,26,.35) 0 5deg,transparent 5deg 12deg);mask:radial-gradient(circle,#000 10%,transparent 60%);-webkit-mask:radial-gradient(circle,#000 10%,transparent 60%)}
+.home-chara{isolation:isolate}
+.sis img{filter:drop-shadow(5px 5px 0 rgba(28,16,18,.9))}
+.sis .plate{background:#fff;border:var(--pop);box-shadow:0 0 0 0 transparent,5px 5px 0 var(--c)}
+.rival{background:#fff;border:var(--pop);box-shadow:var(--sh-s)}
+.rival small{color:var(--muted)}
+
+/* ムービー */
+.movie-box{border:var(--pop);box-shadow:10px 10px 0 var(--ink)}
+.movie-box::after{background:radial-gradient(circle,transparent,rgba(0,0,0,.35))}
+.movie-box .pbtn{box-shadow:0 0 0 4px var(--ink),6px 6px 0 var(--ink)}
+.movie-box .cap{color:#fff;text-shadow:2px 2px 0 var(--ink)}
+.frame-deco::before{border:3px dashed var(--shu)}
+.frame-deco i{border-color:var(--ink);border-width:4px}
+
+/* 配信の帯 */
+.cta{border-block:3px solid var(--ink)}
+.cta::after{background:linear-gradient(135deg,rgba(255,198,26,.93),rgba(255,127,176,.88) 55%,rgba(255,59,47,.9))}
+.cta h2{color:#fff;-webkit-text-stroke:2px var(--ink);paint-order:stroke fill;text-shadow:5px 5px 0 var(--ink)}
+.cta p{color:var(--ink);font-weight:700}
+.cta .kicker{color:var(--ink)}
+.cta .kicker::before{background:var(--ink)}
+
+@media (max-width:760px){
+  .hero::before{background:linear-gradient(0deg,var(--gold) 1%,rgba(255,198,26,.6) 14%,transparent 30%),linear-gradient(180deg,rgba(255,255,255,.5),transparent 14%)}
+  .hero{border-bottom:0}
+  .hero-main::before{top:30%;width:130%}
+  .play-pv{text-shadow:none}
+}
+
+/* =========================================================
+   ゲーム紹介
+   ========================================================= */
+.subnav{background:rgba(255,255,255,.96);backdrop-filter:none;border-block:3px solid var(--ink)}
+.subnav a{color:var(--ink)}
+.subnav a::before{color:var(--shu)}
+.subnav a.on{background:var(--gold);border:2px solid var(--ink);box-shadow:var(--sh-s);color:var(--ink)}
+.gsec:nth-of-type(even){background:linear-gradient(180deg,transparent,rgba(255,198,26,.14) 15%,rgba(255,198,26,.14) 85%,transparent)}
+.step,.od,.lvl,.mode,.vsc,.rm,.mc,.num{background:#fff;border:var(--pop);box-shadow:var(--sh)}
+.step::before{-webkit-text-stroke:2px rgba(255,59,47,.3)}
+.step i{background:var(--gold);box-shadow:0 0 0 3px var(--ink)}
+.step+.step::after{background:var(--ink);width:3px}
+.step p,.od small,.lvl p,.mode p,.vsc p,.rm p,.mc p{color:var(--muted)}
+.od:hover{border-color:var(--ink);box-shadow:8px 8px 0 var(--oc)}
+.od .lv{background:#fff;border:2px solid var(--ink);color:var(--ink)}
+.lvl{border-top:8px solid var(--lc)}
+.lvl img{border-color:var(--ink);background:#fff}
+.lvl em small{color:var(--ink)}
+.mode .bz{border:2px solid var(--ink)}
+.mode img{border-bottom:3px solid var(--ink)}
+.bz-lead em{color:var(--shu);background:linear-gradient(transparent 62%,var(--gold) 62%)}
+.bz-txt{color:var(--muted)}
+.num{background:#fff}
+.num b{background:none;color:var(--shu);-webkit-text-fill-color:var(--shu);text-shadow:3px 3px 0 var(--gold)}
+.num span{color:var(--ink)}
+.bzc{background:#fffdf5;border:var(--pop);box-shadow:var(--sh);border-radius:10px}
+.bzc::before{border-color:rgba(28,16,18,.12);border-radius:6px}
+.vs-hero{border:var(--pop);box-shadow:10px 10px 0 var(--ink)}
+.vs-side img{border-color:var(--ink);box-shadow:0 0 0 3px #fff}
+.vs-side b,.vs-side small{text-shadow:2px 2px 0 var(--ink)}
+.vs-mark{color:var(--gold);-webkit-text-stroke:3px var(--ink);paint-order:stroke fill;text-shadow:6px 6px 0 var(--ink)}
+.vsc .ic{border:2px solid var(--ink);box-shadow:var(--sh-s)}
+.vsc:hover{border-color:var(--ink);box-shadow:8px 8px 0 var(--shu)}
+.vs-sys span{background:#fff;border:2px solid var(--ink)}
+.vs-sys span::before{background:var(--shu)}
+.rm i{background:var(--gold);border:var(--pop)}
+.road-pics img{border:var(--pop);box-shadow:var(--sh)}
+.bosses span{background:#fff;border:2px solid var(--ink)}
+.mc .pic{border-bottom:3px solid var(--ink)}
+.mg-icons{background:radial-gradient(circle,#fff6d0,#ffd84d)}
+.mg-icons img{background:#fff;border:2px solid var(--ink)}
+
+/* =========================================================
+   キャラクター
+   ========================================================= */
+.cs-bg{background:radial-gradient(60% 70% at 50% 45%,color-mix(in srgb,var(--c1) 35%,#fff7e3),transparent 75%),radial-gradient(40% 50% at 90% 90%,color-mix(in srgb,var(--c2) 28%,transparent),transparent 70%),var(--bg)}
+.cs-rays{background:repeating-conic-gradient(from 0deg,color-mix(in srgb,var(--c1) 30%,transparent) 0 5deg,transparent 5deg 13deg)}
+.cs-en{-webkit-text-stroke:2px var(--ink);color:color-mix(in srgb,var(--c1) 55%,#fff);opacity:.3}
+.cs-tab{opacity:.75}
+.cs-tab img{border:3px solid var(--ink);background:#fff}
+.cs-tab span{color:var(--ink)}
+.cs-tab[aria-selected="true"] img{border-color:var(--ink);box-shadow:0 0 0 4px var(--tc),4px 4px 0 4px var(--ink)}
+.cs-tab .grp{background:var(--ink);color:#fff}
+.cs-sep{background:var(--ink);opacity:.3}
+.cs-frame{background:#fff}
+.cs-art::before{inset:-6px;background:var(--ink);opacity:1}
+.cs-art{filter:drop-shadow(10px 10px 0 var(--tc,var(--c1)))}
+.cs-art::after{background:none}
+.cs-th{border:3px solid var(--ink);opacity:.85}
+.cs-th[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 3px var(--c1)}
+.cs-nav button{background:#fff;border:var(--pop);color:var(--ink);box-shadow:var(--sh-s)}
+.cs-nav button:hover{background:var(--gold)}
+.cs-grp{color:var(--ink);filter:none}
+.cs-grp::before{background:var(--c1);height:4px}
+.cs-ruby{color:var(--muted)}
+.cs-name{color:var(--ink);text-shadow:4px 4px 0 color-mix(in srgb,var(--c1) 70%,#fff)}
+.cs-enname{color:color-mix(in srgb,var(--c1) 80%,#000)}
+.cs-role{border:2px solid var(--ink);box-shadow:var(--sh-s)}
+.cs-quote{border:var(--pop);box-shadow:var(--sh)}
+.cs-quote::before{border-bottom-color:var(--ink);top:-15px}
+.cs-quote::after{content:"";position:absolute;left:33px;top:-9px;border:9px solid transparent;border-top:0;border-bottom-color:#fff}
+.cs-stat div{background:#fff;border:2px solid var(--ink);border-left:8px solid var(--c1);backdrop-filter:none}
+.cs-stat dt{color:var(--muted)}
+.cs-count{color:var(--muted)}
+.cs-count b{color:var(--c1);filter:none;-webkit-text-stroke:1.5px var(--ink);paint-order:stroke fill}
+.cs-card{border:var(--pop);box-shadow:var(--sh)}
+.cs-card:hover{border-color:var(--ink);box-shadow:8px 8px 0 var(--cc)}
+.cs-card small{filter:brightness(1.4)}
+
+/* 暗い絵の上の文字は白のまま */
+.fcard h3,.fcard p,.cs-card b,.vs-side b,.vs-side small,.pickup-in h3,.movie-box .cap{color:#fff}
+.fcard p{color:#f3e6d8}
+@media (min-width:761px){
+  .cs-thumbs{right:14px;top:auto;bottom:14px;transform:none;flex-direction:row;gap:8px}
+  .cs-th{width:52px;height:70px}
+  .cs-nav{left:14px;bottom:14px}
+}

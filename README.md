@@ -19,10 +19,11 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 - **問い合わせのメール・運営の名前・App Store のURL**：`assets/js/site.js` のいちばん上の `SITE`。
   - `contact` を入れると、プライバシーポリシー・利用規約・サポートのページに出ます（空のあいだは「準備中」）。
   - `appStoreUrl` を入れると、「App Store 準備中」のボタンが本物のリンクに変わります。
-- **BGM**：`assets/bgm/title.mp3`（ゲームのメニュー画面の曲「開演のテーマ」）。右下のボタンで ON/OFF。はじめから ON（ブラウザの決まりで、最初に画面をタップしたときに流れ始める）。音量は `site.js` の `VOL`（今は 0.22）。
+- **BGM**：`assets/bgm/title.mp3`（ゲームのメニュー画面の曲「開演のテーマ」）。右下のボタンで ON/OFF。はじめから ON（ブラウザの決まりで、最初に画面をタップしたときに流れ始める）。音量は `site.js` の `VOL`（今は 0.22）。ゲームと同じく、頭とおしりの無音を切って終わりの1.2秒を次の頭と重ねてループ（`XF`）。
 
 ## 絵・動画
 - `assets/img/hero.webp`：パソコンのメイン画像（Higgsfield で作成。元は `docs/homepage/gen/hero_a.png`）
 - `assets/vid/pv.mp4`：ムービー（Vidu Q4 で hero_a から作成）
+- `assets/css/pop.css`：明るい「爆笑お笑い」テーマ（クリーム・黄色・朱、太い黒ふち＋ずらした影）。ほかのCSSのあとに読む
 - `assets/vid/kv_sp.mp4`：スマホのメイン動画（ゲームのタイトル動画）
 - そのほかは、ゲームの絵（`img/`）を小さくしたもの。ゲームの画面写真 `ss_*.webp` は Playwright で撮影。
