@@ -417,3 +417,26 @@ body::after{background:radial-gradient(900px 600px at 85% -5%,rgba(255,198,26,.3
 .ph-chips li:nth-child(2n){background:#fff;transform:rotate(1.5deg)}
 .ph-chips li:first-child{background:var(--shu);color:#fff}
 @media (max-width:760px){.ph-chips li{font-size:12px;padding:5px 10px}}
+
+/* キャラの立ち絵：頭のてっぺんを気猫にそろえる（足もとは同じ線）。
+   絵の中の「頭のてっぺん〜足もと」の長さ：気猫 622・葵 621・百萌 551（640の絵の中で）→ 百萌は 1.13 倍。
+   横幅が足りなくても縮まないように max-width を外す（縮むと低く見える） */
+.sisters{--sh:clamp(300px,46vw,560px)}
+.sis img{height:var(--sh);width:auto;max-width:none}
+.sis.a img{height:calc(var(--sh) * 1.0)}
+.sis.m img{height:calc(var(--sh) * 1.13)}
+@media (max-width:760px){.sisters{--sh:clamp(230px,60vw,360px)}}
+@media (max-width:360px){.sis .plate small{display:none}}
+
+/* お題のカード：実際のゲーム画面 */
+.od img.shot,.odai-mini img.shot{width:100%;height:auto;aspect-ratio:13/20;object-fit:cover;object-position:top;border:2px solid var(--ink);border-radius:10px;filter:none;background:#fff}
+.od:hover img.shot{transform:none}
+.od{padding:12px 12px 16px}
+.od::before{display:none}
+.od.wide{flex-direction:column;text-align:center}
+.od.wide img.shot{max-width:none}
+.odai-mini li{padding:8px 8px 12px}
+.odai-mini li:last-child{background:#fff}
+.odai-mini li:hover{transform:translateY(-4px) rotate(-1deg)}
+.od > div{display:flex;flex-direction:column;align-items:center}
+.od > div b{margin-top:10px}
