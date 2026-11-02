@@ -148,8 +148,14 @@ window.SITE = {
     const vr = vb.querySelector("input"), vp = vb.querySelector(".bgm-vp"), vk = vb.querySelector(".bgm-vk"), vt = vb.querySelector("b");
     const vpaint = () => { vr.value = Math.round(VOL * 100); vt.textContent = Math.round(VOL * 100); vr.style.setProperty("--p", VOL * 100 + "%"); };
     vpaint(); window.owVol = () => VOL;
-    vk.addEventListener("click", e => { e.stopPropagation(); vp.hidden = !vp.hidden; vk.setAttribute("aria-expanded", !vp.hidden); });
-    vr.addEventListener("input", () => { VOL = vr.value / 100; set(localStorage, "ow-bgm-vol", VOL); vpaint(); if (playing) ramp(VOL, .15); });
+    /* 開いたら3秒で自動で閉じる（さわっているあいだは閉じない） */
+    let vT = 0, vHold = false;
+    const vOpen = on => { vp.hidden = !on; vk.setAttribute("aria-expanded", on); clearTimeout(vT); if (on) vT = setTimeout(() => { if (!vHold) vOpen(false); }, 3000); };
+    vk.addEventListener("click", e => { e.stopPropagation(); vOpen(vp.hidden); });
+    vr.addEventListener("input", () => { VOL = vr.value / 100; set(localStorage, "ow-bgm-vol", VOL); vpaint(); if (playing) ramp(VOL, .15); vOpen(true); });
+    vp.addEventListener("pointerdown", () => { vHold = true; clearTimeout(vT); });
+    addEventListener("pointerup", () => { if (vHold) { vHold = false; if (!vp.hidden) vOpen(true); } });
+    vOpen(true);  /* 最初から出しておいて、3秒で消える */
     document.addEventListener("click", e => { if (!vb.contains(e.target)) { vp.hidden = true; vk.setAttribute("aria-expanded", "false"); } });
     let on = get(localStorage, KEY) !== "0";  /* はじめから ON（OFF にした人だけ OFF） */
     let ac = null, bus = null, voices = [], timer = 0, gen = 0, playing = false, full = null, head = null, cur = null;

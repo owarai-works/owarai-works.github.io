@@ -1096,3 +1096,7 @@ body{background:transparent!important}
 .thx-cd.on{opacity:.92;transform:none}
 .thx-cd img{width:26px;height:26px;object-fit:contain}
 .thx-cd b{min-width:1.6em;text-align:center;font-family:var(--f-en);font-weight:400;font-size:20px;color:var(--shu)}
+/* 実況：出ていないときは完全にかくす（空の吹き出しが残らないように） */
+.jk{opacity:0;visibility:hidden;transition:transform .45s cubic-bezier(.2,1.4,.4,1),opacity .3s,visibility 0s .3s}
+.jk.on{opacity:1;visibility:visible;transition:transform .45s cubic-bezier(.2,1.4,.4,1),opacity .2s,visibility 0s}
+.jk p:empty{display:none}
