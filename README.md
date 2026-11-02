@@ -1,0 +1,28 @@
+# お笑い道場 なんでやねん 公式ホームページ
+
+GitHub Pages でそのまま公開できる、ふつうの HTML のホームページです（作るための道具はいりません）。
+
+## ページ
+| ファイル | 中身 |
+|---|---|
+| index.html | HOME（メインビジュアル・お知らせ・みどころ・キャラ・ムービー） |
+| news.html / article.html | お知らせの一覧 / 1つずつの記事（`article.html?id=記事のid`） |
+| game.html | ゲーム紹介（遊び方・お題・番付・対戦・お笑いへの道・漫画など） |
+| characters.html | キャラクター紹介（気猫・葵・百萌・黒田・紫音） |
+| support.html | よくある質問・お問い合わせ（App Store の「サポートURL」に使う） |
+| privacy.html | プライバシーポリシー（App Store の「プライバシーポリシーURL」に使う） |
+| terms.html | 利用規約 |
+| 404.html | ページが見つからないとき |
+
+## よく書きかえる所
+- **お知らせを足す**：`assets/js/news-data.js` のいちばん上に1つ足す。
+- **問い合わせのメール・運営の名前・App Store のURL**：`assets/js/site.js` のいちばん上の `SITE`。
+  - `contact` を入れると、プライバシーポリシー・利用規約・サポートのページに出ます（空のあいだは「準備中」）。
+  - `appStoreUrl` を入れると、「App Store 準備中」のボタンが本物のリンクに変わります。
+- **BGM**：`assets/bgm/title.mp3`（ゲームのメニュー画面の曲「開演のテーマ」）。右下のボタンで ON/OFF。最初は OFF（ブラウザは、勝手に音を出すことを止めているため）。
+
+## 絵・動画
+- `assets/img/hero.webp`：パソコンのメイン画像（Higgsfield で作成。元は `docs/homepage/gen/hero_a.png`）
+- `assets/vid/pv.mp4`：ムービー（Vidu Q4 で hero_a から作成）
+- `assets/vid/kv_sp.mp4`：スマホのメイン動画（ゲームのタイトル動画）
+- そのほかは、ゲームの絵（`img/`）を小さくしたもの。ゲームの画面写真 `ss_*.webp` は Playwright で撮影。

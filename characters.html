@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>キャラクター紹介｜お笑い道場 なんでやねん 公式サイト</title>
+<meta name="description" content="お笑いシスターズ（日向気猫・水野葵・桜川百萌）と、ライバルの黒田茂樹・紫音を紹介します。">
+<meta name="theme-color" content="#0d0708">
+<meta property="og:type" content="article">
+<meta property="og:title" content="キャラクター紹介｜お笑い道場 なんでやねん">
+<meta property="og:image" content="assets/img/ogp.jpg">
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dela+Gothic+One&family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/chara.css">
+</head>
+<body data-page="chara">
+<main>
+  <h1 class="sr">キャラクター紹介</h1>
+  <section class="cs" id="cs" aria-label="キャラクター">
+    <i class="cs-bg" aria-hidden="true"></i><i class="cs-rays" aria-hidden="true"></i>
+    <span class="cs-en" aria-hidden="true"></span>
+    <div class="cs-in">
+      <div class="cs-tabs" role="tablist" aria-label="キャラクターを選ぶ"></div>
+      <div class="cs-art">
+        <div class="cs-frame"></div>
+        <div class="cs-thumbs" aria-label="ほかの絵"></div>
+        <div class="cs-nav"><button class="prev" type="button" aria-label="前のキャラクター">‹</button><button class="next" type="button" aria-label="次のキャラクター">›</button></div>
+      </div>
+      <div class="cs-info" role="tabpanel" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="cs-list">
+    <div class="wrap">
+      <header class="sec-hd rv"><span class="en" aria-hidden="true">ALL CAST</span><h2>登場キャラクター一覧</h2></header>
+      <div class="cs-cards"></div>
+    </div>
+  </section>
+</main>
+
+<script src="assets/js/site.js"></script>
+<script>
+(() => {
+  /* キャラクターのデータ（ゲームのプロフィールと同じ） */
+  const CH = [
+    {k: "kineko", tab: "気猫", grp: "OWARAI SISTERS", name: "日向気猫", ruby: "ひなた きねこ", en: "KINEKO HINATA", role: "司会・盛り上げ担当", copy: "笑いの日本一、目指すでー！", c1: "#f4b400", c2: "#ff6a3d",
+      stat: [["年齢", "15歳"], ["性格", "明るく元気なムードメーカー"], ["得意なお笑い", "一発ギャグ・司会のフリ"], ["趣味", "カラオケ・マイク集め"], ["苦手なもの", "シーンとした空気", 1]]},
+    {k: "aoi", tab: "葵", grp: "OWARAI SISTERS", name: "水野葵", ruby: "みずの あおい", en: "AOI MIZUNO", role: "クールなツッコミ担当", copy: "ツッコミは、うちに任しとき。", c1: "#2f7fe0", c2: "#16b3c8",
+      stat: [["年齢", "16歳"], ["性格", "クールだけど涙もろい"], ["得意なお笑い", "ツッコミ・しゃべくり漫才"], ["趣味", "昔の漫才の映像を見る"], ["苦手なもの", "早起き", 1]]},
+    {k: "momoe", tab: "百萌", grp: "OWARAI SISTERS", name: "桜川百萌", ruby: "さくらがわ ももえ", en: "MOMOE SAKURAGAWA", role: "天然ボケ担当", copy: "ほな、みんなで行こか〜", c1: "#e8558f", c2: "#ff9ec4",
+      stat: [["年齢", "17歳"], ["性格", "おっとり天然のほめ上手"], ["得意なお笑い", "天然ボケ・一発ギャグ"], ["趣味", "和菓子作り・お昼寝"], ["苦手なもの", "急かされること", 1]]},
+    {k: "kuroda", tab: "黒田", grp: "RIVAL", name: "黒田茂樹", ruby: "くろだ しげき", en: "SHIGEKI KURODA", role: "スベらせ屋の貴公子", copy: "君の笑い、全部スベらせてあげよう。", c1: "#3a46a8", c2: "#e2231a",
+      stat: [["年齢", "20歳"], ["性格", "嫌味な自信家。陰の努力家"], ["得意なお笑い", "皮肉のきいたコント"], ["趣味", "蝶ネクタイ集め・髪のセット"], ["苦手なもの", "風の強い日", 1]]},
+    {k: "shion", tab: "紫音", grp: "RIVAL", name: "紫音", ruby: "しおん", en: "SHION", role: "高飛車な紫の女王", copy: "ここはワタクシの舞台よ。オホホ。", c1: "#8a3fe0", c2: "#ff4fa3",
+      stat: [["年齢", "20歳・フランス出身"], ["性格", "高飛車だけどさびしがり"], ["得意なお笑い", "エレガントな毒舌漫談"], ["趣味", "紅茶・ショッピング"], ["苦手なもの", "納豆", 1]]}
+  ];
+  const $ = s => document.querySelector(s);
+  const cs = $("#cs"), tabs = $(".cs-tabs"), frame = $(".cs-frame"), thumbs = $(".cs-thumbs"), info = $(".cs-info"), en = $(".cs-en");
+  const art = (c, j) => `assets/img/ch_${c.k}_${j + 1}.webp`;
+  let cur = -1, pic = 0;
+
+  tabs.innerHTML = CH.map((c, i) => `${i === 3 ? '<i class="cs-sep" aria-hidden="true"></i>' : ""}<button class="cs-tab" type="button" role="tab" id="tab-${c.k}" aria-selected="false" style="--tc:${c.c1}" data-i="${i}">${i === 0 || i === 3 ? `<em class="grp">${i ? "RIVAL" : "SISTERS"}</em>` : ""}<img src="assets/img/face_${c.k}.webp" alt="" width="220" height="220"><span>${c.tab}</span></button>`).join("");
+  document.querySelector(".cs-cards").innerHTML = CH.map((c, i) => `<a class="cs-card rv d${i % 4}" href="#${c.k}" style="--cc:${c.c1}"><img src="${art(c, 0)}" alt="" loading="lazy"><span><small>${c.role}</small><b>${c.name}</b></span></a>`).join("");
+
+  const setArt = (src, anim = true) => {
+    const old = frame.querySelector("img:not(.out)");
+    const im = new Image(); im.src = src; im.alt = ""; im.decoding = "async";
+    if (anim) im.className = "in";
+    frame.append(im);
+    if (old) { old.classList.add("out"); setTimeout(() => old.remove(), 500); }
+  };
+  const show = (i, push = true) => {
+    i = (i + CH.length) % CH.length; if (i === cur) return; cur = i; pic = 0;
+    const c = CH[i];
+    cs.style.setProperty("--c1", c.c1); cs.style.setProperty("--c2", c.c2);
+    en.textContent = c.en;
+    tabs.querySelectorAll(".cs-tab").forEach(t => t.setAttribute("aria-selected", +t.dataset.i === i));
+    info.setAttribute("aria-labelledby", "tab-" + c.k);
+    setArt(art(c, 0));
+    thumbs.innerHTML = [0, 1, 2].map(j => `<button class="cs-th" type="button" aria-pressed="${j === 0}" aria-label="絵 ${j + 1}" data-j="${j}"><img src="${art(c, j)}" alt="" loading="lazy"></button>`).join("");
+    info.classList.remove("cs-fx"); void info.offsetWidth;
+    info.innerHTML = `<p class="cs-count"><b>0${i + 1}</b> / 0${CH.length}</p>
+      <span class="cs-grp">${c.grp}</span>
+      <span class="cs-ruby">${c.ruby}</span>
+      <h2 class="cs-name">${[...c.name].map((ch, n) => `<span style="animation-delay:${n * .06}s">${ch}</span>`).join("")}</h2>
+      <span class="cs-enname">${c.en}</span>
+      <span class="cs-role">${c.role}</span>
+      <p class="cs-quote">「${c.copy}」</p>
+      <dl class="cs-stat">${c.stat.map(([a, b, w]) => `<div${w ? ' class="wide"' : ""}><dt>${a}</dt><dd>${b}</dd></div>`).join("")}</dl>`;
+    info.classList.add("cs-fx");
+    if (push) history.replaceState(null, "", "#" + c.k);
+  };
+  tabs.addEventListener("click", e => { const b = e.target.closest(".cs-tab"); if (b) show(+b.dataset.i); });
+  tabs.addEventListener("keydown", e => { if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); show(cur + 1); tabs.querySelector('[aria-selected="true"]').focus(); } if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); show(cur - 1); tabs.querySelector('[aria-selected="true"]').focus(); } });
+  thumbs.addEventListener("click", e => { const b = e.target.closest(".cs-th"); if (!b || +b.dataset.j === pic) return; pic = +b.dataset.j; thumbs.querySelectorAll(".cs-th").forEach(t => t.setAttribute("aria-pressed", t === b)); setArt(art(CH[cur], pic)); });
+  $(".cs-nav .prev").onclick = () => show(cur - 1);
+  $(".cs-nav .next").onclick = () => show(cur + 1);
+  /* スワイプ */
+  let sx = null;
+  frame.parentElement.addEventListener("pointerdown", e => { if (!e.target.closest("button")) sx = e.clientX; });
+  addEventListener("pointerup", e => { if (sx == null) return; const dx = e.clientX - sx; sx = null; if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1)); });
+  const fromHash = () => { const k = location.hash.slice(1), i = CH.findIndex(c => c.k === k); show(i < 0 ? 0 : i, false); if (i >= 0 && scrollY > 200) scrollTo({top: 0, behavior: "smooth"}); };
+  addEventListener("hashchange", fromHash);
+  fromHash();
+  watchReveal();
+})();
+</script>
+</body>
+</html>

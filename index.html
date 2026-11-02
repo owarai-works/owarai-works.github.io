@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>お笑い道場 なんでやねん 公式サイト</title>
+<meta name="description" content="AIがあなたのボケを本気で採点！スマホで遊べるお笑いゲーム「お笑い道場 なんでやねん」の公式サイト。お知らせ、ゲーム紹介、キャラクター紹介など。">
+<meta name="theme-color" content="#0d0708">
+<meta property="og:type" content="website">
+<meta property="og:title" content="お笑い道場 なんでやねん 公式サイト">
+<meta property="og:description" content="AIがあなたのボケを本気で採点！ボケて、ツッコんで、日本一のお笑いマスターを目指そう。">
+<meta property="og:image" content="assets/img/ogp.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dela+Gothic+One&family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/home.css">
+<link rel="preload" as="image" href="assets/img/hero.webp" media="(min-width:761px)">
+</head>
+<body data-page="home">
+
+<div class="curtain" id="curtain" aria-hidden="true"><img src="assets/img/logo.webp" alt=""></div>
+
+<main>
+  <!-- メインビジュアル -->
+  <section class="hero" aria-label="メインビジュアル">
+    <div class="hero-bg">
+      <img class="hero-pc" src="assets/img/hero.webp" alt="舞台に立つお笑いシスターズ（日向気猫・水野葵・桜川百萌）" width="2400" height="1357" fetchpriority="high">
+      <video class="hero-sp" src="assets/vid/kv_sp.mp4" poster="assets/img/kv_poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="お笑いシスターズのタイトル画面"></video>
+    </div>
+    <i class="hero-light" aria-hidden="true"></i>
+    <canvas class="hero-fx" data-petals="54" aria-hidden="true"></canvas>
+    <div class="hero-in">
+      <div class="hero-copy">
+        <h1 class="hero-v"><span>ボケて、<em>ツッコんで</em>、</span><span>日本一へ。</span></h1>
+        <div class="hero-main">
+          <img class="hero-logo" src="assets/img/logo.webp" alt="お笑い道場 なんでやねん" width="900" height="515">
+          <p class="hero-sub"><b>AI採点</b>スマホで遊べる お笑いゲーム</p>
+          <div class="hero-acts">
+            <span data-store="lg"></span>
+            <button class="play-pv" type="button" data-movie="assets/vid/pv.mp4"><i aria-hidden="true"></i><span><small>WATCH MOVIE</small>ムービーを見る</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-side" aria-hidden="true"><span>OWARAI DOJO</span><span>NANDEYANEN</span></div>
+    <a class="hero-scroll" href="#news" aria-label="下へ"><span>SCROLL</span><i></i></a>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-in">
+    <span>ボケろ！<i>◆</i>ツッコめ！<i>◆</i>笑わせろ！<i>◆</i>なんでやねん！<i>◆</i>目指せ日本一のお笑いマスター<i>◆</i></span>
+    <span>ボケろ！<i>◆</i>ツッコめ！<i>◆</i>笑わせろ！<i>◆</i>なんでやねん！<i>◆</i>目指せ日本一のお笑いマスター<i>◆</i></span>
+  </div></div>
+
+  <!-- お知らせ -->
+  <section class="sec" id="news">
+    <div class="wrap">
+      <header class="sec-hd rv"><span class="en" aria-hidden="true">NEWS</span><h2>お知らせ</h2></header>
+      <div class="home-news">
+        <div>
+          <div class="news-list" data-news-latest="4"></div>
+          <div class="more rv"><a class="btn ghost sm" href="news.html">お知らせ一覧 <span class="arw" aria-hidden="true">→</span></a></div>
+        </div>
+        <a class="pickup rv d2" href="article.html?id=2026-11-02-collab">
+          <img src="assets/img/co_join.webp" alt="" loading="lazy">
+          <img class="co" src="assets/img/co_logo.webp" alt="希望の堕天使" loading="lazy" style="position:absolute;inset:auto;left:16px;top:16px;width:70%;height:auto;object-fit:contain;z-index:1">
+          <div class="pickup-in"><span class="kicker">PICK UP</span><h3>コラボイベント<br>「希望の堕天使」開催中！</h3></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- はじめに -->
+  <section class="sec about" id="about">
+    <div class="wrap about-grid">
+      <div class="rv">
+        <span class="kicker">ABOUT</span>
+        <p class="about-lead" style="margin-top:14px">あなたのボケを、<br><em>AIが本気で採点。</em></p>
+        <p class="about-txt">「お笑い道場 なんでやねん」は、出されたお題にボケたりツッコんだりして笑いをとる、スマホのお笑いゲームです。答えはAIが100点満点で採点。お笑いシスターズといっしょに修行して、番付の頂点を目指しましょう。</p>
+        <div class="ways">
+          <div class="way"><i aria-hidden="true">✍️</i><b>文字で答える</b><small>自分で考えたボケを入力</small></div>
+          <div class="way"><i aria-hidden="true">🎤</i><b>声で答える</b><small>マイクでしゃべって回答</small></div>
+          <div class="way"><i aria-hidden="true">🀄</i><b>四択で答える</b><small>4つから選んでサクサク</small></div>
+        </div>
+      </div>
+      <div class="about-ph rv d2" aria-hidden="true">
+        <i class="burst"></i>
+        <div class="phone"><img src="assets/img/ss_play.webp" alt="" loading="lazy"></div>
+        <div class="phone b"><img src="assets/img/ss_menu.webp" alt="" loading="lazy"></div>
+        <span class="ffuki">なんでやねん！</span>
+        <div class="score"><small>AI SCORE</small><b>92<span>点</span></b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ゲームのみどころ -->
+  <section class="sec" id="game">
+    <div class="wrap">
+      <header class="sec-hd rv"><span class="en" aria-hidden="true">GAME</span><h2>ゲームのみどころ</h2><p>お題・番付・対戦・ストーリー。毎日遊んでも飽きない、笑いの修行がそろっています。</p></header>
+      <div class="feat">
+        <a class="fcard w7 tall rv" href="game.html#odai"><img src="assets/img/bn_chal.webp" alt="" loading="lazy"><div class="in"><span class="no">01</span><h3>11種類のお題</h3><p>ボケ・ツッコミ・大喜利・あるある・一発ギャグ・漫画セリフ…。毎日いろんなお題で腕をみがこう。</p><span class="lnk">くわしく見る →</span></div></a>
+        <a class="fcard w5 tall rv d1" href="game.html#banzuke"><img src="assets/img/cut100.webp" alt="" loading="lazy" style="object-position:center 30%"><div class="in"><span class="no">02</span><h3>充実の番付</h3><p>週間・月間・永世の番付で全国のプレイヤーと点数を競う。殿堂入りを目指せ！</p><span class="lnk">くわしく見る →</span></div></a>
+        <a class="fcard w4 rv" href="game.html#taisen"><img src="assets/img/battle.webp" alt="" loading="lazy" style="object-position:center 25%"><div class="in"><span class="no">03</span><h3>白熱の対戦</h3><p>シスターズと格闘モードで勝負。ランクマッチや友達との対戦も。</p><span class="lnk">くわしく見る →</span></div></a>
+        <a class="fcard w4 rv d1" href="game.html#road"><img src="assets/img/road.webp" alt="" loading="lazy" style="object-position:center 20%"><div class="in"><span class="no">04</span><h3>お笑いへの道</h3><p>マスを進んでボスに挑む、すごろく風の修行の旅。</p><span class="lnk">くわしく見る →</span></div></a>
+        <a class="fcard w4 rv d2" href="game.html#manga"><img src="assets/img/comic_e01.webp" alt="" loading="lazy" style="object-position:center top"><div class="in"><span class="no">05</span><h3>漫画・コラボ</h3><p>シスターズの物語を描いた漫画や、期間限定のコラボイベントも。</p><span class="lnk">くわしく見る →</span></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- キャラクター -->
+  <section class="sec home-chara" id="chara">
+    <div class="wrap">
+      <header class="sec-hd center rv"><span class="en" aria-hidden="true">CHARACTER</span><h2>お笑いシスターズ</h2><p>道場で修行する、3人の看板娘。それぞれの得意な笑いで、あなたを待っています。</p></header>
+      <div class="sisters">
+        <a class="sis k rv" href="characters.html#kineko"><i class="glow"></i><img src="assets/img/st_kineko.webp" alt="日向気猫" loading="lazy"><span class="plate"><small>司会・盛り上げ担当</small><b>日向気猫</b><em>KINEKO</em></span></a>
+        <a class="sis a rv d1" href="characters.html#aoi"><i class="glow"></i><img src="assets/img/st_aoi.webp" alt="水野葵" loading="lazy"><span class="plate"><small>クールなツッコミ担当</small><b>水野葵</b><em>AOI</em></span></a>
+        <a class="sis m rv d2" href="characters.html#momoe"><i class="glow"></i><img src="assets/img/st_momoe.webp" alt="桜川百萌" loading="lazy"><span class="plate"><small>天然ボケ担当</small><b>桜川百萌</b><em>MOMOE</em></span></a>
+      </div>
+      <div class="rivals rv">
+        <a class="rival" href="characters.html#kuroda" style="--c:var(--kd)"><img src="assets/img/face_kuroda.webp" alt="" loading="lazy"><span><b>黒田茂樹</b><small>スベらせ屋の貴公子</small></span></a>
+        <a class="rival" href="characters.html#shion" style="--c:var(--s)"><img src="assets/img/face_shion.webp" alt="" loading="lazy"><span><b>紫音</b><small>高飛車な紫の女王</small></span></a>
+      </div>
+      <div class="center-btn rv"><a class="btn" href="characters.html">キャラクター紹介へ <span class="arw" aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
+
+  <!-- ムービー -->
+  <section class="sec" id="movie">
+    <div class="wrap">
+      <header class="sec-hd rv"><span class="en" aria-hidden="true">MOVIE</span><h2>ムービー</h2></header>
+      <div class="frame-deco rv"><i></i><i></i><i></i><i></i>
+        <button class="movie-box" type="button" data-movie="assets/vid/pv.mp4" aria-label="ムービーを再生する"><img src="assets/img/pv_poster.webp" alt="" loading="lazy"><span class="pbtn" aria-hidden="true"></span><span class="cap">SPECIAL MOVIE</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 配信のお知らせ -->
+  <section class="cta">
+    <div class="wrap rv">
+      <span class="kicker">COMING SOON</span>
+      <h2 style="margin-top:10px">iPhoneアプリ版<br>App Store 配信準備中！</h2>
+      <p>配信日が決まりしだい、このホームページのお知らせでお伝えします。</p>
+      <div class="acts"><span data-store="lg"></span><a class="btn ghost" href="news.html">お知らせを見る <span class="arw" aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
+</main>
+
+<script src="assets/js/news-data.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+/* 幕あけ（1回の訪問で1度だけ） */
+(() => {
+  const c = document.getElementById("curtain");
+  let seen = false; try { seen = sessionStorage.getItem("ow-curtain") === "1"; sessionStorage.setItem("ow-curtain", "1"); } catch (e) {}
+  if (seen || matchMedia("(prefers-reduced-motion: reduce)").matches) { c.classList.add("done"); return; }
+  document.documentElement.style.overflow = "hidden";
+  const end = () => { c.classList.add("done"); document.documentElement.style.overflow = ""; };
+  requestAnimationFrame(() => c.classList.add("go"));
+  setTimeout(end, 2300);
+  c.style.pointerEvents = "auto"; c.addEventListener("click", end);
+})();
+</script>
+</body>
+</html>
