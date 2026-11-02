@@ -965,3 +965,6 @@ body{background:transparent!important}
 .rk-hall li.has-pic{grid-template-columns:30px 84px 1fr}
 .rk-pic{width:84px;height:63px;object-fit:cover;border:2px solid var(--ink);border-radius:6px}
 .hl-top{align-items:start}
+/* コラボのカードの文字は白（暗い背景の上） */
+.hero-co .hc-t,.hero-co .hc-t *{color:#fff!important;-webkit-text-stroke:0!important;text-shadow:2px 2px 0 #1c1012!important;font-family:var(--f-disp)!important}
+.hero-co .hc-t small{color:var(--gold-hi)!important;font-family:var(--f-body)!important}
