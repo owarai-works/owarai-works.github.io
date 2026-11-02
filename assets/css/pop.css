@@ -556,3 +556,63 @@ body[data-page="home"] .hd:not(.solid) .hd-logo{opacity:0;pointer-events:none}
 .pt-more li.pm:nth-child(2n) .pm b{color:#fff}
 .pm small{font-size:clamp(12px,9cqi,17px);font-weight:900;color:var(--ink)}
 .pm b .pm-s{font-style:normal;font-size:.7em}
+
+/* ===== 一番の目玉：お題合戦 ===== */
+.gassen{position:relative;isolation:isolate;overflow:hidden;color:#fff;background:radial-gradient(70% 60% at 50% 40%,#7a0d14,#2a0508 70%,#140205);border-block:4px solid var(--ink)}
+.gassen::before{content:"";position:absolute;left:50%;top:40%;width:1800px;aspect-ratio:1;transform:translate(-50%,-50%);z-index:-1;background:repeating-conic-gradient(rgba(255,198,26,.22) 0 4deg,transparent 4deg 11deg);mask:radial-gradient(circle,#000 8%,transparent 55%);-webkit-mask:radial-gradient(circle,#000 8%,transparent 55%);animation:spinC 60s linear infinite}
+.gs-fire{position:absolute;inset:auto 0 0;height:45%;z-index:-1;background:radial-gradient(60% 100% at 20% 100%,rgba(255,120,30,.55),transparent 70%),radial-gradient(60% 100% at 80% 100%,rgba(255,60,40,.5),transparent 70%);animation:fireB 2.4s ease-in-out infinite alternate}
+@keyframes fireB{to{opacity:.6;transform:scaleY(1.08)}}
+.gassen .sec-hd .en{color:#fff;text-shadow:6px 6px 0 var(--shu),9px 9px 0 var(--ink)}
+.gassen .sec-hd h2{color:#fff;font-size:clamp(30px,5vw,54px);text-shadow:3px 3px 0 var(--ink)}
+.gassen .sec-hd h2::before{background:var(--gold)}
+.gs-top{text-align:center}
+.gs-badge{display:inline-block;padding:6px 22px;background:var(--gold);color:var(--ink);border:3px solid var(--ink);border-radius:999px;box-shadow:4px 4px 0 var(--ink);font-family:var(--f-disp);font-size:18px;letter-spacing:.1em;transform:rotate(-3deg);animation:gatePulse 1.4s ease-in-out infinite}
+.gs-title{margin-top:18px;font-family:var(--f-disp);font-weight:400;line-height:1.2;display:flex;flex-direction:column;align-items:center}
+.gs-title span:first-child{font-size:clamp(24px,3.4vw,40px);color:#fff;-webkit-text-stroke:2px var(--ink);paint-order:stroke fill;text-shadow:3px 3px 0 var(--ink)}
+.gs-title em{font-style:normal;font-size:clamp(36px,6.4vw,80px);color:var(--gold);-webkit-text-stroke:3px var(--ink);paint-order:stroke fill;text-shadow:5px 5px 0 var(--shu),8px 8px 0 var(--ink)}
+.gs-lead{margin:20px auto 0;max-width:40em;color:#ffe8d8;font-size:16px;line-height:1.9}
+.gs-lead b{color:var(--gold)}
+.gs-phones{display:flex;justify-content:center;align-items:flex-end;margin-top:44px}
+.gs-ph{position:relative;width:min(30%,260px);margin:0 -12px}
+.gs-ph img{width:100%;aspect-ratio:390/844;object-fit:cover;object-position:top;border:4px solid var(--ink);border-radius:26px;box-shadow:0 0 0 3px var(--gold),8px 10px 0 var(--ink)}
+.gs-ph.p1{transform:rotate(-7deg) translateY(20px)}.gs-ph.p2{z-index:2;width:min(36%,300px)}.gs-ph.p3{transform:rotate(7deg) translateY(20px)}
+.gs-ph figcaption{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%) rotate(-3deg);white-space:nowrap;padding:5px 14px;background:var(--shu);color:#fff;border:3px solid var(--ink);border-radius:10px;box-shadow:3px 3px 0 var(--ink);font-family:var(--f-disp);font-size:clamp(12px,1.4vw,17px)}
+.gs-ph.p2 figcaption{background:var(--gold);color:var(--ink)}
+.gs-feat{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:64px}
+.gs-feat li{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:22px 14px;background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--gold)}
+.gs-feat i{font-style:normal;font-size:40px;line-height:1}
+.gs-feat b{font-family:var(--f-disp);font-weight:400;font-size:clamp(18px,1.8vw,23px);color:var(--shu)}
+.gs-feat li:nth-child(2){background:var(--gold);box-shadow:5px 5px 0 var(--shu)}
+.gs-feat li:nth-child(2) b{color:var(--ink);font-size:clamp(20px,2vw,26px)}
+.gs-feat small{font-size:13px;color:var(--muted);line-height:1.6}
+.gs-feat li:nth-child(2) small{color:#4a3214}
+.gs-call{margin-top:44px;text-align:center;font-family:var(--f-disp);font-size:clamp(22px,3.2vw,38px);color:#fff;text-shadow:3px 3px 0 var(--ink)}
+.gs-call b{font-weight:400;color:var(--gold)}
+.gassen .center-btn{margin-top:28px}
+@media (max-width:1080px){.gs-feat{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){
+  .gs-phones{margin-top:34px}
+  .gs-ph{margin:0 -16px}
+  .gs-ph figcaption{font-size:11px;padding:3px 8px;border-width:2px}
+  .gs-feat{gap:10px;margin-top:50px}
+  .gs-feat li{padding:16px 8px}
+  .gs-feat i{font-size:32px}
+  .gs-lead{font-size:14px}
+}
+
+/* キャラのボイスボタン */
+.cs-voice{display:flex;align-items:center;gap:14px;margin-top:18px}
+.cs-voice .cs-quote{margin-top:0;flex:1}
+.cs-vo{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;font-weight:900;font-size:12px;color:var(--ink)}
+.vo-ic{display:grid;place-items:center;width:62px;height:62px;border-radius:50%;background:var(--c1);color:#fff;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);transition:transform .2s}
+.vo-ic svg{width:32px;height:32px}
+.cs-vo:hover .vo-ic{transform:translate(-2px,-2px) scale(1.05)}
+.cs-vo:active .vo-ic{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.cs-vo.on .vo-ic{animation:voPulse .6s ease-in-out infinite;box-shadow:4px 4px 0 var(--ink),0 0 0 6px color-mix(in srgb,var(--c1) 35%,transparent)}
+@keyframes voPulse{50%{transform:scale(1.12)}}
+@media (max-width:760px){.vo-ic{width:52px;height:52px}.vo-ic svg{width:26px;height:26px}}
+.cs{overflow:clip}
+@media (max-width:760px){
+  .gs-feat li{container-type:inline-size}
+  .gs-feat b,.gs-feat li:nth-child(2) b{font-size:clamp(14px,12.5cqi,20px);white-space:nowrap}
+}

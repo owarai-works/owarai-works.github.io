@@ -72,7 +72,7 @@
     if (old) { old.classList.add("out"); setTimeout(() => old.remove(), 500); }
   };
   const show = (i, push = true) => {
-    i = (i + CH.length) % CH.length; if (i === cur) return; cur = i; pic = 0;
+    i = (i + CH.length) % CH.length; if (i === cur) return; cur = i; pic = 0; vi = 0; if (vau) vau.pause();
     const c = CH[i];
     cs.style.setProperty("--c1", c.c1); cs.style.setProperty("--c2", c.c2);
     en.textContent = c.en;
@@ -87,11 +87,18 @@
       <h2 class="cs-name">${[...c.name].map((ch, n) => `<span style="animation-delay:${n * .06}s">${ch}</span>`).join("")}</h2>
       <span class="cs-enname">${c.en}</span>
       <span class="cs-role">${c.role}</span>
-      <p class="cs-quote">「${c.copy}」</p>
+      <div class="cs-voice"><p class="cs-quote">「${c.copy}」</p><button type="button" class="cs-vo" aria-label="${c.name}の声を聞く"><i class="vo-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a5 5 0 010 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.5 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></i><span>ボイス</span></button></div>
       <dl class="cs-stat">${c.stat.map(([a, b, w]) => `<div${w ? ' class="wide"' : ""}><dt>${a}</dt><dd>${b}</dd></div>`).join("")}</dl>`;
     info.classList.add("cs-fx");
     if (push) history.replaceState(null, "", "#" + c.k);
   };
+  /* ボイス：押すたびに順番にちがうセリフ */
+  const VO = ["intro", "high1", "win", "pass1"]; let vi = 0, vau = null;
+  info.addEventListener("click", e => { const b = e.target.closest(".cs-vo"); if (!b) return;
+    if (vau) { vau.pause(); }
+    vau = new Audio(`assets/vo/${CH[cur].k}_${VO[vi++ % VO.length]}.mp3`); vau.volume = .9;
+    b.classList.add("on"); vau.onended = vau.onpause = () => b.classList.remove("on");
+    vau.play().catch(() => b.classList.remove("on")); });
   tabs.addEventListener("click", e => { const b = e.target.closest(".cs-tab"); if (b) show(+b.dataset.i); });
   tabs.addEventListener("keydown", e => { if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); show(cur + 1); tabs.querySelector('[aria-selected="true"]').focus(); } if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); show(cur - 1); tabs.querySelector('[aria-selected="true"]').focus(); } });
   thumbs.addEventListener("click", e => { const b = e.target.closest(".cs-th"); if (!b || +b.dataset.j === pic) return; pic = +b.dataset.j; thumbs.querySelectorAll(".cs-th").forEach(t => t.setAttribute("aria-pressed", t === b)); setArt(art(CH[cur], pic)); });
