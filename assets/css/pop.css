@@ -746,3 +746,7 @@ body[data-page="home"] .hd:not(.solid) .hd-logo{opacity:0;pointer-events:none}
   .dm-pic figcaption{padding:5px 10px;font-size:12px}
   .dm-odai{margin-top:8px;font-size:14px}
 }
+/* 立ち絵を描き直した（3人とも同じ高さで頭と足がそろう）ので倍率はなし */
+.sis.a img,.sis.m img,.sis.k img{height:var(--sh)}
+/* メイン画像：4Kにした。拡大しすぎてぼやけないように、ゆっくり動く幅を小さく */
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.04) translate(-.6%,.4%)}}
