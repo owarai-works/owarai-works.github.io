@@ -27,7 +27,7 @@ window.SITE = {
   window.storeHTML = storeHTML;
 
   /* ---------- ヘッダーと下の欄 ---------- */
-  const NAV = [["index.html", "HOME", "ホーム", "home"], ["news.html", "NEWS", "お知らせ", "news"], ["game.html", "GAME", "ゲーム紹介", "game"], ["banzuke.html", "RANKING", "ランキング", "banzuke"], ["hall.html", "HALL", "殿堂", "hall"], ["characters.html", "CHARACTER", "キャラクター", "chara"], ["support.html", "SUPPORT", "サポート", "support"]];
+  const NAV = [["index.html", "HOME", "ホーム", "home"], ["news.html", "NEWS", "お知らせ", "news"], ["game.html", "GAME", "ゲーム紹介", "game"], ["characters.html", "CHARACTER", "キャラクター", "chara"], ["banzuke.html", "RANKING", "ランキング", "banzuke"], ["hall.html", "HALL", "殿堂", "hall"], ["support.html", "SUPPORT", "サポート", "support"]];
   const navA = NAV.map(([h, en, jp, k]) => `<a href="${h}"${k === page ? ' aria-current="page"' : ""}><b>${en}</b><small>${jp}</small></a>`).join("");
   const hd = document.createElement("header");
   hd.className = "hd" + (page === "home" ? "" : " always");
