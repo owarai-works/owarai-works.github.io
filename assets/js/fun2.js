@@ -5,7 +5,7 @@
    4 時間帯で変わる寄席（朝・昼・夕・夜・夜中）
    5 季節の飾り（春＝桜・夏＝花火・秋＝紅葉・冬＝雪／正月・ハロウィン・クリスマス）
    6 ページを移るときに赤い幕が閉じて開く（site.js の go から呼ぶ）
-   8 3分以上見てくれた人へ、気猫からごほうび
+   8 1分20秒見てくれた人へ、気猫からごほうび（1分からカウントダウン）
    ・「動きを減らす」設定の人には動きを出さない／笑い声は BGM が ON のときだけ
    ========================================================= */
 (() => {
@@ -138,9 +138,9 @@ html.tod-night .hero-bg img,html.tod-late .hero-bg img{filter:brightness(.82) sa
     let sec = 0, cd = null;
     const iv = setInterval(() => { if (document.hidden || document.querySelector(".og-gate,.prep-wall,.fb.open,.egg")) return; ++sec;
       /* 残り60秒から、画面の上のすみに小さくカウントダウン（突然出てびっくりしないように） */
-      if (sec >= 120 && sec < 180) { if (!cd) { cd = document.createElement("div"); cd.className = "thx-cd"; cd.setAttribute("aria-live", "off"); cd.innerHTML = `<img src="assets/img/fun/k_mic.webp" alt=""><span>気猫から<br>おしらせまで</span><b></b>`; document.body.append(cd); requestAnimationFrame(() => cd.classList.add("on")); }
-        cd.querySelector("b").textContent = 180 - sec; return; }
-      if (sec < 180) return; clearInterval(iv); if (cd) cd.remove();
+      if (sec >= 60 && sec < 80) { if (!cd) { cd = document.createElement("div"); cd.className = "thx-cd"; cd.setAttribute("aria-live", "off"); cd.innerHTML = `<img src="assets/img/fun/k_mic.webp" alt=""><span>気猫から<br>おしらせまで</span><b></b>`; document.body.append(cd); requestAnimationFrame(() => cd.classList.add("on")); }
+        cd.querySelector("b").textContent = 80 - sec; return; }
+      if (sec < 80) return; clearInterval(iv); if (cd) cd.remove();
       try { sessionStorage.setItem("ow-thx", "1"); } catch (e) {}
       const ov = document.createElement("div"); ov.className = "thx"; ov.setAttribute("role", "dialog");
       ov.innerHTML = `<div class="thx-in"><img src="assets/img/fun/k_jump.webp" alt=""><p>まだ見てくれてるん？<br><b>ほんまにありがとう！</b><br>あなたはもう、立派な<b>お笑い道場の門下生</b>や！</p><button type="button" class="btn sm">どういたしまして</button></div>`;

@@ -1100,3 +1100,9 @@ body{background:transparent!important}
 .jk{opacity:0;visibility:hidden;transition:transform .45s cubic-bezier(.2,1.4,.4,1),opacity .3s,visibility 0s .3s}
 .jk.on{opacity:1;visibility:visible;transition:transform .45s cubic-bezier(.2,1.4,.4,1),opacity .2s,visibility 0s}
 .jk p:empty{display:none}
+/* お礼までのカウントダウン：点滅して目立つように */
+.thx-cd.on{opacity:1;animation:cdBlink 1s ease-in-out infinite}
+@keyframes cdBlink{0%,100%{background:#fff;box-shadow:2px 2px 0 var(--ink)}50%{background:var(--gold);box-shadow:2px 2px 0 var(--ink),0 0 14px 4px rgba(255,59,47,.6)}}
+.thx-cd img{animation:cdHop .5s ease-in-out infinite alternate}
+@keyframes cdHop{to{transform:translateY(-3px) rotate(-8deg) scale(1.1)}}
+.thx-cd{font-size:11px}
