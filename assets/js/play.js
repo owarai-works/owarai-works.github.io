@@ -49,7 +49,7 @@ window.owPlayMount = () => {
         el.querySelector(".dl-open").onclick = e => { e.currentTarget.remove(); sfx("slap"); voice("kineko", "pass1"); track("play_finish", {game: "daily"});
           const a = el.querySelector(".dl-ans"); a.hidden = false;
           a.innerHTML = `<div class="dl-a"><img src="assets/img/ex/kineko_laugh0.webp" alt=""><p><small>気猫</small>「${esc(ans[0])}」</p></div><div class="dl-a b"><img src="assets/img/ex/aoi_smile0.webp" alt=""><p><small>葵</small>「${esc(ans[1])}」</p></div>
-            <p class="dl-c">あなたの答えのほうがおもろかった？<br>ゲームでは<b>あなたの答えをAIが100点満点で採点</b>するで！</p><div class="pl-btns">${share(`今日のお題「${odai}」…みんなならどうボケる？`, "daily")}</div>`; bindShare(a); };
+            <p class="dl-c">あなたの答えのほうがおもろかった？<br>ゲームでは<b>あなたの答えをAIが100点満点で採点</b>するで！</p>`; };
       }).catch(() => { el.textContent = "お題を読みこめませんでした。"; });
     }
 
