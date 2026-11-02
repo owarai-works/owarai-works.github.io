@@ -36,7 +36,7 @@
   document.getElementById("cr").textContent = n.date;
   el.innerHTML = `<div class="art-meta"><time datetime="${n.date.replace(/\./g, "-")}">${n.date}</time><span class="tag ${n.tag}">${NEWS_TAG[n.tag] || "お知らせ"}</span></div>
     <h1>${n.title}</h1>
-    ${n.img ? `<figure class="art-img"><img src="${n.img}" alt=""></figure>` : ""}
+    ${n.img ? `<figure class="art-img"><img src="${n.img}" alt=""${n.pos ? ` style="object-position:${n.pos}"` : ""}></figure>` : ""}
     <div class="art-body">${n.body}</div>
     <nav class="art-pager" aria-label="ほかのお知らせ">
       ${od ? `<a href="article.html?id=${od.id}"><small>← PREV</small>${od.title}</a>` : "<span></span>"}
