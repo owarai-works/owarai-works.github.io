@@ -27,7 +27,7 @@ window.SITE = {
   window.storeHTML = storeHTML;
 
   /* ---------- ヘッダーと下の欄 ---------- */
-  const NAV = [["index.html", "HOME", "ホーム", "home"], ["news.html", "NEWS", "お知らせ", "news"], ["game.html", "GAME", "ゲーム紹介", "game"], ["characters.html", "CHARACTER", "キャラクター", "chara"], ["support.html", "SUPPORT", "サポート", "support"]];
+  const NAV = [["index.html", "HOME", "ホーム", "home"], ["news.html", "NEWS", "お知らせ", "news"], ["game.html", "GAME", "ゲーム紹介", "game"], ["banzuke.html", "RANKING", "番付", "banzuke"], ["hall.html", "HALL", "殿堂", "hall"], ["characters.html", "CHARACTER", "キャラクター", "chara"], ["support.html", "SUPPORT", "サポート", "support"]];
   const navA = NAV.map(([h, en, jp, k]) => `<a href="${h}"${k === page ? ' aria-current="page"' : ""}><b>${en}</b><small>${jp}</small></a>`).join("");
   const hd = document.createElement("header");
   hd.className = "hd" + (page === "home" ? "" : " always");
@@ -56,7 +56,7 @@ window.SITE = {
         <nav class="ft-nav" aria-label="サイトの案内">
           <a href="index.html">ホーム</a><a href="news.html">お知らせ</a><a href="game.html">ゲーム紹介</a>
           <a href="characters.html">キャラクター</a><a href="support.html">サポート</a><a href="terms.html">利用規約</a>
-          <a href="privacy.html">プライバシーポリシー</a>
+          <a href="banzuke.html">お題合戦 番付</a><a href="hall.html">みんなの殿堂</a><a href="privacy.html">プライバシーポリシー</a>
         </nav>
       </div>
       <div class="ft-bottom">

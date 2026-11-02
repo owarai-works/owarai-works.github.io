@@ -26,7 +26,7 @@ ban_u = set((ban.get("u") or {}).keys()) if isinstance(ban.get("u"), dict) else 
 ban_t = set(ban.get("t") or [])
 ban_w = [w for w in (ban.get("w") or []) if isinstance(w, str) and w]
 
-def rank_rows(rows, n=10):
+def rank_rows(rows, n=50):
     rows = [r for r in rows if r.get("id") not in ban_u and not r.get("sample") and (r.get("sc") or 0) > 0]
     rows.sort(key=lambda r: -(r.get("sc") or 0))
     out, last, rk = [], None, 0

@@ -60,3 +60,5 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 - 作り方：ゲームのデータベース（公開先 https://claude.ai/artifact/W4qyooRmevxFq3XxpyfxM3 ）を ArtifactData で読んで out_dir に保存 → `python3 -I tools/build_ranking.py <dump> assets/data/ranking.json`。
   - boards（limit 1000・全部）・hall（score の降順に300件）・news/ban。
 - 毎日19時ごろ、スケジュールのタスク「お笑い道場 番付・殿堂の更新」が自動でやる。
+- 専用ページ：`banzuke.html`（お題合戦ランクマッチ 番付・上位50・横綱/大関/関脇/小結/前頭/十両）、`hall.html`（みんなの殿堂・30件・種類でしぼれる）。
+- 本物の記録がないあいだは、`ranking.js` の中の見本（「見本」と表示）を出す。本物が入ると自動で入れかわる。
