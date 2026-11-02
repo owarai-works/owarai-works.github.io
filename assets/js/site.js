@@ -131,7 +131,8 @@ window.SITE = {
      ゲームと同じしくみ（Web Audio）：頭とおしりの無音を切り、終わりの XF 秒を次の頭と重ねて（クロスフェード）切れ目なくループ。
      2MBの全体が読みこめるまでは、最初の14秒だけの小さな版（title_head.mp3）を先に鳴らし、用意できたら同じ位置からつなぎかえる */
   (() => {
-    const KEY = "ow-bgm", POS = "ow-bgm-pos", VOL = .11, XF = 1.2;  /* VOL＝音量（0〜1）、XF＝つなぎ目を重ねる秒数 */
+    const KEY = "ow-bgm", POS = "ow-bgm-pos", XF = 1.2;  /* XF＝つなぎ目を重ねる秒数 */
+    let VOL = (() => { let v = NaN; try { v = parseFloat(localStorage.getItem("ow-bgm-vol")); } catch (e) {} return isFinite(v) ? Math.min(1, Math.max(0, v)) : .5; })();  /* 音量（0〜1）。はじめはゲームと同じ 0.5 */
     const FULL = "assets/bgm/title.mp3", HEAD = "assets/bgm/title_head.mp3";
     const get = (s, k) => { try { return s.getItem(k); } catch (e) { return null; } };
     const set = (s, k, v) => { try { s.setItem(k, v); } catch (e) {} };
@@ -140,6 +141,16 @@ window.SITE = {
     btn.className = "bgm"; btn.type = "button";
     btn.innerHTML = `<span class="bgm-disc" aria-hidden="true"></span><span class="bgm-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="bgm-txt"><small>BGM</small><b>OFF</b></span>`;
     document.body.append(btn);
+    /* 音量つまみ（BGMボタンの左の🔊を押すと開く） */
+    const vb = document.createElement("div"); vb.className = "bgm-vol";
+    vb.innerHTML = `<button type="button" class="bgm-vk" aria-label="音量を調節する" aria-expanded="false"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a5 5 0 010 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.5 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><div class="bgm-vp" hidden><span>音量</span><input type="range" min="0" max="100" step="5" aria-label="BGMと効果音の音量"><b></b></div>`;
+    document.body.append(vb);
+    const vr = vb.querySelector("input"), vp = vb.querySelector(".bgm-vp"), vk = vb.querySelector(".bgm-vk"), vt = vb.querySelector("b");
+    const vpaint = () => { vr.value = Math.round(VOL * 100); vt.textContent = Math.round(VOL * 100); vr.style.setProperty("--p", VOL * 100 + "%"); };
+    vpaint(); window.owVol = () => VOL;
+    vk.addEventListener("click", e => { e.stopPropagation(); vp.hidden = !vp.hidden; vk.setAttribute("aria-expanded", !vp.hidden); });
+    vr.addEventListener("input", () => { VOL = vr.value / 100; set(localStorage, "ow-bgm-vol", VOL); vpaint(); if (playing) ramp(VOL, .15); });
+    document.addEventListener("click", e => { if (!vb.contains(e.target)) { vp.hidden = true; vk.setAttribute("aria-expanded", "false"); } });
     let on = get(localStorage, KEY) !== "0";  /* はじめから ON（OFF にした人だけ OFF） */
     let ac = null, bus = null, voices = [], timer = 0, gen = 0, playing = false, full = null, head = null, cur = null;
     const tip = txt => { if (btn.querySelector(".bgm-tip")) return; const t = document.createElement("span"); t.className = "bgm-tip"; t.textContent = txt; btn.append(t); setTimeout(() => t.remove(), 6000); };

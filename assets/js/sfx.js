@@ -10,7 +10,7 @@
   const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
   let ac = null, master = null, NB = null, ready = false;
   const on = () => !window.owBgm || owBgm.isOn();
-  const init = () => { if (ac) return; ac = new AC(); master = ac.createGain(); master.gain.value = .55; master.connect(ac.destination); };
+  const init = () => { if (ac) return; ac = new AC(); master = ac.createGain(); master.gain.value = .55 * (window.owVol ? owVol() * 2 : 1); master.connect(ac.destination); };
   const wake = () => { init(); if (ac.state !== "running") ac.resume().catch(() => {}); ready = ac.state === "running" || ready; };
   ["pointerdown", "touchend", "keydown", "click"].forEach(t => addEventListener(t, () => { wake(); ready = true; }, {capture: true, passive: true}));
   const tone = (f, dur, type = "sine", vol = .3, at = 0, slideTo = 0) => { const t = ac.currentTime + at, o = ac.createOscillator(), g = ac.createGain();
@@ -27,7 +27,7 @@
     pop(i = 0){ const P = [0, 2, 4, 7, 9], f = 523.25 * 2 ** ((P[i % 5] + 12 * (Math.floor(i / 5) % 2)) / 12);            /* ポコッ（五音音階で上がる） */
       tone(f * .6, .07, "sine", .22, 0, f * 1.08); tone(f * 2, .1, "sine", .05, .012); noise(.012, 5200, 2, .04); }
   };
-  window.owSfx = n => { if (!on() || !ac || ac.state !== "running") return; try { S[n] && S[n](); } catch (e) {} };
+  window.owSfx = n => { if (!on() || !ac || ac.state !== "running") return; master.gain.value = .55 * (window.owVol ? Math.min(1.6, owVol() * 2) : 1); try { S[n] && S[n](); } catch (e) {} };
   const BTN = ".btn,.store,.gate-go,.play-pv,.movie-box,.fb-open,.fb-f button,.cs-nav button,.hd-menu,.pt,.fcard,.sis,.pickup,.news-item,.links3 a";
   const SMALL = ".cs-tab,.cs-th,.nf button,.subnav a,.fb-chips button,.hd-nav a,.ft-nav a,.faq summary,.cs-card,.od,.odai-mini li,.pm,.gs-feat li,.vsc,.bzc,.rival,.art-pager a";
   const kindOf = el => el.closest(".bgm,.cs-vo") ? null : el.closest(BTN) ? "slap" : el.closest(SMALL) ? "pon" : el.closest("a[href],button") ? "hyoshigi" : null;

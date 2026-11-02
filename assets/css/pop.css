@@ -1075,3 +1075,19 @@ body{background:transparent!important}
 /* 実況は「質問する」ボタンの上に */
 .jk{bottom:96px!important}
 @media (max-width:760px){.jk{bottom:84px!important}}
+/* 音量つまみ */
+.bgm-vol{position:fixed;right:18px;bottom:78px;z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.bgm-vk{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#fff;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);color:var(--ink)}
+.bgm-vk svg{width:24px;height:24px}
+.bgm-vk[aria-expanded="true"]{background:var(--gold)}
+.bgm-vp{order:-1;display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:3px solid var(--ink);border-radius:999px;box-shadow:4px 4px 0 var(--ink);font-weight:900;font-size:13px;animation:pop .3s var(--ease)}
+.bgm-vp[hidden]{display:none}
+.bgm-vp b{min-width:2.2em;text-align:right;font-family:var(--f-en);font-size:20px;color:var(--shu)}
+.bgm-vp input{-webkit-appearance:none;appearance:none;width:150px;height:12px;border-radius:999px;border:2px solid var(--ink);background:linear-gradient(90deg,var(--shu) var(--p,50%),#eee var(--p,50%));cursor:pointer}
+.bgm-vp input::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--gold);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--ink)}
+.bgm-vp input::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--gold);border:3px solid var(--ink)}
+@media (max-width:520px){.bgm-vol{right:10px;bottom:62px}.bgm-vk{width:40px;height:40px}.bgm-vp input{width:120px}}
+/* 実況・ひょっこりは「質問する」ボタンより上に（重ならない） */
+.jk{bottom:150px!important}
+.fun-peek{bottom:150px!important}
+@media (max-width:760px){.jk{bottom:128px!important}.fun-peek{bottom:128px!important}}
