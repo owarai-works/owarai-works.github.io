@@ -46,7 +46,7 @@ window.SITE = {
   const mb = $(".hd-menu", hd);
   const setMenu = on => { document.documentElement.classList.toggle("menu-open", on); document.body.classList.toggle("menu-open", on); mb.setAttribute("aria-expanded", on); mb.setAttribute("aria-label", on ? "メニューを閉じる" : "メニューを開く"); };
   mb.addEventListener("click", () => setMenu(!document.body.classList.contains("menu-open")));
-  $$("a", sp).forEach(a => a.addEventListener("click", () => setMenu(false)));
+  $$("a", sp).forEach(a => a.addEventListener("click", e => setTimeout(() => { if (!e.defaultPrevented) setMenu(false); }, 0)));
   addEventListener("keydown", e => { if (e.key === "Escape") { setMenu(false); closeModal(); } });
 
   const ft = document.createElement("footer");
@@ -282,7 +282,10 @@ window.SITE = {
   async function go(url, push = true){
     if (navBusy) return; navBusy = true;
     try {
-      const [r] = await Promise.all([fetch(url, {credentials: "same-origin"}), window.owCurtainClose ? owCurtainClose() : 0]); if (!r.ok) throw 0;
+      const fromMenu = document.body.classList.contains("menu-open");
+      /* スマホのメニュー（赤い幕）が閉じているときは、もう一度閉じる動きはせず、幕を下ろした状態から開く */
+      if (fromMenu && window.owCurtainSet) { owCurtainSet(); setMenu(false); }
+      const [r] = await Promise.all([fetch(url, {credentials: "same-origin"}), !fromMenu && window.owCurtainClose ? owCurtainClose() : 0]); if (!r.ok) throw 0;
       const doc = new DOMParser().parseFromString(await r.text(), "text/html"), nm = doc.querySelector("main"); if (!nm) throw 0;
       await Promise.all([...doc.querySelectorAll('link[rel="stylesheet"]')].map(l => loadCss(new URL(l.getAttribute("href"), url).href)));
       if (push) history.pushState({ow: 1}, "", url);

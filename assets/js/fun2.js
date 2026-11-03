@@ -131,6 +131,8 @@ html.tod-night .hero-bg img,html.tod-late .hero-bg img{filter:brightness(.82) sa
   /* ---------- 6 ページを移るときの幕 ---------- */
   const cur = document.createElement("div"); cur.className = "pg-curtain"; cur.setAttribute("aria-hidden", "true"); document.body.append(cur);
   window.owCurtainClose = () => new Promise(r => { if (reduce) return r(); cur.classList.add("close"); window.owSfx && owSfx("pon"); setTimeout(r, 400); });
+  /* 動きなしで、すぐ幕を閉じた状態にする（スマホのメニューの幕からつなぐ） */
+  window.owCurtainSet = () => { if (reduce) return; cur.classList.add("instant", "close"); void cur.offsetWidth; requestAnimationFrame(() => cur.classList.toggle("instant", false)); };
   window.owCurtainOpen = () => { if (reduce) return; setTimeout(() => cur.classList.remove("close"), 60); };
 
   /* ---------- 8 3分見てくれた人へ ---------- */

@@ -1106,3 +1106,4 @@ body{background:transparent!important}
 .thx-cd img{animation:cdHop .5s ease-in-out infinite alternate}
 @keyframes cdHop{to{transform:translateY(-3px) rotate(-8deg) scale(1.1)}}
 .thx-cd{font-size:11px}
+.pg-curtain.instant::before,.pg-curtain.instant::after{transition:none!important}
