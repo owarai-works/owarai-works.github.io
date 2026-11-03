@@ -140,7 +140,7 @@ html.tod-night .hero-bg img,html.tod-late .hero-bg img{filter:brightness(.82) sa
     let sec = 0, cd = null;
     const iv = setInterval(() => { if (document.hidden || document.querySelector(".og-gate,.prep-wall,.fb.open,.egg")) return; ++sec;
       /* 残り60秒から、画面の上のすみに小さくカウントダウン（突然出てびっくりしないように） */
-      if (sec >= 60 && sec < 80) { if (!cd) { cd = document.createElement("div"); cd.className = "thx-cd"; cd.setAttribute("aria-live", "off"); cd.innerHTML = `<img src="assets/img/fun/k_mic.webp" alt=""><span>気猫から<br>おしらせまで</span><b></b>`; document.body.append(cd); requestAnimationFrame(() => cd.classList.add("on")); }
+      if (sec >= 60 && sec < 80) { if (!cd) { cd = document.createElement("div"); cd.className = "thx-cd"; cd.setAttribute("aria-live", "off"); cd.innerHTML = `<img src="assets/img/fun/k_mic.webp" alt=""><span>気猫から おしらせまで あと</span><b></b><span>秒</span><img src="assets/img/fun/k_jump.webp" alt="">`; document.body.append(cd); requestAnimationFrame(() => cd.classList.add("on")); }
         cd.querySelector("b").textContent = 80 - sec; return; }
       if (sec < 80) return; clearInterval(iv); if (cd) cd.remove();
       try { sessionStorage.setItem("ow-thx", "1"); } catch (e) {}

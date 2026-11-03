@@ -1107,3 +1107,11 @@ body{background:transparent!important}
 @keyframes cdHop{to{transform:translateY(-3px) rotate(-8deg) scale(1.1)}}
 .thx-cd{font-size:11px}
 .pg-curtain.instant::before,.pg-curtain.instant::after{transition:none!important}
+
+/* お礼までのカウントダウン：メニューの下に、画面の横いっぱいの帯で */
+.thx-cd{left:0!important;right:0!important;top:var(--hd)!important;justify-content:center;gap:10px;height:40px;padding:0 12px!important;border:0!important;border-bottom:3px solid var(--ink)!important;border-radius:0!important;font-size:15px!important;line-height:1!important;white-space:nowrap}
+.thx-cd span{font-family:var(--f-disp);font-weight:400;letter-spacing:.04em}
+.thx-cd b{font-size:28px!important}
+.thx-cd img{width:30px!important;height:30px!important}
+@keyframes cdBlink{0%,100%{background:#fff;box-shadow:0 3px 0 rgba(28,16,18,.15)}50%{background:var(--gold);box-shadow:0 0 18px 4px rgba(255,59,47,.55)}}
+@media (max-width:520px){.thx-cd{gap:6px;height:36px;font-size:12px!important}.thx-cd b{font-size:24px!important}.thx-cd img{width:24px!important;height:24px!important}}
