@@ -5,7 +5,7 @@
    4 時間帯で変わる寄席（朝・昼・夕・夜・夜中）
    5 季節の飾り（春＝桜・夏＝花火・秋＝紅葉・冬＝雪／正月・ハロウィン・クリスマス）
    6 ページを移るときに赤い幕が閉じて開く（site.js の go から呼ぶ）
-   8 1分20秒見てくれた人へ、気猫からごほうび（1分からカウントダウン）
+   8 1分20秒見てくれた人へ、シスターズからごほうび（20秒で帯が出て60秒カウントダウン・9種類からランダム）
    ・「動きを減らす」設定の人には動きを出さない／笑い声は BGM が ON のときだけ
    ========================================================= */
 (() => {
@@ -135,21 +135,33 @@ html.tod-night .hero-bg img,html.tod-late .hero-bg img{filter:brightness(.82) sa
   window.owCurtainSet = () => { if (reduce) return; cur.classList.add("instant", "close"); void cur.offsetWidth; requestAnimationFrame(() => cur.classList.toggle("instant", false)); };
   window.owCurtainOpen = () => { if (reduce) return; setTimeout(() => cur.classList.remove("close"), 60); };
 
-  /* ---------- 8 3分見てくれた人へ ---------- */
+  /* ---------- 8 長く見てくれた人へ：見はじめて20秒でカウントダウン（60秒）が出て、1分20秒でお礼 ----------
+     お礼は 3人×3種類＝9種類から、ランダムで1つ（絵・ことば・声・ボタン） */
+  const THX = [
+    {k: "kineko", n: "気猫", img: "k_jump", vo: "win", t: "まだ見てくれてるん？<br><b>ほんまにありがとう！</b><br>あなたはもう、立派な<b>お笑い道場の門下生</b>や！", b: "どういたしまして"},
+    {k: "kineko", n: "気猫", img: "k_mic", vo: "high1", t: "ここまで見てくれたあなたに、<br><b>拍手〜！</b>👏<br>今日の主役は、<b>あなた</b>やで！", b: "照れるやん"},
+    {k: "kineko", n: "気猫", img: "k_roll", vo: "pass1", t: "うれしすぎて<b>転げ回ってもうた</b>〜！<br>そのしぶとさ、<b>芸人向き</b>やで！", b: "起き上がって"},
+    {k: "aoi", n: "葵", img: "a_smug", vo: "win", t: "…ここまで見るとか、<br><b>あんた、ほんまもんの笑い好き</b>やな。<br>気に入ったで。", b: "ありがとう"},
+    {k: "aoi", n: "葵", img: "a_hari", vo: "attack", t: "そんなに見てくれるなら、<br><b>お題合戦</b>で勝負しよか！<br>うちのツッコミ、<b>受けてみ</b>！", b: "受けて立つ！"},
+    {k: "aoi", n: "葵", img: "a_shock", vo: "high1", t: "えっ、まだおったん！？<br><b>びっくりしたわ！</b><br>…でも、<b>ほんまにうれしい</b>。", b: "まだいるで"},
+    {k: "momoe", n: "百萌", img: "m_wave", vo: "win", t: "ずっと見てくれて、<br><b>ありがとう〜</b>💕<br>また<b>遊びに来て</b>な〜", b: "また来るね"},
+    {k: "momoe", n: "百萌", img: "m_fan", vo: "high1", t: "がんばって見てくれたから、<br><b>桜の扇子</b>であおいであげる〜<br>そよそよ〜🌸", b: "すずしい〜"},
+    {k: "momoe", n: "百萌", img: "m_sleep", vo: "pass1", t: "…すや…はっ！<br>ずっと見ててくれたん？<br><b>寝てる間もありがとう</b>〜", b: "おはよう"}
+  ];
   (() => { let shown = false; try { shown = sessionStorage.getItem("ow-thx") === "1"; } catch (e) {} if (shown) return;
+    const R = pick(THX), START = 20, END = 80;  /* 20秒で帯が出て、80秒（1分20秒）でお礼 */
     let sec = 0, cd = null;
     const iv = setInterval(() => { if (document.hidden || document.querySelector(".og-gate,.prep-wall,.fb.open,.egg")) return; ++sec;
-      /* 残り60秒から、画面の上のすみに小さくカウントダウン（突然出てびっくりしないように） */
-      if (sec >= 60 && sec < 80) { if (!cd) { cd = document.createElement("div"); cd.className = "thx-cd"; cd.setAttribute("aria-live", "off"); cd.innerHTML = `<img src="assets/img/fun/k_mic.webp" alt=""><span>気猫から おしらせまで あと</span><b></b><span>秒</span><img src="assets/img/fun/k_jump.webp" alt="">`; document.body.append(cd); requestAnimationFrame(() => cd.classList.add("on")); }
-        cd.querySelector("b").textContent = 80 - sec; return; }
-      if (sec < 80) return; clearInterval(iv); if (cd) cd.remove();
+      if (sec >= START && sec < END) { if (!cd) { cd = document.createElement("div"); cd.className = "thx-cd"; cd.setAttribute("aria-live", "off"); cd.innerHTML = `<img src="assets/img/fun/${R.img}.webp" alt=""><span>${R.n}から おしらせまで あと</span><b></b><span>秒</span><img src="assets/img/fun/${R.img}.webp" alt="">`; document.body.append(cd); requestAnimationFrame(() => cd.classList.add("on")); }
+        cd.querySelector("b").textContent = END - sec; return; }
+      if (sec < END) return; clearInterval(iv); if (cd) cd.remove();
       try { sessionStorage.setItem("ow-thx", "1"); } catch (e) {}
-      const ov = document.createElement("div"); ov.className = "thx"; ov.setAttribute("role", "dialog");
-      ov.innerHTML = `<div class="thx-in"><img src="assets/img/fun/k_jump.webp" alt=""><p>まだ見てくれてるん？<br><b>ほんまにありがとう！</b><br>あなたはもう、立派な<b>お笑い道場の門下生</b>や！</p><button type="button" class="btn sm">どういたしまして</button></div>`;
-      document.body.append(ov); window.owSfx && owSfx("slap"); laugh(true); window.owTrack && owTrack("thx_3min");
-      try { const a = new Audio("assets/vo/kineko_win.mp3"); if (bgmOn()) a.play().catch(() => {}); } catch (e) {}
+      const ov = document.createElement("div"); ov.className = "thx thx-" + R.k; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", R.n + "からのおしらせ");
+      ov.innerHTML = `<div class="thx-in"><img src="assets/img/fun/${R.img}.webp" alt=""><small class="thx-who">${R.n}より</small><p>${R.t}</p><button type="button" class="btn sm">${R.b}</button></div>`;
+      document.body.append(ov); window.owSfx && owSfx("slap"); laugh(true); window.owTrack && owTrack("thx_reward", {chara: R.k, img: R.img});
+      try { const a = new Audio(`assets/vo/${R.k}_${R.vo}.mp3`); if (bgmOn()) a.play().catch(() => {}); } catch (e) {}
       if (!reduce) for (let k = 0; k < 40; k++) { const c = document.createElement("i"); c.className = "thx-cf"; c.style.cssText = `left:${Math.random() * 100}vw;background:${pick(["#ffc61a", "#ff3b2f", "#ff7fb0", "#2f7fe0", "#46d96b"])};--dx:${Math.random() * 120 - 60}px;--rot:${Math.random() * 900}deg;animation-duration:${2.5 + Math.random() * 2}s;animation-delay:${Math.random() * .8}s`; c.addEventListener("animationend", () => c.remove()); document.body.append(c); }
-      const close = () => ov.remove(); ov.querySelector(".btn").onclick = close; ov.onclick = e => { if (e.target === ov) close(); };
+      const close = () => ov.remove(); ov.querySelector(".btn").onclick = () => { close(); if (R.img === "a_hari") { const t = document.getElementById("gassen"); if (t) t.scrollIntoView({behavior: "smooth"}); } }; ov.onclick = e => { if (e.target === ov) close(); };
     }, 1000); })();
 
   const all = () => { watchLol(); watchJk(); applyTod(); };

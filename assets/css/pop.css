@@ -1115,3 +1115,8 @@ body{background:transparent!important}
 .thx-cd img{width:30px!important;height:30px!important}
 @keyframes cdBlink{0%,100%{background:#fff;box-shadow:0 3px 0 rgba(28,16,18,.15)}50%{background:var(--gold);box-shadow:0 0 18px 4px rgba(255,59,47,.55)}}
 @media (max-width:520px){.thx-cd{gap:6px;height:36px;font-size:12px!important}.thx-cd b{font-size:24px!important}.thx-cd img{width:24px!important;height:24px!important}}
+
+/* お礼：キャラごとの色 */
+.thx-who{display:inline-block;margin-bottom:4px;padding:1px 12px;border-radius:999px;background:var(--ink);color:#fff;font-weight:900;font-size:12px}
+.thx-kineko .thx-in{box-shadow:8px 8px 0 #f4b400}.thx-aoi .thx-in{box-shadow:8px 8px 0 #2f7fe0}.thx-momoe .thx-in{box-shadow:8px 8px 0 #e8558f}
+.thx-kineko .thx-who{background:#d99a00}.thx-aoi .thx-who{background:#2f7fe0}.thx-momoe .thx-who{background:#e8558f}
