@@ -159,7 +159,8 @@ html.tod-night .hero-bg img,html.tod-late .hero-bg img{filter:brightness(.82) sa
       const ov = document.createElement("div"); ov.className = "thx thx-" + R.k; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", R.n + "からのおしらせ");
       ov.innerHTML = `<div class="thx-in"><img src="assets/img/fun/${R.img}.webp" alt=""><small class="thx-who">${R.n}より</small><p>${R.t}</p><button type="button" class="btn sm">${R.b}</button></div>`;
       document.body.append(ov); window.owSfx && owSfx("slap"); laugh(true); window.owTrack && owTrack("thx_reward", {chara: R.k, img: R.img});
-      try { const a = new Audio(`assets/vo/${R.k}_${R.vo}.mp3`); if (bgmOn()) a.play().catch(() => {}); } catch (e) {}
+      /* 声はポップアップが出てから1秒後（閉じていたら鳴らさない） */
+      setTimeout(() => { if (!ov.isConnected) return; try { const a = new Audio(`assets/vo/${R.k}_${R.vo}.mp3`); if (bgmOn()) a.play().catch(() => {}); } catch (e) {} }, 1000);
       if (!reduce) for (let k = 0; k < 40; k++) { const c = document.createElement("i"); c.className = "thx-cf"; c.style.cssText = `left:${Math.random() * 100}vw;background:${pick(["#ffc61a", "#ff3b2f", "#ff7fb0", "#2f7fe0", "#46d96b"])};--dx:${Math.random() * 120 - 60}px;--rot:${Math.random() * 900}deg;animation-duration:${2.5 + Math.random() * 2}s;animation-delay:${Math.random() * .8}s`; c.addEventListener("animationend", () => c.remove()); document.body.append(c); }
       const close = () => ov.remove(); ov.querySelector(".btn").onclick = () => { close(); if (R.img === "a_hari") { const t = document.getElementById("gassen"); if (t) t.scrollIntoView({behavior: "smooth"}); } }; ov.onclick = e => { if (e.target === ov) close(); };
     }, 1000); })();
