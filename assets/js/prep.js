@@ -1,17 +1,18 @@
 /* =========================================================
    公開前の「準備中」の幕
    ・PREP を false にすると、ふつうに公開される
-   ・運営の人だけ中身を見る：アドレスの最後に ?preview=nandeyanen を付けて開く（その端末では次から幕なし）
+   ・運営の人だけ中身を見る：アドレスの最後に ?preview=nandeyanen を付けて開く（そのタブを閉じるまで幕なし。閉じたらまた幕が出る）
      もとに戻す（幕を出す）：?preview=off
    ※ 中身のファイルは公開リポジトリにあるので、くわしい人は見られる。かんたんな目かくし。
    ========================================================= */
 (() => {
   const PREP = true, KEY = "nandeyanen";
   try {
+    localStorage.removeItem("ow-preview");  /* 前のしくみ（ずっと覚える）は使わない */
     const q = new URLSearchParams(location.search).get("preview");
-    if (q === KEY) localStorage.setItem("ow-preview", "1");
-    if (q === "off") localStorage.removeItem("ow-preview");
-    if (!PREP || localStorage.getItem("ow-preview") === "1") return;
+    if (q === KEY) sessionStorage.setItem("ow-preview", "1");
+    if (q === "off") sessionStorage.removeItem("ow-preview");
+    if (!PREP || sessionStorage.getItem("ow-preview") === "1") return;
   } catch (e) { if (!PREP) return; }
   const H = document.documentElement; H.classList.add("prep");
   const st = document.createElement("style");

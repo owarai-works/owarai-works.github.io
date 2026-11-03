@@ -50,7 +50,7 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 
 ## 準備中の幕（公開前）
 - `assets/js/prep.js` の `PREP = true` のあいだは、どのページも「ただいま準備中！」だけが出る。BGM も流さない。
-- 運営だけ中身を見る：`https://owarai-works.github.io/?preview=nandeyanen` で開く（その端末では次から幕なし）。戻す：`?preview=off`。
+- 運営だけ中身を見る：`https://owarai-works.github.io/?preview=nandeyanen` で開く（そのタブを閉じるまで幕なし。タブを閉じたら、また準備中の幕が出る）。
 - 準備中は全ページ `<meta name="robots" content="noindex,nofollow">`（検索に出さない）。
 - **公開するとき**：`PREP = false` にして、robots を元に戻す（index.html・game.html・characters.html・news.html・support.html・privacy.html・terms.html は `index,follow,max-image-preview:large`、article.html と 404.html は `noindex,follow`）。
 
