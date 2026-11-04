@@ -10,6 +10,7 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 - **毎回の決まり（ユーザーの希望）**：返事は日本語・初心者向け。更新したら返事の最後に毎回ホームページのリンク。幅390px・320px・パソコンで確かめる（Playwright＋`python3 -m http.server`）。直したら HTML の `?v=` を新しくする（古いファイルが残らないように）：`for f in *.html; do sed -i -E "s#(assets/(js|css)/[a-z0-9-]+\.(js|css))\?v=[0-9]+\"#\1?v=$(date +%m%d%H%M)\"#g" $f; done`
 - **デザインの決まり**：明るい爆笑お笑い（クリーム・黄・朱・太い黒ふち）。文字は重ねない・影やふち取りで読みにくくしない（読ませる文は Noto Sans JP）。芸名は出さない。殿堂はイラストのあるお題だけ。運営者名は「ライトルーム お笑い運営部」。黒田・紫音はキャラ紹介に出さない。
 - **スケジュールのタスク**：「お笑い道場 番付・殿堂の更新」（trig_01RQjzWrXThVZFmS3oGexnFB、毎日19時 日本時間）。ゲームのデータベースを読むだけ → `tools/build_ranking.py` → ranking.json を push。
+  - **⚠ 直すこと**：11-03 の実行は「push が 403（このリポジトリがタスクのセッションに入っていない）」で失敗していた。タスクの設定（claude.ai/code の Scheduled tasks）で、リポジトリ `owarai-works/owarai-works.github.io` を追加する必要がある。
 - **アクセス解析**：Google アナリティクス `G-VZ29R3E1TW`（全ページの head）。Search Console は登録済み（アナリティクスのタグで確認）。公開したらサイトマップ `sitemap.xml` を送る。
 
 ### まだのこと・決めてもらうこと
