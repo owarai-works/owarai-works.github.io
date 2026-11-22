@@ -3011,3 +3011,15 @@ html body #gacha .gc-stage .gc-mach{height:36%!important;bottom:31%!important}
 html.snap body .hero::after{display:none!important;content:none!important}  /* 11-22 ユーザー「スマホの放射線を消せ」：スマホのトップの回る放射（.hero::after）も消す */
 @media (max-width:760px){html body section.hero .hero-sns{top:var(--snsTop,62px)!important;bottom:auto!important;transform:none!important;right:16px!important}}  /* 11-22 ユーザー「XとYouTubeの丸いボタンをメニューのボタンのすぐ下に」 */
 @media (max-width:900px){html body .cm-left{padding-left:0!important;padding-right:0!important;align-items:center}html body .cm-cover{margin:0 auto!important}html body .cm-left .cm-go{margin:0 auto!important}html body .cm-feat{margin-left:auto;margin-right:auto;transform:translateX(-3px)}}  /* 11-22 ユーザー「漫画をちゃんとセンタリング」 */
+/* 11-22 ユーザー「スマホ：ミニゲームをスワイプしたら下が切れる・ページが落ちた」：
+   スマホでは自動で流れる長い列（64枚・数千pxの動く層＋zoom）が重すぎたので、同じカードの複製を出さず、動かさず、指で横にスワイプする1列ずつに */
+@media (max-width:760px){
+  html body .mg-rail{zoom:1!important;display:grid;gap:12px;padding:4px 0 10px;overflow:visible}
+  html body .mg-row{animation:none!important;transform:none!important;width:auto!important;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding:4px 16px 10px;gap:10px;scrollbar-width:none;will-change:auto}
+  html body .mg-row::-webkit-scrollbar{display:none}
+  html body .mg-row .mgc[aria-hidden]{display:none!important}
+  html body .mg-row .mgc{width:132px;scroll-snap-align:start;transform:none!important;animation:none!important}
+  html body .mg-row .mgc img{width:100%;height:auto}
+  html.snap body .mg-row .mgc{width:110px}
+  html.snap body .mg-row .mgc small{display:none}
+}
