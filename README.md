@@ -19,6 +19,7 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 - モードの紹介：HOME の「腕だめしモードもたっぷり！」（#newmode・11-22 ユーザー「NEWモードではない、最初からあるものとして」）、ゲーム紹介の「格闘王への道」（#djroad）・「段位認定・称号」（#dan）・「難しさとモード」（#odai2）。ロゴは `lg_*.webp`、段位と称号の絵は `dan_sheet.webp`・`ttl_sheet.webp`（ゲームの img/logo・img/ic から）。
 - 絵をキャラクターシートどおりに直した（11-22 ユーザー「気猫のマイク・扇子の柄・百萌の襟の柄・草履の鼻緒の色」）：hero・hero_m・ogp・pv_poster・pv.mp4（Vidu Q4 オフピーク）・kv_poster・kv_sp.mp4（ゲームの kv.webp・title_kv.mp4）・ch_*_1・st_*・fun のちびキャラ7枚・boss・battle・bn_*・m_mix・m_tsk・wp_area4・wp_area6・hd_banzuke。**気猫はマイクを持たない**（シートにない）。アイドル衣装の ch_*_2 は手持ちマイクのまま（衣装の絵）。
 - **スマホ（幅760px以下）の HOME とゲーム紹介は、下にスワイプするたびに1つの話題が1画面に収まる**（11-22 ユーザー）。`site.js` の `owSnap`（html.snap・横スワイプのカード `HS`・入りきらない話題は .wrap を zoom で縮める・0.6まで）と `pop.css` の「html.snap」。話題を足すときは、1画面（390×844 で 786px、Safari のバーありで約606px）に入るか `panels.js` 方式で確かめる。
+- **TOP（index.html）の並び（11-22 ユーザー）**：メインビジュアル → NEWS → FOR YOU → HOT POINT → ODAI → ODAI GASSEN → RANKING → MINI GAME → 配信のお知らせ。HOT POINT と RANKING のあとにダウンロードの帯（.dl-band）。
 - **TOP（index.html）には PLAY・キャラクター・ムービーの欄を置かない**（11-22 ユーザー。PLAY とキャラクターは専用ページ、ムービーはトップの絵の「ムービーを見る」ボタンだけ）。
 - 画面写真はゲーム版2145で撮り直した（od_*・gs_*・pt_*・ss_*。新しく od_anaume・od_intv・ss_oni・ss_gp・ss_dan・ss_djroad・ss_gacha）。
 
@@ -37,7 +38,6 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 | characters.html | キャラクター紹介（気猫・葵・百萌。絵は晴れ着・アイドル・メイド、ボイス、つつくと反応） |
 | banzuke.html | ランキング（お題合戦レート・1先の鬼・笑神グランプリ。週間・月間・永世の上位50。記録がないあいだは見本） |
 | hall.html | みんなの殿堂（イラストのお題だけ・30件。記録がないあいだは見本） |
-| play.html | あそぶ（ハリセン連打・今日のお題・タイプ診断・ツッコミタイミング・おみくじ） |
 | support.html | よくある質問・質問ボット・お問い合わせ（App Store の「サポートURL」） |
 | privacy.html / terms.html | プライバシーポリシー（App Store の URL）／利用規約 |
 | 404.html | ページが見つからないとき |
@@ -92,11 +92,8 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 - 殿堂は**イラストのあるお題だけ**（ユーザーの希望。build_ranking.py で絵のない行は外す）。
 - 殿堂のお題の絵：ゲームのお題の絵600枚を `assets/img/odai/`（480px・webp）に入れた。`tools/odai_pics.json` がお題のid（sid）→ファイル名。`build_ranking.py` が殿堂の行に `pic` を付ける。ゲームに絵のお題を足したら、ここにも足す。
 
-## あそぶ（`play.html`・`assets/js/play.js`）
-- A ハリセン連打（10秒・番付・自己ベストは端末に保存）／B 今日のお題（`assets/data/daily.json`＝ゲームの絵のお題100問と四択の上位2つ。日付で毎日かわる）／C お笑いタイプ診断（5問）／D ツッコミ・タイミング（3本）／E 笑い運おみくじ（1日1回）。結果は X にポストできる。
-- トップに「今日のお題」と4つの入口。
-- F：キャラ紹介で大きな絵をつつくと、表情（`assets/img/ex/`）とボイスで反応（`fun.js` の owCharaPoke）。
-- G：隠し要素。トップのロゴ（メイン画面・下の欄）を続けて5回押すと、シスターズの漫才（`fun.js`）。
+## あそぶ（PLAY のページ）
+- 11-22 ユーザー「PLAY のページを消して」で消した（play.html・assets/js/play.js・assets/data/daily.json）。前の中身は owarai-dojo の git の履歴にある。
 
 ## 装飾・演出（`assets/js/fun2.js`）
 - 1 欄が出るたびに客席の笑い声（合成・BGMがONのときだけ）と「ワハハ」／2 画面左下でシスターズが欄に合わせて実況／4 時間帯（朝・昼・夕・夜・夜中）で背景と提灯、夜中は百萌が居眠り／5 季節の飾り（春＝桜・夏＝花火・秋＝紅葉・冬＝雪、正月・ハロウィン・クリスマスはロゴの横に印）／6 ページを移るときの幕（site.js の go から owCurtainClose/Open）／8 1分20秒見た人へのお礼と紙吹雪（見はじめて20秒でメニューの下に横いっぱいの帯が出て60秒カウントダウン。3人×3種類＝9種類からランダム・1回の訪問で1度）。
