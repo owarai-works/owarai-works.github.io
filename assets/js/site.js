@@ -274,42 +274,7 @@ window.SITE = {
     $$("[data-news-latest]", root).forEach(el => { el.innerHTML = (window.NEWS || []).slice(0, +el.dataset.newsLatest || 3).map(newsItemHTML).join(""); });
     watchReveal(root);
     owSnap();
-    heroSlides();
-    gameTabs();
   };
-  /* 11-22 ユーザー「ページが縦長すぎる」：ゲーム紹介は、上の目次（.subnav）をタブにして、選んだ話題だけを出す（1ページのまま） */
-  function gameTabs(){
-    const nav = $(".subnav"); if (!nav || nav.dataset.tab) return; nav.dataset.tab = "1";
-    const links = $$("a[href^='#']", nav), ids = links.map(a => a.getAttribute("href").slice(1)), groups = {};
-    ids.forEach(id => { const g = []; let el = document.getElementById(id);
-      while (el) { g.push(el); el = el.nextElementSibling; if (!el || el.tagName !== "SECTION" || !el.id || ids.includes(el.id)) break; }
-      groups[id] = g; });
-    const all = Object.values(groups).flat();
-    const show = (id, scroll) => { if (!groups[id]) id = ids[0];
-      all.forEach(el => { el.hidden = !groups[id].includes(el); });
-      links.forEach(a => { const on = a.getAttribute("href") === "#" + id; a.classList.toggle("on", on); a.setAttribute("aria-current", on ? "true" : "false"); if (on) { const ol = a.closest("ol"); if (ol) ol.scrollTo({left: a.offsetLeft - 16, behavior: "smooth"}); } });
-      try { history.replaceState(null, "", "#" + id); } catch (e) {}
-      if (scroll) { const y = nav.getBoundingClientRect().top + scrollY - ($(".hd") ? $(".hd").getBoundingClientRect().height : 0); scrollTo({top: Math.max(0, y), behavior: "smooth"}); }
-      watchReveal(document); owSnap(); };
-    links.forEach(a => a.addEventListener("click", e => { e.preventDefault(); show(a.getAttribute("href").slice(1), true); }));
-    const fromHash = () => { const h = decodeURIComponent(location.hash.slice(1)); const id = ids.find(i => i === h || (groups[i] || []).some(el => el.id === h)); return id || ids[0]; };
-    addEventListener("hashchange", () => { if ($(".subnav") === nav) show(fromHash(), true); });
-    show(fromHash(), !!location.hash);
-  }
-  /* 11-22 トップのメインビジュアル：トップの絵 → コラボ → ムービー を7秒ごとに切りかえ（点を押す・横にスワイプでも切りかわる） */
-  function heroSlides(){
-    const hero = $(".hero"); if (!hero || hero.dataset.sl) return; const nav = $(".hsl-nav", hero); if (!nav) return; hero.dataset.sl = "1";
-    const slides = [null, ...$$(".hsl", hero)], dots = $$("button", nav); let cur = 0, t = 0;
-    const show = i => { cur = (i + slides.length) % slides.length;
-      slides.forEach((sl, k) => { if (!sl) return; const on = k === cur; sl.classList.toggle("on", on); sl.setAttribute("aria-hidden", on ? "false" : "true"); $$("a,button", sl).forEach(x => x.tabIndex = on ? 0 : -1); });
-      dots.forEach((d, k) => { d.classList.toggle("on", k === cur); d.setAttribute("aria-selected", k === cur ? "true" : "false"); }); };
-    const auto = () => { clearInterval(t); t = setInterval(() => { if (!document.body.contains(hero)) return clearInterval(t); if (!document.hidden && !document.querySelector(".modal.open")) show(cur + 1); }, 7000); };
-    dots.forEach((d, k) => d.addEventListener("click", () => { show(k); auto(); }));
-    let x0 = null;
-    hero.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, {passive: true});
-    hero.addEventListener("touchend", e => { if (x0 == null) return; const dx = e.changedTouches[0].clientX - x0; x0 = null; if (Math.abs(dx) > 50) { show(cur + (dx < 0 ? 1 : -1)); auto(); } }, {passive: true});
-    show(0); auto();
-  }
   /* 11-22 ユーザー「スマホ版は、下にスワイプするたびに1画面にきれいにそのコンテンツを収めて」：
      HOME とゲーム紹介だけ（幅760px以下）。1つの話題＝1画面（pop.css の html.snap）。横に並べたカード（HS）は横スワイプにし、
      それでも入らない話題は、中身（.wrap）を少し縮めて（zoom）1画面に入れる */
@@ -333,8 +298,6 @@ window.SITE = {
     fit(); setTimeout(fit, 600); setTimeout(fit, 2000);
   }
   window.owSnap = owSnap;
-  /* はじめに開いたときも動かす（ページを移ったときは owHydrate から） */
-  owSnap(); heroSlides(); gameTabs();
   { let t = 0; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(owSnap, 200); }); }
   const loaded = new Set();
   const base = u => u.split("?")[0];
