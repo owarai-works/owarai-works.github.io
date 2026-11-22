@@ -2986,3 +2986,10 @@ html body #gacha .gc-kick span{font-size:clamp(16px,1.6vw,24px)!important}
 @media (max-width:760px){.mg-rank{margin-top:16px;padding:14px;gap:10px}.mgr-crown{font-size:40px}.mgr-t p{font-size:13px}.mgr-board li{padding:5px 10px}
   html.snap #minigame .mgr-board,html.snap #minigame .mgr-t p{display:none!important}html.snap #minigame .mg-rank{margin-top:10px}html.snap #minigame .mgr-t>b{font-size:18px}}
 .mgr-t>b{word-break:keep-all;overflow-wrap:anywhere}@media (max-width:760px){html.snap #minigame .mgr-t>b{font-size:16px!important;white-space:nowrap}html.snap #minigame .mgr-crown{font-size:32px}html.snap #minigame .mg-rank{padding:10px 12px;box-shadow:4px 4px 0 #ffd84d}}
+
+/* 11-22 ユーザー「シスターズの体も見えるように・ガチャ本体を下げる（百萌の顔を隠さない）・運だめしの文を上に」 */
+html body #gacha .gc-stage{height:auto!important;aspect-ratio:1024/664!important;-webkit-mask:linear-gradient(#000 84%,transparent)!important;mask:linear-gradient(#000 84%,transparent)!important}
+html body #gacha .gc-sis3{object-fit:contain!important;object-position:center bottom!important}
+html body #gacha .gc-stage .gc-mach{height:50%!important;bottom:-10%!important}
+html body #gacha .gc-logo{margin-top:-4%!important}
+html body main section#gacha p.gc-top{margin:0 0 6px!important}
