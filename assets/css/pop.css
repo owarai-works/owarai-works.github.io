@@ -1951,3 +1951,14 @@ html body .ph .wow-chips b{font-family:var(--f-disp);font-weight:900;font-size:c
 html body .ph .wow-chips small{font-size:13px;font-weight:800}
 @media (max-width:760px){html body .ph .wow-chips li{padding:6px 12px;border-width:3px!important;box-shadow:4px 4px 0 var(--ink)!important}html body .ph .wow-chips b{font-size:17px}html body .ph .wow-chips small{font-size:10.5px}}
 @media (min-width:761px){html body .hero .hero-acts .store{display:none!important}}  /* 11-22：パソコンは右上の列に App Store があるので、トップの絵の中には出さない */
+/* 11-22 ユーザー「重ならないように（札どうし）」：基本無料とランクマッチ対応は傾けず、すき間16pxで並べる（ふくらむ動きもやめる） */
+html body .wow-chips{gap:16px!important;row-gap:16px!important}
+html body .wow-chips li,html body .wow-chips li.c-rank{transform:none!important;animation:none!important;margin:0!important}
+
+/* 11-22 ユーザー「3人のバストアップを大きく」：開演は3人いっしょの大きな絵（sis_bust.webp）が下から飛び出す */
+.wo-bust{width:min(100%,720px)!important;height:auto!important;bottom:0!important}
+.wo-bust img{width:100%!important;height:auto!important;max-height:72vh;object-fit:contain;object-position:bottom;margin:0!important;transform:translateY(110%) scale(.9)!important;transition:transform .6s cubic-bezier(.2,1.5,.4,1) .45s!important}
+.wow-open.go .wo-bust img{transform:none!important}
+.wow-open.stamp .wo-bust img{animation:woBustHop .5s ease-out 1}
+@keyframes woBustHop{30%{transform:translateY(-14px) scale(1.03)}}
+@media (max-width:760px){.wo-bust{width:140%!important}.wo-bust img{max-height:78vh}}
