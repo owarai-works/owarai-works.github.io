@@ -303,7 +303,7 @@ window.SITE = {
     if (!matchMedia("(min-width:1024px)").matches) return;
     const W = document.createTreeWalker(root || document.body, NodeFilter.SHOW_TEXT), done = new Set();
     while (W.nextNode()) { const e = W.currentNode.parentElement; if (!e || done.has(e) || !W.currentNode.textContent.trim()) continue; done.add(e);
-      if (e.closest(".hd,.sp-menu,.bgm,.bgm-vol,.bgm-tip,.og-gate,.hero-side,.marquee,svg,.rk-tabs,.sec-hd .en,.pd-base,.hsl-nav")) continue;
+      if (e.closest(".hero,.hd,.sp-menu,.bgm,.bgm-vol,.bgm-tip,.og-gate,.hero-side,.marquee,svg,.rk-tabs,.sec-hd .en,.pd-base,.hsl-nav")) continue;
       if (parseFloat(getComputedStyle(e).fontSize) < 20) { e.style.fontSize = "20px"; e.dataset.minf = "1"; } }
   }
   window.owMinFont = owMinFont;
