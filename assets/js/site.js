@@ -125,8 +125,15 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
   /* 11-22 ユーザー「トップの背景をオープニング動画の自動再生（音なし）に」：パソコンは YouTube の横のOP、スマホはホームページの中の縦のOP（index.html の .hero-sp） */
   if (document.body.dataset.page === "home" && innerWidth >= 761 && !matchMedia("(prefers-reduced-motion:reduce)").matches) { const bg = $(".hero-bg");
     if (bg && !$(".hero-yt", bg)) { const f = document.createElement("iframe"); f.className = "hero-yt"; f.title = "オープニング映像（背景）"; f.setAttribute("aria-hidden", "true"); f.tabIndex = -1;
-      f.setAttribute("allow", "autoplay; encrypted-media"); f.src = `https://www.youtube-nocookie.com/embed/${YT.op.h}?autoplay=1&mute=1&loop=1&playlist=${YT.op.h}&controls=0&disablekb=1&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3`;
-      f.addEventListener("load", () => setTimeout(() => f.classList.add("on"), 1500)); bg.append(f); } }
+      f.setAttribute("allow", "autoplay; encrypted-media"); f.src = `https://www.youtube-nocookie.com/embed/${YT.op.h}?autoplay=1&mute=1&controls=0&disablekb=1&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&enablejsapi=1&origin=${encodeURIComponent(location.origin)}`;
+      /* 11-22 ユーザー「動画が終わったら、さっきの1枚絵を出す」：YouTube から「終わった」の知らせ（状態0）が来たら、動画を消して下の1枚絵（hero.webp）を見せる */
+      const fin = () => { f.classList.remove("on"); setTimeout(() => f.remove(), 1300); };
+      addEventListener("message", e => { if (e.source !== f.contentWindow) return; let d = e.data; try { d = typeof d === "string" ? JSON.parse(d) : d; } catch (x) { return; }
+        if (!d) return; if ((d.event === "onStateChange" && d.info === 0) || (d.event === "infoDelivery" && d.info && d.info.playerState === 0)) fin(); });
+      f.addEventListener("load", () => { const hi = () => { try { f.contentWindow.postMessage(JSON.stringify({event: "listening", id: 1, channel: "widget"}), "*"); } catch (x) {} }; hi(); setTimeout(hi, 1000); setTimeout(hi, 3000); setTimeout(() => f.classList.add("on"), 1500); });
+      bg.append(f); } }
+  /* スマホ：縦のOPが終わったら、1枚絵（kv_poster）にふわっと切りかえる */
+  { const v = $(".hero .hero-sp"); if (v && document.body.dataset.page === "home") v.addEventListener("ended", () => { const im = document.createElement("img"); im.className = "hero-sp hero-sp-still"; im.src = "assets/img/kv_poster.webp"; im.alt = ""; v.after(im); requestAnimationFrame(() => im.classList.add("on")); setTimeout(() => v.remove(), 900); }); }
   /* 11-22 漫画の試し読み：第1話の4ページを縦に読む → 最後に「続きはアプリで」 */
   document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-comic]"); if (!b) return; e.preventDefault();
     let ov = $(".cm-read"); if (!ov) { ov = document.createElement("div"); ov.className = "cm-read"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-label", "第1話 試し読み");

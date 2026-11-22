@@ -2512,3 +2512,7 @@ html body .hs-hint i{font-size:28px!important}
 main>section.sec.bg-y::before,main>section.sec.bg-p::before,main>section.sec.bg-b::before{inset:0!important;left:0!important;right:0!important;width:auto!important;background-size:cover!important;background-position:center 20%!important;-webkit-mask-image:none!important;mask-image:none!important;opacity:.12!important}
 /* 11-22 ユーザー「コラボの枠をもう少し小さく、上へ」：右下のBGMのボタンに重ならない高さに */
 @media (min-width:761px){html body .hero .hero-co.hco2{width:min(170px,12.5vw)!important;bottom:auto!important;top:calc(var(--hd,80px) + 30px)!important}}
+
+/* スマホ：OPのあとの1枚絵 */
+.hero-sp-still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;opacity:0;transition:opacity .8s}
+.hero-sp-still.on{opacity:1}
