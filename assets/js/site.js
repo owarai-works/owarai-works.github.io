@@ -286,7 +286,8 @@ window.SITE = {
     const panels = $$("main>section,main>header.ph,footer.ft");
     panels.forEach(sec => { const w = sec.querySelector(":scope>.wrap"); if (w) w.style.zoom = ""; });
     if (!on) return;
-    const hd = $(".hd"), sn = $(".subnav"), hh = (hd ? Math.round(hd.getBoundingClientRect().height) : 58) + (sn ? Math.round(sn.getBoundingClientRect().height) : 0); R.style.setProperty("--hdh", hh + "px"); R.style.setProperty("--snh", `calc(100svh - ${hh}px)`);
+    const hd = $(".hd"), sn = $(".subnav"), hh = (hd ? Math.round(hd.getBoundingClientRect().height) : 58) + (sn ? Math.round(sn.getBoundingClientRect().height) : 0); const cdH = () => { const c = $(".thx-cd"); return c && getComputedStyle(c).position === "fixed" ? Math.round(c.getBoundingClientRect().bottom - (hd ? hd.getBoundingClientRect().bottom : 0)) : 0; };  /* 11-22：上の「おしらせまで あと○秒」の帯の下から見せる */
+    R.style.setProperty("--hdh", (hh + Math.max(0, cdH())) + "px"); clearInterval(owSnap.cdT); owSnap.cdT = setInterval(() => R.style.setProperty("--hdh", (hh + Math.max(0, cdH())) + "px"), 1000); R.style.setProperty("--snh", `calc(100svh - ${hh}px)`);
     $$(HS).forEach(el => { if (el.dataset.hs) return; el.dataset.hs = "1"; el.classList.add("hs");
       const n = el.children.length; if (n < 2) return; const d = document.createElement("div"); d.className = "hs-dots"; d.setAttribute("aria-hidden", "true"); d.innerHTML = "<i></i>".repeat(n); el.after(d);
       const upd = () => { const i = Math.round(el.scrollLeft / Math.max(1, el.scrollWidth - el.clientWidth) * (n - 1)); [...d.children].forEach((x, k) => x.classList.toggle("on", k === i)); };
@@ -294,7 +295,7 @@ window.SITE = {
     const fit = () => { const H = innerHeight - hh;
       panels.forEach(sec => { if (sec.classList.contains("hero")) return; const w = sec.querySelector(":scope>.wrap"); if (!w) return; w.style.zoom = "";
         const cs = getComputedStyle(sec), pad = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom), need = w.scrollHeight;
-        const z = Math.max(.84, Math.min(1, (H - pad) / need)); if (z < .995) w.style.zoom = z.toFixed(3);  /* 11-22：1画面に入れる（字が小さくなりすぎないよう 0.84 まで。それでも入らない話題は少し長くなる） */ }); };
+        void H; void pad; void need;  /* 11-22 ユーザー「切れてる」：iPhone では縮める（zoom）と幅が画面からはみ出したので、縮めない。1画面に入るように中身の量で合わせる（pop.css） */ }); };
     fit(); setTimeout(fit, 600); setTimeout(fit, 2000);
   }
   window.owSnap = owSnap;

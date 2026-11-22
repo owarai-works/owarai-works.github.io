@@ -1672,3 +1672,52 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   html.snap #gassen .gs-feat small{display:none!important}
   html.snap #rankbox .rk-list li:nth-child(n+4),html.snap #rankbox .rk-hall li:nth-child(n+3){display:none!important}
 }
+/* ===== 11-22 ユーザー「ワンスワイプで次のパートをきっちり表示」：スマホは、どの話題も1画面に入る量に（縮めずに、出す物をしぼる） ===== */
+@media (max-width:760px){
+  html.snap .facts{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  html.snap .facts .fact b{font-size:44px!important}
+  html.snap .facts .fact span{font-size:14px!important}
+  html.snap #news .pickup{display:none!important}
+  html.snap #news .news-item{padding:12px 14px!important}
+  html.snap #fit .fit-call{font-size:18px!important;margin:14px auto 0!important}
+  html.snap #fit .fit-list li{padding:9px 12px!important}
+  html.snap #odai .odai-mini img.shot{max-height:9.5vh!important}
+  html.snap #odai .odai-mini li{padding:4px 2px 6px!important}
+  html.snap #gassen .gs-badge,html.snap #gassen .gs-feat{display:none!important}
+  html.snap #gassen .gs-ph img{max-height:36vh!important}
+  html.snap #gassen .gs-call{margin:12px auto 8px!important}
+  html.snap #ranking .sec-hd p{display:none!important}
+  html.snap #ranking .rk-tabs{margin:6px 0!important}
+  html.snap #ranking .rk-up{display:none!important}
+  html.snap .sec-hd .en{font-size:52px!important}
+}
+@media (max-width:760px){
+  html.snap #odai .odai-mini img.shot{display:none!important}
+  html.snap #odai .odai-mini li{padding:10px 2px 10px!important}
+  html.snap #odai .omk{width:44px!important;height:44px!important}
+  html.snap #ranking .rk-card h3 small,html.snap #ranking .rk-chip{display:none!important}
+  html.snap #ranking .rk-list li{padding:6px 10px!important}
+  html.snap #ranking .rk-more{margin-top:8px!important}
+  html.snap #point .pt .ss img{max-height:24vh!important}
+  html.snap #point .pt-t p{font-size:13.5px!important}
+  html.snap #point2 .pm{padding:5px 8px!important}
+  html.snap #fit .fit-list li{font-size:14.5px!important}
+}
+@media (max-width:760px) and (max-height:700px){
+  html.snap .sec-hd .en{font-size:42px!important}
+  html.snap .sec-hd p{display:none!important}
+  html.snap #point .pt .ss img{max-height:18vh!important}
+}
+@media (max-width:760px){
+  html.snap #ranking .rk-tabs{display:none!important}
+  html.snap #ranking .rk-hall li{padding:6px!important}
+  html.snap #ranking .rk-pic{max-height:52px}
+  html.snap #point .pt .ss img{max-height:21vh!important}
+  html.snap #gassen .gs-ph img{max-height:33vh!important}
+}
+@media (max-width:760px) and (max-height:700px){
+  html.snap #fit .fit-call{display:none!important}
+  html.snap #point2 .pt-nado{display:none!important}
+  html.snap #gassen .gs-ph img{max-height:28vh!important}
+}
+@media (max-width:760px){html.snap #point .pt .ss img{max-height:17vh!important}html.snap #point .sec-hd p{display:none!important}}
