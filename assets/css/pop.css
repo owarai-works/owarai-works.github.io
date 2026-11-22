@@ -3004,3 +3004,7 @@ html body #gacha .gc-stage .gc-mach{bottom:4%!important;height:46%!important}
 /* 11-22 ユーザー「ロゴから下を、帯のあたり（絵の切れ目）まで上げて」：絵の高さ（画面の幅×0.648）を元に上げる */
 html body #gacha .gc-logo{margin-top:calc(-100vw / var(--z,1) * 0.648 * 0.40)!important}
 html body #gacha .gc-stage .gc-mach{height:36%!important;bottom:31%!important}
+
+/* スマホ：背景の YouTube（縦）を画面いっぱいに。流れ出したら下の動画ファイルは隠す */
+@media (max-width:760px){html body .hero .hero-bg{container-type:size}html body .hero .hero-yt{display:block!important;width:max(100cqw,100cqh * .5625)!important;height:max(100cqh,100cqw * 1.7778)!important}
+  html body .hero .hero-bg:has(.hero-yt.on) .hero-sp{opacity:0;transition:opacity 1s}}
