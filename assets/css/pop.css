@@ -2644,3 +2644,8 @@ html body .cm-cover .cm-free{animation:cmFree 1.4s ease-in-out infinite!importan
 /* 11-22 ユーザー「X・YouTube・App Store は右寄せ・右につめて」：上のメニューを画面いっぱいに広げ、3つは右はしにぴったり */
 @media (min-width:761px){html body .hd .hd-in{width:auto!important;max-width:none!important;margin:0!important;padding:0 12px 0 16px}html body .hd .hd-cta{margin-left:auto!important;justify-content:flex-end}html body .hd .hd-nav{margin-left:auto}}
 @media (min-width:761px){html body .wo-bust img{max-height:64vh!important}}  /* なんでやねん！の上下に余白ができる高さ */
+/* 11-22 ユーザー「背景の絵が止まっているので、ゆっくり動かして（はしが切れないように）」：12%大きくしておき、その中だけでゆっくり動く */
+main>section.sec.bg-y::before,main>section.sec.bg-p::before,main>section.sec.bg-b::before{transform:scale(1.12);animation:bgDrift 26s ease-in-out infinite alternate;will-change:transform}
+main>section.sec:nth-of-type(even)::before{animation-duration:31s;animation-direction:alternate-reverse}
+@keyframes bgDrift{0%{transform:scale(1.12) translate(-3.5%,-2.5%)}50%{transform:scale(1.16) translate(2%,1.5%)}100%{transform:scale(1.12) translate(3.5%,-1.5%)}}
+@media (prefers-reduced-motion:reduce){main>section.sec::before{animation:none!important}}
