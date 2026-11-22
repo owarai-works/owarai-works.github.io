@@ -2846,3 +2846,21 @@ html body main section p.od-note{font-size:48px!important;line-height:1.3!import
 html body main section p.od-note b{font-size:1.7em!important}
 @media (max-width:1023px){html body main section p.od-note{font-size:30px!important}}
 @media (max-width:760px){html body main section p.od-note{font-size:22px!important}html.snap body main section#odai p.od-note{font-size:18px!important}}
+/* ===== 11-22 ユーザー「ガチャ：レインボーの放射・シスターズのバストアップ（左 気猫・中 百萌・右 葵）・ゲームの画面のように・何度も回したくなる」 ===== */
+html body main section.gcsec{background:radial-gradient(60% 50% at 50% 38%,#fff6d6 0%,#ffd0e6 30%,#b67cff 62%,#3a1470 100%)!important}
+html body .gc-rays{background:repeating-conic-gradient(from 0deg,rgba(255,90,138,.55) 0 5deg,rgba(255,178,26,.55) 5deg 10deg,rgba(255,225,77,.55) 10deg 15deg,rgba(95,211,107,.5) 15deg 20deg,rgba(63,184,255,.55) 20deg 25deg,rgba(180,107,255,.55) 25deg 30deg)!important;-webkit-mask:radial-gradient(circle,#000 16%,transparent 64%)!important;mask:radial-gradient(circle,#000 16%,transparent 64%)!important;animation:spinC 30s linear infinite!important;top:36%!important}
+html body .gc-stage{display:block!important;position:relative;height:auto!important;max-width:1000px!important;margin:10px auto 0!important;aspect-ratio:1024/664}
+html body .gc-sis3{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 12px 24px rgba(40,0,60,.45));animation:gcSis 3s ease-in-out infinite}
+@keyframes gcSis{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+html body .gc-stage .gc-mach{position:absolute!important;left:50%;bottom:-4%;height:58%!important;transform:translateX(-50%);margin:0!important;z-index:2}
+html body .gc-stage .gc-mach img{height:100%}
+html body .gc-stage .gc-trs{position:absolute;right:2%!important;left:auto!important;bottom:-2%!important;z-index:3}
+html body .gc-logo{position:relative;z-index:4;margin:-6% 0 0!important}
+html body .gc-logo img{width:min(760px,96%)!important}
+html body .gc-kick span{background:linear-gradient(90deg,#ff5a8a,#ffb21a,#ffe14d,#5fd36b,#3fb8ff,#b46bff)!important;color:#fff!important;text-shadow:0 2px 0 #3a1470;border-color:#fff!important}
+html body .gc-lights{background:radial-gradient(circle,#fff 0 3px,#ff5aa0 4px,transparent 6px) 0 0/26px 26px repeat-x,radial-gradient(circle,#fff 0 3px,#ffe14d 4px,transparent 6px) 0 100%/26px 26px repeat-x,radial-gradient(circle,#fff 0 3px,#5ab8ff 4px,transparent 6px) 0 0/26px 26px repeat-y,radial-gradient(circle,#fff 0 3px,#7cff7c 4px,transparent 6px) 100% 0/26px 26px repeat-y!important}
+html body .gc-tiers{background:linear-gradient(#2a0a4a,#12001f)!important}
+.gc-free{display:none!important}
+@media (max-width:760px){html body .gc-logo{margin-top:-10%!important}}
+html body .gc-stage .gc-mach{height:66%!important;bottom:-2%!important}html body .gc-stage{-webkit-mask:linear-gradient(#000 85%,transparent);mask:linear-gradient(#000 85%,transparent)}
+html body .gc-stage{-webkit-mask:linear-gradient(#000 82%,transparent),linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(#000 82%,transparent) intersect,linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
