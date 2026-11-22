@@ -1942,3 +1942,11 @@ html body .hero .wow-chips small{font-size:13px;font-weight:800;opacity:.9}
   body>.hero-sns.pinned{position:fixed!important;right:20px;top:calc(var(--hd,72px) + 58px);display:flex;flex-direction:column;align-items:flex-end;gap:12px;z-index:90;margin:0}
   body>.hero-sns.pinned .store{margin-bottom:4px}
 }
+
+/* 11-22 ゲーム紹介の上も、トップと同じ「基本無料」「ランクマッチ対応」の大きな札 */
+html body .ph .wow-chips{display:flex!important;gap:16px;flex-wrap:wrap;margin-top:18px}
+html body .ph .wow-chips li{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 22px;border:4px solid var(--ink)!important;border-radius:18px!important;box-shadow:6px 6px 0 var(--ink)!important;transform:rotate(-3deg);animation:chipPulse 1.6s ease-in-out infinite;line-height:1.2;background:var(--gold)!important;color:var(--ink)!important}
+html body .ph .wow-chips li.c-rank{background:var(--shu)!important;color:#fff!important;transform:rotate(3deg);animation-delay:.8s}
+html body .ph .wow-chips b{font-family:var(--f-disp);font-weight:900;font-size:clamp(22px,2vw,30px)}
+html body .ph .wow-chips small{font-size:13px;font-weight:800}
+@media (max-width:760px){html body .ph .wow-chips li{padding:6px 12px;border-width:3px!important;box-shadow:4px 4px 0 var(--ink)!important}html body .ph .wow-chips b{font-size:17px}html body .ph .wow-chips small{font-size:10.5px}}
