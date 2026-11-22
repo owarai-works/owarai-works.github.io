@@ -61,7 +61,7 @@
 .fb-open:hover{transform:translate(-1px,-2px)}
 .fb-open img{width:38px;height:38px;border-radius:50%;border:2px solid var(--ink);background:#dbe9ff}
 .fb-open small{display:block;font-size:10px;color:var(--shu);line-height:1}
-.fb{position:fixed;left:14px;bottom:14px;z-index:90;width:min(380px,calc(100vw - 28px));height:min(1160px,calc(100svh - 40px));display:flex;flex-direction:column;background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:7px 7px 0 var(--ink);overflow:hidden;transform-origin:left bottom;transform:scale(.6);opacity:0;pointer-events:none;transition:transform .3s var(--ease),opacity .25s}
+.fb{position:fixed;left:14px;bottom:14px;z-index:90;width:min(380px,calc(100vw - 28px));height:min(928px,calc(100svh - 40px));display:flex;flex-direction:column;background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:7px 7px 0 var(--ink);overflow:hidden;transform-origin:left bottom;transform:scale(.6);opacity:0;pointer-events:none;transition:transform .3s var(--ease),opacity .25s}
 .fb.open{transform:none;opacity:1;pointer-events:auto}
 .fb-hd{display:flex;align-items:center;gap:10px;padding:10px 12px;background:linear-gradient(135deg,#2f7fe0,#16b3c8);color:#fff;border-bottom:3px solid var(--ink)}
 .fb-hd img{width:42px;height:42px;border-radius:50%;border:2px solid #fff;background:#dbe9ff}
@@ -82,7 +82,7 @@
 .fb-f input{flex:1;min-width:0;padding:10px 12px;border:2px solid var(--ink);border-radius:10px;font:inherit;font-size:16px}
 .fb-f button{padding:0 16px;border-radius:10px;border:2px solid var(--ink);background:var(--shu);color:#fff;font-weight:900;box-shadow:2px 2px 0 var(--ink)}
 .fb-note{padding:0 12px 8px;font-size:10px;color:var(--muted);background:#fff}
-.fb-inline{position:relative;left:auto;bottom:auto;width:100%;height:1120px;transform:none;opacity:1;pointer-events:auto;z-index:1}
+.fb-inline{position:relative;left:auto;bottom:auto;width:100%;height:896px;transform:none;opacity:1;pointer-events:auto;z-index:1}
 body[data-page="support"] .fb-open{display:none}
 @media (max-width:520px){.fb-open span{display:none}.fb-open{padding:4px}.fb-open img{width:38px;height:38px}}
 `;
