@@ -2994,3 +2994,9 @@ html body #gacha .gc-stage .gc-mach{height:50%!important;bottom:-10%!important}
 html body #gacha .gc-logo{margin-top:-4%!important}
 html body main section#gacha p.gc-top{margin:0 0 6px!important}
 @media (max-width:760px){html body .hero .hero-main::before{display:none!important;content:none!important}}  /* 11-22 ユーザー「スマホ：放射線のエフェクトを消して」 */
+
+/* 11-22 ユーザー「3つの札を消す・ガチャから下をシスターズの絵の下の切れ目まで上げる」 */
+html body #gacha .gc-logo{margin-top:-17%!important}
+html body #gacha .gc-stage{-webkit-mask:linear-gradient(#000 70%,transparent 96%)!important;mask:linear-gradient(#000 70%,transparent 96%)!important}
+html body #gacha .gc-stage .gc-mach{bottom:4%!important;height:46%!important}
+@media (max-width:760px){html body #gacha .gc-logo{margin-top:-15%!important}}
