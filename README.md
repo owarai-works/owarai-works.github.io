@@ -115,3 +115,4 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 ## 漫画のコーナー（11-22）
 - トップのミニゲームの下（#comic）。表紙 cm_cover・第1話の4ページ cm_e01_p1〜4・各話の1コマ目 cm_th01〜05（ゲームの img/comic から）。表紙を押すと試し読み（site.js の [data-comic]）→ 最後に「続きはアプリで」。
 - トップの背景：パソコンは YouTube のOP（横）を音なしで流す（site.js の .hero-yt）、スマホは assets/vid/op_sp.mp4。BGM は assets/bgm/op.mp3（OPソング）。
+- 漫画プレーヤー（11-22）：assets/js/comic.js。「今すぐ読む」([data-comic-play]) で第1話をコマ送り＋声（assets/comic/k01.mp3）＋音楽（bgm01.mp3）。コマの位置と声の時間は assets/comic/e01.json（ゲームの COMIC_KOMA[1]）。再生中はホームページのBGMを止め、閉じたら再開。第2〜5話の小さな絵はぼかし済み。

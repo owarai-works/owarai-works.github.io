@@ -2561,3 +2561,31 @@ html body .rk-hall .rk-hb .k-ic{flex:0 0 52px!important;width:52px!important;hei
 html body .rk-hall .rk-ht{display:flex;flex-direction:column;justify-content:center;gap:6px;min-width:0}
 html body .rk-hall .rk-ht p,html body .rk-hall .rk-ht small,html body .rk-hall .rk-ht>span{margin:0!important;line-height:1.35!important}
 @media (max-width:760px){html body .rk-hall>li{gap:10px!important;padding:10px 12px!important}html body .rk-hall>li>.rk-pic{width:64px!important;height:48px!important}html body .rk-hall>li>.rk-hb{gap:10px!important}html body .rk-hall .rk-hb .k-ic{flex-basis:38px!important;width:38px!important;height:38px!important}}
+
+/* ===== 11-22 漫画：表紙の下に「今すぐ読む」・試し読みの丸は表紙の中に ===== */
+.cm-left{display:flex;flex-direction:column;align-items:center;gap:18px}
+html body .cm-cover .cm-free{right:10px!important;top:10px!important;box-shadow:0 0 0 3px var(--ink),3px 3px 0 3px var(--ink)}
+html body .cm-left .cm-go{position:static!important;transform:none!important;display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 40px!important;font-size:24px!important;cursor:pointer;animation:woBounce 1.4s ease-in-out infinite}
+.cm-left .cm-go small{font-size:13px;font-weight:800;color:var(--shu-d)}
+@media (max-width:760px){html body .cm-left .cm-go{font-size:17px!important;padding:8px 22px!important}.cm-left{gap:10px}html.snap #comic .cm-cover{max-height:30vh}}
+/* 漫画プレーヤー */
+.cmp{position:fixed;inset:0;z-index:430;display:none;flex-direction:column;background:radial-gradient(circle at 50% 45%,#3a2328,#120a0c 75%)}
+.cmp.open{display:flex}
+html.cmp-lock,html.cmp-lock body{overflow:hidden!important}
+.cmp-top{display:flex;align-items:center;gap:12px;padding:10px 14px;color:#fff}
+.cmp-top b{font-family:var(--f-disp);font-weight:900;font-size:18px}
+.cmp-pg{font-size:13px;font-weight:700;opacity:.8}
+.cmp-x{margin-left:auto;width:44px;height:44px;border-radius:50%;background:#fff;border:3px solid var(--ink);font-size:22px;font-weight:900;color:var(--ink);line-height:1}
+.cmp-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:6px 12px;cursor:pointer}
+.cmp-stage[hidden],.cmp-bar[hidden]{display:none}
+.cmp-k{background-repeat:no-repeat;background-color:#fff;border:3px solid #fff;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.6);transition:width .5s var(--ease),height .5s var(--ease),background-size .5s var(--ease),background-position .5s var(--ease)}
+.cmp-cap{min-height:0;margin:0}
+.cmp-bar{display:flex;justify-content:center;gap:16px;padding:10px 0 18px}
+.cmp-bar button{width:54px;height:54px;border-radius:50%;background:#fff;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--shu);font-size:24px;font-weight:900;color:var(--ink);line-height:1}
+.cmp-bar .cmp-pause{background:var(--gold);font-size:18px}
+.cmp-end{margin:auto;width:min(92%,520px);padding:26px 20px;text-align:center;background:linear-gradient(135deg,#fff0f6,#fff4d6);border:4px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 var(--shu)}
+.cmp-end[hidden]{display:none}
+.cmp-end>b{display:block;font-family:var(--f-disp);font-weight:900;font-size:28px;color:var(--shu-d)}
+.cmp-end p{margin:12px 0 18px;font-weight:700;line-height:1.8;color:var(--ink)}
+.cmp-store{display:flex;justify-content:center}
+.cmp-again{margin-top:16px;padding:10px 24px;border-radius:999px;background:#fff;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);font-weight:900;font-size:16px;color:var(--ink)}
