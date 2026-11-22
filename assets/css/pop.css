@@ -1622,3 +1622,12 @@ html body .art-pager span{display:none}
 html body .art-pager .nx{justify-content:flex-start!important;text-align:left!important}
 html body .art-pager .t{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
 @media (max-width:760px){html body .art-pager a{font-size:13px!important;padding:14px!important;gap:10px!important}}
+/* 11-22 ユーザー「文字がきれてる」：ゲーム紹介の目次。パソコンは全部を折り返して並べ（横にスクロールしない）、スマホは札の頭でぴったり止まる */
+@media (min-width:761px){
+  html body .subnav ol{flex-wrap:wrap!important;overflow:visible!important;justify-content:center;row-gap:8px}
+}
+@media (max-width:760px){
+  html body .subnav ol{scroll-snap-type:x mandatory;scroll-padding-inline:12px!important}
+  html body .subnav li{scroll-snap-align:start}
+}
+.tod-badge{display:none!important}  /* 11-22：目次や見出しに重なるので、時間帯の札は出さない */
