@@ -2669,3 +2669,36 @@ html body .cm-left{padding-left:60px;padding-top:50px}@media (max-width:760px){h
 .od-note small{display:block;margin-top:4px;font-family:var(--f-body);font-weight:700;font-size:14px;color:#5a4a45}
 @media (min-width:1024px){.od-n{font-size:16px}}
 @media (max-width:760px){.od-n{top:4px;right:4px;font-size:11px;padding:1px 6px}html.snap #odai .od-note{margin-top:8px;font-size:15px}html.snap #odai .od-note small{font-size:10px}}
+
+/* ===== 11-22 漫画プレーヤーのエフェクト（ゲームの漫画コーナーと同じ動き） ===== */
+.cmp-kw{position:relative;display:inline-block}
+.cmp-kw>.cmp-k{display:block}
+.cmp-kw>i,.cmp-fxl{position:absolute;inset:0;pointer-events:none;border-radius:6px;overflow:hidden}
+.cmp-k.zin{transform:scale(1.08);transition:transform 3.4s ease-out,width .5s,height .5s,background-size .5s,background-position .5s!important}
+.cmp-fl{background:#fff;opacity:0}.cmp-fl.on{animation:cmpFl .45s ease-out}.cmp-fl.dk{background:#1a1030}
+@keyframes cmpFl{0%{opacity:.9}100%{opacity:0}}
+.cmp-sl{opacity:0;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(0,0,0,.55) 0 1.2deg,transparent 1.2deg 7deg);-webkit-mask:radial-gradient(circle,transparent 32%,#000 62%);mask:radial-gradient(circle,transparent 32%,#000 62%)}
+.cmp-sl.on{animation:cmpSl 1.1s ease-out}
+@keyframes cmpSl{0%{opacity:0;transform:scale(1.3)}25%{opacity:.85}100%{opacity:0;transform:scale(1)}}
+.cmp-tint{opacity:0;transition:opacity .4s}.cmp-tint.s{opacity:1;background:rgba(40,70,160,.32)}.cmp-tint.a{opacity:1;background:rgba(220,40,30,.22)}
+.cmp-turn{opacity:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85) 50%,transparent);transform:translateX(-100%)}
+.cmp-turn.on{animation:cmpTurn .45s ease-out}
+@keyframes cmpTurn{0%{opacity:1;transform:translateX(100%)}100%{opacity:0;transform:translateX(-100%)}}
+.cmp-k.shz{animation:shz .6s}.cmp-k.shk{animation:shk .35s}.cmp-k.shi{animation:shi .5s}.cmp-k.sht{animation:sht .5s 2}.cmp-k.shu{animation:shu .4s}.cmp-k.shl{animation:shl .35s 3}
+@keyframes shz{0%{transform:none}30%{transform:translateY(18px) rotate(-2deg)}55%{transform:translateY(-6px)}100%{transform:none}}
+@keyframes shk{0%,100%{transform:none}25%{transform:translate(-6px,2px)}50%{transform:translate(6px,-2px)}75%{transform:translate(-3px,1px)}}
+@keyframes shi{0%{transform:scale(1)}30%{transform:scale(1.06)}60%{transform:scale(.98)}100%{transform:scale(1)}}
+@keyframes sht{0%,100%{transform:none}20%{transform:translateX(-3px)}40%{transform:translateX(3px)}60%{transform:translateX(-2px)}80%{transform:translateX(2px)}}
+@keyframes shu{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+@keyframes shl{0%,100%{transform:none}50%{transform:translateY(-6px)}}
+.kp{position:absolute;display:block;pointer-events:none}
+.kp-cf{width:9px;height:14px;background:var(--c);border-radius:2px;animation:kpCf 1.8s ease-in forwards}
+@keyframes kpCf{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(var(--fall)) rotate(540deg);opacity:.9}}
+.kp-st{width:26px;height:26px;background:radial-gradient(circle,#fff 0 18%,#ffe36b 30%,transparent 62%);animation:kpSt 1.1s ease-out forwards}
+@keyframes kpSt{0%{transform:scale(0);opacity:0}40%{transform:scale(1.3);opacity:1}100%{transform:scale(.4);opacity:0}}
+.kp-sw{width:16px;height:22px;background:#7cc8ff;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;border:2px solid #fff;animation:kpSw 1s ease-out forwards}
+@keyframes kpSw{0%{transform:translate(0,0) scale(.4);opacity:0}30%{opacity:1}100%{transform:translate(22px,-26px) scale(1);opacity:0}}
+.kp-ag{width:44px;height:44px;background:conic-gradient(from 45deg,#e2231a 0 10%,transparent 10% 25%,#e2231a 25% 35%,transparent 35% 50%,#e2231a 50% 60%,transparent 60% 75%,#e2231a 75% 85%,transparent 85%);-webkit-mask:radial-gradient(circle,transparent 26%,#000 28%,#000 62%,transparent 64%);mask:radial-gradient(circle,transparent 26%,#000 28%,#000 62%,transparent 64%);animation:kpAg .9s ease-out 2}
+@keyframes kpAg{0%{transform:scale(.5)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+.kp-bolt{width:60px;height:100%;background:linear-gradient(170deg,transparent 40%,#fff6a8 42%,#ffe14d 46%,transparent 48%);filter:drop-shadow(0 0 10px #fff27a);animation:kpBolt .7s ease-out forwards}
+@keyframes kpBolt{0%,20%,40%{opacity:1}10%,30%{opacity:.2}100%{opacity:0}}
