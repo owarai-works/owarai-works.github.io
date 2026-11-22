@@ -6,7 +6,9 @@
 window.owTrack = (name, params = {}) => { try { window.gtag && gtag("event", name, params); } catch (e) {} };
 window.SITE = {
   operator: "ライトルーム お笑い運営部",
-  contact: "",            /* 問い合わせのメールアドレス。空のあいだは「準備中」と出ます */
+  /* 問い合わせのメールアドレス（11-22 ユーザー）。迷惑メール対策：ページの HTML には書かず、見る人の画面でだけ組み立てて出す（@ の前と後ろを分けて持つ） */
+  contactParts: ["support", "light-room.net"],
+  get contact(){ return this.contactParts.join(String.fromCharCode(64)); },
   appStoreUrl: "",        /* App Store のページができたら URL を入れると、ボタンがリンクになります */
   aiEndpoint: "",         /* 本物のAIで答えるサーバーのURL（あとで足す）。空のあいだは、よくある質問だけで答える */
   year: "2026",
