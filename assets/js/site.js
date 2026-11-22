@@ -208,6 +208,10 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
     const vb = document.createElement("div"); vb.className = "bgm-vol";
     vb.innerHTML = `<button type="button" class="bgm-vk" aria-label="音量を調節する" aria-expanded="false"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a5 5 0 010 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.5 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><div class="bgm-vp" hidden><span>音量</span><input type="range" min="0" max="100" step="5" aria-label="BGMと効果音の音量"><b></b></div>`;
     document.body.append(vb);
+    /* 11-22 ユーザー「白い音量ボタンの上に、ページのいちばん上に戻るボタン」 */
+    { const tt = document.createElement("button"); tt.type = "button"; tt.className = "to-top"; tt.setAttribute("aria-label", "ページのいちばん上へ"); tt.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5l-7 7h4.5v7h5v-7H19z" fill="currentColor"/></svg>`;
+      tt.addEventListener("click", e => { e.stopPropagation(); const sn = document.documentElement.classList.contains("snap"); if (sn) document.documentElement.style.scrollSnapType = "none"; scrollTo({top: 0, behavior: "smooth"}); if (sn) setTimeout(() => { document.documentElement.style.scrollSnapType = ""; }, 900); });
+      vb.prepend(tt); const show = () => tt.classList.toggle("on", scrollY > innerHeight * .6); addEventListener("scroll", show, {passive: true}); show(); }
     const vr = vb.querySelector("input"), vp = vb.querySelector(".bgm-vp"), vk = vb.querySelector(".bgm-vk"), vt = vb.querySelector("b");
     const vpaint = () => { vr.value = Math.round(VOL * 100); vt.textContent = Math.round(VOL * 100); vr.style.setProperty("--p", VOL * 100 + "%"); };
     vpaint(); window.owVol = () => VOL;

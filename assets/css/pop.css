@@ -3023,3 +3023,10 @@ html.snap body .hero::after{display:none!important;content:none!important}  /* 1
   html.snap body .mg-row .mgc{width:110px}
   html.snap body .mg-row .mgc small{display:none}
 }
+
+/* 11-22 ページのいちばん上に戻るボタン（白い音量ボタンの上） */
+.to-top{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--shu);color:#fff;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);cursor:pointer;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s}
+.to-top.on{opacity:1;pointer-events:auto;transform:none}
+.to-top svg{width:24px;height:24px}
+.to-top:hover{transform:translateY(-2px)}
+@media (max-width:520px){.to-top{width:40px;height:40px}.to-top svg{width:22px;height:22px}}
