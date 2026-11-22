@@ -42,7 +42,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
   hd.innerHTML = `<div class="hd-in">
       <a class="hd-logo" href="index.html" aria-label="お笑い道場 なんでやねん ホーム"><img src="assets/img/logo.webp" alt="お笑い道場 なんでやねん" width="900" height="515"></a>
       <nav class="hd-nav" aria-label="メインメニュー">${navA}</nav>
-      <div class="hd-cta">${storeHTML()}</div>
+      <div class="hd-cta">${document.body.dataset.page === "home" ? "" : snsHTML("hd-sns")}</div>
       <button class="hd-menu" type="button" aria-label="メニューを開く" aria-expanded="false"><i></i><i></i><i></i></button>
     </div>`;
   document.body.prepend(hd);
@@ -81,7 +81,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
   });
   $$("[data-operator]").forEach(el => el.textContent = SITE.operator);
   $$("[data-store]").forEach(el => el.outerHTML = storeHTML(el.dataset.store || ""));
-  $$("[data-sns]").forEach(el => el.outerHTML = snsHTML(el.dataset.sns || ""));
+  $$("[data-sns]").forEach(el => el.outerHTML = snsHTML(el.dataset.sns || "").replace('<div class="sns hero-sns">', '<div class="sns hero-sns">' + (el.dataset.sns === "hero-sns" ? storeHTML() : "")));
 
   /* ---------- スクロールでヘッダーを濃く ---------- */
   const onScroll = () => hd.classList.toggle("solid", scrollY > 40);
@@ -237,7 +237,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
            この訪問で最初の1回だけ、どのページでも「タップでBGMスタート」の幕を出す（トップは開演の幕があるので出さない） */
         btn.classList.add("wait"); btn.querySelector("b").textContent = "TAP";
         let seen = false; try { seen = sessionStorage.getItem("ow-curtain") === "1"; } catch (e) {}
-        if (!seen && !document.getElementById("curtain")) gate();
+        if (!seen && !document.getElementById("curtain") && document.body.dataset.page !== "home") gate();  /* トップは wow.js の開演（タップで開演）があるので出さない */
         setTimeout(() => { if (on && !playing) tip("♪ どこかをタップすると曲が流れます"); }, 1500); });
     };
     function gate(){
@@ -277,7 +277,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
     $$("[data-contact]", root).forEach(el => { el.innerHTML = SITE.contact ? `<a class="contact-mail" href="mailto:${SITE.contact}">${SITE.contact}</a>` : "（メールアドレスは準備中です。決まりしだい、ここに載せます）"; });
     $$("[data-operator]", root).forEach(el => el.textContent = SITE.operator);
     $$("[data-store]", root).forEach(el => el.outerHTML = storeHTML(el.dataset.store || ""));
-    $$("[data-sns]", root).forEach(el => el.outerHTML = snsHTML(el.dataset.sns || ""));
+    $$("[data-sns]", root).forEach(el => el.outerHTML = snsHTML(el.dataset.sns || "").replace('<div class="sns hero-sns">', '<div class="sns hero-sns">' + (el.dataset.sns === "hero-sns" ? storeHTML() : "")));
     $$("[data-movie]", root).forEach(b => b.addEventListener("click", () => openMovie(b.dataset.movie)));
     $$("canvas[data-petals]", root).forEach(c => petals(c, {n: +c.dataset.petals || 46}));
     $$("[data-news-latest]", root).forEach(el => { el.innerHTML = (window.NEWS || []).slice(0, +el.dataset.newsLatest || 3).map(newsItemHTML).join(""); });

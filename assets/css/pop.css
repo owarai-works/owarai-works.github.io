@@ -1910,3 +1910,29 @@ main .sec-hd{position:relative}
 .wow-cards li{opacity:0;transform:translateY(20px) scale(.8)}
 .wow-cards li.in{opacity:1;transform:none;transition:opacity .3s,transform .35s cubic-bezier(.3,1.6,.5,1)}
 @media (max-width:760px){.wow-cut{display:none!important}}  /* スマホは見出しの横のシスターズで十分（字にかぶせない）。声はそのまま */
+
+/* ===== 11-22 上のメニュー：App Store をやめて X と YouTube（パソコン）。トップの絵の中の X・YouTube はスマホだけ ===== */
+.hd-sns{gap:10px}
+.hd-sns a{height:44px;padding:0 14px 0 10px;font-size:14px}
+@media (min-width:761px){html body .hero .hero-sns{display:none!important}}
+@media (max-width:1180px){.hd-sns a span{display:none}.hd-sns a{width:44px;padding:0;justify-content:center}}
+/* ===== 11-22 「基本無料」「ランクマッチ対応」を大きく目立たせる（1問30秒は消した） ===== */
+html body .hero .wow-chips{display:flex!important;gap:14px;flex-wrap:wrap;margin-top:14px}
+html body .hero .wow-chips li{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 22px;border:4px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--ink);transform:rotate(-3deg);animation:chipPulse 1.6s ease-in-out infinite;line-height:1.2}
+html body .hero .wow-chips li.c-free{background:var(--gold);color:var(--ink)}
+html body .hero .wow-chips li.c-rank{background:var(--shu);color:#fff;transform:rotate(3deg);animation-delay:.8s}
+html body .hero .wow-chips b{font-family:var(--f-disp);font-weight:900;font-size:clamp(22px,2vw,30px);letter-spacing:.02em}
+html body .hero .wow-chips small{font-size:13px;font-weight:800;opacity:.9}
+@keyframes chipPulse{0%,100%{scale:1}50%{scale:1.08}}
+@media (max-width:760px){html.snap .hero .wow-chips{display:flex!important;justify-content:center;gap:10px;margin:8px 0 0}html body .hero .wow-chips li{padding:6px 12px;border-width:3px;box-shadow:4px 4px 0 var(--ink)}html body .hero .wow-chips b{font-size:17px}html body .hero .wow-chips small{font-size:10.5px}}
+
+/* ===== 11-22 トップ（パソコン）の右の列：App Store → X → YouTube の順に縦に（上のメニューには置かない） ===== */
+@media (min-width:761px){
+  html body .hero .hero-sns{display:flex!important;position:absolute;right:20px;top:calc(var(--hd,72px) + 24px);flex-direction:column;align-items:flex-end;gap:12px;margin:0;z-index:7}
+  html body .hero .hero-sns .store{margin-bottom:6px}
+}
+@media (max-width:760px){html body .hero .hero-sns .store{display:none}}
+/* ===== 11-22 ユーザー「身長を全員アオイに合わせて」：開演の3人の背の高さをそろえる（絵の中の余白の差を打ち消す） ===== */
+.wo-sis .s1{height:100%!important}
+.wo-sis .s2{height:105.6%!important}
+.wo-sis .s3{height:106.9%!important}
