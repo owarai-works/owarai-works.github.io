@@ -1750,3 +1750,8 @@ html body main .fit-list li span{word-break:keep-all!important;overflow-wrap:any
   html body .thx-cd b,html body .thx-cd em,html body .thx-cd strong{font-size:16px!important}
 }
 @media (max-width:760px){html body .thx-cd{height:30px!important;gap:4px!important;padding:0 10px!important;border:2px solid var(--ink)!important;border-radius:999px!important}}
+/* 11-22 ユーザー「枠内綺麗に表示させろ」：スマホの横スワイプのカードは、1枚ずつ画面の幅いっぱい（となりのカードの切れはしを見せない） */
+@media (max-width:760px){
+  html.snap .hs{gap:20px!important;padding:4px 20px 12px!important;margin-inline:-20px!important;scroll-padding-inline:20px}
+  html.snap .hs>*{flex:0 0 100%!important;max-width:100%!important;scroll-snap-align:center}
+}
