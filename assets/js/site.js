@@ -300,7 +300,12 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
     $$(HS).forEach(el => { if (el.dataset.hs) return; el.dataset.hs = "1"; el.classList.add("hs");
       const n = el.children.length; if (n < 2) return; const d = document.createElement("div"); d.className = "hs-dots"; d.setAttribute("aria-hidden", "true"); d.innerHTML = "<i></i>".repeat(n); el.after(d);
       const upd = () => { const i = Math.round(el.scrollLeft / Math.max(1, el.scrollWidth - el.clientWidth) * (n - 1)); [...d.children].forEach((x, k) => x.classList.toggle("on", k === i)); };
-      el.addEventListener("scroll", upd, {passive: true}); upd(); });
+      el.addEventListener("scroll", upd, {passive: true}); upd();
+      /* 11-22 ユーザー「ここズレてる」：指をはなしたあと、カードが中途半端な位置で止まったら、いちばん近いカードにぴったり合わせる */
+      let st = 0; const snapNear = () => { const kids = [...el.children]; if (!kids.length) return; const pl = parseFloat(getComputedStyle(el).paddingLeft) || 0;
+        let best = 0, bd = 1e9; kids.forEach(c => { const x = el.scrollLeft + c.getBoundingClientRect().left - el.getBoundingClientRect().left - pl, dd = Math.abs(x - el.scrollLeft); if (dd < bd) { bd = dd; best = x; } });
+        if (bd > 2) el.scrollTo({left: best, behavior: "smooth"}); };
+      el.addEventListener("scroll", () => { clearTimeout(st); st = setTimeout(snapNear, 160); }, {passive: true}); });
     const fit = () => { const H = innerHeight - hh;
       panels.forEach(sec => { if (sec.classList.contains("hero")) return; const w = sec.querySelector(":scope>.wrap"); if (!w) return; w.style.zoom = "";
         const cs = getComputedStyle(sec), pad = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom), need = w.scrollHeight;

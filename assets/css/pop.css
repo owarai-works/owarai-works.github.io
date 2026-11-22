@@ -2107,3 +2107,11 @@ main>section.sec.bg-y::before,main>section.sec.bg-p::before,main>section.sec.bg-
 @keyframes ccRun{to{transform:translateX(-50%)}}
 @media (max-width:760px){.cc-big{padding:12px 10px}.cc-in{gap:8px}.cc-t{font-size:20px}.cc-strip{padding:8px 0}.cc-run b{font-size:16px}}
 html.snap .cc-big{display:none}
+/* 11-22 ユーザー「ここズレてる」：スマホのトップの HOT POINT。絵の高さを決めて、うしろの絵は枠いっぱい・ゲーム画面はまん中に置く（黄色のすき間を出さない） */
+@media (max-width:760px){
+  html.snap #point .pt figure.ss{aspect-ratio:auto!important;height:21vh;display:block!important}
+  html.snap #point .pt .ss img.ss-bg{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-height:none!important;object-fit:cover!important}
+  html.snap #point .pt .ss img.ss-ph{position:absolute!important;left:50%;top:12%;width:46%!important;height:auto!important;max-height:none!important;margin:0!important;transform:translateX(-50%) rotate(-3deg)!important}
+  html.snap .hs>*{scroll-snap-stop:always}
+}
+@media (max-width:760px) and (max-height:700px){html.snap #point .pt figure.ss{height:17vh}}
