@@ -147,7 +147,7 @@ window.owCharaPoke = () => {
     fr.parentElement.querySelectorAll(".poke").forEach(x => x.remove());
     const r = fr.getBoundingClientRect(), b = document.createElement("div"); b.className = "poke";
     b.style.left = Math.min(Math.max(e.clientX - r.left, 70), r.width - 70) + "px"; b.style.top = Math.max(e.clientY - r.top - 20, 80) + "px";
-    b.innerHTML = `<img src="assets/img/ex/${k}_${ex}0.webp" alt=""><p>${txt}</p>`;
+    b.innerHTML = `<img src="assets/img/ex/${k}_${ex}0.webp?v=11221818" alt=""><p>${txt}</p>`;
     fr.parentElement.append(b);
     /* 11-22 ユーザー「はみ出さないように」：吹き出しの幅を測って、絵の枠の中に収める */
     { const pw = fr.parentElement.clientWidth, bw = b.offsetWidth, x = parseFloat(b.style.left) + (r.left - fr.parentElement.getBoundingClientRect().left);
@@ -174,7 +174,7 @@ owCharaPoke();
     let i = 0, au = null, tm = 0;
     const step = () => { if (!ov.isConnected) return; if (i >= S.length) return;
       const [k, ex, vo, txt] = S[i++]; ov.querySelectorAll("img").forEach(im => im.classList.toggle("on", im.dataset.k === k));
-      const im = ov.querySelector(`img[data-k="${k}"]`); im.src = `assets/img/ex/${k}_${ex}0.webp`;
+      const im = ov.querySelector(`img[data-k="${k}"]`); im.src = `assets/img/ex/${k}_${ex}0.webp?v=11221818`;
       ov.querySelector(".egg-say").innerHTML = `<b>${({kineko: "気猫", aoi: "葵", momoe: "百萌"})[k]}</b>「${txt}」`;
       if (k === "aoi" && ex === "angry") window.owSfx && owSfx("slap");
       try { if (au) au.pause(); au = new Audio(`assets/vo/${k}_${vo}.mp3`); au.play().catch(() => {}); } catch (x) {}

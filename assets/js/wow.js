@@ -86,7 +86,7 @@
       <div class="try-ans">${TRY.ans.map((a, i) => `<button type="button" data-i="${i}">${a.t}</button>`).join("")}</div>`;
       $$(".try-ans button", box).forEach(b => b.onclick = () => judge(+b.dataset.i)); };
     const judge = i => { const a = TRY.ans[i]; sfx("click"); window.owTrack && owTrack("try_answer", {i});
-      box.innerHTML = `<div class="try-res"><img class="try-face" src="assets/img/ex/${a.k}_${a.f}0.webp" alt=""><div class="try-sc"><small>AI SCORE</small><b><i>0</i>点</b></div>
+      box.innerHTML = `<div class="try-res"><img class="try-face" src="assets/img/ex/${a.k}_${a.f}0.webp?v=11221818" alt=""><div class="try-sc"><small>AI SCORE</small><b><i>0</i>点</b></div>
         <p class="try-ct">「${a.t}」</p><p class="try-cm">${a.c}</p>
         <p class="try-go">本物のゲームでは、<b>自分の言葉</b>で答えて、<b>AIが本気で採点</b>！</p>
         <div class="try-btns"><span data-store="lg"></span><button type="button" class="btn ghost try-again">もう1回えらぶ</button></div></div>`;
@@ -111,7 +111,7 @@
     const c = CUT[id]; if (!c || Date.now() - lastCut < 1800) return; lastCut = Date.now();
     let el = $(".wow-cut"); if (!el) { el = document.createElement("div"); el.className = "wow-cut"; el.setAttribute("aria-hidden", "true"); document.body.append(el); }
     const side = ["aoi", "momoe"].includes(c[0]) ? "r" : "l";
-    el.className = `wow-cut ${side} k-${c[0]}`; el.innerHTML = `<img src="assets/img/ex/${c[0]}_${c[1]}0.webp" alt=""><p>${c[3]}</p>`;
+    el.className = `wow-cut ${side} k-${c[0]}`; el.innerHTML = `<img src="assets/img/ex/${c[0]}_${c[1]}0.webp?v=11221818" alt=""><p>${c[3]}</p>`;
     void el.offsetWidth; el.classList.add("on"); voice(c[0], c[2], .22);  /* 11-22 ユーザー「スクロール時のボイスを少し下げて」 */
     clearTimeout(cutT); cutT = setTimeout(() => el.classList.remove("on"), 2300);
   }
@@ -145,7 +145,7 @@
   function peeks(){
     if (document.body.dataset.page !== "home") return;
     Object.entries(PEEK).forEach(([id, [k, f, side]]) => { const hd = document.querySelector(`#${id} .sec-hd`); if (!hd || hd.querySelector(".sec-sis")) return;
-      const im = document.createElement("img"); im.className = `sec-sis ${side}`; im.src = `assets/img/ex/${k}_${f}0.webp`; im.alt = ""; im.setAttribute("aria-hidden", "true"); hd.prepend(im); });
+      const im = document.createElement("img"); im.className = `sec-sis ${side}`; im.src = `assets/img/ex/${k}_${f}0.webp?v=11221818`; im.alt = ""; im.setAttribute("aria-hidden", "true"); hd.prepend(im); });
     /* お知らせのいちばん上に NEW */
     const n1 = $("#news .news-item"); if (n1 && !n1.querySelector(".wow-new")) { const b = document.createElement("span"); b.className = "wow-new"; b.textContent = "NEW"; n1.append(b); }
     /* 「こんな人ほど」：画面に入ったら、チェックが1つずつ入る（自分ごとにする） */
