@@ -72,7 +72,7 @@
     if (!voice) { voice = new Audio("assets/comic/k01.mp3"); voice.preload = "auto"; bgm = new Audio("assets/comic/bgm01.mp3"); bgm.loop = true; bgm.preload = "auto"; }
     const vol = window.owVol ? owVol() : .5;
     voice.volume = 1; bgm.volume = Math.max(.05, Math.min(.45, vol * .6));
-    voice.play().then(() => voice.pause()).catch(() => {}); bgm.currentTime = 0; bgm.play().catch(() => {});
+    voice.currentTime = 0; voice.play().catch(() => {});  /* 11-22 ユーザー「最初のナレーションが聞こえない」：前は音を出せるようにするため鳴らしてすぐ止めていて、その「止める」が1コマ目の声を止めていた。最初の声は0秒からなので、そのまま鳴らす */ bgm.currentTime = 0; bgm.play().catch(() => {});
     ov.classList.add("open"); document.documentElement.classList.add("cmp-lock"); paused = false; $(".cmp-pause", ov).textContent = "❚❚";
     $(".cmp-x", ov).focus(); window.owTrack && owTrack("comic_play", {ep: 1});
     if (!data) { try { data = await (await fetch("assets/comic/e01.json")).json(); flat(); } catch (e) { return; } }
