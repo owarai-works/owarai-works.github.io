@@ -1513,3 +1513,16 @@ main .sec-hd .en::before,main .sec-hd .en::after{content:none!important;display:
   html.snap .sec-hd h2,main .sec-hd h2{font-size:18px!important}
 }
 @media (max-width:760px) and (max-height:720px){html.snap .sec-hd .en{font-size:38px!important}html.snap .sec-hd h2{font-size:16px!important}}
+/* ===== 11-22 ユーザー「スペーシングしろ」：見出しまわりのすき間（英語のタイトル → 日本語のサブタイトル → 説明 → 中身） ===== */
+main .sec-hd{display:flex;flex-direction:column;align-items:center;gap:0;margin-bottom:40px!important}
+main .sec-hd .en{display:block;margin:0 0 16px!important}
+main .sec-hd h2{margin:0!important}
+main .sec-hd p{margin:16px auto 0!important}
+@media (max-width:760px){
+  main .sec-hd,html.snap .sec-hd{margin-bottom:20px!important}
+  main .sec-hd .en{margin-bottom:10px!important}
+  main .sec-hd p,html.snap .sec-hd p{margin-top:10px!important}
+}
+@media (max-width:760px){.tod-badge{display:none!important}}  /* 11-22：スマホでは見出しに重なる「夜の部」などの札を出さない */
+@media (min-width:1024px){.fit-list{gap:22px!important}.fit-list li{transform:none!important}.facts{margin-top:40px!important;gap:22px!important}.fit-call{margin-top:36px!important}}
+@media (max-width:760px){html.snap .fit-list{gap:12px!important}}
