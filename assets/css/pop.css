@@ -1645,3 +1645,4 @@ html body main .bzc .chips span{font-size:15px!important;padding:6px 14px!import
 html body main .bzc{border-top:10px solid var(--shu)!important}
 html body main .bzc:nth-child(2n){border-top-color:#2f6fd6!important}
 html body main .bzc:nth-child(3n){border-top-color:var(--sakura-d)!important}
+html body .hero .hero-sub{display:none!important}  /* 11-22 ユーザー「これ消して、スマホも」：トップの「お題合戦 同じお題で笑いのガチンコ勝負！」の札を出さない */
