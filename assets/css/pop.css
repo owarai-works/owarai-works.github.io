@@ -2036,3 +2036,12 @@ main>section.sec.bg-p{background:linear-gradient(135deg,#ffe0ec 0%,#ffb8d2 55%,#
 main>section.sec.bg-b{background:linear-gradient(135deg,#e3f0ff 0%,#b3d2ff 55%,#d7ccff 100%)!important}
 @media (max-width:760px){main>section.sec.bg-y::before,main>section.sec.bg-p::before,main>section.sec.bg-b::before{width:90vw;opacity:.13}}
 main>section.sec.bg-y::before,main>section.sec.bg-p::before,main>section.sec.bg-b::before{opacity:.22!important}
+/* ===== 11-22 ユーザー「おしらせまでの帯が邪魔で下のボタンが隠れた」：パソコンでも帯をやめ、画面の下のまん中に小さな札で出す（目次やボタンにかぶせない） ===== */
+@media (min-width:761px){
+  html body .thx-cd{top:auto!important;bottom:18px!important;left:50%!important;right:auto!important;width:auto!important;height:auto!important;transform:translateX(-50%)!important;
+    padding:6px 16px!important;border:3px solid var(--ink)!important;border-radius:999px!important;box-shadow:3px 3px 0 var(--ink)!important;font-size:14px!important;gap:8px!important;z-index:85!important}
+  html body .thx-cd *{font-size:14px!important}
+  html body .thx-cd b{font-size:20px!important}
+  html body .thx-cd img{width:24px!important;height:24px!important}
+  body[data-page="game"] .thx-cd{bottom:112px!important}
+}
