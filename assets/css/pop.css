@@ -1333,3 +1333,13 @@ main>section.sec.bg-p .sec-hd p,main>section.sec.bg-b .sec-hd p,main>section.sec
 .ttl-h small{color:#5a4640!important}
 #djroad .sec-hd p,#dan .sec-hd p{max-width:36em;margin-inline:auto}
 @media (max-width:760px){.nmx-pts{width:auto}}
+
+/* ===== 11-22 ユーザー「PCで文字が小さすぎる。大きく見やすく」：パソコン（幅1024px以上）は、ページ全体を1.25倍に（字も絵も枠も同じ割合で大きくする） ===== */
+@media (min-width:1024px){
+  html{zoom:1.25}
+  .hero{height:calc(100svh / 1.25);min-height:520px}
+}
+/* ===== 11-22 ユーザー「背景の色を変えたができてない」：色をはっきり（黄・百萌のピンク・葵の青） ===== */
+:root{--bg-pink:#ffc9dd;--bg-pink2:#ffb3cf;--bg-blue:#c4dcff;--bg-blue2:#a9cbfb;--bg-yel:#ffe680}
+main>section.sec.bg-y{background:linear-gradient(180deg,#fff0a8,var(--bg-yel))!important}
+main>section.sec.bg-p,main>section.sec.bg-b,main>section.sec.bg-y{border-top:4px solid var(--ink)}
