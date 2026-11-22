@@ -2823,3 +2823,9 @@ html body .gc-mach{order:1;height:82%!important;z-index:2}
 html body .gc-trs{left:auto!important;right:4%!important}
 html body .gc-free{right:auto!important;left:-60px!important;width:124px!important;height:124px!important;font-size:17px!important;white-space:nowrap}
 @media (max-width:760px){html body .gc-sis{margin-left:-50px}html body .gc-free{left:-20px!important;width:86px!important;height:86px!important;font-size:12px!important}html body .gc-free b{font-size:24px!important}}
+/* 11-22 ユーザー「キャラ紹介：上に適度なすき間・右の名前をもう少し左へ」（パソコン） */
+@media (min-width:1024px){
+  html body .cs{padding-top:calc(var(--hd,80px) + 40px)!important}
+  html body .cs-in{gap:clamp(20px,2vw,32px)!important;grid-template-columns:108px minmax(0,1fr) minmax(0,1fr)!important}
+  html body .cs-art{max-width:min(600px,calc((100vh - 170px) / 1.25 * .6))!important}
+}
