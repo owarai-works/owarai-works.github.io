@@ -287,7 +287,7 @@ window.SITE = {
     panels.forEach(sec => { const w = sec.querySelector(":scope>.wrap"); if (w) w.style.zoom = ""; });
     if (!on) return;
     const hd = $(".hd"), sn = $(".subnav"), hh = (hd ? Math.round(hd.getBoundingClientRect().height) : 58) + (sn ? Math.round(sn.getBoundingClientRect().height) : 0); const cdH = () => { const c = $(".thx-cd"); return c && getComputedStyle(c).position === "fixed" ? Math.round(c.getBoundingClientRect().bottom - (hd ? hd.getBoundingClientRect().bottom : 0)) : 0; };  /* 11-22：上の「おしらせまで あと○秒」の帯の下から見せる */
-    R.style.setProperty("--hdh", (hh + Math.max(0, cdH())) + "px"); clearInterval(owSnap.cdT); owSnap.cdT = setInterval(() => R.style.setProperty("--hdh", (hh + Math.max(0, cdH())) + "px"), 1000); R.style.setProperty("--snh", `calc(100svh - ${hh}px)`);
+    R.style.setProperty("--hdh", hh + "px"); R.style.setProperty("--hdb", (hd ? Math.round(hd.getBoundingClientRect().height) : 58) + "px"); void cdH;  /* 11-22：「おしらせまで」の帯はスマホでは上のメニューの中に出すので、止まる位置は上のメニューの下だけ */ R.style.setProperty("--snh", `calc(100svh - ${hh}px)`);
     $$(HS).forEach(el => { if (el.dataset.hs) return; el.dataset.hs = "1"; el.classList.add("hs");
       const n = el.children.length; if (n < 2) return; const d = document.createElement("div"); d.className = "hs-dots"; d.setAttribute("aria-hidden", "true"); d.innerHTML = "<i></i>".repeat(n); el.after(d);
       const upd = () => { const i = Math.round(el.scrollLeft / Math.max(1, el.scrollWidth - el.clientWidth) * (n - 1)); [...d.children].forEach((x, k) => x.classList.toggle("on", k === i)); };

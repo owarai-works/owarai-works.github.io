@@ -1721,3 +1721,32 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   html.snap #gassen .gs-ph img{max-height:28vh!important}
 }
 @media (max-width:760px){html.snap #point .pt .ss img{max-height:17vh!important}html.snap #point .sec-hd p{display:none!important}}
+/* ===== 11-22 ユーザー「丸の中センタリング」：ボタンの丸い矢印は、字（→）をやめて絵の矢印をまん中に ===== */
+html body .btn .arw{font-size:0!important;line-height:0!important;color:transparent!important;display:inline-block!important;position:relative;flex:0 0 auto;
+  background:var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12h13M12 6l6 6-6 6' fill='none' stroke='%231c1012' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/62% 62% no-repeat!important}
+html body .btn .arw::before,html body .btn .arw::after{content:none!important}
+
+/* ===== 11-22 ユーザー「改行汚すぎ」：せまい枠の中の文は、ふつうに折る（「 」だけの行を作らない）。見出しと呼びかけだけ、言葉の切れ目で折る ===== */
+html body main p,html body main li,html body main small,html body main b,html body main span{word-break:normal!important;overflow-wrap:break-word!important;line-break:strict}
+html body main :is(h1,h2,h3,.fit-call,.pt-nado,.gs-call,.gs-title,.sec-hd p,.gs-lead,.bz-lead,.about-lead){word-break:keep-all!important;overflow-wrap:anywhere!important;text-wrap:balance}
+html body main .fit-list li span{word-break:keep-all!important;overflow-wrap:anywhere!important;text-wrap:pretty}
+/* 殿堂の小さな欄：絵を上に、文は横いっぱいで */
+@media (max-width:760px){
+  html body #rankbox .rk-hall li.has-pic{grid-template-columns:28px 1fr!important;grid-template-rows:auto auto}
+  html body #rankbox .rk-hall li.has-pic .rk-pic{grid-column:2;width:100%;max-height:90px!important;object-fit:cover;border-radius:8px}
+  html body #rankbox .rk-hall li.has-pic>div{grid-column:1/-1}
+  html body #rankbox .rk-hall p{font-size:17px!important;line-height:1.5}
+}
+
+/* ===== 11-22 ユーザー「縦にずれる」：1つの話題の高さ＝上のメニューの下から画面の下まで（ちょうど1画面）。「おしらせまで」の帯は、スマホでは上のメニューの中に小さく出す（話題にかぶせない） ===== */
+@media (max-width:760px){
+  html.snap{scroll-padding-top:var(--hdb,58px)!important}
+  html.snap main>section:not(.hero),html.snap footer.ft{min-height:calc(100dvh - var(--hdb,58px))!important;height:calc(100dvh - var(--hdb,58px));justify-content:center}
+  html.snap main>section.hero{height:calc(100dvh - var(--hdb,58px))!important}
+  html body .thx-cd{top:calc(var(--hdb,58px) / 2)!important;left:50%!important;right:auto!important;width:auto!important;transform:translate(-50%,-50%)!important;
+    padding:4px 12px!important;border-radius:999px!important;border:2px solid var(--ink)!important;font-size:12px!important;white-space:nowrap;box-shadow:none!important;z-index:120!important;max-width:calc(100vw - 190px)}
+  html body .thx-cd img{width:20px!important;height:20px!important}
+  html body .thx-cd *{font-size:12px!important}
+  html body .thx-cd b,html body .thx-cd em,html body .thx-cd strong{font-size:16px!important}
+}
+@media (max-width:760px){html body .thx-cd{height:30px!important;gap:4px!important;padding:0 10px!important;border:2px solid var(--ink)!important;border-radius:999px!important}}
