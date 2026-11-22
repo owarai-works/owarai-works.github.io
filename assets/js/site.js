@@ -258,7 +258,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
     const unlock = () => { try { const b = ac.createBuffer(1, 1, 22050), s = ac.createBufferSource(); s.buffer = b; s.connect(ac.destination); s.start(0); } catch (e) {} };
     const play = async () => {
       if (!AC) return false;
-      if (!ac) { ac = new AC(); bus = ac.createGain(); bus.gain.value = 0; const mst = ac.createGain(); mst.gain.value = .3; bus.connect(mst); mst.connect(ac.destination);  /* 11-22 ユーザー「MAXを今より70%下げて」：いちばん大きくしても前の30% */ }
+      if (!ac) { ac = new AC(); bus = ac.createGain(); bus.gain.value = 0; const mst = ac.createGain(); mst.gain.value = .15; bus.connect(mst); mst.connect(ac.destination);  /* 11-22 ユーザー「MAXを今より70%下げて」→さらに「今の半分」：いちばん大きくしても最初の15% */ }
       unlock();
       /* タップ前の resume() は返事がずっと来ないことがあるので、0.3秒で見切る */
       if (ac.state !== "running") await Promise.race([ac.resume().catch(() => {}), new Promise(r => setTimeout(r, 300))]);
@@ -308,7 +308,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
       g.onclick = e => { if (e.target === g) close(true); };
     }
     /* トップの「タップで開演」の幕から使う */
-    window.owBgm = {isOn: () => on, start: () => { if (on) start(); }, prime: () => { if (!AC || !on) return; if (!ac) { ac = new AC(); bus = ac.createGain(); bus.gain.value = 0; const mst = ac.createGain(); mst.gain.value = .3; bus.connect(mst); mst.connect(ac.destination);  /* 11-22 ユーザー「MAXを今より70%下げて」：いちばん大きくしても前の30% */ } unlock(); try { ac.resume(); } catch (e) {} }, hush: () => { const w = playing; stop(); return w; }, resume: () => { if (on && !playing) play(); }, play: () => { if (on) play().then(ok => { if (ok) offWait(); }); }, off: () => { if (!on) return; on = false; set(localStorage, KEY, "0"); paint(); stop(); offWait(); }};
+    window.owBgm = {isOn: () => on, start: () => { if (on) start(); }, prime: () => { if (!AC || !on) return; if (!ac) { ac = new AC(); bus = ac.createGain(); bus.gain.value = 0; const mst = ac.createGain(); mst.gain.value = .15; bus.connect(mst); mst.connect(ac.destination);  /* 11-22 ユーザー「MAXを今より70%下げて」→さらに「今の半分」：いちばん大きくしても最初の15% */ } unlock(); try { ac.resume(); } catch (e) {} }, hush: () => { const w = playing; stop(); return w; }, resume: () => { if (on && !playing) play(); }, play: () => { if (on) play().then(ok => { if (ok) offWait(); }); }, off: () => { if (!on) return; on = false; set(localStorage, KEY, "0"); paint(); stop(); offWait(); }};
     btn.addEventListener("click", e => {
       e.stopPropagation(); noTip();
       if (on && !playing) { play(); return; }  /* ON なのにまだ鳴っていない（ブラウザに止められた）ときは、流すだけ */
