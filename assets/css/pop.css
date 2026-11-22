@@ -2829,3 +2829,20 @@ html body .gc-free{right:auto!important;left:-60px!important;width:124px!importa
   html body .cs-in{gap:clamp(20px,2vw,32px)!important;grid-template-columns:108px minmax(0,1fr) minmax(0,1fr)!important}
   html body .cs-art{max-width:min(600px,calc((100vh - 170px) / 1.25 * .6))!important}
 }
+/* 11-22 ユーザー「（キャラ紹介の上のすき間）できてないよ」：どの幅でも、上のメニューの下にすき間 */
+@media (min-width:761px){html body main section.cs#cs{padding-top:calc(var(--hd,64px) + 48px)!important}}
+/* 11-22 ユーザー「（セリフの吹き出しの角が）切れてる」：しっぽを黒いふち付きのひし形に */
+html body .cs-quote{overflow:visible!important}
+html body .cs-quote::before{left:30px!important;top:-11px!important;width:18px!important;height:18px!important;border:0!important;background:#fff!important;border-left:3px solid var(--ink)!important;border-top:3px solid var(--ink)!important;transform:rotate(45deg)!important;border-radius:3px 0 0 0}
+/* 11-22 ユーザー「お題は全部で2,820問以上！を超おおきく」 */
+html body .od-note{font-size:clamp(28px,4vw,56px)!important;line-height:1.3;margin-top:30px!important}
+html body .od-note b{font-size:1.6em!important;color:var(--shu)!important;-webkit-text-stroke:2px var(--ink);paint-order:stroke fill;text-shadow:4px 4px 0 var(--ink);display:inline-block;animation:woBounce 1.6s ease-in-out infinite}
+html body .od-note small{font-size:clamp(13px,1.2vw,18px)!important}
+@media (max-width:760px){html.snap body #odai .od-note{font-size:20px!important;margin-top:8px!important}html.snap body #odai .od-note b{font-size:1.5em!important;-webkit-text-stroke:1px var(--ink);text-shadow:2px 2px 0 var(--ink)}}
+@media (min-width:1024px){html body .od-note{font-size:48px!important}html body .od-note b{font-size:1.7em!important;-webkit-text-stroke:3px var(--ink);text-shadow:5px 5px 0 var(--ink)}}
+@media (min-width:761px) and (max-width:1023px){html body .od-note{font-size:36px!important}}
+@media (max-width:760px){html.snap body #odai .od-note small{display:none!important}html.snap body #odai .od-note{font-size:18px!important}}
+html body main section p.od-note{font-size:48px!important;line-height:1.3!important}
+html body main section p.od-note b{font-size:1.7em!important}
+@media (max-width:1023px){html body main section p.od-note{font-size:30px!important}}
+@media (max-width:760px){html body main section p.od-note{font-size:22px!important}html.snap body main section#odai p.od-note{font-size:18px!important}}
