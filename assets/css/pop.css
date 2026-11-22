@@ -2345,3 +2345,13 @@ html body .hero .hero-top .ht1{font-weight:900!important}
 @media (max-width:760px){html body .hero .hero-top .ht2 span{-webkit-text-stroke:3.5px var(--ink)!important}}
 /* 11-22 ユーザー「シスターズをど真ん中に」：絵を左右に広げて3人をまん中にしたので、絵のまん中を画面のまん中に合わせる */
 @media (min-width:761px){html body .hero .hero-pc{object-position:50% 30%!important;transform-origin:50% 30%!important}}
+
+/* ===== 11-22 ミニゲームの流れるカード：とぎれずに流れる（8枚×4組・1組分ずつ動かす）・マウスを乗せても止めない ===== */
+html body .mg-rail:hover .mg-row{animation-play-state:running!important}
+@keyframes mgL{from{transform:translateX(0)}to{transform:translateX(calc(-25% - 4px))}}
+@keyframes mgR{from{transform:translateX(calc(-25% - 4px))}to{transform:translateX(0)}}
+/* ===== 11-22 開演の背景：明るいレインボー ===== */
+html body .wow-open{background:radial-gradient(circle at 50% 42%,rgba(255,255,255,.85) 0 8%,transparent 45%),conic-gradient(from 0deg at 50% 42%,#ff5a8a,#ffb21a,#ffe14d,#5fd36b,#3fb8ff,#7a6bff,#d66bff,#ff5a8a)!important}
+html body .wow-open .wo-rays{background:repeating-conic-gradient(from 0deg,rgba(255,255,255,.45) 0 8deg,transparent 8deg 18deg)!important}
+html body .wow-open .wo-skip{color:var(--ink)!important;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:4px 12px;text-shadow:none!important}
+html body .wow-open .wo-ready small{color:var(--ink)!important;background:#fff;border-radius:999px;padding:2px 12px;text-shadow:none!important}
