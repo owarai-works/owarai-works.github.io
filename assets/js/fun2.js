@@ -83,8 +83,8 @@ html.tod-night .hero-bg img,html.tod-late .hero-bg img{filter:brightness(.82) sa
   const watchLol = () => { if (!lolIO) return; document.querySelectorAll("main > section.sec:not([data-lol])").forEach(s => { s.dataset.lol = 1; lolIO.observe(s); }); };
 
   /* ---------- 2 シスターズの実況 ---------- */
-  const JK = {fit: ["m_wave", "当てはまったら、もう<b>仲間</b>やね〜"], gassen: ["a_smug", "ここが<b>一番アツい</b>とこやで！"], play: ["k_jump", "ハリセン連打、<b>横綱</b>めざしてや！"], ranking: ["a_hari", "番付の<b>横綱</b>は、うちがもらう！"],
-    point: ["k_mic", "大喜利対戦、<b>激アツ</b>やで〜！"], odai: ["k_mic", "お題は<b>11種類</b>！毎日ちがうで"], minigame: ["m_sleep", "ミニゲームは<b>寝てても</b>勝てるで〜…zzz"], news: ["m_fan", "最新情報、<b>チェック</b>してな〜"],
+  const JK = {fit: ["m_wave", "当てはまったら、もう<b>仲間</b>やね〜"], gassen: ["a_smug", "ここが<b>一番アツい</b>とこやで！"], play: ["k_jump", "ハリセン連打、<b>横綱</b>めざしてや！"], ranking: ["a_hari", "ランキング<b>1位</b>は、うちがもらう！"],
+    point: ["k_mic", "大喜利対戦、<b>激アツ</b>やで〜！"], odai: ["k_mic", "お題は<b>12種類</b>！毎日ちがうで"], minigame: ["m_sleep", "ミニゲームは<b>寝てても</b>勝てるで〜…zzz"], news: ["m_fan", "最新情報、<b>チェック</b>してな〜"],
     about: ["a_smug", "AIの採点、<b>甘くない</b>で"], chara: ["k_jump", "うちらの<b>アイドル姿</b>も見てな！"], movie: ["m_wave", "ムービー、<b>見てって</b>な〜"], cta: ["k_roll", "配信まで<b>もうちょい</b>待っててや！"],
     how: ["a_smug", "遊び方は<b>かんたん</b>やで"], banzuke: ["a_hari", "<b>横綱</b>めざして勝負や！"], taisen: ["a_hari", "格闘モード、<b>手加減なし</b>やで"], road: ["k_jump", "お笑いへの道、<b>いっしょに</b>行こ！"], manga: ["m_fan", "漫画も<b>30話</b>あるで〜"]};
   const jk = document.createElement("div"); jk.className = "jk"; jk.setAttribute("aria-hidden", "true"); jk.innerHTML = `<img alt=""><p></p>`; document.body.append(jk);

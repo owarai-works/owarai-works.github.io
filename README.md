@@ -2,31 +2,39 @@
 
 GitHub Pages でそのまま公開できる、ふつうの HTML のホームページです（作るための道具はいりません）。
 
-## 引き継ぎ（2026-11-04 時点）
+## 引き継ぎ（2026-11-22 時点・ゲーム版2145の内容に更新ずみ）
 - **公開先**：https://owarai-works.github.io/ （公開リポジトリ `owarai-works/owarai-works.github.io` の main。GitHub Pages）。
 - **元のファイル**：ゲームのリポジトリ `owarai-works/owarai-dojo` のブランチ `claude/determined-ride-5ngwy8` の `homepage/`。直したら homepage/ にコミット → 公開リポジトリに `cp -r homepage/. ../owarai-works.github.io/` して push（両方に入れる）。
   - 公開リポジトリだけにあるもの：`assets/data/ranking.json`（毎日19時の自動更新が書く。homepage/ には置かない）。
 - **今は「準備中」**：`assets/js/prep.js` の `PREP = true`。全ページ「ただいま準備中！」の幕・検索に出さない（noindex）。運営が中身を見る：`?preview=nandeyanen`（そのタブのあいだだけ）。**公開するとき**は「準備中の幕（公開前）」の手順。
 - **毎回の決まり（ユーザーの希望）**：返事は日本語・初心者向け。更新したら返事の最後に毎回ホームページのリンク。幅390px・320px・パソコンで確かめる（Playwright＋`python3 -m http.server`）。直したら HTML の `?v=` を新しくする（古いファイルが残らないように）：`for f in *.html; do sed -i -E "s#(assets/(js|css)/[a-z0-9-]+\.(js|css))\?v=[0-9]+\"#\1?v=$(date +%m%d%H%M)\"#g" $f; done`
 - **デザインの決まり**：明るい爆笑お笑い（クリーム・黄・朱・太い黒ふち）。文字は重ねない・影やふち取りで読みにくくしない（読ませる文は Noto Sans JP）。芸名は出さない。殿堂はイラストのあるお題だけ。運営者名は「ライトルーム お笑い運営部」。黒田・紫音はキャラ紹介に出さない。
-- **スケジュールのタスク**：「お笑い道場 番付・殿堂の更新」（trig_01RQjzWrXThVZFmS3oGexnFB、毎日19時 日本時間）。ゲームのデータベースを読むだけ → `tools/build_ranking.py` → ranking.json を push。
-  - **⚠ 直すこと**：11-03 の実行は「push が 403（このリポジトリがタスクのセッションに入っていない）」で失敗していた。タスクの設定（claude.ai/code の Scheduled tasks）で、リポジトリ `owarai-works/owarai-works.github.io` を追加する必要がある。
+- **スケジュールのタスク**：「お笑い道場 ランキング・殿堂の更新」（trig_01RQjzWrXThVZFmS3oGexnFB、毎日19時 日本時間）。ゲームのデータベースを読むだけ → `tools/build_ranking.py` → ranking.json を push。
+  - 11-03〜11-21 は「push が 403」で失敗していた（タスクのセッションにこのリポジトリが入っていなかった）。11-22 にタスクの手順のはじめで `add_repo`（push）を呼ぶように直した。次の実行で push できたか、公開リポジトリのコミット「ランキング・殿堂を更新」で確かめる。
 - **アクセス解析**：Google アナリティクス `G-VZ29R3E1TW`（全ページの head）。Search Console は登録済み（アナリティクスのタグで確認）。公開したらサイトマップ `sitemap.xml` を送る。
 
+### 11-22 にやったこと（ゲーム版2145に合わせた）
+- 名前：番付→**ランキング**、道場破り→**格闘王への道**、梅竹松（難しさ）→**初級・中級・上級**、MIX→**ボケツッコミ**、全部→**フルコース**、オプション→設定。四択は消した（ゲームから消えた）。お題は**12種類**（穴埋めを足した）。ミニゲームは今も16種類。
+- ランキング（`banzuke.html`・`ranking.js`・`build_ranking.py`）：**お題合戦レート／1先の鬼の連勝／笑神グランプリ**（11-22 ユーザーが選んだ）。ゲームの記録は `rank/<uid>`（v=2）から読む（前の boards/pvppoint_* は古い）。笑神GPは `news/gp` と `gpres/<回>`。
+- 新しい紹介：HOME の「続々登場！新しい遊び」（#newmode）、ゲーム紹介の「格闘王への道」（#djroad）・「段位認定・称号」（#dan）・「難しさとモード」（#odai2）。ロゴは `lg_*.webp`、段位と称号の絵は `dan_sheet.webp`・`ttl_sheet.webp`（ゲームの img/logo・img/ic から）。
+- 絵をキャラクターシートどおりに直した（11-22 ユーザー「気猫のマイク・扇子の柄・百萌の襟の柄・草履の鼻緒の色」）：hero・hero_m・ogp・pv_poster・pv.mp4（Vidu Q4 オフピーク）・kv_poster・kv_sp.mp4（ゲームの kv.webp・title_kv.mp4）・ch_*_1・st_*・fun のちびキャラ7枚・boss・battle・bn_*・m_mix・m_tsk・wp_area4・wp_area6・hd_banzuke。**気猫はマイクを持たない**（シートにない）。アイドル衣装の ch_*_2 は手持ちマイクのまま（衣装の絵）。
+- **スマホ（幅760px以下）の HOME とゲーム紹介は、下にスワイプするたびに1つの話題が1画面に収まる**（11-22 ユーザー）。`site.js` の `owSnap`（html.snap・横スワイプのカード `HS`・入りきらない話題は .wrap を zoom で縮める・0.6まで）と `pop.css` の「html.snap」。話題を足すときは、1画面（390×844 で 786px、Safari のバーありで約606px）に入るか `panels.js` 方式で確かめる。
+- 画面写真はゲーム版2145で撮り直した（od_*・gs_*・pt_*・ss_*。新しく od_anaume・od_intv・ss_oni・ss_gp・ss_dan・ss_djroad・ss_gacha）。
+
 ### まだのこと・決めてもらうこと
-1. **ゲームの更新の反映**（ゲームは版1219。ホームページは版1074ごろの内容）：①ミニゲームが16→**15種類**（早押しパネル f25 がなくなった）→「16」の文字と画面を直す（index・game・fun2 の実況・faq-bot・pm バッジ・facts の data-count）②道場破り→「**格闘王への道**」の紹介 ③段位アイコン・称号プレート（img/ic/dan_sheet・ttl_sheet）④対戦画面の写真を撮り直し ⑦タイトルの絵（img/kv.jpg）が新しい。ユーザーの答え待ち。
-2. **X の自動投稿**：お笑い道場の公式 X アカウントをユーザーが作る → X の開発者キー4つ（環境の Network secrets：`X_API_KEY`・`X_API_SECRET`・`X_ACCESS_TOKEN`・`X_ACCESS_SECRET`、`api.x.com` を許可）。投稿の種類・時間・下書きにするかはユーザーの答え待ち。
-3. **Google ログインの会員登録**（Firebase）：①〜⑥の案を出した。ユーザーの答え待ち。
-4. 問い合わせのメールアドレス（`SITE.contact`）・App Store の URL（`SITE.appStoreUrl`）は、決まったら入れる。
+1. **X の自動投稿**：お笑い道場の公式 X アカウントをユーザーが作る → X の開発者キー4つ（環境の Network secrets：`X_API_KEY`・`X_API_SECRET`・`X_ACCESS_TOKEN`・`X_ACCESS_SECRET`、`api.x.com` を許可）。投稿の種類・時間・下書きにするかはユーザーの答え待ち。
+2. **Google ログインの会員登録**（Firebase）：①〜⑥の案を出した。ユーザーの答え待ち。
+3. 問い合わせのメールアドレス（`SITE.contact`）・App Store の URL（`SITE.appStoreUrl`）は、決まったら入れる。
+4. ゲームの中にも、シートとちがう絵が残っている（img/mg/clear_k・clear_a の鼻緒と扇子、img/sel/m_tsk・m_adana・m_gag、img/ui/btn_battle、img/wp/area6 のマイク、ちびキャラ sis_tsk の白い扇子・sis_dokan のマイクなど）。ゲームを直すかはユーザーが決める。
 
 ## ページ
 | ファイル | 中身 |
 |---|---|
-| index.html | HOME（メイン画面・こんな人ほどハマる・あそぶ・お題合戦・番付と殿堂・3つの売り・お題・ミニゲーム・お知らせ・みどころ・キャラ・ムービー） |
+| index.html | HOME（メイン画面・こんな人ほどハマる・あそぶ・お題合戦・ランキングと殿堂・3つの売り・お題・ミニゲーム・お知らせ・みどころ・キャラ・ムービー） |
 | news.html / article.html | お知らせの一覧 / 1つずつの記事（`article.html?id=記事のid`） |
-| game.html | ゲーム紹介（お題合戦・遊び方・お題・番付・対戦・お笑いへの道・ミニゲーム・漫画など） |
+| game.html | ゲーム紹介（お題合戦・遊び方・お題・難しさとモード・ランキング・対戦・格闘王への道・段位認定・お笑いへの道・ミニゲーム・漫画など） |
 | characters.html | キャラクター紹介（気猫・葵・百萌。絵は晴れ着・アイドル・メイド、ボイス、つつくと反応） |
-| banzuke.html | お題合戦ランクマッチ 番付（週間・月間・永世の上位50。記録がないあいだは見本） |
+| banzuke.html | ランキング（お題合戦レート・1先の鬼・笑神グランプリ。週間・月間・永世の上位50。記録がないあいだは見本） |
 | hall.html | みんなの殿堂（イラストのお題だけ・30件。記録がないあいだは見本） |
 | play.html | あそぶ（ハリセン連打・今日のお題・タイプ診断・ツッコミタイミング・おみくじ） |
 | support.html | よくある質問・質問ボット・お問い合わせ（App Store の「サポートURL」） |
@@ -73,13 +81,12 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 - 準備中は全ページ `<meta name="robots" content="noindex,nofollow">`（検索に出さない）。
 - **公開するとき**：`PREP = false` にして、robots を元に戻す（index.html・game.html・characters.html・news.html・support.html・privacy.html・terms.html は `index,follow,max-image-preview:large`、article.html と 404.html は `noindex,follow`）。
 
-## 番付・殿堂（ゲームと連動・毎日自動更新）
-- 表示：トップの「ゲームと連動！番付と殿堂」（`assets/js/ranking.js`）が `assets/data/ranking.json` を読む。芸名は出さない（ユーザーの希望）。
+## ランキング・殿堂（ゲームと連動・毎日自動更新）
+- 表示：トップの「ゲームと連動！ランキングと殿堂」（レート TOP5＋殿堂3件）と、専用ページ `banzuke.html`（レート／1先の鬼／笑神グランプリのタブ・週間／月間／永世・上位50）、`hall.html`（みんなの殿堂・30件）。全部 `assets/js/ranking.js` が `assets/data/ranking.json` を読む。芸名は出さない（ユーザーの希望）。
 - `assets/data/ranking.json` は **公開リポジトリ owarai-works.github.io にだけ**ある（毎日の自動更新が書く）。homepage/ からコピーするときに上書きしないよう、homepage/ には置かない。
-- 作り方：ゲームのデータベース（公開先 https://claude.ai/artifact/W4qyooRmevxFq3XxpyfxM3 ）を ArtifactData で読んで out_dir に保存 → `python3 -I tools/build_ranking.py <dump> assets/data/ranking.json`。
-  - boards（limit 1000・全部）・hall（score の降順に300件）・news/ban。
-- 毎日19時ごろ、スケジュールのタスク「お笑い道場 番付・殿堂の更新」が自動でやる。
-- 専用ページ：`banzuke.html`（お題合戦ランクマッチ 番付・上位50・横綱/大関/関脇/小結/前頭/十両）、`hall.html`（みんなの殿堂・30件・種類でしぼれる）。
+- 作り方：ゲームのデータベース（公開先 https://claude.ai/artifact/W4qyooRmevxFq3XxpyfxM3 ）を ArtifactData で**読むだけ**して out_dir に保存 → `python3 -I tools/build_ranking.py <dump> assets/data/ranking.json`。
+  - 読むもの：rank（limit 1000）・gpres・boards（limit 1000）・hall（score の降順に300件）・news/ban・news/bdhide・news/gp。
+  - 数え方はゲームの `bpRows` と同じ：レートは 週間＝今週（月曜0時から）上がった分・月間＝今月いちばん高いレート・永世＝いまのレート。1先の鬼は その期間の最高連勝（鬼の称号つき）。笑神GPは、いちばん新しい終わった回の TOP10。利用停止の人・かくした記録（bdhide）・通報3件以上は出さない。
 - 本物の記録がないあいだは、`ranking.js` の中の見本（「見本」と表示）を出す。本物が入ると自動で入れかわる。
 - 殿堂は**イラストのあるお題だけ**（ユーザーの希望。build_ranking.py で絵のない行は外す）。
 - 殿堂のお題の絵：ゲームのお題の絵600枚を `assets/img/odai/`（480px・webp）に入れた。`tools/odai_pics.json` がお題のid（sid）→ファイル名。`build_ranking.py` が殿堂の行に `pic` を付ける。ゲームに絵のお題を足したら、ここにも足す。

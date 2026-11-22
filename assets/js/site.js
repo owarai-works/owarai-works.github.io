@@ -57,7 +57,7 @@ window.SITE = {
         <nav class="ft-nav" aria-label="サイトの案内">
           <a href="index.html">ホーム</a><a href="news.html">お知らせ</a><a href="game.html">ゲーム紹介</a>
           <a href="characters.html">キャラクター</a><a href="support.html">サポート</a><a href="terms.html">利用規約</a>
-          <a href="banzuke.html">お題合戦 番付</a><a href="hall.html">みんなの殿堂</a><a href="play.html">あそぶ</a><a href="privacy.html">プライバシーポリシー</a>
+          <a href="banzuke.html">ランキング</a><a href="hall.html">みんなの殿堂</a><a href="play.html">あそぶ</a><a href="privacy.html">プライバシーポリシー</a>
         </nav>
       </div>
       <div class="ft-bottom">
@@ -273,7 +273,32 @@ window.SITE = {
     $$("canvas[data-petals]", root).forEach(c => petals(c, {n: +c.dataset.petals || 46}));
     $$("[data-news-latest]", root).forEach(el => { el.innerHTML = (window.NEWS || []).slice(0, +el.dataset.newsLatest || 3).map(newsItemHTML).join(""); });
     watchReveal(root);
+    owSnap();
   };
+  /* 11-22 ユーザー「スマホ版は、下にスワイプするたびに1画面にきれいにそのコンテンツを収めて」：
+     HOME とゲーム紹介だけ（幅760px以下）。1つの話題＝1画面（pop.css の html.snap）。横に並べたカード（HS）は横スワイプにし、
+     それでも入らない話題は、中身（.wrap）を少し縮めて（zoom）1画面に入れる */
+  const SNAP_PAGES = ["home", "game"];
+  const HS = ".pts,.gs-phones,.feat,#rankbox .rk-grid,.more3,.vs-cards,.banzuke,.lvls,.modes,.road-map,.steps";
+  function owSnap(){
+    const on = SNAP_PAGES.includes(document.body.dataset.page || "") && matchMedia("(max-width:760px)").matches, R = document.documentElement;
+    R.classList.toggle("snap", on);
+    const panels = $$("main>section,main>header.ph,footer.ft");
+    panels.forEach(sec => { const w = sec.querySelector(":scope>.wrap"); if (w) w.style.zoom = ""; });
+    if (!on) return;
+    const hd = $(".hd"), sn = $(".subnav"), hh = (hd ? Math.round(hd.getBoundingClientRect().height) : 58) + (sn ? Math.round(sn.getBoundingClientRect().height) : 0); R.style.setProperty("--hdh", hh + "px"); R.style.setProperty("--snh", `calc(100svh - ${hh}px)`);
+    $$(HS).forEach(el => { if (el.dataset.hs) return; el.dataset.hs = "1"; el.classList.add("hs");
+      const n = el.children.length; if (n < 2) return; const d = document.createElement("div"); d.className = "hs-dots"; d.setAttribute("aria-hidden", "true"); d.innerHTML = "<i></i>".repeat(n); el.after(d);
+      const upd = () => { const i = Math.round(el.scrollLeft / Math.max(1, el.scrollWidth - el.clientWidth) * (n - 1)); [...d.children].forEach((x, k) => x.classList.toggle("on", k === i)); };
+      el.addEventListener("scroll", upd, {passive: true}); upd(); });
+    const fit = () => { const H = innerHeight - hh;
+      panels.forEach(sec => { if (sec.classList.contains("hero")) return; const w = sec.querySelector(":scope>.wrap"); if (!w) return; w.style.zoom = "";
+        const cs = getComputedStyle(sec), pad = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom), need = w.scrollHeight;
+        const z = Math.max(.6, Math.min(1, (H - pad) / need)); if (z < .995) w.style.zoom = z.toFixed(3); }); };
+    fit(); setTimeout(fit, 600); setTimeout(fit, 2000);
+  }
+  window.owSnap = owSnap;
+  { let t = 0; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(owSnap, 200); }); }
   const loaded = new Set();
   const base = u => u.split("?")[0];
   const loadScript = src => (loaded.has(base(src)) || $$("script[src]").some(x => base(x.src) === base(src))) ? Promise.resolve() : new Promise(r => { const t = document.createElement("script"); t.src = src; t.onload = t.onerror = () => { loaded.add(base(src)); r(); }; document.body.append(t); });

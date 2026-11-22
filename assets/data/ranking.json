@@ -1,14 +1,56 @@
 {
- "updated": "2026-11-03 02:58",
+ "updated": "2026-11-22 16:34",
  "month": "2026年11月",
- "gassen": {
+ "week": "11/16〜",
+ "rate": {
+  "week": [],
+  "month": [],
+  "all": [
+   {
+    "rank": 1,
+    "v": 1476
+   }
+  ]
+ },
+ "oni": {
   "week": [],
   "month": [],
   "all": []
  },
+ "gp": null,
  "hall": {
-  "week": [],
-  "month": [],
-  "all": []
+  "week": [
+   {
+    "pic": "assets/img/odai/umi.webp",
+    "odai": "",
+    "text": "家賃高すぎや、",
+    "score": 83.5,
+    "likes": 0,
+    "kind": "b",
+    "at": 1793906208273
+   }
+  ],
+  "month": [
+   {
+    "pic": "assets/img/odai/umi.webp",
+    "odai": "",
+    "text": "家賃高すぎや、",
+    "score": 83.5,
+    "likes": 0,
+    "kind": "b",
+    "at": 1793906208273
+   }
+  ],
+  "all": [
+   {
+    "pic": "assets/img/odai/umi.webp",
+    "odai": "",
+    "text": "家賃高すぎや、",
+    "score": 83.5,
+    "likes": 0,
+    "kind": "b",
+    "at": 1793906208273
+   }
+  ]
  }
 }

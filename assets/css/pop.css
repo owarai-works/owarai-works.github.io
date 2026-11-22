@@ -1120,3 +1120,169 @@ body{background:transparent!important}
 .thx-who{display:inline-block;margin-bottom:4px;padding:1px 12px;border-radius:999px;background:var(--ink);color:#fff;font-weight:900;font-size:12px}
 .thx-kineko .thx-in{box-shadow:8px 8px 0 #f4b400}.thx-aoi .thx-in{box-shadow:8px 8px 0 #2f7fe0}.thx-momoe .thx-in{box-shadow:8px 8px 0 #e8558f}
 .thx-kineko .thx-who{background:#d99a00}.thx-aoi .thx-who{background:#2f7fe0}.thx-momoe .thx-who{background:#e8558f}
+
+/* ===== 11-22 ランキング（レート・1先の鬼・笑神グランプリ） ===== */
+.rk3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:18px 0 22px}
+.rk3c{background:#fff;border:var(--pop);border-radius:16px;box-shadow:var(--sh-s);padding:14px 16px 16px;text-align:center}
+.rk3c img{display:block;height:92px;width:auto;max-width:100%;margin:0 auto 6px;object-fit:contain}
+.rk3c b{display:block;font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:1.1rem;margin-bottom:6px}
+.rk3c p{font-size:.92rem;line-height:1.7;text-align:left;color:var(--text)}
+.rk3c p b{display:inline;font-family:inherit;font-size:inherit;color:var(--shu-d);font-weight:700}
+@media(max-width:760px){.rk3{grid-template-columns:1fr}.rk3c{display:grid;grid-template-columns:110px 1fr;gap:4px 12px;text-align:left;align-items:center}.rk3c img{grid-row:span 2;height:auto;width:110px;margin:0}.rk3c b{margin:0}}
+.bz-page>.rk-tabs:first-child{margin-bottom:12px}
+.bz-page>.rk-tabs:first-child button{font-size:1rem}
+.bz-what{text-align:center;font-weight:700;margin:6px 0 2px;color:var(--muted)}
+.gp-res{position:relative;max-width:760px;margin:10px auto 0}
+.gp-odai{background:linear-gradient(#7a0f14,#4a0609);color:#fff;border:var(--pop);border-radius:18px;box-shadow:var(--sh);padding:18px 18px 14px;text-align:center}
+.gp-no{display:inline-block;background:var(--gold);color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:2px 14px;font-weight:900;margin-bottom:8px}
+.gp-odai img{display:block;max-width:260px;width:70%;margin:0 auto 10px;border-radius:10px;border:3px solid #fff}
+.gp-odai p{font-family:"Dela Gothic One",sans-serif;font-size:1.25rem;line-height:1.5}
+.gp-odai small{display:block;margin-top:8px;color:#ffe3a3;font-weight:700}
+.gp-list{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.gp-list li{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:10px;background:#fff;border:var(--pop);border-radius:14px;box-shadow:var(--sh-s);padding:10px 14px}
+.gp-list li>b{font-size:1.3rem;text-align:center;font-weight:900}
+.gp-list li p{font-weight:700;line-height:1.5}
+.gp-list li span{color:var(--sakura-d);font-weight:900;text-align:right;white-space:nowrap}
+.gp-list li span small{display:block;color:var(--muted);font-weight:700;font-size:.78rem}
+.gp-list li.r1{background:#fff4c2}
+.gp-res .rk-chip{position:absolute;top:-10px;right:-6px;z-index:2}
+/* ===== 11-22 新しい遊び ===== */
+.nm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.nm{display:block;background:#fff;border:var(--pop);border-radius:18px;box-shadow:var(--sh);padding:14px 14px 16px;color:var(--text);text-decoration:none;transition:transform .15s}
+.nm:hover{transform:translate(-2px,-2px)}
+.nm img{display:block;width:100%;height:120px;object-fit:contain;margin-bottom:8px}
+.nm p{font-size:.95rem;line-height:1.7}
+.nm p b{color:var(--shu-d)}
+.nm-more{list-style:none;padding:0;margin:18px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.nm-more li{background:var(--gold);border:var(--pop);border-radius:14px;box-shadow:var(--sh-s);padding:10px 14px}
+.nm-more b{display:block;font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:1.05rem}
+.nm-more small{display:block;font-size:.88rem;line-height:1.6;font-weight:700}
+@media(max-width:860px){.nm-grid{grid-template-columns:repeat(2,1fr);gap:12px}.nm img{height:84px}.nm p{font-size:.86rem;line-height:1.6}.nm{padding:10px 10px 12px}.nm-more{grid-template-columns:1fr;gap:8px}.nm-more li{padding:8px 12px}}
+/* ===== 11-22 格闘王への道・段位 ===== */
+.nmx{display:grid;grid-template-columns:minmax(220px,380px) 1fr;gap:24px;align-items:center;background:#fff;border:var(--pop);border-radius:20px;box-shadow:var(--sh);padding:18px 22px}
+.nmx-logo{width:100%;height:auto}
+.nmx-pts{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.nmx-pts li{font-weight:700;font-size:1.02rem;line-height:1.6;padding-left:28px;position:relative}
+.nmx-pts li::before{content:"";position:absolute;left:4px;top:.45em;width:14px;height:14px;border-radius:50%;background:var(--shu);border:2px solid var(--ink)}
+.nmx-pts b{color:var(--shu-d)}
+.dan-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:18px 0 0}
+.dan-row i{display:block;width:52px;height:52px;background:url(../img/dan_sheet.webp) no-repeat;background-size:1200% 100%}
+.ttl-row{margin:16px auto 0;max-width:720px}
+.ttl-row img{width:100%;height:auto;display:block}
+@media(max-width:760px){.nmx{grid-template-columns:1fr;gap:12px;padding:14px}.nmx-logo{max-width:280px;margin:0 auto}.nmx-pts li{font-size:.95rem}.dan-row i{width:40px;height:40px}}
+
+/* ===== 11-22 スマホ：下にスワイプするたびに1つの話題が1画面に収まる（HOME・ゲーム紹介） =====
+   html.snap は site.js の owSnap が付ける。1画面＝見えている高さ − 上の帯（--snh）。
+   入りきらない話題は、横にスワイプするカード（.hs）にして、それでも入らない分は owSnap が少し縮める（zoom） */
+@media (max-width:760px){
+  html.snap{scroll-snap-type:y mandatory;scroll-padding-top:var(--hdh,58px)}
+  html.snap main>section,html.snap main>header.ph,html.snap footer.ft{scroll-snap-align:start;scroll-snap-stop:always;min-height:var(--snh,calc(100svh - 58px));box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding-top:14px!important;padding-bottom:14px!important;margin:0!important;overflow:hidden}
+  html.snap main>section.hero{height:var(--snh,calc(100svh - 58px));min-height:0;max-height:none;padding:0!important;justify-content:flex-end}
+  html.snap main>section>.wrap,html.snap main>header.ph>.wrap{width:100%;transform-origin:50% 50%}
+  html.snap .sec-hd{margin-bottom:10px!important}
+  html.snap .sec-hd .en{font-size:34px!important;line-height:1}
+  html.snap .sec-hd h2{font-size:22px!important;line-height:1.3}
+  html.snap .sec-hd p{font-size:13px!important;line-height:1.6;margin-top:4px!important}
+  html.snap .center-btn,html.snap .more{margin-top:12px!important}
+  html.snap .rv{opacity:1!important;transform:none!important}
+  /* 横にスワイプするカード */
+  html.snap .hs{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;grid-template-columns:none!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px!important;padding:4px 16px 12px!important;margin-inline:-16px!important;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  html.snap .hs::-webkit-scrollbar{display:none}
+  html.snap .hs>*{flex:0 0 78%!important;max-width:78%!important;scroll-snap-align:center;margin:0!important}
+  html.snap .hs-dots{display:flex;justify-content:center;gap:6px;margin-top:2px}
+  html.snap .hs-dots i{width:8px;height:8px;border-radius:50%;background:rgba(28,16,18,.25)}
+  html.snap .hs-dots i.on{background:var(--shu);width:20px;border-radius:4px}
+  /* 帯（マーキー）はヒーローの下にのせる */
+  html.snap .marquee{display:none}
+}
+@media (max-width:760px){
+  html.snap .mcta,html.snap .fun-cta{display:none!important}
+  /* こんな人ほど */
+  html.snap .fit-list{gap:7px}
+  html.snap .fit-list li{padding:8px 12px;font-size:13.5px;gap:10px;box-shadow:3px 3px 0 var(--ink)}
+  html.snap .fit-call{font-size:14px!important;margin-top:10px!important}
+  html.snap .facts{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important;margin-top:12px!important}
+  html.snap .fact{padding:8px 2px!important}
+  html.snap .fact b{font-size:26px!important}
+  html.snap .fact span{font-size:10.5px!important;line-height:1.35}
+  /* あそぶ */
+  html.snap .pl-top{gap:10px!important}
+  html.snap #play .pl-tiles{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important}
+  html.snap #play .pl-tile{padding:8px 4px!important}
+  html.snap #play .pl-tile small{display:none}
+  html.snap #play .pl-tile b{font-size:11.5px!important;line-height:1.35}
+  html.snap #play .pl-tile i{font-size:22px!important}
+  html.snap #play .dl-pic img{max-height:24vh;width:auto;margin-inline:auto}
+  /* お題合戦 */
+  html.snap .gs-top{margin:0!important}
+  html.snap .gs-lead,html.snap .gs-call{display:none}
+  html.snap .gs-title{font-size:24px!important}
+  html.snap .gs-phones{margin-top:8px!important;justify-content:flex-start}
+  html.snap .gs-phones .gs-ph{transform:none!important;flex:0 0 44%!important;max-width:44%!important}
+  html.snap .gs-ph img{max-height:42vh}
+  html.snap .gs-feat{grid-template-columns:1fr 1fr!important;gap:8px!important;margin-top:6px!important}
+  html.snap .gs-feat li{padding:8px 6px!important;gap:2px!important}
+  html.snap .gs-feat i{font-size:22px!important}
+  html.snap .gs-feat b{font-size:15px!important}
+  html.snap .gs-feat small{font-size:11px!important;line-height:1.4}
+  /* ランキング */
+  html.snap #rankbox .rk-card{padding:12px!important}
+  html.snap #rankbox .rk-list li{padding:6px 10px!important}
+  html.snap #rankbox .rk-hall li{padding:6px!important}
+  /* 3つの売り・ほかにも */
+  html.snap .pts .pt .ss img{max-height:30vh;object-fit:cover}
+  html.snap .pt-more{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}
+  html.snap .pt-more .pm{padding:6px 8px!important;gap:8px!important}
+  html.snap .pt-more .pm-ic{width:40px!important;height:40px!important;flex:0 0 40px}
+  html.snap .pt-more .pm b{font-size:14px!important}
+  html.snap .pt-more .pm small{font-size:10.5px!important}
+  html.snap .pt-nado{margin-top:10px!important;font-size:15px!important}
+  /* お題 */
+  html.snap .odai-mini{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important}
+  html.snap .odai-mini li{padding:5px 2px 6px!important}
+  html.snap .odai-mini img{height:auto!important;width:100%;max-height:11vh;object-fit:cover;object-position:top}
+  html.snap .odai-mini b{font-size:11px!important;line-height:1.25}
+  /* はじめに */
+  html.snap .about-ph{display:none!important}
+  html.snap .about-grid{gap:0!important}
+  html.snap .about-lead{font-size:24px!important}
+  html.snap .about-txt{font-size:13px!important;line-height:1.7}
+  html.snap .ways{gap:6px!important;margin-top:10px!important}
+  html.snap .way{padding:8px 10px!important}
+  /* みどころ */
+  html.snap .feat .fcard{min-height:0!important;height:56vh}
+  /* キャラ・ムービー */
+  html.snap .sisters{gap:6px!important}
+}
+@media (max-width:760px){
+  /* ゲーム紹介 */
+  html.snap main>header.ph{min-height:calc(100svh - 58px)}
+  html.snap .odai{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important}
+  html.snap .odai .od{padding:5px 2px 6px!important}
+  html.snap .odai .od img{height:auto!important;width:100%;max-height:12vh;object-fit:cover;object-position:top}
+  html.snap .odai .od b{font-size:11px!important;margin-top:3px!important;line-height:1.25}
+  html.snap .odai .od small{display:none}
+  html.snap .bz-ph{display:none!important}
+  html.snap .bz-top{gap:8px!important}
+  html.snap .nums{gap:6px!important;margin-top:8px!important}
+  html.snap .bz-lead{font-size:22px!important}
+  html.snap .bz-txt{font-size:13px!important;line-height:1.7}
+  html.snap .dan-row i{width:34px;height:34px}
+  html.snap .ttl-row{max-width:100%}
+  html.snap .road-pics{max-height:30vh;overflow:hidden}
+}
+@media (max-width:760px){
+  html.snap #how .phone{display:none!important}
+  html.snap .mg-rail{zoom:.8}
+  html.snap .vs-hero{min-height:0!important;height:24vh!important}
+  html.snap .vs-sys{margin-top:8px!important;gap:6px!important}
+  html.snap .vs-sys span{font-size:11px!important;padding:4px 8px!important}
+}
+@media (max-width:760px) and (max-height:720px){
+  html.snap .mg-rail{zoom:.62}
+  html.snap .sec-hd .en{font-size:26px!important}
+  html.snap .sec-hd p{display:none}
+}
+.nmx-l{display:flex;flex-direction:column;align-items:center;gap:12px}
+.nmx-ss{width:min(220px,70%);border:4px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink)}
+@media (max-width:760px){html.snap .nmx-ss{display:none}}
