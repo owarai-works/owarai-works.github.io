@@ -1646,3 +1646,11 @@ html body main .bzc{border-top:10px solid var(--shu)!important}
 html body main .bzc:nth-child(2n){border-top-color:#2f6fd6!important}
 html body main .bzc:nth-child(3n){border-top-color:var(--sakura-d)!important}
 html body .hero .hero-sub{display:none!important}  /* 11-22 ユーザー「これ消して、スマホも」：トップの「お題合戦 同じお題で笑いのガチンコ勝負！」の札を出さない */
+/* 11-22 ユーザー「ギザギザが切れてる」：3つの売りのカードの「激アツ!!」のギザギザを、カードの内側の右上に収める（横スワイプの枠で切れない） */
+@media (max-width:760px){
+  html body .pt-burst{right:10px!important;top:10px!important;width:78px!important;height:78px!important;font-size:15px!important}
+  html.snap .pts.hs{padding-top:8px!important}
+}
+/* 11-22 ユーザー「改行がおかしい」：マーカーの言葉（自分ならこう答える・0.5秒でツッコミ など）は、とちゅうで折らない */
+html body main .fit-list b,html body main .fit-call b,html body main .pt-nado b,html body main .gs-call b{white-space:nowrap!important}
+html body main .fit-list li span{word-break:keep-all;overflow-wrap:normal!important;text-wrap:pretty}
