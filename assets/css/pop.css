@@ -2325,3 +2325,8 @@ body.on-hero .fb-open{opacity:0;pointer-events:none;transform:translateY(20px);t
 @media (min-width:1024px){.acc i{width:26px;height:38px;font-size:30px}}
 @media (max-width:1100px){.cc-big:has(.acc) .cc-in{padding-left:150px}}
 @media (max-width:760px){.cc-big .acc{position:static;transform:none;margin:0 auto 8px}.cc-big:has(.acc){display:flex;flex-direction:column}.cc-big:has(.acc) .cc-in{padding-left:0}}
+/* 11-22 ユーザー「もっと左に」：パソコンのトップの文字のかたまりを、画面の左はしに寄せる（広い画面でもまん中に寄らない） */
+@media (min-width:1024px){html body .hero .hero-in{width:100%!important;max-width:none!important;margin:0!important;padding-left:clamp(20px,2vw,40px)!important;padding-right:0!important}
+  html body .hero .hero-main{transform:translateY(0) scale(1.04)!important}}
+@media (min-width:1024px) and (min-height:860px){html body .hero .hero-main{transform:translateY(-10px) scale(1.08)!important}}
+@media (min-width:1600px) and (min-height:960px){html body .hero .hero-main{transform:translateY(-20px) scale(1.12)!important}}
