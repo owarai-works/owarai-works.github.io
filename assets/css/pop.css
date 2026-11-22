@@ -1125,7 +1125,7 @@ body{background:transparent!important}
 .rk3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:18px 0 22px}
 .rk3c{background:#fff;border:var(--pop);border-radius:16px;box-shadow:var(--sh-s);padding:14px 16px 16px;text-align:center}
 .rk3c img{display:block;height:92px;width:auto;max-width:100%;margin:0 auto 6px;object-fit:contain}
-.rk3c b{display:block;font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:1.1rem;margin-bottom:6px}
+.rk3c b{display:block;font-family:"M PLUS Rounded 1c",sans-serif;font-weight:400;font-size:1.1rem;margin-bottom:6px}
 .rk3c p{font-size:.92rem;line-height:1.7;text-align:left;color:var(--text)}
 .rk3c p b{display:inline;font-family:inherit;font-size:inherit;color:var(--shu-d);font-weight:700}
 @media(max-width:760px){.rk3{grid-template-columns:1fr}.rk3c{display:grid;grid-template-columns:110px 1fr;gap:4px 12px;text-align:left;align-items:center}.rk3c img{grid-row:span 2;height:auto;width:110px;margin:0}.rk3c b{margin:0}}
@@ -1136,7 +1136,7 @@ body{background:transparent!important}
 .gp-odai{background:linear-gradient(#7a0f14,#4a0609);color:#fff;border:var(--pop);border-radius:18px;box-shadow:var(--sh);padding:18px 18px 14px;text-align:center}
 .gp-no{display:inline-block;background:var(--gold);color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:2px 14px;font-weight:900;margin-bottom:8px}
 .gp-odai img{display:block;max-width:260px;width:70%;margin:0 auto 10px;border-radius:10px;border:3px solid #fff}
-.gp-odai p{font-family:"Dela Gothic One",sans-serif;font-size:1.25rem;line-height:1.5}
+.gp-odai p{font-family:"M PLUS Rounded 1c",sans-serif;font-size:1.25rem;line-height:1.5}
 .gp-odai small{display:block;margin-top:8px;color:#ffe3a3;font-weight:700}
 .gp-list{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
 .gp-list li{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:10px;background:#fff;border:var(--pop);border-radius:14px;box-shadow:var(--sh-s);padding:10px 14px}
@@ -1155,7 +1155,7 @@ body{background:transparent!important}
 .nm p b{color:var(--shu-d)}
 .nm-more{list-style:none;padding:0;margin:18px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .nm-more li{background:var(--gold);border:var(--pop);border-radius:14px;box-shadow:var(--sh-s);padding:10px 14px}
-.nm-more b{display:block;font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:1.05rem}
+.nm-more b{display:block;font-family:"M PLUS Rounded 1c",sans-serif;font-weight:400;font-size:1.05rem}
 .nm-more small{display:block;font-size:.88rem;line-height:1.6;font-weight:700}
 @media(max-width:860px){.nm-grid{grid-template-columns:repeat(2,1fr);gap:12px}.nm img{height:84px}.nm p{font-size:.86rem;line-height:1.6}.nm{padding:10px 10px 12px}.nm-more{grid-template-columns:1fr;gap:8px}.nm-more li{padding:8px 12px}}
 
@@ -1463,3 +1463,30 @@ main .gassen .gs-feat li:not(:nth-child(2)) b{color:var(--shu-d)!important}
 .fb-f input:focus{outline:3px solid var(--shu)}
 .fb-f button{min-width:110px;padding:0 22px!important;font-size:20px!important;border:3px solid var(--ink)!important;border-radius:14px!important;box-shadow:3px 3px 0 var(--ink)!important}
 @media (max-width:760px){.fb-f{padding:12px!important;gap:8px!important}.fb-f input{min-height:52px;font-size:17px!important;padding:10px 14px!important}.fb-f button{min-width:76px;font-size:17px!important}}
+/* ===== 11-22 ユーザー「文字が小さい！もっとでかく」：パソコンの字をさらに大きく（全体1.25倍の前の大きさ） ===== */
+@media (min-width:1024px){
+  .fit-list li{font-size:26px!important;padding:20px 26px!important}
+  .fit-list li i{width:44px;height:44px;font-size:24px}
+  .fit-call,.pt-nado,.gs-call{font-size:34px!important;line-height:1.6!important}
+  .fact b{font-size:84px!important}
+  .fact span{font-size:22px!important}
+  main .btn{font-size:22px!important;padding:18px 34px!important}
+  main section:not(.hero) p{font-size:22px!important}
+  main .sec-hd p{font-size:22px!important}
+  main section:not(.hero) small,main section:not(.hero) li small{font-size:20px!important}
+  .sec-hd h2{font-size:44px!important}
+}
+@media (min-width:1024px){
+  main section p.fit-call,main section p.pt-nado,main section p.gs-call{font-size:36px!important;line-height:1.6!important}
+  main section .fact span{font-size:22px!important}
+  main .gassen p.gs-lead{font-size:24px!important;line-height:1.8!important}
+  main .gs-feat li b{font-size:26px!important}
+  main .gs-feat li small{font-size:20px!important}
+}
+/* ===== 11-22 ユーザー「別の読みやすいフォントに。HP全体」：見出しは M PLUS Rounded 1c の太字、本文は M PLUS Rounded 1c の中太（前は見出し用の太い字体と細い Zen Kaku Gothic New） ===== */
+:root{--f-disp:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN",sans-serif;--f-body:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Noto Sans JP",sans-serif}
+body{font-family:var(--f-body);font-weight:500;letter-spacing:.03em}
+h1,h2,h3,.sec-hd h2,.gs-title,.fit-call,.pt-nado,.gs-call,.dl-lead,.bnr-t b,.ttl-h,.nm-more b,.rk3c b{font-weight:900!important}
+b,strong{font-weight:800}
+main p,main li,main small{font-weight:500}
+.odai-mini li>b,.odai .od>b{font-family:var(--f-body)!important;font-weight:900!important}

@@ -19,7 +19,7 @@
   st.textContent = `html.prep,html.prep body{overflow:hidden!important;height:100%}
 html.prep body > *:not(.prep-wall){display:none!important}
 .prep-wall{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;padding:20px;overflow:hidden;
- background:repeating-linear-gradient(90deg,rgba(0,0,0,.28) 0 8px,transparent 8px 26px,rgba(255,255,255,.06) 26px 30px,transparent 30px 40px),linear-gradient(180deg,#c3161f,#6a0810 90%);font-family:"Dela Gothic One","Zen Kaku Gothic New",sans-serif;color:#fff;text-align:center}
+ background:repeating-linear-gradient(90deg,rgba(0,0,0,.28) 0 8px,transparent 8px 26px,rgba(255,255,255,.06) 26px 30px,transparent 30px 40px),linear-gradient(180deg,#c3161f,#6a0810 90%);font-family:"M PLUS Rounded 1c","Zen Kaku Gothic New",sans-serif;color:#fff;text-align:center}
 .prep-wall::before{content:"";position:absolute;inset:-30%;background:repeating-conic-gradient(rgba(255,216,77,.16) 0 5deg,transparent 5deg 13deg);animation:prepSpin 50s linear infinite}
 @keyframes prepSpin{to{transform:rotate(360deg)}}
 .prep-in{position:relative;display:flex;flex-direction:column;align-items:center;gap:14px}
