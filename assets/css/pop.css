@@ -2115,3 +2115,21 @@ html.snap .cc-big{display:none}
   html.snap .hs>*{scroll-snap-stop:always}
 }
 @media (max-width:760px) and (max-height:700px){html.snap #point .pt figure.ss{height:17vh}}
+/* ===== 11-22 ユーザーの5つの直し ===== */
+/* ① 殿堂の答えと点数：文字のすき間をつめる（かなを詰める palt） */
+html body :is(.rk-hall p,.rk-hall .rk-ht>span,.rk-hall small,.hc-t,.hc-f,.hc-o){letter-spacing:0!important;font-feature-settings:"palt" 1}
+/* ② トップのキャッチコピーの帯と、流れる文字の帯を重ねない */
+html body .cc-big+.marquee{margin-top:40px!important}
+html body .cc-big{position:relative;z-index:3}
+/* ③ ミニゲームの背景：ポップで明るく楽しく（水色・ピンク・黄色＋紙ふぶき） */
+html body main section.mgsec{position:relative;isolation:isolate;background:
+  linear-gradient(135deg,#bdeaff 0%,#ffd6ec 45%,#fff1a8 100%)!important}
+html body main section.mgsec::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.55;background-image:
+  radial-gradient(circle,#ff5a8a 3px,transparent 3.6px),
+  radial-gradient(circle,#2f9bff 3px,transparent 3.6px),
+  radial-gradient(circle,#ffbf1a 3.5px,transparent 4px),
+  radial-gradient(circle,#34c38f 2.5px,transparent 3px);
+  background-size:90px 90px,120px 120px,150px 150px,70px 70px;background-position:0 0,40px 60px,80px 20px,20px 45px}
+/* ④ ゲーム紹介・トップの「友達と対戦」：黄色をやめて白に */
+html body .gs-feat li:nth-child(2){background:#fff!important;box-shadow:5px 5px 0 var(--gold)!important}
+html body .gs-feat li:nth-child(2) small{color:inherit!important}
