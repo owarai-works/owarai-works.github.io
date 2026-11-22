@@ -76,6 +76,9 @@
     ov.classList.add("open"); document.documentElement.classList.add("cmp-lock"); paused = false; $(".cmp-pause", ov).textContent = "❚❚";
     $(".cmp-x", ov).focus(); window.owTrack && owTrack("comic_play", {ep: 1});
     if (!data) { try { data = await (await fetch("assets/comic/e01.json")).json(); flat(); } catch (e) { return; } }
+    /* 11-22 ユーザー「コマが映る直前に一瞬まっ白になる」：ページの絵を先に全部読みこんでおく（読みこむ前の白が見えていた） */
+    if (!window.__owCmImgs) window.__owCmImgs = Promise.all(PAGES.map(src => new Promise(r => { const im = new Image(); im.onload = im.onerror = () => (im.decode ? im.decode().catch(() => {}) : Promise.resolve()).then(r); im.src = src; (window.__owCmKeep = window.__owCmKeep || []).push(im); })));
+    await Promise.race([window.__owCmImgs, new Promise(r => setTimeout(r, 4000))]);
     if (voice.readyState < 1) await new Promise(r => { voice.addEventListener("loadedmetadata", r, {once: true}); setTimeout(r, 3000); });
     frame(list[0], true); go(0);
   }
