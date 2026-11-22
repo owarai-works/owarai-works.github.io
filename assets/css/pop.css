@@ -2948,3 +2948,21 @@ html body main section#gacha p.gc-last{font-size:clamp(24px,3vw,46px)!important;
 @media (max-width:760px){html body main section#gacha p.gc-c1{font-size:22px!important}html body main section#gacha p.gc-c2{font-size:28px!important}html body main section#gacha p.gc-c3{font-size:15px!important}html body main section#gacha p.gc-last{font-size:20px!important}}
 @media (max-width:760px){html body main section#gacha p.gc-c1{font-size:18px!important;white-space:nowrap}html body main section#gacha p.gc-c2{font-size:24px!important;white-space:nowrap}html body main section#gacha p.gc-c3{font-size:13px!important;white-space:nowrap}html body main section#gacha p.gc-last{font-size:17px!important;white-space:nowrap}}
 html body .road-ph{margin-bottom:56px}html body .road-ph figcaption{bottom:-52px!important}
+
+/* 11-22 ユーザー「ガチャ：シスターズを枠いっぱい・700を虹色・当たりの表を消す・字を超大きく」 */
+html body #gacha{overflow:hidden}
+html body #gacha .gc-stage{width:auto!important;max-width:none!important;margin-left:calc(-1 * (100vw / var(--z,1) - 100%) / 2)!important;margin-right:calc(-1 * (100vw / var(--z,1) - 100%) / 2)!important;aspect-ratio:auto!important;height:clamp(420px,52vw,760px)!important;-webkit-mask:linear-gradient(#000 78%,transparent)!important;mask:linear-gradient(#000 78%,transparent)!important}
+html body #gacha .gc-sis3{object-fit:cover!important;object-position:center 12%!important}
+html body #gacha .gc-c2 em{text-shadow:none!important;-webkit-text-stroke:3px #3a1470;filter:drop-shadow(0 5px 0 #3a1470);background:linear-gradient(90deg,#ff3d6e,#ff9a1a,#ffe14d,#3fd36b,#2fa8ff,#9b5bff)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important}
+html body main section#gacha p.gc-c1{font-size:clamp(32px,4.6vw,72px)!important}
+html body main section#gacha p.gc-c2{font-size:clamp(40px,6.4vw,100px)!important}
+html body main section#gacha p.gc-c3{font-size:clamp(22px,2.8vw,42px)!important}
+html body main section#gacha p.gc-last{font-size:clamp(30px,4vw,62px)!important}
+html body #gacha .gc-pts li{font-size:clamp(18px,1.8vw,26px)!important;line-height:1.6!important}
+html body #gacha .gc-pts b{font-size:clamp(24px,2.6vw,38px)!important}
+html body #gacha .gc-kick span{font-size:clamp(16px,1.6vw,24px)!important}
+@media (max-width:760px){html body main section#gacha p.gc-c1{font-size:21px!important}html body main section#gacha p.gc-c2{font-size:29px!important}html body main section#gacha p.gc-c3{font-size:14px!important}html body main section#gacha p.gc-last{font-size:20px!important}html body #gacha .gc-stage{height:300px!important}}
+:root{--z:1}
+@media (min-width:1024px){:root{--z:1.25}}
+@media (min-width:761px){html body main section#gacha p.gc-c1{font-size:min(3.6vw,64px)!important;white-space:nowrap}html body main section#gacha p.gc-c2{font-size:min(5vw,92px)!important;white-space:nowrap}html body main section#gacha p.gc-c3{font-size:min(2.3vw,40px)!important;white-space:nowrap}html body main section#gacha p.gc-last{font-size:min(3.4vw,60px)!important;white-space:nowrap}}
+@media (max-width:760px){html body main section#gacha :is(p.gc-c1,p.gc-c2,p.gc-c3,p.gc-last){white-space:nowrap}}
