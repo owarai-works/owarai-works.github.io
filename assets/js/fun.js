@@ -148,7 +148,11 @@ window.owCharaPoke = () => {
     const r = fr.getBoundingClientRect(), b = document.createElement("div"); b.className = "poke";
     b.style.left = Math.min(Math.max(e.clientX - r.left, 70), r.width - 70) + "px"; b.style.top = Math.max(e.clientY - r.top - 20, 80) + "px";
     b.innerHTML = `<img src="assets/img/ex/${k}_${ex}0.webp" alt=""><p>${txt}</p>`;
-    fr.parentElement.append(b); fr.classList.remove("poked"); void fr.offsetWidth; fr.classList.add("poked");
+    fr.parentElement.append(b);
+    /* 11-22 ユーザー「はみ出さないように」：吹き出しの幅を測って、絵の枠の中に収める */
+    { const pw = fr.parentElement.clientWidth, bw = b.offsetWidth, x = parseFloat(b.style.left) + (r.left - fr.parentElement.getBoundingClientRect().left);
+      b.style.left = (Math.min(Math.max(x, bw / 2 + 8), pw - bw / 2 - 8) - (r.left - fr.parentElement.getBoundingClientRect().left)) + "px"; }
+    fr.classList.remove("poked"); void fr.offsetWidth; fr.classList.add("poked");
     setTimeout(() => b.remove(), 2200);
   });
 };
