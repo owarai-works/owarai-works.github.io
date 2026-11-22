@@ -9,6 +9,9 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
   const P = [["week", "週間"], ["month", "月間"], ["all", "永世"]];
   const KIND = {b: "ボケ", t: "ツッコミ", m: "ボケツッコミ", o: "大喜利", oogiri: "大喜利", a: "あるある", aruaru: "あるある", d: "あだ名", adana: "あだ名", h: "一発ギャグ", gag: "一発ギャグ", k: "しばり", shibari: "しばり", n: "穴埋め", anaume: "穴埋め", x: "フルコース", g: "漫画セリフ", manga: "漫画セリフ", s: "インタビュー", intv: "インタビュー"};
+  /* 11-22 ユーザー：お題の種類は字でなく、ゲームと同じアイコン（assets/img/ki_*.webp） */
+  const KIC = {b: "boke", t: "tsk", m: "mix", o: "og", oogiri: "og", a: "ar", aruaru: "ar", s: "intv", intv: "intv", d: "adana", adana: "adana", h: "gag", gag: "gag", k: "shibari", shibari: "shibari", g: "manga", manga: "manga", n: "anaume", anaume: "anaume", x: "all"};
+  const kindIc = k => KIC[k] ? `<img class="k-ic" src="assets/img/ki_${KIC[k]}.webp" alt="${kindName(k)}" title="${kindName(k)}" width="40" height="40">` : "";
   const kindName = k => KIND[k] || (k && String(k).length < 8 ? k : "お題");
 
   /* ---------- 見本（本物の記録がないときだけ） ---------- */
@@ -75,7 +78,7 @@
   const sampleNote = s => s ? `<p class="rk-sample"><b>見本</b>まだ記録がないため、見本を表示しています。本物の記録が入ると自動で入れかわります。</p>` : "";
   const upLine = (x) => `<p class="rk-up">${x.up && x.up !== "見本" ? `${esc(x.up)} 更新（毎日19時ごろ）` : "毎日19時ごろ更新"}・芸名は表示していません</p>`;
   const AV = (r) => `<span class="bz-av r${Math.min(r, 4)}" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="15" r="8"/><path d="M5 38c1-9 7-14 15-14s14 5 15 14z"/></svg></span>`;
-  const hallCard = (v, i, big) => `<li class="hc ${big ? "big" : ""} k-${esc(v.kind || "x")} ${v.pic ? "has-pic" : ""}"><span class="hc-no">${i + 1}</span>${v.pic ? `<figure class="hc-pic"><img src="${esc(v.pic)}" alt="お題の絵" loading="lazy"></figure>` : ""}<em class="hc-k">${esc(kindName(v.kind))}</em>${v.odai ? `<small class="hc-o">お題：${esc(v.odai)}</small>` : ""}<p class="hc-t">${esc(v.text)}</p><div class="hc-f"><span class="hc-like">♥ ええやん ${v.likes || 0}</span><b class="hc-sc"><i>${v.score}</i>点</b></div></li>`;
+  const hallCard = (v, i, big) => `<li class="hc ${big ? "big" : ""} k-${esc(v.kind || "x")} ${v.pic ? "has-pic" : ""}"><span class="hc-no">${i + 1}</span>${v.pic ? `<figure class="hc-pic"><img src="${esc(v.pic)}" alt="お題の絵" loading="lazy"></figure>` : ""}<em class="hc-k">${kindIc(v.kind) || esc(kindName(v.kind))}</em>${v.odai ? `<small class="hc-o">お題：${esc(v.odai)}</small>` : ""}<p class="hc-t">${esc(v.text)}</p><div class="hc-f"><span class="hc-like">♥ ええやん ${v.likes || 0}</span><b class="hc-sc"><i>${v.score}</i>点</b></div></li>`;
   /* 笑神グランプリの結果 */
   const gpBox = (g, S, n = 10) => `<div class="gp-res">${S ? `<p class="rk-chip">見本</p>` : ""}<div class="gp-odai"><span class="gp-no">第${esc(g.no)}回</span>${g.pic ? `<img src="${esc(g.pic)}" alt="お題の絵" loading="lazy">` : ""}<p>${esc(g.odai).replace(/\n/g, "<br>")}</p><small>${g.n ? `答えた人 ${esc(g.n)}人・` : ""}ええやんの数で順位が決まる</small></div>
     <ol class="gp-list">${(g.rows || []).slice(0, n).map(r => `<li class="r${r.rank}"><b>${medal(r.rank)}</b><p>「${esc(r.text)}」</p><span>♥ ${r.likes}${r.av ? `<small>平均 ${r.av}点</small>` : ""}</span></li>`).join("")}</ol></div>`;
@@ -91,7 +94,7 @@
             <ol class="rk-list">${g.map(r => `<li class="r${r.rank}"><b>${medal(r.rank)}</b><span>${VNAME.rate[gp]}</span><em>${fmtV("rate", gp, r.v)}</em></li>`).join("")}</ol>
             <a class="btn sm rk-more" href="banzuke.html">ランキングをすべて見る <span class="arw" aria-hidden="true">→</span></a></div>
           <div class="rk-card rk-h"><h3><span>みんなの殿堂</span><small>AIが80点以上をつけた名回答</small></h3>${tabs(hp, "h")}${x.hallS ? `<p class="rk-chip">見本</p>` : ""}
-            <ol class="rk-hall">${h.map((v, i) => `<li class="${v.pic ? "has-pic" : ""}"><i>${i + 1}</i>${v.pic ? `<img class="rk-pic" src="${esc(v.pic)}" alt="" loading="lazy">` : ""}<div><small>${esc(kindName(v.kind))}${v.odai ? "｜" + esc(v.odai) : ""}</small><p>「${esc(v.text)}」</p><span><b>${v.score}点</b>・ええやん ${v.likes || 0}</span></div></li>`).join("")}</ol>
+            <ol class="rk-hall">${h.map((v, i) => `<li class="${v.pic ? "has-pic" : ""}"><i>${i + 1}</i>${v.pic ? `<img class="rk-pic" src="${esc(v.pic)}" alt="" loading="lazy">` : ""}<div>${kindIc(v.kind)}${v.odai ? `<small>${esc(v.odai)}</small>` : ""}<p>「${esc(v.text)}」</p><span><b>${v.score}点</b>・ええやん ${v.likes || 0}</span></div></li>`).join("")}</ol>
             <a class="btn sm rk-more" href="hall.html">殿堂をすべて見る <span class="arw" aria-hidden="true">→</span></a></div></div>
           ${upLine(x)}`;
         root.querySelectorAll("[data-g]").forEach(b => b.onclick = () => { gp = b.dataset.g; draw(); });

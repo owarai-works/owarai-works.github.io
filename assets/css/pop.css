@@ -1962,3 +1962,9 @@ html body .wow-chips li,html body .wow-chips li.c-rank{transform:none!important;
 .wow-open.stamp .wo-bust img{animation:woBustHop .5s ease-out 1}
 @keyframes woBustHop{30%{transform:translateY(-14px) scale(1.03)}}
 @media (max-width:760px){.wo-bust{width:140%!important}.wo-bust img{max-height:78vh}}
+
+/* 11-22 お題の種類のアイコン（ランキング・殿堂の欄） */
+.k-ic{display:block;width:44px;height:44px;object-fit:contain;filter:drop-shadow(0 2px 0 rgba(28,16,18,.25))}
+.rk-hall .k-ic{margin-bottom:4px}
+.hc-k{background:none!important;border:0!important;padding:0!important;box-shadow:none!important}
+.hc-k .k-ic{width:48px;height:48px}
