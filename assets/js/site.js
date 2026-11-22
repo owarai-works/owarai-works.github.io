@@ -130,11 +130,11 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
       const fin = () => { f.classList.remove("on"); setTimeout(() => f.remove(), 1300); };
       addEventListener("message", e => { if (e.source !== f.contentWindow) return; let d = e.data; try { d = typeof d === "string" ? JSON.parse(d) : d; } catch (x) { return; }
         if (!d) return; if ((d.event === "onStateChange" && d.info === 0) || (d.event === "infoDelivery" && d.info && d.info.playerState === 0)) fin(); });
-      f.addEventListener("load", () => { const hi = () => { try { f.contentWindow.postMessage(JSON.stringify({event: "listening", id: 1, channel: "widget"}), "*"); } catch (x) {} }; hi(); setTimeout(hi, 1000); setTimeout(hi, 3000); if (window.__owHeroGo) go(); });
+      f.addEventListener("load", () => { const hi = () => { try { f.contentWindow.postMessage(JSON.stringify({event: "listening", id: 1, channel: "widget"}), "*"); } catch (x) {} }; hi(); setTimeout(hi, 1000); setTimeout(hi, 3000); if (window.__owHeroGo) heroGo(); });
       /* 11-22 ユーザー「開演が終わった直後に動画をスタート」：wow.js の end() から呼ぶ */
-      function go(){ const cmd = (func, args = []) => { try { f.contentWindow.postMessage(JSON.stringify({event: "command", func, args}), "*"); } catch (x) {} };
+      function heroGo(){ const cmd = (func, args = []) => { try { f.contentWindow.postMessage(JSON.stringify({event: "command", func, args}), "*"); } catch (x) {} };
         cmd("mute"); cmd("seekTo", [0, true]); cmd("playVideo"); setTimeout(() => { cmd("playVideo"); f.classList.add("on"); }, 400); }
-      window.owHeroPlay = () => { window.__owHeroGo = true; go(); };
+      window.owHeroPlay = () => { window.__owHeroGo = true; heroGo(); };  /* 11-22：名前を go にするとページ移動の go を上書きしてしまったので heroGo */
       bg.append(f); } }
   /* スマホ：縦のOPが終わったら、1枚絵（kv_poster）にふわっと切りかえる */
   { const v = $(".hero .hero-sp"); if (v && document.body.dataset.page === "home") { const pv = window.owHeroPlay; window.owHeroPlay = () => { pv && pv(); try { v.currentTime = 0; v.play().catch(() => {}); } catch (x) {} }; }
@@ -195,7 +195,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
      2MBの全体が読みこめるまでは、最初の14秒だけの小さな版（title_head.mp3）を先に鳴らし、用意できたら同じ位置からつなぎかえる */
   (() => {
     const KEY = "ow-bgm", POS = "ow-bgm-pos", XF = 1.2;  /* XF＝つなぎ目を重ねる秒数 */
-    let VOL = (() => { let v = NaN; try { v = parseFloat(localStorage.getItem("ow-bgm-vol")); } catch (e) {} return isFinite(v) ? Math.min(1, Math.max(0, v)) : .5; })();  /* 音量（0〜1）。はじめはゲームと同じ 0.5 */
+    let VOL = (() => { let v = NaN; try { v = parseFloat(localStorage.getItem("ow-bgm-vol")); } catch (e) {} return isFinite(v) ? Math.min(1, Math.max(0, v)) : .35; })();  /* 11-22 ユーザー「はじめの音量を30%下げて」0.5→0.35 */  /* 音量（0〜1）。はじめはゲームと同じ 0.5 */
     const FULL = "assets/bgm/op.mp3", HEAD = "assets/bgm/op_head.mp3", LOOP = "assets/bgm/title.mp3", TRK = "ow-bgm-trk";  /* 11-22 ユーザー「OPソングを1曲流したら、あとは前の曲（開演のテーマ）をくり返す」 */  /* 11-22 ユーザー「BGMをOPソングに」 */
     const get = (s, k) => { try { return s.getItem(k); } catch (e) { return null; } };
     const set = (s, k, v) => { try { s.setItem(k, v); } catch (e) {} };
