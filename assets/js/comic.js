@@ -19,19 +19,20 @@
     ov.innerHTML = `<div class="cmp-top"><b>第1話「跡継ぎ宣言」</b><span class="cmp-pg"></span><button type="button" class="cmp-x" aria-label="閉じる">×</button></div>
       <div class="cmp-stage"><div class="cmp-k" role="img" aria-label="漫画のコマ"></div></div>
       <p class="cmp-cap" aria-live="polite"></p>
-      <div class="cmp-bar"><button type="button" class="cmp-prev" aria-label="前のコマ">‹</button><button type="button" class="cmp-pause" aria-label="一時停止">❚❚</button><button type="button" class="cmp-next" aria-label="次のコマ">›</button></div>
+      <div class="cmp-bar"><button type="button" class="cmp-prev" aria-label="次のコマ">‹</button><button type="button" class="cmp-pause" aria-label="一時停止">❚❚</button><button type="button" class="cmp-next" aria-label="前のコマ">›</button></div>
       <div class="cmp-end" hidden><b>このあと、どうなる──！？</b><p>第2話「朝ごはん戦争」から先は、アプリで読めます。<br>全30話、<b>フルボイス・自動コマ送り</b>で！</p><div class="cmp-store"></div><button type="button" class="cmp-again">▶ もう一度見る</button></div>`;
     document.body.append(ov);
     if (window.storeHTML) $(".cmp-store", ov).innerHTML = storeHTML("lg");
     $(".cmp-x", ov).onclick = close;
     ov.addEventListener("click", e => { if (e.target === ov) close(); });
-    $(".cmp-next", ov).onclick = () => go(idx + 1);
-    $(".cmp-prev", ov).onclick = () => go(Math.max(0, idx - 1));
+    /* 11-22 ユーザー「左を押したら進む」：漫画は右から左へ読むので、左＝次・右＝前 */
+    $(".cmp-prev", ov).onclick = () => go(idx + 1);
+    $(".cmp-next", ov).onclick = () => go(Math.max(0, idx - 1));
     $(".cmp-stage", ov).onclick = () => go(idx + 1);
     $(".cmp-pause", ov).onclick = () => { paused = !paused; $(".cmp-pause", ov).textContent = paused ? "▶" : "❚❚"; $(".cmp-pause", ov).setAttribute("aria-label", paused ? "再生" : "一時停止");
       if (paused) { clear(); voice.pause(); bgm.pause(); } else { bgm.play().catch(() => {}); go(idx); } };
     $(".cmp-again", ov).onclick = () => go(0);
-    addEventListener("keydown", e => { if (!ov.classList.contains("open")) return; if (e.key === "Escape") close(); else if (e.key === "ArrowRight") go(idx + 1); else if (e.key === "ArrowLeft") go(Math.max(0, idx - 1)); });
+    addEventListener("keydown", e => { if (!ov.classList.contains("open")) return; if (e.key === "Escape") close(); else if (e.key === "ArrowLeft") go(idx + 1); else if (e.key === "ArrowRight") go(Math.max(0, idx - 1)); });
     addEventListener("resize", () => { if (ov.classList.contains("open") && list[idx]) frame(list[idx], true); });
   }
 
