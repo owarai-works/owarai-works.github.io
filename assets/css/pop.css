@@ -2404,3 +2404,6 @@ html body .poke p{white-space:nowrap}
 html body .poke{max-width:calc(100% - 16px)}
 /* 11-22 ユーザー「幕が閉じたとき黄色い（線）のでやめて」 */
 html body .wo-cur.l,html body .wo-cur.r{border:0!important}
+/* 11-22 ユーザー「YouTubeのアイコンをサムネイルのど真ん中に」：はずむ動きが位置合わせ（transform）を上書きしていたので、margin でまん中に置く */
+html body .ytc-play{left:0!important;right:0!important;top:0!important;bottom:0!important;margin:auto!important;transform:none}
+@keyframes ytcPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}html body .ytc-play{animation:ytcPulse 1.6s ease-in-out infinite!important}
