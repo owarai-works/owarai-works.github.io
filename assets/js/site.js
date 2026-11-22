@@ -191,7 +191,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
   (() => {
     const KEY = "ow-bgm", POS = "ow-bgm-pos", XF = 1.2;  /* XF＝つなぎ目を重ねる秒数 */
     let VOL = (() => { let v = NaN; try { v = parseFloat(localStorage.getItem("ow-bgm-vol")); } catch (e) {} return isFinite(v) ? Math.min(1, Math.max(0, v)) : .5; })();  /* 音量（0〜1）。はじめはゲームと同じ 0.5 */
-    const FULL = "assets/bgm/op.mp3", HEAD = "assets/bgm/op_head.mp3";  /* 11-22 ユーザー「BGMをOPソングに」 */
+    const FULL = "assets/bgm/op.mp3", HEAD = "assets/bgm/op_head.mp3", LOOP = "assets/bgm/title.mp3", TRK = "ow-bgm-trk";  /* 11-22 ユーザー「OPソングを1曲流したら、あとは前の曲（開演のテーマ）をくり返す」 */  /* 11-22 ユーザー「BGMをOPソングに」 */
     const get = (s, k) => { try { return s.getItem(k); } catch (e) { return null; } };
     const set = (s, k, v) => { try { s.setItem(k, v); } catch (e) {} };
     const AC = window.AudioContext || window.webkitAudioContext;
@@ -216,7 +216,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
     vOpen(true);  /* 最初から出しておいて、3秒で消える */
     document.addEventListener("click", e => { if (!vb.contains(e.target)) { vp.hidden = true; vk.setAttribute("aria-expanded", "false"); } });
     let on = get(localStorage, KEY) !== "0";  /* はじめから ON（OFF にした人だけ OFF） */
-    let ac = null, bus = null, voices = [], timer = 0, gen = 0, playing = false, full = null, head = null, cur = null;
+    let ac = null, bus = null, voices = [], timer = 0, gen = 0, playing = false, full = null, head = null, cur = null, loopP = null, loopT = null, opT = null;
     const tip = txt => { if (btn.querySelector(".bgm-tip")) return; const t = document.createElement("span"); t.className = "bgm-tip"; t.textContent = txt; btn.append(t); setTimeout(() => t.remove(), 6000); };
     const noTip = () => { const t = btn.querySelector(".bgm-tip"); if (t) t.remove(); };
     const paint = () => { btn.classList.toggle("on", on); btn.querySelector("b").textContent = on ? "ON" : "OFF"; btn.setAttribute("aria-pressed", on); btn.setAttribute("aria-label", on ? "BGMを止める" : "BGMを流す"); };
@@ -243,7 +243,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
       n.start(when, tr.start + off, len); n.stop(endAt + .05);
       const v = {n, g, tr, t0: when, off}; voices.push(v); n.onended = () => { voices = voices.filter(x => x !== v); };
       cur = v;
-      if (loop) { clearTimeout(timer); timer = setTimeout(() => { if (g0 === gen && playing) voice(tr, endAt - XF, XF, g0); }, Math.max(0, (endAt - XF - ac.currentTime - 1.5) * 1000)); }
+      if (loop) { clearTimeout(timer); timer = setTimeout(() => { if (g0 !== gen || !playing) return; const nx = tr === opT && loopT ? loopT : tr; if (nx === loopT) set(sessionStorage, TRK, "loop"); voice(nx, endAt - XF, XF, g0); }, Math.max(0, (endAt - XF - ac.currentTime - 1.5) * 1000)); }
       return v;
     };
     const stopVoices = (t = .08) => { const now = ac.currentTime; voices.forEach(v => { try { v.g.gain.cancelScheduledValues(now); v.g.gain.setValueAtTime(v.g.gain.value, now); v.g.gain.linearRampToValueAtTime(0, now + t); v.n.stop(now + t + .02); } catch (e) {} }); };
@@ -261,7 +261,9 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
       if (playing) return true;
       playing = true; const g0 = ++gen; ramp(VOL, 1.2); noTip(); btn.classList.remove("wait"); paint();
       const startAt = +get(sessionStorage, POS) || 0;  /* ほかのページから来たら、続きから */
-      if (!full) full = load(FULL).catch(e => { full = null; throw e; });
+      if (!loopP) loopP = load(LOOP).then(t => (loopT = t)).catch(() => { loopP = null; return null; });
+      if (get(sessionStorage, TRK) === "loop") { const t = await loopP; if (g0 !== gen) return true; if (t) { const L = t.end - t.start; voice(t, ac.currentTime + .02, .6, g0, startAt % L); return true; } }
+      if (!full) full = load(FULL).then(t => (opT = t)).catch(e => { full = null; throw e; });
       if (!head && !startAt) head = load(HEAD).catch(() => null);
       let w = null; try { w = await Promise.race([full.then(t => ({f: t})), ...(head ? [head.then(t => t ? {h: t} : new Promise(() => {}))] : [])]); } catch (e) { playing = false; return false; }
       if (g0 !== gen) return true;
@@ -301,7 +303,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
       g.onclick = e => { if (e.target === g) close(true); };
     }
     /* トップの「タップで開演」の幕から使う */
-    window.owBgm = {isOn: () => on, prime: () => { if (!AC || !on) return; if (!ac) { ac = new AC(); bus = ac.createGain(); bus.gain.value = 0; bus.connect(ac.destination); } unlock(); try { ac.resume(); } catch (e) {} }, hush: () => { const w = playing; stop(); return w; }, resume: () => { if (on && !playing) play(); }, play: () => { if (on) play().then(ok => { if (ok) offWait(); }); }, off: () => { if (!on) return; on = false; set(localStorage, KEY, "0"); paint(); stop(); offWait(); }};
+    window.owBgm = {isOn: () => on, start: () => { if (on) start(); }, prime: () => { if (!AC || !on) return; if (!ac) { ac = new AC(); bus = ac.createGain(); bus.gain.value = 0; bus.connect(ac.destination); } unlock(); try { ac.resume(); } catch (e) {} }, hush: () => { const w = playing; stop(); return w; }, resume: () => { if (on && !playing) play(); }, play: () => { if (on) play().then(ok => { if (ok) offWait(); }); }, off: () => { if (!on) return; on = false; set(localStorage, KEY, "0"); paint(); stop(); offWait(); }};
     btn.addEventListener("click", e => {
       e.stopPropagation(); noTip();
       if (on && !playing) { play(); return; }  /* ON なのにまだ鳴っていない（ブラウザに止められた）ときは、流すだけ */
@@ -314,8 +316,11 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
     document.addEventListener("pause", e => { if (e.target.tagName === "VIDEO" && !e.target.muted && playing) ramp(VOL, .6); }, true);
     paint();
     if (window.OW_PREP) return;  /* 準備中の幕のあいだは曲を流さない */
-    if (on) start();
-    else if (get(sessionStorage, "ow-bgm-tip") !== "1") { set(sessionStorage, "ow-bgm-tip", "1"); tip("♪ ゲームの曲を流せます"); }
+    /* 11-22 ユーザー「ページを更新すると、開演の幕のところで続きから音が出る」：トップは開演が終わるまで鳴らさない（wow.js が終わりに鳴らす）。トップを開き直したら曲は頭から */
+    const isHome = document.body.dataset.page === "home";
+    if (isHome) { set(sessionStorage, POS, 0); set(sessionStorage, TRK, ""); }
+    if (on && !isHome) start();
+    else if (!on && get(sessionStorage, "ow-bgm-tip") !== "1") { set(sessionStorage, "ow-bgm-tip", "1"); tip("♪ ゲームの曲を流せます"); }
   })();
 
   /* ---------- お知らせ ---------- */

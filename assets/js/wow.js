@@ -45,7 +45,7 @@
       <canvas class="wo-cf"></canvas><p class="wo-skip">タップでスキップ</p>`;
     document.body.append(ov); document.documentElement.classList.add("wow-lock");
     let started = false, done = false, sound = false;
-    const end = () => { if (done) return; done = true; if (sound) { try { window.owBgm && owBgm.play(); } catch (e) {} }  /* 11-22 ユーザー「98点の画面のあとでBGM」：幕が終わってから鳴らす */ ov.classList.add("out"); document.documentElement.classList.remove("wow-lock"); setTimeout(() => ov.remove(), 500); };
+    const end = () => { if (done) return; done = true; try { if (window.owBgm) sound ? owBgm.play() : owBgm.start(); } catch (e) {}  /* 11-22 ユーザー「98点の画面のあとでBGM」：幕が終わってから鳴らす */ ov.classList.add("out"); document.documentElement.classList.remove("wow-lock"); setTimeout(() => ov.remove(), 500); };
     const run = withSound => {
       if (started) return; started = true; sound = withSound; ov.classList.remove("ready");
       if (sound) { ac(); try { window.owBgm && owBgm.prime && owBgm.prime(); } catch (e) {} }  /* 11-22 ユーザー「BGMは『なんでやねん』のあとから」：タップのときは音の準備だけ */
