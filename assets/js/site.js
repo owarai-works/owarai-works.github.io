@@ -94,6 +94,26 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
 
   /* ---------- 動画の小窓 ---------- */
   let modal = null;
+  /* 11-22 YouTube の動画（横＝パソコン、縦のショート＝スマホ）。data-yt="pv" か "op" */
+  const YT = {pv: {h: "_FEhVNyJrwI", v: "tbc39yXXjtI", t: "プロモーション映像"}, op: {h: "64Qg-vbznxA", v: "cBmBSB1yWxU", t: "オープニング映像"}};
+  window.OW_YT = YT;
+  let bgmWas = false;
+  window.openYT = key => {
+    const y = YT[key]; if (!y) return;
+    const tall = matchMedia("(max-width:760px), (orientation:portrait) and (max-width:1024px)").matches, id = tall ? y.v : y.h;
+    if (!modal) openMovie(null);
+    const box = $(".modal-box", modal); box.classList.toggle("yt-v", tall); box.classList.add("yt");
+    const v = $("video", modal); v.pause(); v.removeAttribute("src"); v.hidden = true;
+    let f = $("iframe", modal); if (!f) { f = document.createElement("iframe"); f.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture; fullscreen"); f.setAttribute("allowfullscreen", ""); box.append(f); }
+    f.title = y.t; f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1&modestbranding=1`;
+    /* 画面からはみ出さない大きさ（パソコンは全体を1.25倍にしているので、その分を割る） */
+    const z = parseFloat(getComputedStyle(document.documentElement).zoom) || 1, aw = (innerWidth - 40) / z, ah = (innerHeight - 150) / z, r = tall ? 9 / 16 : 16 / 9;
+    box.style.width = Math.floor(Math.min(aw, ah * r, tall ? 460 : 1100)) + "px";
+    bgmWas = !!(window.owBgm && owBgm.hush && owBgm.hush());
+    owTrack("movie_play", {movie: "yt_" + key + (tall ? "_v" : "_h")});
+    modal.setAttribute("aria-label", y.t); modal.classList.add("open"); $(".modal-x", modal).focus();
+  };
+  addEventListener("keydown", e => { if (e.key === "Escape" && modal && modal.classList.contains("open")) closeModal(); });
   window.openMovie = src => {
     if (!modal) {
       modal = document.createElement("div"); modal.className = "modal"; modal.setAttribute("role", "dialog"); modal.setAttribute("aria-modal", "true"); modal.setAttribute("aria-label", "ムービー");
@@ -101,11 +121,14 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
       document.body.append(modal);
       modal.addEventListener("click", e => { if (e.target === modal || e.target.closest(".modal-x")) closeModal(); });
     }
+    if (!src) return;
+    const fr = $("iframe", modal); if (fr) fr.remove(); const bx = $(".modal-box", modal); bx.classList.remove("yt", "yt-v"); bx.style.width = "";
     owTrack("movie_play", {movie: src});
-    const v = $("video", modal); v.src = src; modal.classList.add("open"); v.play().catch(() => {}); $(".modal-x", modal).focus();
+    const v = $("video", modal); v.hidden = false; v.src = src; modal.classList.add("open"); v.play().catch(() => {}); $(".modal-x", modal).focus();
   };
-  function closeModal(){ if (!modal) return; modal.classList.remove("open"); const v = $("video", modal); v.pause(); }
+  function closeModal(){ if (!modal) return; modal.classList.remove("open"); const v = $("video", modal); v.pause(); const fr = $("iframe", modal); if (fr) fr.src = "about:blank"; if (bgmWas && window.owBgm) { bgmWas = false; owBgm.resume(); } }
   $$("[data-movie]").forEach(b => b.addEventListener("click", () => openMovie(b.dataset.movie)));
+  document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-yt]"); if (!b) return; e.preventDefault(); openYT(b.dataset.yt); });
 
   /* ---------- 桜と紙吹雪 ---------- */
   window.petals = (cv, opt = {}) => {
@@ -228,7 +251,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
        スマホは「指をはなした時（touchend・click）」でないと音を出せないので、いろいろな合図で試す */
     const EV = ["click", "touchend", "pointerup", "mousedown", "keydown"];
     const offWait = () => EV.forEach(t => removeEventListener(t, tryTap, true));
-    function tryTap(e){ if (e && e.target && e.target.closest && e.target.closest(".bgm")) return;  /* BGM ボタンそのものは click で扱う */
+    function tryTap(e){ if (e && e.target && e.target.closest && e.target.closest(".bgm,.modal")) return;  /* BGM ボタンそのものは click で扱う */
       if (!on || playing) return offWait(); play().then(ok => { if (ok) offWait(); }); }
     const start = () => {
       EV.forEach(t => addEventListener(t, tryTap, true));  /* 先に待っておく（鳴ったら外す） */
@@ -251,7 +274,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
       g.onclick = e => { if (e.target === g) close(true); };
     }
     /* トップの「タップで開演」の幕から使う */
-    window.owBgm = {isOn: () => on, play: () => { if (on) play().then(ok => { if (ok) offWait(); }); }, off: () => { if (!on) return; on = false; set(localStorage, KEY, "0"); paint(); stop(); offWait(); }};
+    window.owBgm = {isOn: () => on, hush: () => { const w = playing; stop(); return w; }, resume: () => { if (on && !playing) play(); }, play: () => { if (on) play().then(ok => { if (ok) offWait(); }); }, off: () => { if (!on) return; on = false; set(localStorage, KEY, "0"); paint(); stop(); offWait(); }};
     btn.addEventListener("click", e => {
       e.stopPropagation(); noTip();
       if (on && !playing) { play(); return; }  /* ON なのにまだ鳴っていない（ブラウザに止められた）ときは、流すだけ */

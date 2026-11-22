@@ -2208,3 +2208,46 @@ html body main section.gassen .gs-ph img{box-shadow:0 0 0 3px #fff,8px 10px 0 va
   html body main section.gassen{background-size:44px 154px,44px 154px,auto!important;background-position:left 2px top 0,right 2px top 77px,center!important}
   html body main section.gassen .gs-title em{font-size:clamp(24px,8vw,34px)!important;white-space:nowrap}
 }
+
+/* ===== 11-22 YouTube の動画（PV・オープニング） ===== */
+.modal-box.yt{width:min(100%,1100px)}
+.modal-box.yt iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:14px;background:#000;box-shadow:0 30px 80px rgba(0,0,0,.8)}
+.modal-box.yt-v{width:min(100%,calc((100dvh - 120px) * 9 / 16),460px)}
+.modal-box.yt-v iframe{aspect-ratio:9/16}
+.modal-x{background:#fff!important;color:var(--ink)!important;border:3px solid var(--ink)!important;font-weight:900}
+/* トップ：オープニングの小さなボタン */
+.op-mini{display:inline-flex;align-items:center;padding:8px 16px;border-radius:999px;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);font-weight:900;font-size:15px;cursor:pointer}
+.op-mini:hover{transform:translateY(-2px)}
+/* 動画のカード（表紙の絵＋再生ボタン） */
+.ytc{display:flex;align-items:center;gap:18px;width:min(100%,560px);margin:22px 0 0;padding:10px 18px 10px 10px;background:#fff;color:var(--ink);border:4px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--shu);text-align:left;cursor:pointer;transition:transform .2s}
+.ytc:hover{transform:translateY(-4px)}
+.ytc-pic{position:relative;flex:0 0 46%;aspect-ratio:16/9;overflow:hidden;border-radius:12px;border:3px solid var(--ink);background:#000}
+.ytc-pic img{width:100%;height:100%;object-fit:cover}
+.ytc-play{position:absolute;left:50%;top:50%;width:58px;height:40px;transform:translate(-50%,-50%);border-radius:12px;background:#ff0033;box-shadow:0 4px 12px rgba(0,0,0,.4);animation:woBounce 1.4s ease-in-out infinite}
+.ytc-play::after{content:"";position:absolute;left:23px;top:11px;border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #fff}
+.ytc-t{display:flex;flex-direction:column;gap:4px;min-width:0}
+.ytc-t small{align-self:flex-start;padding:2px 10px;border-radius:999px;background:var(--gold);border:2px solid var(--ink);font-weight:900;font-size:13px}
+.ytc-t b{font-family:var(--f-disp);font-weight:900;font-size:24px;line-height:1.3}
+.ytc-t em{font-style:normal;font-weight:700;font-size:14px;color:#3a2a25}
+.ytc-wrap{display:flex;justify-content:center;margin:0 0 34px}
+.ytc-wrap .ytc{margin:0}
+@media (min-width:1024px){.ytc-t b{font-size:28px}.ytc-t em{font-size:18px}.ytc-t small{font-size:16px}.op-mini{font-size:18px}}
+@media (max-width:760px){
+  .ytc{gap:12px;padding:8px 12px 8px 8px;box-shadow:4px 4px 0 var(--shu);border-width:3px}
+  .ytc-t b{font-size:18px}.ytc-t em{font-size:12px}.ytc-t small{font-size:11px}
+  .ytc-play{width:44px;height:30px;border-radius:9px}.ytc-play::after{left:17px;top:8px;border-width:7px 0 7px 12px}
+  .op-mini{font-size:13px;padding:6px 12px}
+}
+
+.modal-box.yt video{display:none!important}
+.modal-box.yt,.modal-box.yt-v{max-width:100%}
+html body .modal{z-index:400!important}
+html body .modal-x{top:-56px;right:0}
+
+/* スマホのトップ：オープニングのボタンは、ボタンの列の下に1行で */
+@media (max-width:760px){
+  html body .hero-acts{flex-wrap:wrap!important;justify-content:center}
+  html body .hero-acts .op-mini{order:3;flex:0 0 auto;writing-mode:horizontal-tb;white-space:nowrap;margin:2px auto 0}
+}
+.ytc-t b{word-break:keep-all;overflow-wrap:anywhere}
+@media (max-width:760px){html.snap body .hero-acts{flex-wrap:wrap!important;justify-content:center}html.snap body .hero-acts .op-mini{order:3;margin:2px auto 0}}
