@@ -2355,3 +2355,9 @@ html body .wow-open{background:radial-gradient(circle at 50% 42%,rgba(255,255,25
 html body .wow-open .wo-rays{background:repeating-conic-gradient(from 0deg,rgba(255,255,255,.45) 0 8deg,transparent 8deg 18deg)!important}
 html body .wow-open .wo-skip{color:var(--ink)!important;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:4px 12px;text-shadow:none!important}
 html body .wow-open .wo-ready small{color:var(--ink)!important;background:#fff;border-radius:999px;padding:2px 12px;text-shadow:none!important}
+/* ===== 11-22 ユーザー「お知らせの背景をポップでパステル風の虹色に」 ===== */
+body[data-page="news"] main>section.sec{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(120deg,#ffd6e7 0%,#ffe6c7 18%,#fff6b8 34%,#d9f7c9 50%,#cdeeff 66%,#dcd6ff 82%,#f6d6ff 100%)!important}
+body[data-page="news"] main>section.sec::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.55;background-image:
+  radial-gradient(circle,#ff8fb5 3px,transparent 3.6px),radial-gradient(circle,#7cc8ff 3px,transparent 3.6px),
+  radial-gradient(circle,#ffd04d 3.5px,transparent 4px),radial-gradient(circle,#7fdc9b 2.5px,transparent 3px);
+  background-size:90px 90px,120px 120px,150px 150px,70px 70px;background-position:0 0,40px 60px,80px 20px,20px 45px}
