@@ -2947,3 +2947,4 @@ html body main section#gacha p.gc-c3{font-size:clamp(18px,2vw,30px)!important;li
 html body main section#gacha p.gc-last{font-size:clamp(24px,3vw,46px)!important;line-height:1.4!important}
 @media (max-width:760px){html body main section#gacha p.gc-c1{font-size:22px!important}html body main section#gacha p.gc-c2{font-size:28px!important}html body main section#gacha p.gc-c3{font-size:15px!important}html body main section#gacha p.gc-last{font-size:20px!important}}
 @media (max-width:760px){html body main section#gacha p.gc-c1{font-size:18px!important;white-space:nowrap}html body main section#gacha p.gc-c2{font-size:24px!important;white-space:nowrap}html body main section#gacha p.gc-c3{font-size:13px!important;white-space:nowrap}html body main section#gacha p.gc-last{font-size:17px!important;white-space:nowrap}}
+html body .road-ph{margin-bottom:56px}html body .road-ph figcaption{bottom:-52px!important}
