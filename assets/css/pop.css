@@ -3000,3 +3000,7 @@ html body #gacha .gc-logo{margin-top:-17%!important}
 html body #gacha .gc-stage{-webkit-mask:linear-gradient(#000 70%,transparent 96%)!important;mask:linear-gradient(#000 70%,transparent 96%)!important}
 html body #gacha .gc-stage .gc-mach{bottom:4%!important;height:46%!important}
 @media (max-width:760px){html body #gacha .gc-logo{margin-top:-15%!important}}
+
+/* 11-22 ユーザー「ロゴから下を、帯のあたり（絵の切れ目）まで上げて」：絵の高さ（画面の幅×0.648）を元に上げる */
+html body #gacha .gc-logo{margin-top:calc(-100vw / var(--z,1) * 0.648 * 0.40)!important}
+html body #gacha .gc-stage .gc-mach{height:36%!important;bottom:31%!important}
