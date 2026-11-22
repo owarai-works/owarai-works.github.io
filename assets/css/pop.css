@@ -1364,3 +1364,13 @@ main>section.sec.bg-p,main>section.sec.bg-b,main>section.sec.bg-y{border-top:4px
   html.snap .hero-acts .play-pv span{white-space:nowrap;font-size:14px}
 }
 @media (max-width:760px){ html.snap .hero-acts .play-pv span{display:none} }
+
+/* ===== 11-22 ユーザー「お題のマークも使って」：お題のカードに、ゲームのお題のマーク（キャラの絵）を名前の上に ===== */
+.odai-mini li,.odai .od{position:relative}
+.omk{display:block;width:64px;height:64px;object-fit:contain;margin:6px auto -4px;filter:drop-shadow(0 3px 0 rgba(28,16,18,.25))}
+.odai .od .omk{width:72px;height:72px;margin:8px auto -2px}
+@media (max-width:760px){.omk{width:40px;height:40px;margin:2px auto -2px}.odai .od .omk{width:44px;height:44px}html.snap .omk{width:30px;height:30px;margin:1px auto -3px}}
+/* ===== 11-22 ユーザー「枠の横幅を左右対称に」：ランキングと殿堂の枠を同じ幅・同じ影に ===== */
+.rk-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.rk-g{box-shadow:8px 8px 0 var(--ink)!important}
+@media (max-width:860px){.rk-grid{grid-template-columns:1fr!important}}
