@@ -2190,3 +2190,21 @@ html body main .odai .od small{font-size:20px!important;line-height:1.6!importan
 @media (max-width:760px){html body main .odai .od small{font-size:15px!important}}
 /* お笑いへの道のロゴ */
 .road-logo{display:block;width:min(460px,80%);height:auto;margin:4px auto 10px;filter:drop-shadow(0 6px 0 rgba(28,16,18,.25));animation:woLogo 2.6s ease-in-out infinite}
+/* ===== 11-22 ユーザー「お題合戦：茶色じゃなくて明るく。★を使ってポップに」 =====
+   空色のグラデーション＋白い光の線＋黄・ピンク・白の★。字は黒と赤（明るい地に明るい字を重ねない） */
+html body main section.gassen{color:var(--ink)!important;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='420'%3E%3Cg stroke='%231c1012' stroke-width='3' stroke-linejoin='round'%3E%3Cpath fill='%23ffc61a' d='M50 20l11 23 25 3-18 17 5 25-23-12-23 12 5-25-18-17 25-3z'/%3E%3Cpath fill='%23ff6fa5' d='M85 140l7 15 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2z'/%3E%3Cpath fill='%23fff' d='M40 230l9 19 21 3-15 14 4 21-19-10-19 10 4-21-15-14 21-3z'/%3E%3Cpath fill='%23ffc61a' d='M90 330l6 12 13 2-10 9 3 13-12-6-12 6 3-13-10-9 13-2z'/%3E%3C/g%3E%3C/svg%3E") left 12px top 0/120px 420px repeat-y,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='420'%3E%3Cg stroke='%231c1012' stroke-width='3' stroke-linejoin='round'%3E%3Cpath fill='%23ffc61a' d='M50 20l11 23 25 3-18 17 5 25-23-12-23 12 5-25-18-17 25-3z'/%3E%3Cpath fill='%23ff6fa5' d='M85 140l7 15 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2z'/%3E%3Cpath fill='%23fff' d='M40 230l9 19 21 3-15 14 4 21-19-10-19 10 4-21-15-14 21-3z'/%3E%3Cpath fill='%23ffc61a' d='M90 330l6 12 13 2-10 9 3 13-12-6-12 6 3-13-10-9 13-2z'/%3E%3C/g%3E%3C/svg%3E") right 12px top 210px/120px 420px repeat-y,radial-gradient(70% 60% at 50% 35%,#ffffff 0%,#d4f0ff 40%,#8fd3ff 100%)!important}
+html body main section.gassen::before{background:repeating-conic-gradient(rgba(255,255,255,.55) 0 4deg,transparent 4deg 11deg)!important}
+html body main section.gassen .gs-fire{display:none!important}
+html body main section.gassen .sec-hd .en{color:#2f6fd6!important}
+html body main section.gassen .sec-hd h2{color:var(--ink)!important;text-shadow:none!important}
+html body main section.gassen .gs-title span:first-child{color:var(--ink)!important;-webkit-text-stroke:0!important;text-shadow:none!important}
+html body main section.gassen .gs-title em{color:var(--shu)!important;-webkit-text-stroke:0!important;text-shadow:none!important}
+html body main section.gassen :is(.gs-lead,.gs-call,p,.sec-hd p){color:var(--ink)!important;text-shadow:none!important}
+html body main section.gassen :is(.gs-lead,.gs-call,p) b{color:var(--shu-d)!important}
+html body main section.gassen .gs-feat li small{color:#3a2a25!important}
+html body main section.gassen .gs-ph img{box-shadow:0 0 0 3px #fff,8px 10px 0 var(--ink)!important}
+/* ★がくるくる光る飾り */
+@media (max-width:760px){
+  html body main section.gassen{background-size:44px 154px,44px 154px,auto!important;background-position:left 2px top 0,right 2px top 77px,center!important}
+  html body main section.gassen .gs-title em{font-size:clamp(24px,8vw,34px)!important;white-space:nowrap}
+}
