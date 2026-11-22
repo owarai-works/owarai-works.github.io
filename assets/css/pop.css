@@ -2385,3 +2385,12 @@ html body .cs-cards{grid-template-columns:repeat(3,minmax(0,280px))!important;ju
   body[data-page="hall"] .rk-sample,body[data-page="hall"] .rk-up{font-size:20px!important}
 }
 @media (min-width:1024px){body[data-page="hall"] .pg-shots figcaption{display:flex!important;align-items:center;justify-content:center;white-space:nowrap;line-height:1.3!important;font-size:26px!important}}
+/* 11-22 ユーザー「目次を1行に・両はしが切れないように」：パソコンは10個を1行に並べ、画面の幅に合わせて字の大きさを変える */
+@media (min-width:761px){
+  html body .subnav .wrap{width:calc(100% - 24px)!important;max-width:none!important}
+  html body .subnav ol{flex-wrap:nowrap!important;justify-content:space-between!important;overflow:visible!important;gap:0!important;padding:10px 0 14px!important}
+  html body .subnav li{flex:0 1 auto;min-width:0}
+  html body .subnav a{white-space:nowrap!important;font-size:clamp(11px,1.05vw,19px)!important;padding:8px clamp(4px,.6vw,14px)!important;gap:4px}
+}
+/* 11-22 ユーザー「サポートの背景を、明るい落ち着けるパステルグリーンに」 */
+body[data-page="support"] main>section.sec{position:relative;isolation:isolate;background:radial-gradient(circle,rgba(255,255,255,.7) 2px,transparent 2.6px) 0 0/26px 26px,linear-gradient(160deg,#eefbea 0%,#d9f3dc 50%,#e6f7ee 100%)!important}
