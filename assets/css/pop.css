@@ -2010,7 +2010,6 @@ body[data-page="game"] .subnav{top:var(--hd,58px)!important}
 .g-sticky p small{font-size:13px;font-weight:800;color:var(--shu-d)}
 .g-sticky .store{flex:0 0 auto}
 body[data-page="game"] main{padding-bottom:110px}
-body[data-page="game"] .bgm,body[data-page="game"] .bgm-vol,body[data-page="game"] .faqb,body[data-page="game"] .fb-open{bottom:120px!important}
 @media (max-width:760px){.g-sticky{bottom:10px;gap:10px;padding:8px}.g-sticky img{width:44px;height:44px;flex-basis:44px}.g-sticky p b{font-size:14px}.g-sticky p small{font-size:11px}.g-sticky .store{transform:scale(.85);transform-origin:right center}}
 
 /* 11-22 ユーザー「アイコンの横に文字を置いて」：殿堂の小さな欄は、お題のアイコンの右に答えと点数 */
@@ -2761,3 +2760,7 @@ html body .road-pics{display:flex!important;justify-content:center;align-items:c
 @media (max-width:760px){#pgwipe .wpi img{object-fit:cover}#pgwipe .wpi .sh{-webkit-mask-size:cover;mask-size:cover}}
 /* 11-22 ユーザー「お題合戦のまん中の放射を、もっと大きく」 */
 html body main section.gassen::before{width:max(3400px,240vw)!important;top:30%!important;-webkit-mask:radial-gradient(circle,#000 18%,transparent 62%)!important;mask:radial-gradient(circle,#000 18%,transparent 62%)!important;background:repeating-conic-gradient(rgba(255,255,255,.7) 0 4deg,transparent 4deg 11deg)!important}
+
+/* 11-22 ユーザー「下の帯（今日から、笑いの修行を…）を消して」 */
+.g-sticky{display:none!important}
+body[data-page="game"] main{padding-bottom:0!important}
