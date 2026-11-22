@@ -236,27 +236,5 @@
 <script src="assets/js/fun.js?v=11221316" defer></script>
 <script src="assets/js/faq-bot.js?v=11221316" defer></script>
 <script src="assets/js/ranking.js?v=11221316" defer></script>
-<script>
-/* 幕あけ：ゲームと同じ「タップで開演」。タップした瞬間に曲も流れる（ブラウザは、タップがないと音を出せない） */
-(() => {
-  const c = document.getElementById("curtain");
-  let seen = false; try { seen = sessionStorage.getItem("ow-curtain") === "1"; } catch (e) {}
-  const bgmOn = window.owBgm && owBgm.isOn();
-  if (seen || !bgmOn) {  /* 2回目、または BGM を OFF にしている人は、幕なし（OFF の人には幕だけ自動で開く） */
-    if (seen || matchMedia("(prefers-reduced-motion: reduce)").matches) { c.classList.add("done"); return; }
-    c.classList.add("auto"); requestAnimationFrame(() => c.classList.add("go")); setTimeout(() => c.classList.add("done"), 2300); return;
-  }
-  document.documentElement.style.overflow = "hidden";
-  const open = sound => {
-    try { sessionStorage.setItem("ow-curtain", "1"); } catch (e) {}
-    if (sound) owBgm.play(); else owBgm.off();
-    c.classList.add("go"); document.documentElement.style.overflow = "";
-    setTimeout(() => c.classList.add("done"), 1500);
-  };
-  document.getElementById("gateGo").addEventListener("click", () => open(true));
-  document.getElementById("gateMute").addEventListener("click", e => { e.stopPropagation(); open(false); });
-  c.addEventListener("click", e => { if (!e.target.closest("button")) open(true); });
-})();
-</script>
 </body>
 </html>
