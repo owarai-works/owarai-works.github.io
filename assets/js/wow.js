@@ -11,7 +11,7 @@
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const bgmOn = () => !window.owBgm || (owBgm.isOn && owBgm.isOn());
-  const voice = (k, v) => { if (!bgmOn()) return; try { const a = new Audio(`assets/vo/${k}_${v}.mp3`); a.volume = .8; a.play().catch(() => {}); } catch (e) {} };
+  const voice = (k, v, vol = .8) => { if (!bgmOn()) return; try { const a = new Audio(`assets/vo/${k}_${v}.mp3`); a.volume = vol; a.play().catch(() => {}); } catch (e) {} };
   const sfx = n => { try { window.owSfx && owSfx(n); } catch (e) {} };
 
   /* ---------- 1 開演の演出 ---------- */
@@ -106,7 +106,7 @@
     let el = $(".wow-cut"); if (!el) { el = document.createElement("div"); el.className = "wow-cut"; el.setAttribute("aria-hidden", "true"); document.body.append(el); }
     const side = ["aoi", "momoe"].includes(c[0]) ? "r" : "l";
     el.className = `wow-cut ${side} k-${c[0]}`; el.innerHTML = `<img src="assets/img/ex/${c[0]}_${c[1]}0.webp" alt=""><p>${c[3]}</p>`;
-    void el.offsetWidth; el.classList.add("on"); voice(c[0], c[2]);
+    void el.offsetWidth; el.classList.add("on"); voice(c[0], c[2], .45);  /* 11-22 ユーザー「スクロール時のボイスを少し下げて」 */
     clearTimeout(cutT); cutT = setTimeout(() => el.classList.remove("on"), 2300);
   }
   let cutIO = null;

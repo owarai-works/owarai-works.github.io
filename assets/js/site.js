@@ -116,6 +116,12 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
   };
   addEventListener("keydown", e => { if (e.key === "Escape" && modal && modal.classList.contains("open")) closeModal(); });
   if (document.body.dataset.page === "home") { const heroFaq = () => { const h = $("section.hero"); document.body.classList.toggle("on-hero", !!h && scrollY < h.offsetHeight * .6 && innerWidth >= 1024); }; addEventListener("scroll", heroFaq, {passive: true}); addEventListener("resize", heroFaq); heroFaq(); }
+  /* 11-22 ユーザー「左上ぴったり」：パソコンのトップの文字のかたまりを、上のメニューの下から画面の下までに収まる大きさにする（最大1.12倍） */
+  if (document.body.dataset.page === "home") { const heroFit = () => { const h = $("section.hero"), m = $(".hero-main"), w = $(".hero-in"); if (!h || !m || !w) return;
+      if (innerWidth < 900) { m.style.removeProperty("transform"); return; }
+      m.style.setProperty("transform", "none", "important"); const nat = m.offsetHeight, pad = parseFloat(getComputedStyle(w).paddingTop) || 0, room = h.clientHeight - pad - 24;
+      const sc = Math.max(.7, Math.min(1.12, room / Math.max(1, nat))); m.style.setProperty("transform", `scale(${sc.toFixed(3)})`, "important"); };
+    addEventListener("resize", heroFit); addEventListener("load", heroFit); heroFit(); setTimeout(heroFit, 800); if (document.fonts) document.fonts.ready.then(heroFit); }
   window.openMovie = src => {
     if (!modal) {
       modal = document.createElement("div"); modal.className = "modal"; modal.setAttribute("role", "dialog"); modal.setAttribute("aria-modal", "true"); modal.setAttribute("aria-label", "ムービー");
