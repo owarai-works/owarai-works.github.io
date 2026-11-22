@@ -1343,3 +1343,24 @@ main>section.sec.bg-p .sec-hd p,main>section.sec.bg-b .sec-hd p,main>section.sec
 :root{--bg-pink:#ffc9dd;--bg-pink2:#ffb3cf;--bg-blue:#c4dcff;--bg-blue2:#a9cbfb;--bg-yel:#ffe680}
 main>section.sec.bg-y{background:linear-gradient(180deg,#fff0a8,var(--bg-yel))!important}
 main>section.sec.bg-p,main>section.sec.bg-b,main>section.sec.bg-y{border-top:4px solid var(--ink)}
+
+/* ===== 11-22 ユーザー「スマホのトップ、背景の動画が見れない」：スマホは動画を1画面いっぱいに出し、字とボタンは下にまとめて小さく ===== */
+@media (max-width:760px){
+  html.snap main>section.hero{position:relative;justify-content:flex-end}
+  html.snap .hero .hero-bg{position:absolute!important;inset:0!important;height:100%!important;aspect-ratio:auto!important}
+  html.snap .hero .hero-sp{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+  html.snap .hero::before{height:100%!important;bottom:0!important;background:linear-gradient(0deg,rgba(28,16,18,.82) 0%,rgba(28,16,18,.45) 26%,transparent 46%)!important}
+  html.snap .hero .hero-fx{height:100%!important}
+  html.snap .hero-in{margin-top:0!important;padding:0 16px 20px!important}
+  html.snap .hero-top,html.snap .hero-bubble,html.snap .hero-chips,html.snap .hero-co,html.snap .hero-scroll{display:none!important}
+  html.snap .hero-logo{width:min(56vw,230px)!important}
+  html.snap .hero-sub{margin-top:6px!important}
+  html.snap .hero-acts{margin-top:12px!important;display:flex!important;flex-wrap:nowrap!important;align-items:center;gap:10px!important}
+  html.snap .hero-acts .play-pv{color:#fff}
+  html.snap .hero-acts .play-pv span{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.8)}
+}
+@media (max-width:760px){
+  html.snap .hero-acts .play-pv small{display:none}
+  html.snap .hero-acts .play-pv span{white-space:nowrap;font-size:14px}
+}
+@media (max-width:760px){ html.snap .hero-acts .play-pv span{display:none} }
