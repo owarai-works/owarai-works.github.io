@@ -2251,3 +2251,24 @@ html body .modal-x{top:-56px;right:0}
 }
 .ytc-t b{word-break:keep-all;overflow-wrap:anywhere}
 @media (max-width:760px){html.snap body .hero-acts{flex-wrap:wrap!important;justify-content:center}html.snap body .hero-acts .op-mini{order:3;margin:2px auto 0}}
+/* 11-22 ユーザー「（トップの左の文字のかたまりを）もう少し大きく、左に50px」：パソコン。画面の左に余白がある広い画面だけ左へ動かす */
+@media (min-width:1024px){html body .hero .hero-main{transform-origin:left top;transform:scale(1.08)}}
+@media (min-width:1600px){html body .hero .hero-main{transform:translateX(-40px) scale(1.12)}}
+@media (min-width:1024px){html body .hero .hero-main{transform-origin:left center;transform:translateY(-34px) scale(1.08)}}
+@media (min-width:1600px){html body .hero .hero-main{max-width:560px;transform:translate(-40px,-30px) scale(1.12)}html body .hero .hero-chips{flex-wrap:nowrap!important}}
+/* 上の2つを整理：基本無料とランクマッチ対応はいつも横に並べて高さを節約。画面の高さに合わせて大きさを決める */
+@media (min-width:1024px){
+  html body .hero .hero-main{max-width:min(600px,44vw)!important;transform-origin:left center;transform:translateY(-20px) scale(1.06)}
+  html body .hero .hero-chips{flex-wrap:nowrap!important}
+}
+@media (min-width:1024px) and (min-height:860px){html body .hero .hero-main{transform:translateY(-30px) scale(1.1)}}
+@media (min-width:1600px) and (min-height:960px){html body .hero .hero-main{transform:translate(-40px,-30px) scale(1.14)}}
+
+/* 動画の小窓：画面いっぱい */
+html body .modal{padding:56px 12px 12px!important}
+html body .modal-box.yt,html body .modal-box.yt-v{max-width:none}
+html body .modal-box.yt iframe{border-radius:10px}
+/* トップの大きな絵が見えているあいだ（パソコン）は「なんでも聞いてな」を隠す */
+body.on-hero .fb-open{opacity:0;pointer-events:none;transform:translateY(20px);transition:opacity .3s,transform .3s}
+.fb-open{transition:opacity .3s,transform .3s}
+@media (min-width:1024px){html body .hero .hero-top .ht2>span{display:block}html body .hero .hero-main{max-width:min(560px,40vw)!important}}

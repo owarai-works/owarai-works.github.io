@@ -107,13 +107,15 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
     let f = $("iframe", modal); if (!f) { f = document.createElement("iframe"); f.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture; fullscreen"); f.setAttribute("allowfullscreen", ""); box.append(f); }
     f.title = y.t; f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1&modestbranding=1`;
     /* 画面からはみ出さない大きさ（パソコンは全体を1.25倍にしているので、その分を割る） */
-    const z = parseFloat(getComputedStyle(document.documentElement).zoom) || 1, aw = (innerWidth - 40) / z, ah = (innerHeight - 150) / z, r = tall ? 9 / 16 : 16 / 9;
-    box.style.width = Math.floor(Math.min(aw, ah * r, tall ? 460 : 1100)) + "px";
+    /* 11-22 ユーザー「もっと画面いっぱいの大画面に」：上限をなくし、画面いっぱい（閉じるボタンの分だけあける） */
+    const z = parseFloat(getComputedStyle(document.documentElement).zoom) || 1, aw = (innerWidth - 24) / z, ah = (innerHeight - 76) / z, r = tall ? 9 / 16 : 16 / 9;
+    box.style.width = Math.floor(Math.min(aw, ah * r)) + "px";
     bgmWas = !!(window.owBgm && owBgm.hush && owBgm.hush());
     owTrack("movie_play", {movie: "yt_" + key + (tall ? "_v" : "_h")});
     modal.setAttribute("aria-label", y.t); modal.classList.add("open"); $(".modal-x", modal).focus();
   };
   addEventListener("keydown", e => { if (e.key === "Escape" && modal && modal.classList.contains("open")) closeModal(); });
+  if (document.body.dataset.page === "home") { const heroFaq = () => { const h = $("section.hero"); document.body.classList.toggle("on-hero", !!h && scrollY < h.offsetHeight * .6 && innerWidth >= 1024); }; addEventListener("scroll", heroFaq, {passive: true}); addEventListener("resize", heroFaq); heroFaq(); }
   window.openMovie = src => {
     if (!modal) {
       modal = document.createElement("div"); modal.className = "modal"; modal.setAttribute("role", "dialog"); modal.setAttribute("aria-modal", "true"); modal.setAttribute("aria-label", "ムービー");
