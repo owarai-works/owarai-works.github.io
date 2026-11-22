@@ -2764,3 +2764,11 @@ html body main section.gassen::before{width:max(3400px,240vw)!important;top:30%!
 /* 11-22 ユーザー「下の帯（今日から、笑いの修行を…）を消して」 */
 .g-sticky{display:none!important}
 body[data-page="game"] main{padding-bottom:0!important}
+/* 11-22 ユーザー「キャラ紹介の上に余白がある。もっと上に、もっと大きく」（パソコン） */
+@media (min-width:1024px){
+  html body .cs{min-height:0!important;padding-top:calc(var(--hd,80px) + 8px)!important;padding-bottom:40px!important}
+  html body .cs-in{min-height:0!important;align-items:start!important;width:min(100% - 40px,1500px)!important;grid-template-columns:108px minmax(0,1.05fr) minmax(0,1fr)!important}
+  html body .cs-art{max-width:600px!important}
+  html body .cs-tabs{align-self:center}
+}
+@media (min-width:1024px){html body .cs-art{max-width:min(600px,calc((100vh - 130px) / 1.25 * .6))!important}}
