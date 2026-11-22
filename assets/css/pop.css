@@ -1850,3 +1850,21 @@ body[data-page="home"] .jk{display:none!important}
 .wow-cut{bottom:auto!important;top:calc(var(--hdb,58px) + 8px)!important;align-items:center!important}
 .wow-cut p{margin-bottom:0!important}
 @media (max-width:760px){.wow-cut img{width:72px!important;height:72px!important}.wow-cut p{max-width:220px!important}}
+
+/* ===== 11-22 X と YouTube のアイコン ===== */
+.sns{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.sns a{display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 18px 0 12px;border:3px solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);font-weight:900;font-size:15px;text-decoration:none;transition:transform .15s}
+.sns a:hover{transform:translate(-2px,-2px)}
+.sns svg{width:24px;height:24px;flex:0 0 24px}
+.sns-x{background:#000;color:#fff}.sns-x svg{fill:#fff}
+.sns-youtube{background:#fff;color:var(--ink)}.sns-youtube svg{fill:#ff0033}
+.hero-sns{margin-top:16px}
+.ft-sns{margin-top:16px}
+@media (max-width:760px){
+  .hero-sns{justify-content:center;margin-top:10px}
+  .hero-sns a{height:40px;padding:0 10px;font-size:0;gap:0;width:40px;justify-content:center;border-width:2px}
+  .hero-sns a span{display:none}
+  .hero-sns svg{width:22px;height:22px}
+}
+@media (max-width:760px){html body .hero .hero-sns{position:absolute;top:calc(var(--hdb,58px) + 12px);right:12px;margin:0;flex-direction:column;gap:10px;z-index:6}}
+@media (max-width:760px){html body .hero .hero-sns{position:static!important;flex-direction:row!important;order:2;margin:10px 0 0!important;justify-content:center}html.snap .hero-main>*:not(.hero-sns):not(.hero-acts){order:1}html.snap .hero-acts{order:3}}

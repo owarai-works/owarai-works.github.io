@@ -9,8 +9,13 @@ window.SITE = {
   contact: "",            /* 問い合わせのメールアドレス。空のあいだは「準備中」と出ます */
   appStoreUrl: "",        /* App Store のページができたら URL を入れると、ボタンがリンクになります */
   aiEndpoint: "",         /* 本物のAIで答えるサーバーのURL（あとで足す）。空のあいだは、よくある質問だけで答える */
-  year: "2026"
+  year: "2026",
+  sns: [["x", "https://x.com/owarai_dojo", "X（旧Twitter）"], ["youtube", "https://www.youtube.com/@owarai-dojo/", "YouTube"]]  /* 11-22 ユーザー */
 };
+/* 11-22 X と YouTube のアイコン（data-sns の所と、フッターに出す） */
+window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n]) => `<a class="sns-${k}" href="${u}" target="_blank" rel="noopener" aria-label="${n}（新しいタブで開く）">${k === "x"
+  ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7.2L4.5 22H1.4l8.1-9.3L1 2h7.1l5 6.6L18.9 2Zm-1.1 18.1h1.7L7.3 3.8H5.5l12.3 16.3Z"/></svg>'
+  : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>'}<span>${n}</span></a>`).join("")}</div>`;
 
 (() => {
   if (window.__owSite) return; window.__owSite = true;  /* 2回読みこまれても1回だけ動く（BGMが2つ鳴らないように） */
@@ -53,7 +58,7 @@ window.SITE = {
   ft.className = "ft";
   ft.innerHTML = `<div class="wrap">
       <div class="ft-top">
-        <div class="ft-logo"><img src="assets/img/logo.webp" alt="お笑い道場 なんでやねん" width="900" height="515" loading="lazy"><p>AIが採点する、スマホで遊べるお笑いゲーム。ボケて、ツッコんで、日本一のお笑いマスターを目指そう。</p></div>
+        <div class="ft-logo"><img src="assets/img/logo.webp" alt="お笑い道場 なんでやねん" width="900" height="515" loading="lazy"><p>AIが採点する、スマホで遊べるお笑いゲーム。ボケて、ツッコんで、日本一のお笑いマスターを目指そう。</p>${snsHTML("ft-sns")}</div>
         <nav class="ft-nav" aria-label="サイトの案内">
           <a href="index.html">ホーム</a><a href="news.html">お知らせ</a><a href="game.html">ゲーム紹介</a>
           <a href="characters.html">キャラクター</a><a href="support.html">サポート</a><a href="terms.html">利用規約</a>
@@ -74,6 +79,7 @@ window.SITE = {
   });
   $$("[data-operator]").forEach(el => el.textContent = SITE.operator);
   $$("[data-store]").forEach(el => el.outerHTML = storeHTML(el.dataset.store || ""));
+  $$("[data-sns]").forEach(el => el.outerHTML = snsHTML(el.dataset.sns || ""));
 
   /* ---------- スクロールでヘッダーを濃く ---------- */
   const onScroll = () => hd.classList.toggle("solid", scrollY > 40);
@@ -269,6 +275,7 @@ window.SITE = {
     $$("[data-contact]", root).forEach(el => { el.innerHTML = SITE.contact ? `<a class="contact-mail" href="mailto:${SITE.contact}">${SITE.contact}</a>` : "（メールアドレスは準備中です。決まりしだい、ここに載せます）"; });
     $$("[data-operator]", root).forEach(el => el.textContent = SITE.operator);
     $$("[data-store]", root).forEach(el => el.outerHTML = storeHTML(el.dataset.store || ""));
+    $$("[data-sns]", root).forEach(el => el.outerHTML = snsHTML(el.dataset.sns || ""));
     $$("[data-movie]", root).forEach(b => b.addEventListener("click", () => openMovie(b.dataset.movie)));
     $$("canvas[data-petals]", root).forEach(c => petals(c, {n: +c.dataset.petals || 46}));
     $$("[data-news-latest]", root).forEach(el => { el.innerHTML = (window.NEWS || []).slice(0, +el.dataset.newsLatest || 3).map(newsItemHTML).join(""); });
