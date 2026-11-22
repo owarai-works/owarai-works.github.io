@@ -138,7 +138,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
       bg.append(f); } }
   /* スマホ：縦のOPが終わったら、1枚絵（kv_poster）にふわっと切りかえる */
   { const v = $(".hero .hero-sp"); if (v && document.body.dataset.page === "home") { const pv = window.owHeroPlay; window.owHeroPlay = () => { pv && pv(); if ($(".hero-yt")) return; try { v.currentTime = 0; v.play().catch(() => {}); } catch (x) {} }; }
-    if (v && document.body.dataset.page === "home") v.addEventListener("ended", () => { const im = document.createElement("img"); im.className = "hero-sp hero-sp-still"; im.src = "assets/img/kv_poster.webp"; im.alt = ""; v.after(im); requestAnimationFrame(() => im.classList.add("on")); setTimeout(() => v.remove(), 900); }); }
+    if (v && document.body.dataset.page === "home") v.addEventListener("ended", () => { const im = document.createElement("video"); im.className = "hero-sp hero-sp-still"; im.src = "assets/vid/kv_sp.mp4"; im.poster = "assets/img/kv_poster.webp"; im.muted = true; im.loop = true; im.autoplay = true; im.playsInline = true; im.setAttribute("playsinline", ""); im.setAttribute("aria-hidden", "true"); im.play().catch(() => {});  /* 11-22 ユーザー「スマホ：OPが終わったら静止画ではなく動画に戻せ」：前の背景動画（タイトルの動画）をくり返す */ v.after(im); requestAnimationFrame(() => im.classList.add("on")); setTimeout(() => v.remove(), 900); }); }
   /* 11-22 漫画の試し読み：第1話の4ページを縦に読む → 最後に「続きはアプリで」 */
   document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-comic]"); if (!b) return; e.preventDefault();
     let ov = $(".cm-read"); if (!ov) { ov = document.createElement("div"); ov.className = "cm-read"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-label", "第1話 試し読み");

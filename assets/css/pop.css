@@ -3009,3 +3009,4 @@ html body #gacha .gc-stage .gc-mach{height:36%!important;bottom:31%!important}
 @media (max-width:760px){html body .hero .hero-bg{container-type:size}html body .hero .hero-yt{display:block!important;width:max(100cqw,100cqh * .5625)!important;height:max(100cqh,100cqw * 1.7778)!important}
   html body .hero .hero-bg:has(.hero-yt.on) .hero-sp{opacity:0;transition:opacity 1s}}
 html.snap body .hero::after{display:none!important;content:none!important}  /* 11-22 ユーザー「スマホの放射線を消せ」：スマホのトップの回る放射（.hero::after）も消す */
+@media (max-width:760px){html body section.hero .hero-sns{top:var(--snsTop,62px)!important;bottom:auto!important;transform:none!important;right:16px!important}}  /* 11-22 ユーザー「XとYouTubeの丸いボタンをメニューのボタンのすぐ下に」 */
