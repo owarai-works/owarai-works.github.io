@@ -1755,3 +1755,98 @@ html body main .fit-list li span{word-break:keep-all!important;overflow-wrap:any
   html.snap .hs{gap:20px!important;padding:4px 20px 12px!important;margin-inline:-20px!important;scroll-padding-inline:20px}
   html.snap .hs>*{flex:0 0 100%!important;max-width:100%!important;scroll-snap-align:center}
 }
+
+/* ===================== 11-22 「超やりたくなる」仕かけ（assets/js/wow.js） ===================== */
+/* 1 開演の演出 */
+html.wow-lock,html.wow-lock body{overflow:hidden!important}
+.wow-open{position:fixed;inset:0;z-index:300;overflow:hidden;background:radial-gradient(circle at 50% 42%,#7a0f14,#1a0608 70%);display:grid;place-items:center;transition:opacity .45s}
+.wow-open.out{opacity:0;pointer-events:none}
+.wo-rays{position:absolute;left:50%;top:42%;width:240vmax;height:240vmax;transform:translate(-50%,-50%);background:repeating-conic-gradient(from 0deg,rgba(255,198,26,.32) 0 8deg,transparent 8deg 18deg);animation:woSpin 6s linear infinite;opacity:0;transition:opacity .4s .3s}
+.wow-open.go .wo-rays{opacity:1}
+@keyframes woSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.wo-cur{position:absolute;top:0;bottom:0;width:51%;z-index:5;background:repeating-linear-gradient(90deg,rgba(0,0,0,.3) 0 10px,transparent 10px 30px),linear-gradient(180deg,#d0141e,#6a0810);transition:transform .7s cubic-bezier(.7,0,.3,1) .15s}
+.wo-cur.l{left:0;border-right:4px solid var(--gold)}.wo-cur.r{right:0;border-left:4px solid var(--gold)}
+.wow-open.go .wo-cur.l{transform:translateX(-101%)}.wow-open.go .wo-cur.r{transform:translateX(101%)}
+.wo-sis{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,640px);height:72%;display:flex;justify-content:center;align-items:flex-end;z-index:2}
+.wo-sis img{height:100%;width:auto;margin:0 -9%;transform:translateY(110%);transition:transform .55s cubic-bezier(.2,1.5,.4,1);filter:drop-shadow(0 8px 18px rgba(0,0,0,.5))}
+.wo-sis .s2{height:108%;z-index:2}
+.wow-open.go .wo-sis img{transform:none}
+.wow-open.go .wo-sis .s1{transition-delay:.45s}.wow-open.go .wo-sis .s2{transition-delay:.6s}.wow-open.go .wo-sis .s3{transition-delay:.75s}
+.wo-stamp{position:absolute;left:50%;top:16%;z-index:6;transform:translate(-50%,-50%) scale(4) rotate(-14deg);opacity:0;transition:transform .28s cubic-bezier(.3,1.6,.5,1),opacity .2s}
+.wo-stamp b{display:block;padding:12px 26px;border:6px solid #fff;border-radius:18px;background:var(--shu);color:#fff;font-family:var(--f-disp);font-weight:900;font-size:clamp(36px,9vw,84px);letter-spacing:.04em;white-space:nowrap;box-shadow:0 0 0 6px var(--ink),10px 12px 0 var(--ink)}
+.wow-open.stamp .wo-stamp{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-8deg)}
+.wow-open.stamp{animation:woShake .35s}
+@keyframes woShake{20%{transform:translate(-8px,5px)}40%{transform:translate(7px,-6px)}60%{transform:translate(-5px,3px)}80%{transform:translate(3px,-2px)}}
+.wo-score{position:absolute;left:50%;top:31%;z-index:6;transform:translate(-50%,-50%) scale(.3);opacity:0;transition:all .35s cubic-bezier(.3,1.6,.5,1);text-align:center;background:var(--gold);border:5px solid var(--ink);border-radius:20px;padding:6px 22px;box-shadow:8px 8px 0 var(--ink)}
+.wo-score small{display:block;font-family:var(--f-en);letter-spacing:.2em;font-size:16px;color:var(--ink)}
+.wo-score b{font-family:var(--f-disp);font-weight:900;font-size:clamp(40px,10vw,72px);color:var(--shu);line-height:1}
+.wo-score b i{font-style:normal}
+.wow-open.score .wo-score{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.wo-cf{position:absolute;inset:0;z-index:7;pointer-events:none}
+.wo-skip{position:absolute;right:14px;bottom:14px;z-index:8;color:#fff;font-size:13px;font-weight:700;opacity:.8}
+
+/* トップの絵（スマホ）も派手に：光がまわる・ボタンがはねる */
+@media (max-width:760px){
+  html.snap .hero::after{content:"";position:absolute;left:50%;top:38%;width:200vmax;height:200vmax;transform:translate(-50%,-50%);background:repeating-conic-gradient(from 0deg,rgba(255,220,120,.16) 0 7deg,transparent 7deg 16deg);animation:woSpin 14s linear infinite;mix-blend-mode:screen;pointer-events:none;z-index:-1}
+  html.snap .hero-acts .store{animation:woBounce 1.4s ease-in-out infinite}
+  html.snap .hero-logo{animation:woLogo 2.4s ease-in-out infinite}
+}
+@keyframes woBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px) scale(1.04)}}
+@keyframes woLogo{0%,100%{transform:rotate(-2deg) scale(1)}50%{transform:rotate(2deg) scale(1.04)}}
+
+/* 2 お試しで1問 */
+.try-box{position:relative;max-width:640px;margin:0 auto;background:#fff;border:var(--pop);border-radius:22px;box-shadow:var(--sh);padding:18px;overflow:hidden}
+.try-pic{position:relative;margin:0;border:3px solid var(--ink);border-radius:14px;overflow:hidden}
+.try-pic img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.try-pic figcaption{position:absolute;left:10px;bottom:10px;right:10px;background:rgba(28,16,18,.82);color:#fff;font-weight:900;padding:6px 12px;border-radius:10px;font-size:17px}
+.try-q{text-align:center;font-family:var(--f-disp);font-weight:900;font-size:22px;margin:14px 0 10px;color:var(--ink)}
+.try-q small{display:block;font-size:14px;color:var(--shu-d);font-family:var(--f-body)}
+.try-ans{display:grid;gap:10px}
+.try-ans button{padding:14px 16px;border:3px solid var(--ink);border-radius:14px;background:var(--gold);box-shadow:4px 4px 0 var(--ink);font-family:var(--f-body);font-weight:900;font-size:17px;color:var(--ink);text-align:left;cursor:pointer;animation:woBounce 2.2s ease-in-out infinite}
+.try-ans button:nth-child(2){animation-delay:.3s;background:#ffd0e2}.try-ans button:nth-child(3){animation-delay:.6s;background:#c8defc}
+.try-ans button:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.try-res{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.try-face{width:120px;height:120px;object-fit:contain;animation:woBounce 1s ease-in-out infinite}
+.try-sc{background:var(--gold);border:4px solid var(--ink);border-radius:16px;padding:4px 22px;box-shadow:5px 5px 0 var(--ink)}
+.try-sc small{display:block;font-family:var(--f-en);letter-spacing:.2em;font-size:14px}
+.try-sc b{font-family:var(--f-disp);font-weight:900;font-size:56px;color:var(--shu-d);line-height:1}
+.try-sc b i{font-style:normal}
+.try-sc.pop{animation:woPop .4s cubic-bezier(.3,1.8,.5,1)}
+@keyframes woPop{0%{transform:scale(1)}50%{transform:scale(1.25) rotate(-4deg)}100%{transform:scale(1)}}
+.try-ct{font-weight:900;font-size:17px;color:var(--ink)}
+.try-cm{font-weight:700;font-size:15px;color:#3a2a25;background:#fff4cf;border:2px solid var(--ink);border-radius:12px;padding:6px 12px}
+.try-go{font-weight:900;font-size:16px;color:var(--ink)}
+.try-go b{background:linear-gradient(transparent 58%,var(--gold) 58%)}
+.try-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center}
+.try-cf{position:absolute;inset:0;pointer-events:none;z-index:5}
+@media (max-width:760px){
+  .try-box{padding:12px}
+  .try-pic img{aspect-ratio:16/9}
+  .try-q{font-size:18px;margin:10px 0 8px}
+  .try-ans{gap:8px}
+  .try-ans button{padding:11px 12px;font-size:15px}
+  .try-face{width:84px;height:84px}
+  .try-sc b{font-size:44px}
+}
+
+/* 3 シスターズのカットイン（前の小さなふきだし jk はトップでは出さない） */
+body[data-page="home"] .jk{display:none!important}
+.wow-cut{position:fixed;bottom:84px;z-index:58;display:flex;align-items:flex-end;gap:6px;pointer-events:none;transition:transform .45s cubic-bezier(.2,1.4,.4,1)}
+.wow-cut.l{left:0;transform:translateX(-110%)}.wow-cut.r{right:0;flex-direction:row-reverse;transform:translateX(110%)}
+.wow-cut.on{transform:none}
+.wow-cut img{width:130px;height:130px;object-fit:contain;filter:drop-shadow(4px 4px 0 rgba(28,16,18,.4))}
+.wow-cut p{max-width:220px;margin-bottom:56px;padding:10px 14px;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:4px 4px 0 var(--ink);font-weight:900;font-size:15px;line-height:1.5;color:var(--ink)}
+.wow-cut.k-kineko p{border-color:#e0a000;box-shadow:4px 4px 0 #e0a000}.wow-cut.k-aoi p{border-color:#2f6fd6;box-shadow:4px 4px 0 #2f6fd6}.wow-cut.k-momoe p{border-color:var(--sakura-d);box-shadow:4px 4px 0 var(--sakura-d)}
+@media (max-width:760px){.wow-cut{bottom:96px}.wow-cut img{width:96px;height:96px}.wow-cut p{font-size:13px;max-width:190px;margin-bottom:40px;padding:8px 10px}}
+
+/* 4 残り時間 */
+.wow-reset{display:inline-block;margin:14px auto 0!important;padding:6px 16px;border:3px solid var(--ink);border-radius:999px;background:var(--ink);color:#fff!important;font-weight:900;font-size:15px!important;animation:woBounce 2s ease-in-out infinite}
+.wow-reset b{color:var(--gold);font-size:1.25em;margin:0 2px}
+@media (max-width:760px){.wow-reset{font-size:12px!important;padding:5px 10px;margin-top:8px!important}html.snap #ranking .sec-hd p.wow-reset{display:inline-block!important}}
+
+/* 5 数字がはねる */
+.facts [data-count].pop{display:inline-block;animation:woPop .45s cubic-bezier(.3,1.8,.5,1)}
+/* カットインは画面の上（メニューのすぐ下）に出す：下のボタンや答えにかぶせない */
+.wow-cut{bottom:auto!important;top:calc(var(--hdb,58px) + 8px)!important;align-items:center!important}
+.wow-cut p{margin-bottom:0!important}
+@media (max-width:760px){.wow-cut img{width:72px!important;height:72px!important}.wow-cut p{max-width:220px!important}}
