@@ -2721,3 +2721,8 @@ html body .bz-join .bzj-reset b{color:var(--gold)!important}
 html body .bz-join .bzj-sis{z-index:1}
 html body .bz-join>.bzj-sis{position:absolute!important}
 html body .bz-join::before{opacity:.55!important}html body .bz-join::after{opacity:.45!important}
+/* 11-22 ユーザー「プライバシーポリシーを改行しないで」：下の欄とサポートのリンクの字は1行に */
+html body .ft a,html body .links3 a span,html body .sp-links a span{white-space:nowrap;word-break:keep-all}
+html body .ft nav a,html body .ft-nav a{white-space:nowrap}
+html body .ft .ft-nav{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(max-content,240px))!important;gap:10px 28px!important;min-width:0;max-width:100%}
+html body .ft .ft-top{flex-wrap:wrap}
