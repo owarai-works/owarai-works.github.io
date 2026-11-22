@@ -1526,3 +1526,46 @@ main .sec-hd p{margin:16px auto 0!important}
 @media (max-width:760px){.tod-badge{display:none!important}}  /* 11-22：スマホでは見出しに重なる「夜の部」などの札を出さない */
 @media (min-width:1024px){.fit-list{gap:22px!important}.fit-list li{transform:none!important}.facts{margin-top:40px!important;gap:22px!important}.fit-call{margin-top:36px!important}}
 @media (max-width:760px){html.snap .fit-list{gap:12px!important}}
+/* ===== 11-22 ユーザー「重ね文字やめい！タイトル文字がまだ小さい。全部調べて直せ」 =====
+   前の「影なし」の決まりは、青の地・お題合戦などの決まり（もっと強い指定）に負けていた。英語のタイトルは、どのページ・どの地でも影・ふち・重ねなし */
+html body main section .sec-hd .en,html body main section.bg-b .sec-hd .en,html body main section.bg-p .sec-hd .en,html body main section.bg-y .sec-hd .en,
+html body main section.gassen .sec-hd .en,html body main section.mgsec .sec-hd .en,html body .ph .en,html body main .pg-ih small{text-shadow:none!important;-webkit-text-stroke:0!important;paint-order:normal!important;filter:none!important}
+html body .ph .en{color:#2f6fd6!important}
+/* タイトルの大きさ（日本語のサブタイトルより、はっきり大きく） */
+html body main section .sec-hd .en{font-size:clamp(84px,8vw,128px)!important;line-height:.95!important}
+html body .ph .en{font-size:clamp(96px,9vw,150px)!important;line-height:.95!important}
+html body main section .sec-hd h2{font-size:clamp(28px,2.6vw,38px)!important}
+@media (max-width:760px){
+  html body main section .sec-hd .en{font-size:60px!important}
+  html body .ph .en{font-size:72px!important}
+  html body main section .sec-hd h2{font-size:19px!important}
+}
+@media (max-width:760px) and (max-height:720px){html body main section .sec-hd .en{font-size:50px!important}html body main section .sec-hd h2{font-size:17px!important}}
+/* スマホの1画面ずつの表示でも、タイトルを大きく（html.snap の決まりより強く） */
+@media (max-width:760px){
+  html.snap body main section .sec-hd .en{font-size:60px!important}
+  html.snap body main section .sec-hd h2{font-size:19px!important}
+}
+@media (max-width:760px) and (max-height:720px){html.snap body main section .sec-hd .en{font-size:50px!important}html.snap body main section .sec-hd h2{font-size:17px!important}}
+
+/* ===== 11-22 ユーザー「文字が小さい、何のために文字があるか不明、考えろ」「このボタンをもっと大きく」：
+   欄の最後のひと言は、ボタンを押したくなる「呼びかけ」。ボタンのすぐ上に、大きく・まん中に置く。ボタンも大きく ===== */
+html body main section p.gs-call,html body main section p.fit-call,html body main section p.pt-nado{
+  font-size:clamp(30px,3.2vw,46px)!important;line-height:1.5!important;font-weight:900!important;margin:48px auto 24px!important;max-width:22em;text-align:center}
+html body main section p.gs-call{color:#fff!important;text-shadow:0 3px 10px rgba(0,0,0,.6)!important}
+html body main section p.gs-call b{color:var(--gold)!important;display:inline-block}
+html body main .center-btn{margin-top:24px!important;display:flex;justify-content:center}
+html body main .center-btn .btn{font-size:28px!important;padding:26px 64px!important;min-width:min(560px,100%);justify-content:center;border-radius:18px!important;border-width:4px!important;box-shadow:8px 8px 0 var(--ink)!important}
+html body main .center-btn .btn .arw{width:44px!important;height:44px!important;font-size:22px!important}
+@media (max-width:760px){
+  html body main section p.gs-call,html body main section p.fit-call,html body main section p.pt-nado,
+  html.snap body main section p.gs-call,html.snap body main section p.fit-call,html.snap body main section p.pt-nado{display:block!important;font-size:21px!important;margin:18px auto 12px!important}
+  html body main .center-btn .btn{font-size:19px!important;padding:18px 24px!important;min-width:0;width:100%;box-shadow:5px 5px 0 var(--ink)!important}
+  html body main .center-btn .btn .arw{width:32px!important;height:32px!important}
+}
+/* 11-22：スマホで1画面に入らない話題は縮めずに長くする（scroll-snap は proximity にして、長い話題の中もふつうにスクロールできるように） */
+@media (max-width:760px){html.snap{scroll-snap-type:y proximity!important}html.snap main>section{overflow:visible!important}
+  html.snap .fit-list li{font-size:16px!important}html.snap .fact span{font-size:13px!important}html.snap .fact b{font-size:36px!important}
+  html.snap .pt-more .pm b{font-size:16px!important}html.snap .pt-more .pm small{font-size:12.5px!important}
+  html.snap .gs-feat b{font-size:17px!important}html.snap .gs-feat small{font-size:13px!important}
+  html.snap .odai-mini li>b{font-size:13px!important}}

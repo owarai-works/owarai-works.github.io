@@ -294,7 +294,7 @@ window.SITE = {
     const fit = () => { const H = innerHeight - hh;
       panels.forEach(sec => { if (sec.classList.contains("hero")) return; const w = sec.querySelector(":scope>.wrap"); if (!w) return; w.style.zoom = "";
         const cs = getComputedStyle(sec), pad = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom), need = w.scrollHeight;
-        const z = Math.max(.6, Math.min(1, (H - pad) / need)); if (z < .995) w.style.zoom = z.toFixed(3); }); };
+        const z = 1; void need;  /* 11-22 ユーザー「小さすぎ」：中身を縮めない（入らない話題は1画面より長くしてよい） */ }); };
     fit(); setTimeout(fit, 600); setTimeout(fit, 2000);
   }
   window.owSnap = owSnap;
