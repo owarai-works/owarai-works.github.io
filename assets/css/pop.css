@@ -1654,3 +1654,21 @@ html body .hero .hero-sub{display:none!important}  /* 11-22 ユーザー「こ�
 /* 11-22 ユーザー「改行がおかしい」：マーカーの言葉（自分ならこう答える・0.5秒でツッコミ など）は、とちゅうで折らない */
 html body main .fit-list b,html body main .fit-call b,html body main .pt-nado b,html body main .gs-call b{white-space:nowrap!important}
 html body main .fit-list li span{word-break:keep-all;overflow-wrap:normal!important;text-wrap:pretty}
+/* ===== 11-22 ユーザー「切れてる・下にスワイプしてもコンテンツごとに切り替わらない」 ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (max-width:760px){
+  html.snap{scroll-snap-type:y mandatory!important}
+  html.snap main>section,html.snap footer.ft{overflow:hidden!important}
+  html body main .fit-list b{white-space:normal!important}
+  html body main .fit-list li span{word-break:normal!important;overflow-wrap:normal!important;line-break:strict;min-width:0}
+  html body main .fit-list li{overflow:hidden}
+  html.snap .fit-list li{font-size:15px!important}
+  html body main .fit-call b,html body main .pt-nado b,html body main .gs-call b{white-space:normal!important}
+  html body main section,html body main .wrap{max-width:100vw}
+}
+@media (max-width:760px){
+  html.snap main>section{overflow:visible!important}
+  html.snap #gassen .gs-lead{display:none!important}
+  html.snap #gassen .gs-feat small{display:none!important}
+  html.snap #rankbox .rk-list li:nth-child(n+4),html.snap #rankbox .rk-hall li:nth-child(n+3){display:none!important}
+}
