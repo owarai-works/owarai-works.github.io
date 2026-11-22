@@ -1457,3 +1457,9 @@ main .gassen .gs-feat li:not(:nth-child(2)) b{color:var(--shu-d)!important}
 @media (max-width:760px){.pg-ih small,.kicker{font-size:15px!important}.ph p{font-size:15px!important}}
 .store em{background:#c4170f!important}
 .endcta p.rv:first-child{font-size:clamp(24px,2.6vw,34px)!important;line-height:1.6!important}
+/* ===== 11-22 ユーザー「入力枠を大きくしろ」：質問ボットの入力欄と送るボタン ===== */
+.fb-f{gap:12px!important;padding:16px!important;align-items:stretch}
+.fb-f input{min-height:64px;padding:14px 20px!important;font-size:20px!important;border:3px solid var(--ink)!important;border-radius:14px!important;outline-offset:3px}
+.fb-f input:focus{outline:3px solid var(--shu)}
+.fb-f button{min-width:110px;padding:0 22px!important;font-size:20px!important;border:3px solid var(--ink)!important;border-radius:14px!important;box-shadow:3px 3px 0 var(--ink)!important}
+@media (max-width:760px){.fb-f{padding:12px!important;gap:8px!important}.fb-f input{min-height:52px;font-size:17px!important;padding:10px 14px!important}.fb-f button{min-width:76px;font-size:17px!important}}
