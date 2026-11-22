@@ -1612,3 +1612,13 @@ html body .hero .hco2 .hc-pic img.hc-logo{object-fit:contain!important;aspect-ra
 .gs-ph.p1 figcaption,.gs-ph.p3 figcaption{z-index:3}
 .gs-ph.p2 figcaption{z-index:4}
 @media (max-width:760px){.gs-phones{gap:10px}.gs-ph figcaption{font-size:10.5px!important;padding:3px 6px!important}}
+/* 11-22 ユーザー「改行してしまってる、1行にして」：お知らせの前・次の記事は、横いっぱいの1行（一覧へ戻るは下に） */
+html body .art-pager{grid-template-columns:1fr!important;gap:14px!important}
+html body .art-pager a{display:flex!important;flex-direction:row!important;align-items:center;justify-content:flex-start;gap:16px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html body .art-pager a small{flex:0 0 auto}
+html body .art-pager .nx{justify-content:flex-end}
+html body .art-pager .ls{grid-row:auto!important;justify-content:center!important}
+html body .art-pager span{display:none}
+html body .art-pager .nx{justify-content:flex-start!important;text-align:left!important}
+html body .art-pager .t{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
+@media (max-width:760px){html body .art-pager a{font-size:13px!important;padding:14px!important;gap:10px!important}}
