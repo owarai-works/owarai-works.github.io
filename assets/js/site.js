@@ -60,7 +60,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
   ft.className = "ft";
   ft.innerHTML = `<div class="wrap">
       <div class="ft-top">
-        <div class="ft-logo"><img src="assets/img/logo.webp" alt="お笑い道場 なんでやねん" width="900" height="515" loading="lazy"><p>AIが採点する、スマホで遊べるお笑いゲーム。ボケて、ツッコんで、日本一のお笑いマスターを目指そう。</p>${snsHTML("ft-sns")}</div>
+        <div class="ft-logo"><img src="assets/img/logo.webp" alt="お笑い道場 なんでやねん" width="900" height="515" loading="lazy"><p>AIが採点する、スマホで遊べるお笑いゲーム。ボケて、ツッコんで、日本一のお笑いマスターを目指そう。</p>${snsHTML("ft-sns")}<p class="ft-mail">お問い合わせ：<span data-contact></span></p></div>
         <nav class="ft-nav" aria-label="サイトの案内">
           <a href="index.html">ホーム</a><a href="news.html">お知らせ</a><a href="game.html">ゲーム紹介</a>
           <a href="characters.html">キャラクター</a><a href="support.html">サポート</a><a href="terms.html">利用規約</a>

@@ -1868,3 +1868,4 @@ body[data-page="home"] .jk{display:none!important}
 }
 @media (max-width:760px){html body .hero .hero-sns{position:absolute;top:calc(var(--hdb,58px) + 12px);right:12px;margin:0;flex-direction:column;gap:10px;z-index:6}}
 @media (max-width:760px){html body .hero .hero-sns{position:static!important;flex-direction:row!important;order:2;margin:10px 0 0!important;justify-content:center}html.snap .hero-main>*:not(.hero-sns):not(.hero-acts){order:1}html.snap .hero-acts{order:3}}
+.ft-mail{margin-top:12px;font-weight:700;font-size:15px}.ft-mail a{color:var(--ink);text-decoration:underline}
