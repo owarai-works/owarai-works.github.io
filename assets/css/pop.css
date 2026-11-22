@@ -1408,3 +1408,17 @@ main section.bg-b .sec-hd .en{color:var(--gold)!important;text-shadow:5px 5px 0 
 main section.gassen .sec-hd .en,main section.mgsec .sec-hd .en{color:#fff!important}
 main section.bg-p .sec-hd h2::before,main section.bg-y .sec-hd h2::before{background:#2f6fd6!important}
 main section.mgsec .sec-hd .en{color:#2f6fd6!important}
+
+/* ===== 11-22 ユーザー「これ系のアイコンを使え・文字ももっといい感じに」：お題のカードに、ゲームのお題のアイコン（img/rd/icons.webp）と、お題の色の札 ===== */
+.omk{width:72px!important;height:72px!important;margin:10px auto 2px!important;filter:drop-shadow(0 4px 0 rgba(28,16,18,.25))!important}
+.odai-mini li>b,.odai .od>b,.odai .od>div>b{display:inline-flex;align-items:center;justify-content:center;min-width:72%;margin:6px auto 0!important;padding:6px 14px;
+  background:var(--kc,#2b8ae2)!important;color:#fff!important;border:3px solid var(--ink);border-radius:999px;box-shadow:0 3px 0 var(--ink);
+  font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif!important;font-weight:900!important;font-size:17px!important;line-height:1.25!important;letter-spacing:.04em;
+  -webkit-text-stroke:0!important;text-shadow:0 1px 0 rgba(0,0,0,.3)!important;text-align:center}
+.odai .od>b{font-size:19px!important}
+.odai .od small{margin-top:10px!important;font-size:15px!important;line-height:1.7!important;color:#3a2a25!important}
+@media (max-width:760px){
+  .omk{width:40px!important;height:40px!important;margin:4px auto 0!important}
+  .odai-mini li>b,.odai .od>b{font-size:11.5px!important;padding:3px 6px;border-width:2px;min-width:0;width:94%;box-shadow:0 2px 0 var(--ink)}
+  html.snap .omk{width:30px!important;height:30px!important}
+}
