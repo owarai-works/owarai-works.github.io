@@ -51,7 +51,11 @@
       if (sound) { ac(); try { window.owBgm && owBgm.prime && owBgm.prime(); } catch (e) {} }  /* 11-22 ユーザー「BGMは『なんでやねん』のあとから」：タップのときは音の準備だけ */
       if (reduce) { ov.classList.add("go", "stamp", "score"); $(".wo-score i", ov).textContent = 98; setTimeout(end, 1200); return; }
       requestAnimationFrame(() => ov.classList.add("go")); if (sound) SND.roll();
-      setTimeout(() => { ov.classList.add("stamp"); if (sound) { SND.don(); SND.clap(); } confetti($(".wo-cf", ov)); }, 900);
+      const stampPos = () => { const bu = $(".wo-bust", ov), im = bu && $("img", bu), st = $(".wo-stamp", ov); if (!im || !st) return; const sh = $("b", st).offsetHeight || 80, room = Math.round(sh * 1.45) + 70;  /* なんでやねんの高さ（ななめの分も）＋上下に余白 */
+        im.style.setProperty("max-height", Math.max(200, ov.clientHeight - room) + "px", "important");
+        const top = bu.offsetTop + im.offsetTop; st.style.setProperty("top", Math.round(Math.max(top, room) / 2) + "px", "important"); };  /* 11-22 ユーザー「なんでやねんを上の余白のまん中に」：画面の上とシスターズの頭のあいだの、まん中 */
+      stampPos(); addEventListener("resize", stampPos);
+      setTimeout(() => { stampPos(); ov.classList.add("stamp"); if (sound) { SND.don(); SND.clap(); } confetti($(".wo-cf", ov)); }, 900);
       setTimeout(() => { ov.classList.add("score"); if (sound) SND.up(); const el = $(".wo-score i", ov), t0 = performance.now();
         const f = t => { const k = Math.min(1, (t - t0) / 800); el.textContent = Math.round(98 * (1 - (1 - k) ** 3)); if (k < 1) requestAnimationFrame(f); else if (sound) SND.fan(); }; requestAnimationFrame(f); }, 1300);
       setTimeout(end, 3300);
