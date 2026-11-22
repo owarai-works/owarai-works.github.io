@@ -2634,3 +2634,10 @@ html body .wo-bust img{transform-origin:50% 100%!important;transition:transform 
 @keyframes woBustHop{30%{transform:scale(1.03)}}
 /* 11-22 ユーザー「コラボの画像を下の切れ目まで下げて」：パソコンは右下（BGMのボタンの上）に */
 @media (min-width:761px){html body .hero .hero-co.hco2{top:auto!important;bottom:clamp(110px,14vh,150px)!important}}
+/* 11-22 ユーザー「試し読みの丸を本の左上の角に。丸の中心が角に来るように」 */
+html body .cm-cover{overflow:visible!important}
+html body .cm-cover img{border-radius:12px}
+html body .cm-cover .cm-free{left:0!important;top:0!important;right:auto!important;transform:translate(-50%,-50%) rotate(-10deg)!important;z-index:3}
+@keyframes cmFree{0%,100%{transform:translate(-50%,-50%) rotate(-10deg) scale(1)}50%{transform:translate(-50%,-50%) rotate(-10deg) scale(1.08)}}
+html body .cm-cover .cm-free{animation:cmFree 1.4s ease-in-out infinite!important}
+@media (max-width:900px){html body .cm-left{padding-left:44px}}
