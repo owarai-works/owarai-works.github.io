@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Cache-Control" content="no-cache">
-<script src="assets/js/prep.js?v=11221405"></script>
+<script src="assets/js/prep.js?v=11221409"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>キャラクター紹介｜お笑いシスターズ｜ボケて！ツッコんで！お笑い道場なんでやねん！</title>
 <meta name="description" content="日向気猫・水野葵・桜川百萌の「お笑いシスターズ」を紹介。晴れ着・アイドル・メイドのイラストやボイスも楽しめます。">
@@ -32,9 +32,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@500;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=11221405">
-<link rel="stylesheet" href="assets/css/chara.css?v=11221405">
-<link rel="stylesheet" href="assets/css/pop.css?v=11221405">
+<link rel="stylesheet" href="assets/css/site.css?v=11221409">
+<link rel="stylesheet" href="assets/css/chara.css?v=11221409">
+<link rel="stylesheet" href="assets/css/pop.css?v=11221409">
 <!-- Google アナリティクス（アクセス解析） -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VZ29R3E1TW"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-VZ29R3E1TW");</script>
@@ -64,12 +64,12 @@
   </section>
 </main>
 
-<script src="assets/js/site.js?v=11221405"></script>
-<script src="assets/js/sfx.js?v=11221405" defer></script>
-<script src="assets/js/fun2.js?v=11221405" defer></script>
-<script src="assets/js/catch.js?v=11221405" defer></script>
-<script src="assets/js/fun.js?v=11221405" defer></script>
-<script src="assets/js/faq-bot.js?v=11221405" defer></script>
+<script src="assets/js/site.js?v=11221409"></script>
+<script src="assets/js/sfx.js?v=11221409" defer></script>
+<script src="assets/js/fun2.js?v=11221409" defer></script>
+<script src="assets/js/catch.js?v=11221409" defer></script>
+<script src="assets/js/fun.js?v=11221409" defer></script>
+<script src="assets/js/faq-bot.js?v=11221409" defer></script>
 <script>
 (() => {
   /* キャラクターのデータ（ゲームのプロフィールと同じ） */
@@ -86,7 +86,7 @@
   const art = (c, j) => `assets/img/ch_${c.k}_${j + 1}.webp`;
   let cur = -1, pic = 0;
 
-  tabs.innerHTML = CH.map((c, i) => `<button class="cs-tab" type="button" role="tab" id="tab-${c.k}" aria-selected="false" style="--tc:${c.c1}" data-i="${i}">${i === 0 ? `<em class="grp">SISTERS</em>` : ""}<img src="assets/img/face_${c.k}.webp" alt="" width="220" height="220"><span>${c.tab}</span></button>`).join("");
+  tabs.innerHTML = CH.map((c, i) => `<button class="cs-tab" type="button" role="tab" id="tab-${c.k}" aria-selected="false" style="--tc:${c.c1}" data-i="${i}"><img src="assets/img/face_${c.k}.webp" alt="" width="220" height="220"><span>${c.tab}</span></button>`).join("");
   document.querySelector(".cs-cards").innerHTML = CH.map((c, i) => `<a class="cs-card rv d${i % 4}" href="#${c.k}" style="--cc:${c.c1}"><img src="${art(c, 0)}" alt="" loading="lazy"><span><small>${c.role}</small><b>${c.name}</b></span></a>`).join("");
 
   const setArt = (src, anim = true) => {
