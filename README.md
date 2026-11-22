@@ -20,6 +20,7 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 - 絵をキャラクターシートどおりに直した（11-22 ユーザー「気猫のマイク・扇子の柄・百萌の襟の柄・草履の鼻緒の色」）：hero・hero_m・ogp・pv_poster・pv.mp4（Vidu Q4 オフピーク）・kv_poster・kv_sp.mp4（ゲームの kv.webp・title_kv.mp4）・ch_*_1・st_*・fun のちびキャラ7枚・boss・battle・bn_*・m_mix・m_tsk・wp_area4・wp_area6・hd_banzuke。**気猫はマイクを持たない**（シートにない）。アイドル衣装の ch_*_2 は手持ちマイクのまま（衣装の絵）。
 - **スマホ（幅760px以下）の HOME とゲーム紹介は、下にスワイプするたびに1つの話題が1画面に収まる**（11-22 ユーザー）。`site.js` の `owSnap`（html.snap・横スワイプのカード `HS`・入りきらない話題は .wrap を zoom で縮める・0.6まで）と `pop.css` の「html.snap」。話題を足すときは、1画面（390×844 で 786px、Safari のバーありで約606px）に入るか `panels.js` 方式で確かめる。
 - **TOP（index.html）の並び（11-22 ユーザー）**：メインビジュアル → NEWS → FOR YOU → HOT POINT → ODAI → ODAI GASSEN → RANKING → MINI GAME → 配信のお知らせ。話題ごとに地の色を 黄・ピンク（百萌）・青（葵）で変える（pop.css の bg-y・bg-p・bg-b・はっきりした色＋上に黒い線）。パソコン（幅1024px以上）はページ全体を zoom 1.25 で大きく（11-22 ユーザー「PCで文字が小さすぎる」）。ダウンロードの帯は 11-22 に消した。
+- **字の色の点検**：`node tools/contrast.js <url> out 1440 900` → `python3 tools/contrast.py out`（字と、その下の地の明るさの差・暖色に暖色＝WW を全部の字で出す。11-22 ユーザー「暖色に暖色を使うな。全ページ調べて直せ」）。パソコンでは site.js の `owMinFont` が16pxより小さい字を16pxにする。
 - **TOP（index.html）には PLAY・キャラクター・ムービーの欄を置かない**（11-22 ユーザー。PLAY とキャラクターは専用ページ、ムービーはトップの絵の「ムービーを見る」ボタンだけ）。
 - 画面写真はゲーム版2145で撮り直した（od_*・gs_*・pt_*・ss_*。新しく od_anaume・od_intv・ss_oni・ss_gp・ss_dan・ss_djroad・ss_gacha）。
 

@@ -1422,3 +1422,38 @@ main section.mgsec .sec-hd .en{color:#2f6fd6!important}
   .odai-mini li>b,.odai .od>b{font-size:11.5px!important;padding:3px 6px;border-width:2px;min-width:0;width:94%;box-shadow:0 2px 0 var(--ink)}
   html.snap .omk{width:30px!important;height:30px!important}
 }
+
+/* ===== 11-22 ユーザー「暖色に暖色を使うな。全ページ調べて直せ」（tools は scratchpad/contrast.js・contrast.py で全ページ測った） ===== */
+/* 格闘モードの VS：絵の上の名前と担当は白い字＋黒いふち（前は、ゲーム紹介の字を濃くする決まりが当たって黒っぽくなっていた） */
+body[data-page="game"] .vs-side b,body[data-page="game"] .vs-side small{color:#fff!important;text-shadow:0 0 4px var(--ink),2px 2px 0 var(--ink),-1px -1px 0 var(--ink),1px -1px 0 var(--ink),-1px 1px 0 var(--ink)!important}
+body[data-page="game"] .vs-side small{display:inline-block;margin-top:6px;padding:3px 12px;background:rgba(28,16,18,.72);border-radius:999px;font-weight:700}
+/* お題合戦の特徴カード：黄色いカードの上の赤い字 → 黒い字。白いカードは赤のまま */
+main .gassen .gs-feat li b{color:var(--ink)!important}
+main .gassen .gs-feat li:not(:nth-child(2)) b{color:var(--shu-d)!important}
+/* ランキングの2位・3位（銀・銅の地）の数は黒 */
+#rankbox .rk-list li em,.bz-list li em{color:var(--ink)!important}
+/* お知らせの「イベント」札：うすいピンク → こいピンク */
+.news-item .tag{background:#c2185b!important;color:#fff!important}
+/* 殿堂の「ええやん」：うすいピンク → こいピンク */
+.hc-like{color:#c2185b!important}
+/* 難しさの「初級・中級・上級」：白い地に黄色い字 → こい色 */
+.lvl em{filter:none!important;color:color-mix(in srgb,var(--lc) 70%,#000)!important}
+/* キャラ紹介の担当（ピンクの地の上） */
+.cs-card small{color:#fff!important;text-shadow:0 0 4px var(--ink),2px 2px 0 var(--ink)!important}
+
+/* ===== 11-22 ユーザー「縦センタリングしろ」：ページ下の「あなたの一言が…」の欄は上下まん中・ボタンの高さをそろえる ===== */
+.endcta{padding:64px 0!important;display:flex;flex-direction:column;justify-content:center;min-height:360px}
+.endcta .acts-row{display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;margin-top:24px}
+.endcta .acts-row>*{margin:0!important}
+.cta .acts{align-items:center}
+
+/* ===== 11-22 ユーザー「顔をうつせ」：ページの上の大きな絵は、顔が入る位置で切り取る ===== */
+.ph-bg{background-position:center 12%!important}
+.ph-big .ph-bg{background-position:70% 12%!important;background-size:cover!important}
+
+/* ===== 11-22 ユーザー「文字が小さすぎる」：小さい英語の札（ABOUT など）とページの説明を大きく ===== */
+.pg-ih small,.kicker{font-size:20px!important;letter-spacing:.2em}
+.ph p{font-size:18px!important;line-height:1.8!important;color:var(--ink)!important;font-weight:500}
+@media (max-width:760px){.pg-ih small,.kicker{font-size:15px!important}.ph p{font-size:15px!important}}
+.store em{background:#c4170f!important}
+.endcta p.rv:first-child{font-size:clamp(24px,2.6vw,34px)!important;line-height:1.6!important}

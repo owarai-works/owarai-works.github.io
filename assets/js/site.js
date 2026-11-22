@@ -298,6 +298,17 @@ window.SITE = {
     fit(); setTimeout(fit, 600); setTimeout(fit, 2000);
   }
   window.owSnap = owSnap;
+  /* 11-22 ユーザー「文字が小さすぎる。ページ全体を見直せ」：パソコン（幅1024px以上）では、上のメニュー以外の字を16pxより小さくしない（全体1.25倍で、画面では20px以上） */
+  function owMinFont(root){
+    if (!matchMedia("(min-width:1024px)").matches) return;
+    const W = document.createTreeWalker(root || document.body, NodeFilter.SHOW_TEXT), done = new Set();
+    while (W.nextNode()) { const e = W.currentNode.parentElement; if (!e || done.has(e) || !W.currentNode.textContent.trim()) continue; done.add(e);
+      if (e.closest(".hd,.sp-menu,.bgm,.bgm-vol,.bgm-tip,.og-gate,.hero-side,.marquee,svg,.rk-tabs,.sec-hd .en,.pd-base,.hsl-nav")) continue;
+      if (parseFloat(getComputedStyle(e).fontSize) < 16) { e.style.fontSize = "16px"; e.dataset.minf = "1"; } }
+  }
+  window.owMinFont = owMinFont;
+  setTimeout(() => owMinFont(), 300); setTimeout(() => owMinFont(), 1500);
+  new MutationObserver(m => { clearTimeout(owMinFont.t); owMinFont.t = setTimeout(() => owMinFont(), 120); }).observe(document.body, {childList: true, subtree: true});
   { let t = 0; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(owSnap, 200); }); }
   const loaded = new Set();
   const base = u => u.split("?")[0];
