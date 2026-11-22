@@ -150,7 +150,13 @@
       new IntersectionObserver((es, o) => es.forEach(e => { if (!e.isIntersecting) return; o.disconnect(); $$("li", om).forEach((li, i) => setTimeout(() => li.classList.add("in"), i * 70)); }), {threshold: .3}).observe(om); }
   }
 
-  const init = () => { opening(); peeks(); tryMount(); cutWatch(); numWatch(); countdown(); };
+  /* ---------- 7 パソコン：App Store・X・YouTube の列は、スクロールしても右上に出たまま（11-22 ユーザー） ---------- */
+  function pinSns(){
+    if (document.body.dataset.page !== "home" || !matchMedia("(min-width:761px)").matches) return;
+    const el = $(".hero .hero-sns"); if (!el) return; el.classList.add("pinned"); document.body.append(el);
+  }
+
+  const init = () => { opening(); pinSns(); peeks(); tryMount(); cutWatch(); numWatch(); countdown(); };
   init(); setInterval(countdown, 1000);
-  addEventListener("ow:page", () => { peeks(); tryMount(); cutWatch(); numWatch(); countdown(); });
+  addEventListener("ow:page", () => { document.querySelectorAll("body>.hero-sns.pinned").forEach(e => { if (document.body.dataset.page !== "home") e.remove(); }); pinSns(); peeks(); tryMount(); cutWatch(); numWatch(); countdown(); });
 })();
