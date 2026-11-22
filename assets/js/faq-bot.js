@@ -61,13 +61,14 @@
 .fb-open:hover{transform:translate(-1px,-2px)}
 .fb-open img{width:38px;height:38px;border-radius:50%;border:2px solid var(--ink);background:#dbe9ff}
 .fb-open small{display:block;font-size:10px;color:var(--shu);line-height:1}
-.fb{position:fixed;left:14px;bottom:14px;z-index:90;width:min(380px,calc(100vw - 28px));height:min(580px,calc(100svh - 90px));display:flex;flex-direction:column;background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:7px 7px 0 var(--ink);overflow:hidden;transform-origin:left bottom;transform:scale(.6);opacity:0;pointer-events:none;transition:transform .3s var(--ease),opacity .25s}
+.fb{position:fixed;left:14px;bottom:14px;z-index:90;width:min(380px,calc(100vw - 28px));height:min(1160px,calc(100svh - 40px));display:flex;flex-direction:column;background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:7px 7px 0 var(--ink);overflow:hidden;transform-origin:left bottom;transform:scale(.6);opacity:0;pointer-events:none;transition:transform .3s var(--ease),opacity .25s}
 .fb.open{transform:none;opacity:1;pointer-events:auto}
 .fb-hd{display:flex;align-items:center;gap:10px;padding:10px 12px;background:linear-gradient(135deg,#2f7fe0,#16b3c8);color:#fff;border-bottom:3px solid var(--ink)}
 .fb-hd img{width:42px;height:42px;border-radius:50%;border:2px solid #fff;background:#dbe9ff}
 .fb-hd b{display:block;font-family:var(--f-disp);font-weight:400;font-size:17px;letter-spacing:.04em;text-shadow:2px 2px 0 var(--ink)}
 .fb-hd small{font-size:11px;opacity:.95}
 .fb-x{margin-left:auto;width:34px;height:34px;border-radius:50%;background:#fff;color:var(--ink);border:2px solid var(--ink);font-size:18px;line-height:1}
+.fb-pin{flex:none;display:flex;flex-direction:column;gap:10px;padding:14px 12px;background:#fff;border-bottom:3px solid var(--ink);max-height:45%;overflow-y:auto}
 .fb-log{flex:1;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:10px;background:radial-gradient(circle,rgba(47,127,224,.08) 1.5px,transparent 2px) 0 0/16px 16px,#f6f9ff}
 .fb-m{max-width:86%;padding:10px 13px;border-radius:14px;font-size:14px;line-height:1.7;border:2px solid var(--ink);word-break:break-word}
 .fb-m a{color:var(--shu-d);text-decoration:underline}
@@ -81,7 +82,7 @@
 .fb-f input{flex:1;min-width:0;padding:10px 12px;border:2px solid var(--ink);border-radius:10px;font:inherit;font-size:16px}
 .fb-f button{padding:0 16px;border-radius:10px;border:2px solid var(--ink);background:var(--shu);color:#fff;font-weight:900;box-shadow:2px 2px 0 var(--ink)}
 .fb-note{padding:0 12px 8px;font-size:10px;color:var(--muted);background:#fff}
-.fb-inline{position:relative;left:auto;bottom:auto;width:100%;height:560px;transform:none;opacity:1;pointer-events:auto;z-index:1}
+.fb-inline{position:relative;left:auto;bottom:auto;width:100%;height:1120px;transform:none;opacity:1;pointer-events:auto;z-index:1}
 body[data-page="support"] .fb-open{display:none}
 @media (max-width:520px){.fb-open span{display:none}.fb-open{padding:4px}.fb-open img{width:38px;height:38px}}
 `;
@@ -91,6 +92,7 @@ body[data-page="support"] .fb-open{display:none}
     const el = document.createElement("section");
     el.className = "fb" + (inline ? " fb-inline" : ""); el.setAttribute("aria-label", "お問い合わせボット");
     el.innerHTML = `<header class="fb-hd"><img src="assets/img/face_aoi.webp" alt=""><div><b>サポート担当 葵</b><small>よくある質問に すぐ答えるで</small></div>${inline ? "" : '<button class="fb-x" type="button" aria-label="閉じる">×</button>'}</header>
+      <div class="fb-pin"></div>
       <div class="fb-log" aria-live="polite"></div>
       <form class="fb-f"><input type="text" maxlength="200" placeholder="質問を書いてな（例：アプリはいつ？）" aria-label="質問"><button type="submit">送る</button></form>
       <p class="fb-note">自動で答えています。答えがちがうときは、お問い合わせ先に送ってください。</p>`;
@@ -113,7 +115,9 @@ body[data-page="support"] .fb-open{display:none}
       if (!f) chips(CHIPS.slice(0, 4));
     }
     form.onsubmit = e => { e.preventDefault(); const q = input.value; input.value = ""; ask(q); };
-    add(GREET, "bot"); chips(CHIPS);
+    /* 11-22 ユーザー「あいさつとボタンの部分を固定」：上に止めておき、下の会話だけスクロール */
+    { const pin = el.querySelector(".fb-pin"); const g = document.createElement("div"); g.className = "fb-m bot"; g.innerHTML = GREET; pin.append(g);
+      const c = document.createElement("div"); c.className = "fb-chips"; CHIPS.forEach(q => { const b = document.createElement("button"); b.type = "button"; b.textContent = q; b.onclick = () => ask(q); c.append(b); }); pin.append(c); }
     return el;
   };
 
