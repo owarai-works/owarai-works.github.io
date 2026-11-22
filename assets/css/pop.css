@@ -1605,3 +1605,10 @@ html body main .pt-t p,html body main .gs-feat small,html body main .nm p,html b
 .hero .hero-sub{display:inline-flex!important;align-items:center;gap:12px}
 .hero .hero-sub b{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center}
 html body .hero .hco2 .hc-pic img.hc-logo{object-fit:contain!important;aspect-ratio:720/235!important;height:auto!important;min-height:0!important;max-height:none!important}
+/* 11-22 ユーザー「文字がかくれてる」：お題合戦の3台のスマホの札が重ならないように、スマホのあいだをあけ、札は各スマホの幅の中に収める */
+.gs-phones{gap:28px}
+.gs-ph{margin:0!important}
+.gs-ph figcaption{z-index:3;max-width:96%;font-size:clamp(13px,1.15vw,18px)!important;padding:6px 12px!important}
+.gs-ph.p1 figcaption,.gs-ph.p3 figcaption{z-index:3}
+.gs-ph.p2 figcaption{z-index:4}
+@media (max-width:760px){.gs-phones{gap:10px}.gs-ph figcaption{font-size:10.5px!important;padding:3px 6px!important}}
