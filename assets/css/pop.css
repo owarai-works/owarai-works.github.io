@@ -2552,3 +2552,12 @@ main>section.sec.bg-y::before,main>section.sec.bg-p::before,main>section.sec.bg-
 @media (max-width:760px){html.snap .hs{overflow-y:hidden!important;overscroll-behavior-x:contain}html.snap main>section{overflow:hidden!important}
   html.snap #ranking .rk-hall>li:nth-child(n+2){display:none!important}}
 html body .hero .hco2 .hc-tag{display:none!important}  /* 11-22 ユーザー「COLLAB 開催中の字を消して」 */
+/* ===== 11-22 ユーザー「殿堂の欄のスペーシングとセンタリングを完璧に」：番号・絵・アイコン・文を1列に並べ、上下のまん中・すき間は16pxでそろえる ===== */
+html body .rk-hall>li{display:flex!important;align-items:center!important;gap:16px!important;padding:14px 18px!important;grid-template-columns:none!important;grid-template-rows:none!important}
+html body .rk-hall>li>i{flex:0 0 auto;margin:0!important}
+html body .rk-hall>li>.rk-pic{flex:0 0 auto;width:96px!important;height:72px!important;max-height:none!important;object-fit:cover;border-radius:10px;border:2px solid var(--ink);margin:0!important;grid-column:auto!important}
+html body .rk-hall>li>.rk-hb{flex:1;min-width:0;display:flex!important;align-items:center!important;gap:16px!important;grid-column:auto!important}
+html body .rk-hall .rk-hb .k-ic{flex:0 0 52px!important;width:52px!important;height:52px!important;margin:0!important}
+html body .rk-hall .rk-ht{display:flex;flex-direction:column;justify-content:center;gap:6px;min-width:0}
+html body .rk-hall .rk-ht p,html body .rk-hall .rk-ht small,html body .rk-hall .rk-ht>span{margin:0!important;line-height:1.35!important}
+@media (max-width:760px){html body .rk-hall>li{gap:10px!important;padding:10px 12px!important}html body .rk-hall>li>.rk-pic{width:64px!important;height:48px!important}html body .rk-hall>li>.rk-hb{gap:10px!important}html body .rk-hall .rk-hb .k-ic{flex-basis:38px!important;width:38px!important;height:38px!important}}
