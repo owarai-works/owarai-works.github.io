@@ -94,7 +94,7 @@
             <ol class="rk-list">${g.map(r => `<li class="r${r.rank}"><b>${medal(r.rank)}</b><span>${VNAME.rate[gp]}</span><em>${fmtV("rate", gp, r.v)}</em></li>`).join("")}</ol>
             <a class="btn sm rk-more" href="banzuke.html">ランキングをすべて見る <span class="arw" aria-hidden="true">→</span></a></div>
           <div class="rk-card rk-h"><h3><span>みんなの殿堂</span><small>AIが80点以上をつけた名回答</small></h3>${tabs(hp, "h")}${x.hallS ? `<p class="rk-chip">見本</p>` : ""}
-            <ol class="rk-hall">${h.map((v, i) => `<li class="${v.pic ? "has-pic" : ""}"><i>${i + 1}</i>${v.pic ? `<img class="rk-pic" src="${esc(v.pic)}" alt="" loading="lazy">` : ""}<div>${kindIc(v.kind)}${v.odai ? `<small>${esc(v.odai)}</small>` : ""}<p>「${esc(v.text)}」</p><span><b>${v.score}点</b>・ええやん ${v.likes || 0}</span></div></li>`).join("")}</ol>
+            <ol class="rk-hall">${h.map((v, i) => `<li class="${v.pic ? "has-pic" : ""}"><i>${i + 1}</i>${v.pic ? `<img class="rk-pic" src="${esc(v.pic)}" alt="" loading="lazy">` : ""}<div class="rk-hb">${kindIc(v.kind)}<div class="rk-ht">${v.odai ? `<small>${esc(v.odai)}</small>` : ""}<p>「${esc(v.text)}」</p><span><b>${v.score}点</b>・ええやん ${v.likes || 0}</span></div></div></li>`).join("")}</ol>
             <a class="btn sm rk-more" href="hall.html">殿堂をすべて見る <span class="arw" aria-hidden="true">→</span></a></div></div>
           ${upLine(x)}`;
         root.querySelectorAll("[data-g]").forEach(b => b.onclick = () => { gp = b.dataset.g; draw(); });
