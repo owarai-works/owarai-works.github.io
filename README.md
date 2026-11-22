@@ -19,6 +19,10 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 - モードの紹介：HOME の「腕だめしモードもたっぷり！」（#newmode・11-22 ユーザー「NEWモードではない、最初からあるものとして」）、ゲーム紹介の「格闘王への道」（#djroad）・「段位認定・称号」（#dan）・「難しさとモード」（#odai2）。ロゴは `lg_*.webp`、段位と称号の絵は `dan_sheet.webp`・`ttl_sheet.webp`（ゲームの img/logo・img/ic から）。
 - 絵をキャラクターシートどおりに直した（11-22 ユーザー「気猫のマイク・扇子の柄・百萌の襟の柄・草履の鼻緒の色」）：hero・hero_m・ogp・pv_poster・pv.mp4（Vidu Q4 オフピーク）・kv_poster・kv_sp.mp4（ゲームの kv.webp・title_kv.mp4）・ch_*_1・st_*・fun のちびキャラ7枚・boss・battle・bn_*・m_mix・m_tsk・wp_area4・wp_area6・hd_banzuke。**気猫はマイクを持たない**（シートにない）。アイドル衣装の ch_*_2 は手持ちマイクのまま（衣装の絵）。
 - **スマホ（幅760px以下）の HOME とゲーム紹介は、下にスワイプするたびに1つの話題が1画面に収まる**（11-22 ユーザー）。`site.js` の `owSnap`（html.snap・横スワイプのカード `HS`・入りきらない話題は .wrap を zoom で縮める・0.6まで）と `pop.css` の「html.snap」。話題を足すときは、1画面（390×844 で 786px、Safari のバーありで約606px）に入るか `panels.js` 方式で確かめる。
+- **TOP（index.html）は短く**（11-22 ユーザー「ページが縦長すぎる。ストリートファイター6の公式ページを参考に」）：①切りかわるメインビジュアル（トップの絵→コラボ→ムービー・7秒ごと・`site.js` の `heroSlides`）②3つのバナー（ランキング・殿堂・あそぶ）③ゲーム情報の表、だけ。くわしい説明はゲーム紹介へ。
+- **ゲーム紹介は1ページのまま、上の目次がタブ**（`site.js` の `gameTabs`。選んだ話題だけ出す。`game.html#taisen` のようにアドレスの # で開く話題を選べる）。
+- ロゴはゲームの新しいロゴ（img/logo.webp・11-21「なんでやねん」を帯のまん中に）。ogp.jpg もこのロゴで作り直した。
+- ページ用の CSS（game.css など）は、ページを移ったときも pop.css より前に入れる（`loadCss`。あとから入れると pop.css の直しが負ける）。
 - **TOP（index.html）には PLAY・キャラクター・ムービーの欄を置かない**（11-22 ユーザー。PLAY とキャラクターは専用ページ、ムービーはトップの絵の「ムービーを見る」ボタンだけ）。
 - 画面写真はゲーム版2145で撮り直した（od_*・gs_*・pt_*・ss_*。新しく od_anaume・od_intv・ss_oni・ss_gp・ss_dan・ss_djroad・ss_gacha）。
 
