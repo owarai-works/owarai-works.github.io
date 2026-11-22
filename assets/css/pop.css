@@ -2302,3 +2302,17 @@ body.on-hero .fb-open{opacity:0;pointer-events:none;transform:translateY(20px);t
 @media (min-width:1024px){html body .hero .hero-bubble,html body .hero .hero-bubble[class]{top:-6px!important;left:230px!important;right:auto!important}}
 @media (min-width:1600px) and (min-height:960px){html body .hero .hero-main{transform:translateX(-40px) scale(1.12)}}
 @media (min-width:1024px) and (max-height:820px){html body .hero .hero-bubble{display:none!important}}
+
+/* ===== 11-22 横スワイプのカード：右に続きがあるとわかるように ===== */
+.hs-box{position:relative}
+.hs-arr{position:absolute;top:50%;z-index:5;width:44px;height:44px;margin-top:-22px;border-radius:50%;background:var(--shu);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);cursor:pointer;display:grid;place-items:center}
+.hs-arr::after{content:"";width:12px;height:12px;border:solid #fff;border-width:4px 4px 0 0;transform:translateX(-2px) rotate(45deg)}
+.hs-arr.l::after{transform:translateX(2px) rotate(-135deg)}
+.hs-arr.r{right:-12px;animation:hsPoke 1.2s ease-in-out infinite}
+.hs-arr.l{left:-12px;background:#fff}.hs-arr.l::after{border-color:var(--ink)}
+.hs-arr[hidden]{display:none}
+@keyframes hsPoke{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+.hs-hint{display:flex;align-items:center;justify-content:center;gap:4px;margin:4px 0 0;font-weight:900;font-size:13px;color:var(--shu-d)}
+.hs-hint i{font-style:normal;font-size:20px;line-height:1;animation:hsPoke 1s ease-in-out infinite}
+.hs-hint.end{visibility:hidden}
+@media (min-width:761px){.hs-arr,.hs-hint{display:none!important}}

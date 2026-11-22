@@ -325,6 +325,17 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
     $$(HS).forEach(el => { if (el.dataset.hs) return; el.dataset.hs = "1"; el.classList.add("hs");
       const n = el.children.length; if (n < 2) return; const d = document.createElement("div"); d.className = "hs-dots"; d.setAttribute("aria-hidden", "true"); d.innerHTML = "<i></i>".repeat(n); el.after(d);
       const upd = () => { const i = Math.round(el.scrollLeft / Math.max(1, el.scrollWidth - el.clientWidth) * (n - 1)); [...d.children].forEach((x, k) => x.classList.toggle("on", k === i)); };
+      /* 11-22 ユーザー「右にスライドできることがわかりにくい」：左右の矢印・「スワイプで次へ」・はじめに少し動いて見せる */
+      const box = document.createElement("div"); box.className = "hs-box"; el.before(box); box.append(el);
+      const arr = k => { const a = document.createElement("button"); a.type = "button"; a.className = "hs-arr " + (k > 0 ? "r" : "l"); a.setAttribute("aria-label", k > 0 ? "次へ" : "前へ");
+        a.onclick = () => { const w = el.children[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(el).columnGap) || 0); el.scrollBy({left: k * w, behavior: "smooth"}); }; box.append(a); return a; };
+      const aL = arr(-1), aR = arr(1);
+      const hint = document.createElement("p"); hint.className = "hs-hint"; hint.innerHTML = `<span>スワイプで次へ</span><i aria-hidden="true">›</i>`; d.after(hint);
+      const upd2 = () => { const m = el.scrollWidth - el.clientWidth - 4; aL.hidden = el.scrollLeft < 4; aR.hidden = el.scrollLeft > m; hint.classList.toggle("end", el.scrollLeft > m); };
+      el.addEventListener("scroll", upd2, {passive: true}); upd2();
+      const io2 = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting || el.dataset.nudged) return; el.dataset.nudged = "1";
+        setTimeout(() => { if (el.scrollLeft > 4) return; el.scrollTo({left: 70, behavior: "smooth"}); setTimeout(() => el.scrollTo({left: 0, behavior: "smooth"}), 550); }, 700); }), {threshold: .6});
+      io2.observe(el);
       el.addEventListener("scroll", upd, {passive: true}); upd();
       /* 11-22 ユーザー「ここズレてる」：指をはなしたあと、カードが中途半端な位置で止まったら、いちばん近いカードにぴったり合わせる */
       let st = 0; const snapNear = () => { const kids = [...el.children]; if (!kids.length) return; const pl = parseFloat(getComputedStyle(el).paddingLeft) || 0;
