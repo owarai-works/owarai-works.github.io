@@ -1569,3 +1569,17 @@ html body main .center-btn .btn .arw{width:44px!important;height:44px!important;
   html.snap .pt-more .pm b{font-size:16px!important}html.snap .pt-more .pm small{font-size:12.5px!important}
   html.snap .gs-feat b{font-size:17px!important}html.snap .gs-feat small{font-size:13px!important}
   html.snap .odai-mini li>b{font-size:13px!important}}
+/* ===== 11-22 ユーザー「文字が細くなってて統一感がない・改行がおかしい・明色に明色を重ねるな」 ===== */
+/* 見出し・呼びかけの中の強調（黄色いマーカーの字）も、まわりと同じいちばん太い字に */
+html body main h1 b,html body main h1 strong,html body main h1 em,html body main h2 b,html body main h2 em,html body main h3 b,html body main h3 strong,html body main h3 em,
+html body main .fit-call b,html body main .pt-nado b,html body main .gs-call b,html body main .gs-title em,html body main .bz-lead em,html body main .about-lead em,html body main .pt-t h3 strong{font-weight:900!important;font-family:var(--f-disp)!important;-webkit-text-stroke:0!important}
+/* 改行：言葉のとちゅうで折らない（日本語は、、。や空白の所で折る）・行の長さをそろえる */
+html body main h1,html body main h2,html body main h3,html body main .fit-call,html body main .pt-nado,html body main .gs-call,html body main .gs-title,html body main .sec-hd p,html body main .bz-lead,html body main .about-lead{word-break:keep-all;overflow-wrap:anywhere;text-wrap:balance;line-break:strict}
+/* 青い地の英語タイトルは、黄色をやめて こい紺（明るい地に明るい字を置かない） */
+html body main section.bg-b .sec-hd .en{color:#16285e!important}
+html body main section.bg-b .sec-hd h2::before{background:#16285e!important}
+/* 11-22 ユーザー「改行がおかしい」：説明の文も、言葉のとちゅうで折らない（。、の所で折る） */
+html body main p,html body main li,html body main small,html body main b{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+html body main .gs-lead{text-wrap:balance;max-width:40em;margin-inline:auto}
+/* カードの中の短い説明（幅がせまい所）は、ふつうに折り返す（句読点が行の頭に来ない・1字だけの行を作らない） */
+html body main .pt-t p,html body main .gs-feat small,html body main .nm p,html body main .rk3c p,html body main .od small,html body main .mgc small,html body main .bzc p,html body main .vsc p,html body main .rm p,html body main .mc p,html body main .step p,html body main .lvl p,html body main .mode p{word-break:normal;overflow-wrap:normal;line-break:strict;text-wrap:pretty}
