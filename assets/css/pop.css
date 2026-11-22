@@ -2518,3 +2518,37 @@ main>section.sec.bg-y::before,main>section.sec.bg-p::before,main>section.sec.bg-
 .hero-sp-still.on{opacity:1}
 /* 11-22 ユーザー「（文字のかたまりを）絵の下まで下げて」：パソコンは左下にそろえる（大きさは site.js の heroFit が画面に合わせる） */
 @media (min-width:900px){html body .hero .hero-in{align-items:flex-end!important;padding-bottom:clamp(16px,3vh,36px)!important}html body .hero .hero-main{transform-origin:left bottom!important}}
+/* ===== 11-22 スマホのトップを作り直し：ロゴは左上に小さく・XとYouTubeはメニューの下・基本無料／ランクマ／App Storeは小さく1行で動画のカードの上 ===== */
+@media (max-width:760px){
+  html.snap body .hero .hero-in{position:absolute!important;inset:0!important;margin:0!important;padding:0 12px 14px!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important;height:auto!important;width:auto!important}
+  html.snap body .hero .hero-copy,html.snap body .hero .hero-main{position:static!important;width:100%!important;max-width:none!important;transform:none!important}
+  html.snap body .hero .hero-main{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;justify-content:center!important;align-items:center!important;gap:8px 6px!important}
+  html.snap body .hero .hero-h1{position:absolute!important;left:10px;top:10px;width:118px!important;margin:0!important;z-index:3}
+  html.snap body .hero .hero-h1 img{width:100%!important;height:auto!important;max-width:none!important}
+  html.snap body .hero .hero-sub{display:none!important}
+  html.snap body .hero .hero-acts{display:contents!important}
+  html.snap body .hero .hero-chips{display:flex!important;flex-wrap:nowrap!important;gap:6px!important;margin:0!important;order:1}
+  html.snap body .hero .hero-chips li{padding:4px 8px!important;border-width:2px!important;box-shadow:2px 2px 0 var(--ink)!important;transform:none!important;min-width:0!important}
+  html.snap body .hero .hero-chips b{font-size:12px!important;white-space:nowrap}
+  html.snap body .hero .hero-chips small{display:none!important}
+  html.snap body .hero .hero-acts .store{order:2;transform:none!important;margin:0!important;padding:4px 10px!important;min-width:0!important;width:auto!important;height:auto!important;border-width:2px!important;box-shadow:2px 2px 0 var(--ink)!important;gap:4px!important;animation:none!important}
+  html.snap body .hero .hero-acts .store svg{width:14px!important;height:14px!important}
+  html.snap body .hero .hero-acts .store small{display:none!important}
+  html.snap body .hero .hero-acts .store b{font-size:12px!important;white-space:nowrap}
+  html.snap body .hero .hero-acts .store em{font-size:9px!important;padding:1px 4px!important}
+  html.snap body .hero .hv-row{order:3;flex:0 0 100%;justify-content:center;margin:0!important}
+  html.snap body .hero .hero-sns{position:absolute!important;right:12px;top:12px;margin:0!important;display:flex!important;flex-direction:column!important;gap:8px!important;z-index:4;order:initial}
+  html.snap body .hero .hero-sns .store{display:none!important}
+  html.snap body .hero .hero-sns a{width:44px!important;height:44px!important;padding:0!important;border-radius:50%!important;justify-content:center!important}
+  html.snap body .hero .hero-sns a span{display:none!important}
+  /* お題合戦：1画面に収める */
+  html.snap #gassen .gs-call{display:none!important}
+  /* ランキング：カードは中身の高さだけ・一覧は3つまで */
+  html.snap #ranking .hs{align-items:flex-start!important}
+  html.snap #ranking .rk-hall>li:nth-child(n+3),html.snap #ranking .rk-list>li:nth-child(n+4){display:none!important}
+}
+
+/* 11-22 スマホ：横スワイプの中は縦に動かない・各話題は枠の外にはみ出さない */
+@media (max-width:760px){html.snap .hs{overflow-y:hidden!important;overscroll-behavior-x:contain}html.snap main>section{overflow:hidden!important}
+  html.snap #ranking .rk-hall>li:nth-child(n+2){display:none!important}}
+html body .hero .hco2 .hc-tag{display:none!important}  /* 11-22 ユーザー「COLLAB 開催中の字を消して」 */
