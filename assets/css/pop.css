@@ -2641,3 +2641,5 @@ html body .cm-cover .cm-free{left:0!important;top:0!important;right:auto!importa
 @keyframes cmFree{0%,100%{transform:translate(-50%,-50%) rotate(-10deg) scale(1)}50%{transform:translate(-50%,-50%) rotate(-10deg) scale(1.08)}}
 html body .cm-cover .cm-free{animation:cmFree 1.4s ease-in-out infinite!important}
 @media (max-width:900px){html body .cm-left{padding-left:44px}}
+/* 11-22 ユーザー「X・YouTube・App Store は右寄せ・右につめて」：上のメニューを画面いっぱいに広げ、3つは右はしにぴったり */
+@media (min-width:761px){html body .hd .hd-in{width:auto!important;max-width:none!important;margin:0!important;padding:0 12px 0 16px}html body .hd .hd-cta{margin-left:auto!important;justify-content:flex-end}html body .hd .hd-nav{margin-left:auto}}
