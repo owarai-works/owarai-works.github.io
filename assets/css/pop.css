@@ -2649,3 +2649,9 @@ main>section.sec.bg-y::before,main>section.sec.bg-p::before,main>section.sec.bg-
 main>section.sec:nth-of-type(even)::before{animation-duration:31s;animation-direction:alternate-reverse}
 @keyframes bgDrift{0%{transform:scale(1.12) translate(-3.5%,-2.5%)}50%{transform:scale(1.16) translate(2%,1.5%)}100%{transform:scale(1.12) translate(3.5%,-1.5%)}}
 @media (prefers-reduced-motion:reduce){main>section.sec::before{animation:none!important}}
+
+/* 11-22 ユーザー「漫画の背景を桜のピンクに・花びらを降らせて」 */
+html body main section.comicsec{background:radial-gradient(circle,rgba(255,255,255,.55) 2px,transparent 2.6px) 0 0/26px 26px,radial-gradient(120% 80% at 50% 0%,#ffe4ee 0%,#ffc6da 55%,#ffb0cb 100%)!important;overflow:hidden}
+.cm-petals{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+html body main section.comicsec>.wrap{position:relative;z-index:1}
+html body .cm-left{padding-left:60px;padding-top:50px}@media (max-width:760px){html body .cm-left{padding-left:44px;padding-top:40px}}
