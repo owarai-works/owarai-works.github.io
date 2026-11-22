@@ -45,7 +45,7 @@
       <canvas class="wo-cf"></canvas><p class="wo-skip">タップでスキップ</p>`;
     document.body.append(ov); document.documentElement.classList.add("wow-lock");
     let started = false, done = false, sound = false;
-    const end = () => { if (done) return; done = true; ov.classList.add("out"); document.documentElement.classList.remove("wow-lock"); setTimeout(() => ov.remove(), 500); };
+    const end = () => { if (done) return; done = true; if (sound) { try { window.owBgm && owBgm.play(); } catch (e) {} }  /* 11-22 ユーザー「98点の画面のあとでBGM」：幕が終わってから鳴らす */ ov.classList.add("out"); document.documentElement.classList.remove("wow-lock"); setTimeout(() => ov.remove(), 500); };
     const run = withSound => {
       if (started) return; started = true; sound = withSound; ov.classList.remove("ready");
       if (sound) { ac(); try { window.owBgm && owBgm.prime && owBgm.prime(); } catch (e) {} }  /* 11-22 ユーザー「BGMは『なんでやねん』のあとから」：タップのときは音の準備だけ */
@@ -55,7 +55,6 @@
       setTimeout(() => { ov.classList.add("score"); if (sound) SND.up(); const el = $(".wo-score i", ov), t0 = performance.now();
         const f = t => { const k = Math.min(1, (t - t0) / 800); el.textContent = Math.round(98 * (1 - (1 - k) ** 3)); if (k < 1) requestAnimationFrame(f); else if (sound) SND.fan(); }; requestAnimationFrame(f); }, 1300);
       setTimeout(end, 3300);
-      if (sound) setTimeout(() => { try { window.owBgm && owBgm.play(); } catch (e) {} }, 1700);
       ov.addEventListener("click", () => { if (started) end(); });
     };
     $(".wo-go", ov).addEventListener("click", e => { e.stopPropagation(); run(true); });
