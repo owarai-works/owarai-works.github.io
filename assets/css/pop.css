@@ -1600,10 +1600,7 @@ html body main .pt-t p,html body main .gs-feat small,html body main .nm p,html b
 .hco2 .hc-pic img.hc-logo{position:absolute!important;left:6%!important;bottom:6px!important;width:88%!important;height:auto!important;max-width:none;transform:none!important}
 .hco2 .hc-pic img.hc-noz{position:absolute;inset:0}
 /* 11-22 ユーザー「この塊をもっと左に（葵と重なっている）・1行にしろ」：トップの字のかたまりを画面の左はしに寄せる。「お題合戦 同じお題で…」は1行 */
-@media (min-width:761px){
-  .hero .hero-in{width:auto!important;max-width:none!important;margin:0!important;padding-left:clamp(20px,2.5vw,48px)!important;padding-right:0!important}
-  .hero .hero-main{max-width:min(520px,34vw)}
-}
+/* （11-22 ユーザー「位置もどして」：字のかたまりを左はしに寄せたのはやめた） */
 .hero .hero-sub,.hero .hero-sub *{white-space:nowrap!important;word-break:keep-all!important}
 .hero .hero-sub{display:inline-flex!important;align-items:center;gap:12px}
 .hero .hero-sub b{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center}
