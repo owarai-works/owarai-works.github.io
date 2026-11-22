@@ -128,12 +128,21 @@ html.tod-night .hero-bg img,html.tod-late .hero-bg img{filter:brightness(.82) sa
       f.addEventListener("animationend", () => f.remove()); box.append(f); }, 2600); return; }
     for (let k = 0; k < (small ? 6 : 10); k++) one(true); setInterval(() => one(false), 1500); };
 
-  /* ---------- 6 ページを移るときの幕 ---------- */
-  const cur = document.createElement("div"); cur.className = "pg-curtain"; cur.setAttribute("aria-hidden", "true"); document.body.append(cur);
-  window.owCurtainClose = () => new Promise(r => { if (reduce) return r(); cur.classList.add("close"); window.owSfx && owSfx("pon"); setTimeout(r, 400); });
-  /* 動きなしで、すぐ幕を閉じた状態にする（スマホのメニューの幕からつなぐ） */
-  window.owCurtainSet = () => { if (reduce) return; cur.classList.add("instant", "close"); void cur.offsetWidth; requestAnimationFrame(() => cur.classList.toggle("instant", false)); };
-  window.owCurtainOpen = () => { if (reduce) return; setTimeout(() => cur.classList.remove("close"), 60); };
+  /* ---------- 6 ページを移るとき：ゲームと同じ、シスターズのカットインの帯（11-22 ユーザー「ページ移動は幕ではなく、ゲームのカットインに」）----------
+     3人×5ポーズ＝15枚を、ランダムに1周ずつ（直前と同じ絵は続けない）。帯がななめに横切り、まん中で止まっている間に中身を入れかえ、右へ抜ける */
+  const WP = ["kineko", "aoi", "momoe"].flatMap(k => [1, 2, 3, 4, 5].map(n => `${k}_${n}`));
+  let wpBag = [], wpLast = "", wpImg = null;
+  const wpNext = () => { if (!wpBag.length) { wpBag = WP.slice().sort(() => Math.random() - .5); if (wpBag[0] === wpLast) wpBag.push(wpBag.shift()); } return wpBag[0]; };
+  const wpPre = () => { const k = wpNext(); if (wpImg && wpImg.k === k) return; wpImg = new Image(); wpImg.k = k; wpImg.src = `assets/img/wipe/${k}.webp`; };
+  const cur = document.createElement("div"); cur.id = "pgwipe"; cur.setAttribute("aria-hidden", "true"); document.body.append(cur);
+  setTimeout(wpPre, 1500);
+  const wpSet = () => { cur.innerHTML = ""; if (!(wpImg && wpImg.complete && wpImg.naturalWidth)) { wpPre(); return; }
+    const k = wpBag.shift(); wpLast = k; const src = `assets/img/wipe/${k}.webp`;
+    cur.innerHTML = `<div class="wpc ${k[0]}"><i class="wpbg"></i><div class="wpi" style="--im:url(${src})"><i class="sh sh1"></i><i class="sh sh2"></i><i class="sh sh3"></i><img src="${src}" alt=""></div></div>`; wpPre(); };
+  let wpT = 0;
+  window.owCurtainClose = () => new Promise(r => { if (reduce) return r(); clearTimeout(wpT); wpSet(); cur.className = ""; void cur.offsetWidth; cur.className = "in"; window.owSfx && owSfx("whoosh"); setTimeout(r, 380); });
+  window.owCurtainSet = () => { if (reduce) return; wpSet(); cur.className = "hold"; };
+  window.owCurtainOpen = () => { if (reduce || !cur.className) return; clearTimeout(wpT); cur.className = "out"; wpT = setTimeout(() => { cur.className = ""; cur.innerHTML = ""; }, 520); };
 
   /* ---------- 8 長く見てくれた人へ：見はじめて20秒でカウントダウン（60秒）が出て、1分20秒でお礼 ----------
      お礼は 3人×3種類＝9種類から、ランダムで1つ（絵・ことば・声・ボタン） */

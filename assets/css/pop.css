@@ -2733,3 +2733,31 @@ html body .road-pics{display:flex!important;justify-content:center;align-items:c
 .road-ph img{display:block;width:100%;height:auto;border:6px solid var(--ink);border-radius:30px;box-shadow:0 0 0 4px #fff,10px 12px 0 var(--ink);background:#fff}
 .road-ph figcaption{position:absolute;left:50%;bottom:-16px;transform:translateX(-50%) rotate(2deg);white-space:nowrap;padding:6px 18px;background:var(--shu);color:#fff;border:3px solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);font-weight:900;font-size:16px}
 @media (max-width:760px){.road-ph{width:min(260px,78%)}.road-ph figcaption{font-size:13px}}
+
+/* ===== 11-22 ページ移動：ゲームと同じシスターズのカットイン（assets/js/fun2.js の #pgwipe） ===== */
+.pg-curtain{display:none!important}
+#pgwipe{position:fixed;inset:0;z-index:500;pointer-events:none;visibility:hidden;overflow:hidden;background:#ff5d8f;transform:translateX(-160%) skewX(-12deg);--d:.6s}
+#pgwipe.in{visibility:visible;pointer-events:auto;animation:pgwIn .38s cubic-bezier(.7,0,.3,1) forwards}
+#pgwipe.hold{visibility:visible;pointer-events:auto;transform:translateX(0) skewX(-12deg) scaleX(1.4)}
+#pgwipe.out{visibility:visible;animation:pgwOut .48s cubic-bezier(.7,0,.3,1) forwards}
+@keyframes pgwIn{0%{transform:translateX(-120%) skewX(-12deg) scaleX(1.4)}100%{transform:translateX(0) skewX(-12deg) scaleX(1.4)}}
+@keyframes pgwOut{0%{transform:translateX(0) skewX(-12deg) scaleX(1.4)}100%{transform:translateX(120%) skewX(-12deg) scaleX(1.4)}}
+#pgwipe:has(.wpc){background:transparent}
+#pgwipe .wpc{position:absolute;inset:0;transform:scaleX(.7143) skewX(12deg);--c1:#ffb400;--c2:#ff3a1a}
+#pgwipe .wpc.a{--c1:#2f7fe0;--c2:#0b2a9a}#pgwipe .wpc.m{--c1:#ff8ab8;--c2:#e0237a}
+#pgwipe .wpbg{position:absolute;inset:-20% -60%;background:radial-gradient(55% 60% at 50% 50%,var(--c2) 0%,var(--c1) 28%,color-mix(in srgb,var(--c1) 70%,#fff) 55%,color-mix(in srgb,var(--c1) 35%,#fff) 80%,color-mix(in srgb,var(--c1) 15%,#fff) 100%)}
+#pgwipe .wpi{position:absolute;left:50%;top:0;bottom:0;width:100%;translate:-50% 0}
+#pgwipe .wpi>*{position:absolute;inset:0}
+#pgwipe .wpi .sh{-webkit-mask:var(--im) center top/auto 100% no-repeat;mask:var(--im) center top/auto 100% no-repeat}
+#pgwipe .wpi .sh3{background:var(--c2);filter:blur(6px);opacity:.95;animation:pgwT3 var(--d) cubic-bezier(.7,0,.3,1) both}
+#pgwipe .wpi .sh2{background:var(--c1);filter:blur(16px);opacity:.75;animation:pgwT2 var(--d) cubic-bezier(.7,0,.3,1) both}
+#pgwipe .wpi .sh1{background:color-mix(in srgb,var(--c1) 55%,#fff);filter:blur(30px);opacity:.55;animation:pgwT1 var(--d) cubic-bezier(.7,0,.3,1) both}
+#pgwipe .wpi img{width:100%;height:100%;object-fit:contain;object-position:center top;animation:pgwC var(--d) cubic-bezier(.2,1.1,.4,1) both}
+#pgwipe.out .wpi>*{animation:none}
+@keyframes pgwT1{0%{transform:translateX(-190px) scale(1.1);opacity:0}25%{opacity:.55}55%{transform:translateX(-100px) scale(1.1)}100%{transform:translateX(0) scale(1.06)}}
+@keyframes pgwT2{0%{transform:translateX(-120px) scale(1.06);opacity:0}25%{opacity:.75}55%{transform:translateX(-62px) scale(1.06)}100%{transform:translateX(0) scale(1.03)}}
+@keyframes pgwT3{0%{transform:translateX(-54px);opacity:0}25%{opacity:.95}55%{transform:translateX(-26px)}100%{transform:translateX(0) scale(1.01)}}
+@keyframes pgwC{0%{transform:translateX(90px) scale(.94);opacity:0}30%{opacity:1}100%{transform:none;opacity:1}}
+@media (max-width:760px){#pgwipe .wpi img{object-fit:cover}#pgwipe .wpi .sh{-webkit-mask-size:cover;mask-size:cover}}
+/* 11-22 ユーザー「お題合戦のまん中の放射を、もっと大きく」 */
+html body main section.gassen::before{width:max(3400px,240vw)!important;top:30%!important;-webkit-mask:radial-gradient(circle,#000 18%,transparent 62%)!important;mask:radial-gradient(circle,#000 18%,transparent 62%)!important;background:repeating-conic-gradient(rgba(255,255,255,.7) 0 4deg,transparent 4deg 11deg)!important}
