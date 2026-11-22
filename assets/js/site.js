@@ -127,6 +127,13 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
     if (bg && !$(".hero-yt", bg)) { const f = document.createElement("iframe"); f.className = "hero-yt"; f.title = "オープニング映像（背景）"; f.setAttribute("aria-hidden", "true"); f.tabIndex = -1;
       f.setAttribute("allow", "autoplay; encrypted-media"); f.src = `https://www.youtube-nocookie.com/embed/${YT.op.h}?autoplay=1&mute=1&loop=1&playlist=${YT.op.h}&controls=0&disablekb=1&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3`;
       f.addEventListener("load", () => setTimeout(() => f.classList.add("on"), 1500)); bg.append(f); } }
+  /* 11-22 漫画の試し読み：第1話の4ページを縦に読む → 最後に「続きはアプリで」 */
+  document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-comic]"); if (!b) return; e.preventDefault();
+    let ov = $(".cm-read"); if (!ov) { ov = document.createElement("div"); ov.className = "cm-read"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-label", "第1話 試し読み");
+      ov.innerHTML = `<div class="cm-rbox"><button class="cm-x" type="button" aria-label="閉じる">×</button><p class="cm-rt">第1話「跡継ぎ宣言」<small>右上から左下へ読んでな</small></p>${[1, 2, 3, 4].map(n => `<img src="assets/img/cm_e01_p${n}.webp" alt="第1話 ${n}ページ目" width="688" height="1024" loading="lazy">`).join("")}
+        <div class="cm-end"><b>このあと、どうなる──！？</b><p>第2話「朝ごはん戦争」から先は、アプリで読めます。<br><b>フルボイス・自動コマ送り</b>で、もっと楽しい！</p>${storeHTML("lg")}</div></div>`;
+      document.body.append(ov); ov.addEventListener("click", x => { if (x.target === ov || x.target.closest(".cm-x")) { ov.classList.remove("open"); document.documentElement.style.overflow = ""; } }); }
+    ov.classList.add("open"); ov.scrollTop = 0; document.documentElement.style.overflow = "hidden"; owTrack("comic_try", {}); $(".cm-x", ov).focus(); });
   window.openMovie = src => {
     if (!modal) {
       modal = document.createElement("div"); modal.className = "modal"; modal.setAttribute("role", "dialog"); modal.setAttribute("aria-modal", "true"); modal.setAttribute("aria-label", "ムービー");

@@ -2436,3 +2436,63 @@ html body .facts .fact span{display:block;margin-top:6px}
 @media (min-width:761px) and (max-width:1180px){html body .hd .hd-cta .store em{display:none}}
 @media (min-width:761px) and (max-width:1400px){html body .hd .hd-cta .store em{display:none}html body .hd .hd-nav a{padding-inline:8px!important}html body .hd .hd-cta{gap:6px}html body .hd .hd-cta .sns{gap:6px}}
 @media (min-width:761px) and (max-width:1080px){html body .hd .hd-cta{margin-left:auto}html body .hd .hd-menu{margin-left:12px!important}}
+
+/* ===== 11-22 トップ：漫画のコーナー ===== */
+html body main section.comicsec{position:relative;isolation:isolate;background:radial-gradient(circle,rgba(255,255,255,.7) 2px,transparent 2.6px) 0 0/24px 24px,linear-gradient(135deg,#fff0f6 0%,#ffe3ef 45%,#fff4d6 100%)!important}
+.cm-q{font-family:var(--f-disp);font-weight:900;font-size:clamp(20px,2.2vw,30px)!important;color:var(--ink)!important}
+.cm-q b{color:var(--shu-d)}
+.cm-grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:40px;align-items:start;max-width:1100px;margin:0 auto}
+.cm-cover{position:relative;display:block;padding:0;border:4px solid var(--ink);border-radius:16px;overflow:hidden;box-shadow:10px 10px 0 var(--shu);background:#fff;cursor:pointer;transform:rotate(-2deg);transition:transform .25s}
+.cm-cover:hover{transform:rotate(0) translateY(-6px)}
+.cm-cover img{display:block;width:100%;height:auto}
+.cm-free{position:absolute;right:-6px;top:14px;display:grid;place-items:center;width:110px;height:110px;border-radius:50%;background:var(--shu);color:#fff;border:4px solid #fff;box-shadow:0 0 0 3px var(--ink);font-family:var(--f-disp);font-weight:900;font-size:17px;line-height:1.25;text-align:center;transform:rotate(10deg);animation:woBounce 1.4s ease-in-out infinite}
+.cm-go{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);padding:10px 26px;border-radius:999px;background:var(--gold);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);font-family:var(--f-disp);font-weight:900;font-size:20px;color:var(--ink);white-space:nowrap}
+.cm-side{display:flex;flex-direction:column;gap:22px}
+.cm-feat{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.cm-feat li{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:16px 10px;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink)}
+.cm-feat li:nth-child(1){background:#ffe7f0}.cm-feat li:nth-child(2){background:#e6f3ff}.cm-feat li:nth-child(3){background:#fff3c4}
+.cm-feat i{font-style:normal;font-size:34px;line-height:1}
+.cm-feat b{font-family:var(--f-disp);font-weight:900;font-size:22px;color:var(--shu-d)}
+.cm-feat small{font-size:14px;font-weight:700;line-height:1.5;color:var(--ink)}
+.cm-eps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.cm-eps li{position:relative;display:flex;flex-direction:column;background:#fff;border:3px solid var(--ink);border-radius:12px;overflow:hidden;box-shadow:3px 3px 0 var(--ink)}
+.cm-eps img{display:block;width:100%;aspect-ratio:480/251;object-fit:cover}
+.cm-eps span{display:flex;flex-direction:column;padding:6px 10px 8px}
+.cm-eps small{font-size:12px;font-weight:900;color:var(--shu-d)}
+.cm-eps b{font-weight:900;font-size:15px;line-height:1.35;color:var(--ink)}
+.cm-eps li.lock{justify-content:center;align-items:center;text-align:center;background:repeating-linear-gradient(-45deg,#2b1a1e 0 12px,#3a2328 12px 24px);color:#fff}
+.cm-eps li.lock small{color:var(--gold)}.cm-eps li.lock b{color:#fff;font-size:22px}
+.cm-eps li.lock em{font-style:normal;font-weight:900;font-size:13px;padding:0 8px 10px}
+.cm-hook{margin:0;padding:16px 20px;background:#fff;border:3px dashed var(--shu);border-radius:14px;font-weight:700;font-size:17px;line-height:1.8;color:var(--ink)}
+.cm-hook b{color:var(--shu-d)}
+@media (min-width:1024px){.cm-feat b{font-size:24px}.cm-feat small{font-size:16px}.cm-eps b{font-size:17px}.cm-hook{font-size:20px}}
+@media (max-width:900px){.cm-grid{grid-template-columns:1fr;gap:26px}.cm-cover{width:min(300px,70%);margin:0 auto}}
+@media (max-width:760px){.cm-feat{gap:8px}.cm-feat li{padding:10px 4px}.cm-feat i{font-size:24px}.cm-feat b{font-size:15px}.cm-feat small{font-size:11px}
+  .cm-eps{grid-template-columns:repeat(2,minmax(0,1fr))}.cm-free{width:84px;height:84px;font-size:13px}.cm-go{font-size:15px;padding:8px 16px}.cm-hook{font-size:14px}}
+/* スマホのトップ（1画面ずつ）：表紙・3つの売り・あらすじだけに */
+@media (max-width:760px){
+  html.snap #comic .cm-eps,html.snap #comic .cm-hook{display:none!important}
+  html.snap #comic .cm-grid{gap:12px}
+  html.snap #comic .cm-cover{width:auto;max-height:38vh;aspect-ratio:688/1024;margin:0 auto}
+  html.snap #comic .cm-cover img{height:100%;object-fit:cover}
+  html.snap #comic .sec-hd{margin-bottom:10px!important}
+}
+/* 試し読みの小窓 */
+.cm-read{position:fixed;inset:0;z-index:420;background:rgba(28,16,18,.9);overflow-y:auto;display:none;padding:56px 12px 40px}
+.cm-read.open{display:block}
+.cm-rbox{position:relative;width:min(100%,620px);margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.cm-rbox>img{width:100%;height:auto;border-radius:6px;background:#fff}
+.cm-rt{margin:0;text-align:center;color:#fff;font-family:var(--f-disp);font-weight:900;font-size:22px}
+.cm-rt small{display:block;font-size:13px;font-weight:700;opacity:.85}
+.cm-x{position:fixed;right:16px;top:12px;width:44px;height:44px;border-radius:50%;background:#fff;border:3px solid var(--ink);font-size:22px;font-weight:900;color:var(--ink);z-index:2}
+.cm-end{margin-top:10px;padding:22px 18px;text-align:center;background:linear-gradient(135deg,#fff0f6,#fff4d6);border:4px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--shu)}
+.cm-end>b{display:block;font-family:var(--f-disp);font-weight:900;font-size:26px;color:var(--shu-d)}
+.cm-end p{margin:10px 0 16px;font-weight:700;line-height:1.8}
+.cm-end .store{margin:0 auto}
+
+html body .cm-feat b{white-space:nowrap;font-size:clamp(15px,1.7vw,24px)!important}
+html body .cm-feat small{word-break:keep-all;overflow-wrap:anywhere}
+@media (max-width:760px){html body .cm-feat small{font-size:11px!important;line-height:1.45}}
+@media (max-width:760px){html body #comic .sec-hd h2{white-space:nowrap;font-size:clamp(18px,5.6vw,24px)!important;display:flex;align-items:center;justify-content:center;gap:4px}html body #comic .sec-hd h2 .mg-n{font-size:1.5em!important;display:inline}
+  html body #comic .cm-feat b{font-size:clamp(12px,3.8vw,15px)!important}}
+@media (max-width:760px) and (max-height:700px){html.snap #comic .cm-cover{max-height:30vh}html.snap #comic .cm-feat small{font-size:10px!important}html.snap #comic .cm-q{font-size:14px!important}}

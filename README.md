@@ -111,3 +111,7 @@ GitHub Pages でそのまま公開できる、ふつうの HTML のホームペ�
 
 ## アクセスカウンター（11-22）
 - トップの赤いキャッチコピーの帯の左はし（`assets/js/catch.js` の `counter`）。数えるのは無料の外のサービス counterapi.dev（`owarai-works-github-io/top`）。同じタブでは1回だけ数える。読めないときは出さない。5桁（99999の次は00000に戻る）。
+
+## 漫画のコーナー（11-22）
+- トップのミニゲームの下（#comic）。表紙 cm_cover・第1話の4ページ cm_e01_p1〜4・各話の1コマ目 cm_th01〜05（ゲームの img/comic から）。表紙を押すと試し読み（site.js の [data-comic]）→ 最後に「続きはアプリで」。
+- トップの背景：パソコンは YouTube のOP（横）を音なしで流す（site.js の .hero-yt）、スマホは assets/vid/op_sp.mp4。BGM は assets/bgm/op.mp3（OPソング）。
