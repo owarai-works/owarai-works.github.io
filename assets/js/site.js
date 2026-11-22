@@ -129,7 +129,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
       /* 11-22 ユーザー「動画が終わったら、さっきの1枚絵を出す」：YouTube から「終わった」の知らせ（状態0）が来たら、動画を消して下の1枚絵（hero.webp）を見せる */
       const fin = () => { const sp = $(".hero .hero-sp"); if (sp && sp.tagName === "VIDEO") sp.dispatchEvent(new Event("ended"));  /* スマホ：YouTube が終わったら1枚絵に */ f.classList.remove("on"); setTimeout(() => f.remove(), 1300); };
       addEventListener("message", e => { if (e.source !== f.contentWindow) return; let d = e.data; try { d = typeof d === "string" ? JSON.parse(d) : d; } catch (x) { return; }
-        if (!d) return; if ((d.event === "onStateChange" && d.info === 0) || (d.event === "infoDelivery" && d.info && d.info.playerState === 0)) fin(); });
+        if (!d) return; if ((d.event === "onStateChange" && d.info === 1) || (d.event === "infoDelivery" && d.info && d.info.playerState === 1)) { const g = window.__owYtPlaying; if (g) { window.__owYtPlaying = null; g(); } } if ((d.event === "onStateChange" && d.info === 0) || (d.event === "infoDelivery" && d.info && d.info.playerState === 0)) fin(); });
       f.addEventListener("load", () => { const hi = () => { try { f.contentWindow.postMessage(JSON.stringify({event: "listening", id: 1, channel: "widget"}), "*"); } catch (x) {} }; hi(); setTimeout(hi, 1000); setTimeout(hi, 3000); if (window.__owHeroGo) heroGo(); });
       /* 11-22 ユーザー「開演が終わった直後に動画をスタート」：wow.js の end() から呼ぶ */
       function heroGo(){ const cmd = (func, args = []) => { try { f.contentWindow.postMessage(JSON.stringify({event: "command", func, args}), "*"); } catch (x) {} };

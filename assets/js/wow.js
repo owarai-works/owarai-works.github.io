@@ -45,7 +45,9 @@
       <canvas class="wo-cf"></canvas><p class="wo-skip">タップでスキップ</p>`;
     document.body.append(ov); document.documentElement.classList.add("wow-lock");
     let started = false, done = false, sound = false;
-    const end = () => { if (done) return; done = true; try { window.owHeroPlay && owHeroPlay(); } catch (e) {} try { if (window.owBgm) sound ? owBgm.play() : owBgm.start(); } catch (e) {}  /* 11-22 ユーザー「98点の画面のあとでBGM」：幕が終わってから鳴らす */ ov.classList.add("out"); document.documentElement.classList.remove("wow-lock"); setTimeout(() => ov.remove(), 500); };
+    const end = () => { if (done) return; done = true; try { window.owHeroPlay && owHeroPlay(); } catch (e) {} const bgmGo = () => { try { if (window.owBgm) sound ? owBgm.play() : owBgm.start(); } catch (e) {} };
+      /* 11-22 ユーザー「映像とBGMが1秒ずれる（映像が遅い）」：背景の YouTube が実際に動き出してから BGM を鳴らす（来なければ3秒で鳴らす） */
+      if (document.querySelector(".hero-yt")) { let gone = false; const once = () => { if (gone) return; gone = true; bgmGo(); }; window.__owYtPlaying = once; setTimeout(once, 3000); } else bgmGo();  /* 11-22 ユーザー「98点の画面のあとでBGM」：幕が終わってから鳴らす */ ov.classList.add("out"); document.documentElement.classList.remove("wow-lock"); setTimeout(() => ov.remove(), 500); };
     const run = withSound => {
       if (started) return; started = true; sound = withSound; ov.classList.remove("ready");
       if (sound) { ac(); try { window.owBgm && owBgm.prime && owBgm.prime(); } catch (e) {} }  /* 11-22 ユーザー「BGMは『なんでやねん』のあとから」：タップのときは音の準備だけ */
