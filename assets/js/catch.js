@@ -18,6 +18,20 @@
   const STRIP = ["日本一を決めろ！", "基本無料", "全国ランクマッチ", "AIが100点満点で採点", "1問30秒", "今週の1位はあなたかも", "お題は12種類", "毎週リセット", "笑いのガチンコ勝負"];
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   let timer = 0;
+  /* 11-22 ユーザー「左に5桁のアクセスカウンター」：トップの赤い帯の左はし。数えるのは無料の外のサービス（counterapi.dev）。
+     同じ人が同じタブで何回開いても1回だけ数える（sessionStorage）。読めなかったときはカウンターを出さない */
+  function counter(band){
+    const API = "https://api.counterapi.dev/v1/owarai-works-github-io/top";
+    let seen = false; try { seen = sessionStorage.getItem("ow-acc") === "1"; } catch (e) {}
+    fetch(API + (seen ? "" : "/up"), {cache: "no-store"}).then(r => r.ok ? r.json() : Promise.reject()).then(j => {
+      const n = Math.max(0, Math.floor(Number(j.count) || 0)); if (!band.isConnected) return;
+      try { sessionStorage.setItem("ow-acc", "1"); } catch (e) {}
+      const dg = String(n % 100000).padStart(5, "0");
+      const box = document.createElement("div"); box.className = "acc"; box.setAttribute("aria-label", `アクセス数 ${n}`);
+      box.innerHTML = `<small aria-hidden="true">ACCESS</small><span aria-hidden="true">${[...dg].map(d => `<i>${d}</i>`).join("")}</span>`;
+      band.append(box);
+    }).catch(() => {});
+  }
   function mount(){
     const pg = document.body.dataset.page || "", list = COPY[pg]; if (!list) return;
     clearInterval(timer);
@@ -27,6 +41,7 @@
       const el = document.createElement("div"); el.className = "cc-big"; el.setAttribute("role", "note"); el.setAttribute("aria-label", "キャッチコピー");
       el.innerHTML = `<div class="cc-in"><span class="cc-sp" aria-hidden="true">★</span><p class="cc-t">${list[0]}</p><span class="cc-sp" aria-hidden="true">★</span></div>`;
       at.after(el);
+      if (pg === "home") counter(el);
       let i = 0; const t = $(".cc-t", el);
       timer = setInterval(() => { if (!el.isConnected) return clearInterval(timer); i = (i + 1) % list.length; t.classList.remove("in"); void t.offsetWidth; t.textContent = list[i]; t.classList.add("in"); }, 3200);
     }

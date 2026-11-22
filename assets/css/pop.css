@@ -2316,3 +2316,12 @@ body.on-hero .fb-open{opacity:0;pointer-events:none;transform:translateY(20px);t
 .hs-hint i{font-style:normal;font-size:20px;line-height:1;animation:hsPoke 1s ease-in-out infinite}
 .hs-hint.end{visibility:hidden}
 @media (min-width:761px){.hs-arr,.hs-hint{display:none!important}}
+
+/* ===== 11-22 アクセスカウンター（トップの赤い帯の左はし） ===== */
+.cc-big .acc{position:absolute;left:clamp(12px,2vw,32px);top:50%;transform:translateY(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:3px}
+.acc small{font-family:var(--f-en);font-size:13px;letter-spacing:.2em;color:#fff}
+.acc span{display:flex;gap:3px;padding:4px;background:var(--ink);border:2px solid #fff;border-radius:8px;box-shadow:3px 3px 0 rgba(0,0,0,.35)}
+.acc i{display:grid;place-items:center;width:22px;height:32px;border-radius:4px;background:linear-gradient(#3a2a25 0 49%,#1c1012 51%);color:var(--gold);font-style:normal;font-family:var(--f-en);font-size:26px;line-height:1}
+@media (min-width:1024px){.acc i{width:26px;height:38px;font-size:30px}}
+@media (max-width:1100px){.cc-big:has(.acc) .cc-in{padding-left:150px}}
+@media (max-width:760px){.cc-big .acc{position:static;transform:none;margin:0 auto 8px}.cc-big:has(.acc){display:flex;flex-direction:column}.cc-big:has(.acc) .cc-in{padding-left:0}}
