@@ -1869,3 +1869,44 @@ body[data-page="home"] .jk{display:none!important}
 @media (max-width:760px){html body .hero .hero-sns{position:absolute;top:calc(var(--hdb,58px) + 12px);right:12px;margin:0;flex-direction:column;gap:10px;z-index:6}}
 @media (max-width:760px){html body .hero .hero-sns{position:static!important;flex-direction:row!important;order:2;margin:10px 0 0!important;justify-content:center}html.snap .hero-main>*:not(.hero-sns):not(.hero-acts){order:1}html.snap .hero-acts{order:3}}
 .ft-mail{margin-top:12px;font-weight:700;font-size:15px}.ft-mail a{color:var(--ink);text-decoration:underline}
+/* ===== 11-22 開演の演出の直し：幕が閉じた所で「タップで開演！」（タップで音つき）・ハンコは上、点数は下（百萌の顔にかぶせない） ===== */
+.wow-open.ready .wo-sis,.wow-open.ready .wo-stamp,.wow-open.ready .wo-score{visibility:hidden}
+.wo-ready{position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;transition:opacity .3s}
+.wow-open:not(.ready) .wo-ready{opacity:0;pointer-events:none}
+.wo-ready img{width:min(78vw,460px);filter:drop-shadow(0 10px 24px rgba(0,0,0,.6));animation:woLogo 2s ease-in-out infinite}
+.wo-go{padding:18px 40px;border:4px solid var(--ink);border-radius:999px;background:var(--gold);color:var(--ink);font-family:var(--f-disp);font-weight:900;font-size:clamp(22px,5.5vw,32px);box-shadow:6px 6px 0 var(--ink),0 0 0 10px rgba(255,198,26,.25);cursor:pointer;animation:woGo 1s ease-in-out infinite}
+@keyframes woGo{0%,100%{transform:scale(1)}50%{transform:scale(1.08);box-shadow:6px 6px 0 var(--ink),0 0 0 18px rgba(255,198,26,.15)}}
+.wo-ready small{color:#fff;font-weight:700;font-size:14px;opacity:.85}
+.wo-stamp{top:9%!important}
+.wo-score{top:auto!important;bottom:7%!important;transform:translate(-50%,0) scale(.3)!important}
+.wow-open.score .wo-score{transform:translate(-50%,0) scale(1)!important}
+/* スマホのトップ：ロゴを必ず出す・X と YouTube は右はしに縦に並べる */
+@media (max-width:760px){
+  html.snap .hero-logo{opacity:1!important}
+  html body .hero .hero-sns{position:absolute!important;right:12px!important;top:50%!important;transform:translateY(-50%);flex-direction:column!important;margin:0!important;z-index:7}
+  html body .hero .hero-sns a{width:46px!important;height:46px!important}
+}
+@media (min-width:761px){html body .hero .hero-sns{position:absolute;right:20px;top:calc(var(--hd,72px) + 20px);flex-direction:column;align-items:flex-end;margin:0;z-index:7}}
+
+/* ===== 11-22 コラボのカード（パソコン）：小さく・右下・右に傾ける ===== */
+@media (min-width:761px){html body .hero .hero-co.hco2{width:min(200px,15vw)!important;right:clamp(16px,2vw,36px)!important;bottom:clamp(24px,5vh,56px)!important;top:auto!important;transform:rotate(5deg)!important}
+  html body .hero .hero-co.hco2:hover{transform:rotate(2deg) translateY(-4px)!important}
+  .hco2 .hc-t{font-size:14px!important;padding:8px 10px 12px!important}.hco2 .hc-t small{font-size:12px!important}.hco2 .hc-t em{font-size:12px!important;padding:4px 12px}}
+/* ===== 11-22 見出しの横からシスターズがのぞく ===== */
+main .sec-hd{position:relative}
+.sec-sis{position:absolute;top:-6px;width:clamp(76px,9vw,140px);height:auto;pointer-events:none;filter:drop-shadow(4px 4px 0 rgba(28,16,18,.3));animation:sisBob 1.8s ease-in-out infinite alternate;z-index:2}
+.sec-sis.l{left:calc(50% - clamp(240px,26vw,420px))}.sec-sis.r{right:calc(50% - clamp(240px,26vw,420px))}
+@keyframes sisBob{from{transform:translateY(0) rotate(-4deg)}to{transform:translateY(-8px) rotate(4deg)}}
+@media (max-width:760px){.sec-sis{width:64px;top:-4px}.sec-sis.l{left:4px}.sec-sis.r{right:4px}}
+/* NEW */
+.news-item{position:relative}
+.wow-new{position:absolute;top:-10px;left:-8px;padding:2px 10px;border:2px solid var(--ink);border-radius:999px;background:var(--shu);color:#fff;font-family:var(--f-en);font-size:15px;letter-spacing:.1em;transform:rotate(-8deg);animation:woGo 1s ease-in-out infinite}
+/* チェックが1つずつ入る */
+.wow-tick li>i{transform:scale(0);transition:transform .25s cubic-bezier(.3,1.8,.5,1)}
+.wow-tick li.ticked>i{transform:scale(1)}
+.wow-tick li{transition:background .3s}
+.wow-tick li.ticked{background:#fff8d6}
+/* お題のカードが飛び出す */
+.wow-cards li{opacity:0;transform:translateY(20px) scale(.8)}
+.wow-cards li.in{opacity:1;transform:none;transition:opacity .3s,transform .35s cubic-bezier(.3,1.6,.5,1)}
+@media (max-width:760px){.wow-cut{display:none!important}}  /* スマホは見出しの横のシスターズで十分（字にかぶせない）。声はそのまま */

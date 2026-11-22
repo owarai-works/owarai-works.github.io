@@ -15,22 +15,51 @@
   const sfx = n => { try { window.owSfx && owSfx(n); } catch (e) {} };
 
   /* ---------- 1 開演の演出 ---------- */
+  /* 効果音（その場で音を作る。タップのあとでないと鳴らせないので、開演ボタンのタップで鳴らす） */
+  let AC = null;
+  const ac = () => { try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === "suspended") AC.resume(); } catch (e) {} return AC; };
+  const vol = () => (window.owVol ? Math.min(1.4, owVol() * 2) : 1);
+  function tone(f, t, d, type = "triangle", g = .25, f2){ const a = ac(); if (!a) return; const o = a.createOscillator(), v = a.createGain(), T = a.currentTime + t;
+    o.type = type; o.frequency.setValueAtTime(f, T); if (f2) o.frequency.exponentialRampToValueAtTime(f2, T + d); v.gain.setValueAtTime(g * vol(), T); v.gain.exponentialRampToValueAtTime(.001, T + d); o.connect(v); v.connect(a.destination); o.start(T); o.stop(T + d + .05); }
+  function noise(t, d, g = .3, lp = 1800){ const a = ac(); if (!a) return; const n = a.sampleRate * d, buf = a.createBuffer(1, n, a.sampleRate), ch = buf.getChannelData(0);
+    for (let k = 0; k < n; k++) ch[k] = (Math.random() * 2 - 1) * (1 - k / n); const src = a.createBufferSource(), f = a.createBiquadFilter(), v = a.createGain(), T = a.currentTime + t;
+    src.buffer = buf; f.type = "lowpass"; f.frequency.value = lp; v.gain.value = g * vol(); src.connect(f); f.connect(v); v.connect(a.destination); src.start(T); }
+  const taiko = (t, g = .9) => { tone(120, t, .5, "sine", g, 45); noise(t, .08, g * .5, 900); };
+  const SND = {
+    roll: () => { for (let k = 0; k < 18; k++) taiko(k * .045, .25 + k * .025); },              /* ドラムロール */
+    don: () => { taiko(0, 1.1); taiko(.02, .8); noise(0, .35, .45, 3000); tone(880, 0, .12, "square", .12); },  /* ハンコの「ドン！」 */
+    clap: () => { for (let k = 0; k < 26; k++) noise(Math.random() * 1.1, .06, .22, 4500); },   /* 拍手 */
+    fan: () => { [523, 659, 784, 1047].forEach((f, k) => tone(f, k * .09, .32, "square", .14)); tone(1047, .4, .7, "triangle", .2); tone(1319, .4, .7, "triangle", .16); },  /* ファンファーレ */
+    up: () => { tone(300, 0, .8, "sawtooth", .08, 1500); }                                      /* 点数がかけ上がる音 */
+  };
+
+  /* ---------- 1 開演の演出（はじめは幕が閉じていて「タップで開演！」。タップで音つきで開く。4秒たったら音なしで開く） ---------- */
   function opening(){
     if (document.body.dataset.page !== "home" || $(".wow-open")) return;
-    const ov = document.createElement("div"); ov.className = "wow-open"; ov.setAttribute("aria-hidden", "true");
+    const ov = document.createElement("div"); ov.className = "wow-open ready"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", "開演");
     ov.innerHTML = `<i class="wo-rays"></i><i class="wo-cur l"></i><i class="wo-cur r"></i>
+      <div class="wo-ready"><img src="assets/img/logo.webp" alt="お笑い道場 なんでやねん"><button type="button" class="wo-go">▶ タップで開演！</button><small>音が出ます</small></div>
       <div class="wo-sis"><img class="s1" src="assets/img/st_aoi.webp" alt=""><img class="s2" src="assets/img/st_momoe.webp" alt=""><img class="s3" src="assets/img/st_kineko.webp" alt=""></div>
       <div class="wo-stamp"><b>なんでやねん！</b></div>
       <div class="wo-score"><small>AI SCORE</small><b><i>0</i>点</b></div>
       <canvas class="wo-cf"></canvas><p class="wo-skip">タップでスキップ</p>`;
     document.body.append(ov); document.documentElement.classList.add("wow-lock");
-    let done = false; const end = () => { if (done) return; done = true; ov.classList.add("out"); document.documentElement.classList.remove("wow-lock"); setTimeout(() => ov.remove(), 500); };
-    ov.addEventListener("click", end); setTimeout(end, reduce ? 900 : 2900);
-    if (reduce) { ov.classList.add("go", "stamp", "score"); $(".wo-score i", ov).textContent = 98; return; }
-    requestAnimationFrame(() => ov.classList.add("go"));
-    setTimeout(() => { ov.classList.add("stamp"); sfx("click"); confetti($(".wo-cf", ov)); }, 900);
-    setTimeout(() => { ov.classList.add("score"); const el = $(".wo-score i", ov), t0 = performance.now();
-      const f = t => { const k = Math.min(1, (t - t0) / 800); el.textContent = Math.round(98 * (1 - (1 - k) ** 3)); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); }, 1300);
+    let started = false, done = false, sound = false;
+    const end = () => { if (done) return; done = true; ov.classList.add("out"); document.documentElement.classList.remove("wow-lock"); setTimeout(() => ov.remove(), 500); };
+    const run = withSound => {
+      if (started) return; started = true; sound = withSound; ov.classList.remove("ready");
+      if (sound) { ac(); try { window.owBgm && owBgm.play(); } catch (e) {} }
+      if (reduce) { ov.classList.add("go", "stamp", "score"); $(".wo-score i", ov).textContent = 98; setTimeout(end, 1200); return; }
+      requestAnimationFrame(() => ov.classList.add("go")); if (sound) SND.roll();
+      setTimeout(() => { ov.classList.add("stamp"); if (sound) { SND.don(); SND.clap(); } confetti($(".wo-cf", ov)); }, 900);
+      setTimeout(() => { ov.classList.add("score"); if (sound) SND.up(); const el = $(".wo-score i", ov), t0 = performance.now();
+        const f = t => { const k = Math.min(1, (t - t0) / 800); el.textContent = Math.round(98 * (1 - (1 - k) ** 3)); if (k < 1) requestAnimationFrame(f); else if (sound) SND.fan(); }; requestAnimationFrame(f); }, 1300);
+      setTimeout(end, 3300);
+      ov.addEventListener("click", () => { if (started) end(); });
+    };
+    $(".wo-go", ov).addEventListener("click", e => { e.stopPropagation(); run(true); });
+    ov.addEventListener("click", () => { if (!started) run(true); });
+    setTimeout(() => run(false), 4000);
   }
   function confetti(cv){
     const ctx = cv.getContext("2d"), W = cv.width = innerWidth, H = cv.height = innerHeight, C = ["#ffc61a", "#ff3b2f", "#ff7fb0", "#2f6fd6", "#fff"];
@@ -104,7 +133,24 @@
     $$(".facts [data-count]").forEach(el => numIO.observe(el));
   }
 
-  const init = () => { opening(); tryMount(); cutWatch(); numWatch(); countdown(); };
+  /* ---------- 6 見出しの横からシスターズがのぞく・話題ごとの小さな仕かけ ---------- */
+  const PEEK = {news: ["kineko", "smile", "l"], fit: ["momoe", "laugh", "r"], facts: ["kineko", "surprise", "l"], point: ["aoi", "smile", "r"], try: ["momoe", "smile", "l"],
+    odai: ["kineko", "laugh", "r"], gassen: ["aoi", "angry", "l"], ranking: ["momoe", "surprise", "r"], minigame: ["kineko", "smile", "l"]};
+  function peeks(){
+    if (document.body.dataset.page !== "home") return;
+    Object.entries(PEEK).forEach(([id, [k, f, side]]) => { const hd = document.querySelector(`#${id} .sec-hd`); if (!hd || hd.querySelector(".sec-sis")) return;
+      const im = document.createElement("img"); im.className = `sec-sis ${side}`; im.src = `assets/img/ex/${k}_${f}0.webp`; im.alt = ""; im.setAttribute("aria-hidden", "true"); hd.prepend(im); });
+    /* お知らせのいちばん上に NEW */
+    const n1 = $("#news .news-item"); if (n1 && !n1.querySelector(".wow-new")) { const b = document.createElement("span"); b.className = "wow-new"; b.textContent = "NEW"; n1.append(b); }
+    /* 「こんな人ほど」：画面に入ったら、チェックが1つずつ入る（自分ごとにする） */
+    const fl = $("#fit .fit-list"); if (fl && !fl.dataset.tick) { fl.dataset.tick = "1"; fl.classList.add("wow-tick");
+      new IntersectionObserver((es, o) => es.forEach(e => { if (!e.isIntersecting) return; o.disconnect(); $$("li", fl).forEach((li, i) => setTimeout(() => { li.classList.add("ticked"); sfx("pop"); }, 250 + i * 280)); }), {threshold: .4}).observe(fl); }
+    /* お題：画面に入ったら、カードが1枚ずつ飛び出す */
+    const om = $("#odai .odai-mini"); if (om && !om.dataset.pop) { om.dataset.pop = "1"; om.classList.add("wow-cards");
+      new IntersectionObserver((es, o) => es.forEach(e => { if (!e.isIntersecting) return; o.disconnect(); $$("li", om).forEach((li, i) => setTimeout(() => li.classList.add("in"), i * 70)); }), {threshold: .3}).observe(om); }
+  }
+
+  const init = () => { opening(); peeks(); tryMount(); cutWatch(); numWatch(); countdown(); };
   init(); setInterval(countdown, 1000);
-  addEventListener("ow:page", () => { tryMount(); cutWatch(); numWatch(); countdown(); });
+  addEventListener("ow:page", () => { peeks(); tryMount(); cutWatch(); numWatch(); countdown(); });
 })();
