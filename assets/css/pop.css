@@ -2993,3 +2993,4 @@ html body #gacha .gc-sis3{object-fit:contain!important;object-position:center bo
 html body #gacha .gc-stage .gc-mach{height:50%!important;bottom:-10%!important}
 html body #gacha .gc-logo{margin-top:-4%!important}
 html body main section#gacha p.gc-top{margin:0 0 6px!important}
+@media (max-width:760px){html body .hero .hero-main::before{display:none!important;content:none!important}}  /* 11-22 ユーザー「スマホ：放射線のエフェクトを消して」 */
