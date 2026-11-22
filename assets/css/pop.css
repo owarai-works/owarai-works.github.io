@@ -1158,18 +1158,6 @@ body{background:transparent!important}
 .nm-more b{display:block;font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:1.05rem}
 .nm-more small{display:block;font-size:.88rem;line-height:1.6;font-weight:700}
 @media(max-width:860px){.nm-grid{grid-template-columns:repeat(2,1fr);gap:12px}.nm img{height:84px}.nm p{font-size:.86rem;line-height:1.6}.nm{padding:10px 10px 12px}.nm-more{grid-template-columns:1fr;gap:8px}.nm-more li{padding:8px 12px}}
-/* ===== 11-22 格闘王への道・段位 ===== */
-.nmx{display:grid;grid-template-columns:minmax(220px,380px) 1fr;gap:24px;align-items:center;background:#fff;border:var(--pop);border-radius:20px;box-shadow:var(--sh);padding:18px 22px}
-.nmx-logo{width:100%;height:auto}
-.nmx-pts{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.nmx-pts li{font-weight:700;font-size:1.02rem;line-height:1.6;padding-left:28px;position:relative}
-.nmx-pts li::before{content:"";position:absolute;left:4px;top:.45em;width:14px;height:14px;border-radius:50%;background:var(--shu);border:2px solid var(--ink)}
-.nmx-pts b{color:var(--shu-d)}
-.dan-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:18px 0 0}
-.dan-row i{display:block;width:52px;height:52px;background:url(../img/dan_sheet.webp) no-repeat;background-size:1200% 100%}
-.ttl-row{margin:16px auto 0;max-width:720px}
-.ttl-row img{width:100%;height:auto;display:block}
-@media(max-width:760px){.nmx{grid-template-columns:1fr;gap:12px;padding:14px}.nmx-logo{max-width:280px;margin:0 auto}.nmx-pts li{font-size:.95rem}.dan-row i{width:40px;height:40px}}
 
 /* ===== 11-22 スマホ：下にスワイプするたびに1つの話題が1画面に収まる（HOME・ゲーム紹介） =====
    html.snap は site.js の owSnap が付ける。1画面＝見えている高さ − 上の帯（--snh）。
@@ -1283,22 +1271,11 @@ body{background:transparent!important}
   html.snap .sec-hd .en{font-size:26px!important}
   html.snap .sec-hd p{display:none}
 }
-.nmx-l{display:flex;flex-direction:column;align-items:center;gap:12px}
-.nmx-ss{width:min(220px,70%);border:4px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink)}
-@media (max-width:760px){html.snap .nmx-ss{display:none}}
 
 /* 11-22 ユーザー「同じ色が重なってて読みにくい」：強調は、黄色い地に黒い字 */
 .bz-top .bz-lead em,.about .about-lead em{display:inline-block;color:var(--ink)!important;background:var(--gold)!important;padding:.02em .22em;margin-top:.12em;line-height:1.35}
 /* 11-22 ユーザー「文字と枠がくっつかないように」：キャラをつついたときのふきだし（丸いはしと字のあいだをあける） */
 .poke{padding:8px 28px 8px 8px!important;gap:12px!important}
-/* ===== 11-22 遊びたくなった所で、すぐ次の一歩（ダウンロードの帯） ===== */
-.dl-band{background:var(--shu);border-block:3px solid var(--ink);padding:26px 0;position:relative;overflow:hidden}
-.dl-band::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.07) 0 14px,transparent 14px 28px);pointer-events:none}
-.dl-in{position:relative;display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;text-align:center}
-.dl-lead{color:#fff;font-family:var(--f-disp);font-weight:400;font-size:clamp(20px,2.4vw,30px);line-height:1.45;text-shadow:2px 2px 0 var(--ink)}
-.dl-lead b{color:var(--ink);background:var(--gold);padding:0 .2em;text-shadow:none;border-radius:4px}
-.dl-lead small{display:block;font-family:inherit;font-size:.5em;font-weight:700;letter-spacing:.06em;margin-top:6px;color:#fff;text-shadow:1px 1px 0 var(--ink)}
-@media (max-width:760px){.dl-in{flex-direction:column;gap:16px}}
 /* ===== 11-22 ユーザー「ゲーム紹介のページを世界一見やすく」：字を濃く・少し大きく・行を読みやすく・1行の長さをおさえる ===== */
 body[data-page="game"] .sec-hd p{color:var(--text);font-size:16px;line-height:1.85;max-width:40em}
 body[data-page="game"] .sec-hd.center p{margin-inline:auto}
@@ -1309,5 +1286,50 @@ body[data-page="game"] .gsec b{color:var(--ink)}
 body[data-page="game"] .subnav{background:#fff!important;border-bottom:3px solid var(--ink)!important;box-shadow:0 4px 0 rgba(28,16,18,.08)}
 body[data-page="game"] .subnav a{font-size:15px;color:var(--ink)!important}
 body[data-page="game"] .subnav a.on{background:var(--gold)!important;border:2px solid var(--ink)!important}
-body[data-page="game"] main>section.gsec:nth-of-type(even){background:linear-gradient(180deg,rgba(255,198,26,.08),rgba(255,198,26,0))}
 body[data-page="game"] .ph p{color:var(--text)}
+
+/* ===== 11-22 格闘王への道・段位認定（作り直し）：左にスマホの画面、右にロゴと要点。字は2段（要点17px・小見出し15px）、すき間は8の倍数 ===== */
+.nmx{display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;align-items:center;max-width:880px;margin:0 auto;background:#fff;border:var(--pop);border-radius:24px;box-shadow:var(--sh);padding:32px 48px}
+.nmx-ss{width:240px;height:auto;aspect-ratio:390/844;object-fit:cover;object-position:top;border:4px solid var(--ink);border-radius:28px;box-shadow:6px 6px 0 var(--ink);display:block}
+.nmx-r{display:flex;flex-direction:column;align-items:flex-start;gap:24px;min-width:0}
+.nmx-logo{width:100%;max-width:400px;height:auto;display:block}
+.nmx-pts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px;width:100%}
+.nmx-pts li{position:relative;padding-left:32px;font-size:17px;font-weight:700;line-height:1.6;color:var(--ink)}
+.nmx-pts li::before{content:"";position:absolute;left:4px;top:.5em;width:16px;height:16px;border-radius:50%;background:var(--shu);border:2px solid var(--ink)}
+.nmx-pts b{color:var(--shu-d)}
+.nmx-sub{font-size:15px;font-weight:900;color:var(--ink);margin:0 0 -12px}
+.dan-row{display:grid;grid-template-columns:repeat(6,48px);gap:12px;margin:0}
+.dan-row i{display:block;width:48px;height:48px;background:url(../img/dan_sheet.webp) no-repeat;background-size:1200% 100%}
+.ttl-box{max-width:880px;margin:32px auto 0;background:#fff;border:var(--pop);border-radius:24px;box-shadow:var(--sh);padding:24px 32px 32px;text-align:center}
+.ttl-h{font-family:var(--f-disp);font-weight:400;font-size:22px;margin:0 0 16px;color:var(--ink)}
+.ttl-h small{display:block;font-family:inherit;font-size:14px;font-weight:700;color:var(--muted);margin-top:4px}
+.ttl-box img{width:100%;height:auto;display:block}
+@media (max-width:760px){
+  .nmx{grid-template-columns:1fr;gap:24px;padding:24px;justify-items:center}
+  .nmx-ss{width:200px}
+  .nmx-r{align-items:center;gap:16px}
+  .nmx-logo{max-width:300px}
+  .nmx-pts li{font-size:15px}
+  .nmx-sub{margin:0 0 -8px}
+  .dan-row{grid-template-columns:repeat(6,40px);gap:8px}
+  .dan-row i{width:40px;height:40px}
+  .ttl-box{padding:16px;margin-top:24px}
+  html.snap .nmx-ss{display:none}
+  html.snap .ttl-box{display:none}
+}
+
+/* ===== 11-22 ユーザー「各セクションで背景の色を変えて。百萌のピンクと葵の青も」：話題ごとに 黄・ピンク・青 の地を順番に ===== */
+:root{--bg-pink:#ffe1ec;--bg-pink2:#ffd0e2;--bg-blue:#dcebff;--bg-blue2:#c8defc;--bg-yel:#fff4cf}
+main>section.sec{position:relative}
+main>section.sec.bg-p{background:linear-gradient(180deg,var(--bg-pink),var(--bg-pink2))!important}
+main>section.sec.bg-b{background:linear-gradient(180deg,var(--bg-blue),var(--bg-blue2))!important}
+main>section.sec.bg-y{background:linear-gradient(180deg,#fff8de,var(--bg-yel))!important}
+main>section.sec.bg-p .sec-hd .en{text-shadow:6px 6px 0 var(--sakura-d)}
+main>section.sec.bg-b .sec-hd .en{text-shadow:6px 6px 0 #2f6fd6}
+main>section.sec.bg-p .sec-hd h2::before{background:var(--sakura-d)}
+main>section.sec.bg-b .sec-hd h2::before{background:#2f6fd6}
+main>section.sec.bg-p .sec-hd p,main>section.sec.bg-b .sec-hd p,main>section.sec.bg-y .sec-hd p{color:var(--ink)}
+.ttl-h,.ttl-h small{-webkit-text-stroke:0!important;text-shadow:none!important;color:var(--ink)!important}
+.ttl-h small{color:#5a4640!important}
+#djroad .sec-hd p,#dan .sec-hd p{max-width:36em;margin-inline:auto}
+@media (max-width:760px){.nmx-pts{width:auto}}
