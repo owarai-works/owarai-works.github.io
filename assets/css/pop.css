@@ -1950,3 +1950,4 @@ html body .ph .wow-chips li.c-rank{background:var(--shu)!important;color:#fff!im
 html body .ph .wow-chips b{font-family:var(--f-disp);font-weight:900;font-size:clamp(22px,2vw,30px)}
 html body .ph .wow-chips small{font-size:13px;font-weight:800}
 @media (max-width:760px){html body .ph .wow-chips li{padding:6px 12px;border-width:3px!important;box-shadow:4px 4px 0 var(--ink)!important}html body .ph .wow-chips b{font-size:17px}html body .ph .wow-chips small{font-size:10.5px}}
+@media (min-width:761px){html body .hero .hero-acts .store{display:none!important}}  /* 11-22：パソコンは右上の列に App Store があるので、トップの絵の中には出さない */
