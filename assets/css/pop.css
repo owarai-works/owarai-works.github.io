@@ -1374,3 +1374,37 @@ main>section.sec.bg-p,main>section.sec.bg-b,main>section.sec.bg-y{border-top:4px
 .rk-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 .rk-g{box-shadow:8px 8px 0 var(--ink)!important}
 @media (max-width:860px){.rk-grid{grid-template-columns:1fr!important}}
+
+/* ===== 11-22 ユーザー「きれてる」：目次の札（影ふくむ）が左右で切れないように ===== */
+.subnav ol{padding:10px 12px 14px!important;scroll-padding-inline:24px}
+/* ===== 11-22 ユーザー「暖色に暖色をかさねるな」：お題合戦（こい赤茶の地）の字は白・強調は黄色 ===== */
+main .gassen .gs-lead,main .gassen .gs-call,main .gassen p,main .gassen .sec-hd p{color:#fff!important;text-shadow:0 2px 6px rgba(0,0,0,.55)}
+main .gassen .gs-lead b,main .gassen .gs-call b,main .gassen p b{color:var(--gold-hi)!important}
+main .gassen .gs-feat li small,main .gassen .gs-feat li p{color:#3a2a25!important;text-shadow:none}
+main .gassen .gs-feat li b{color:var(--shu)!important}
+main .gassen .gs-badge{color:var(--ink)!important;text-shadow:none}
+/* ===== 11-22 ユーザー「文字が小さい」：パソコンでは、説明の字を大きく（さらに全体1.25倍がかかる） ===== */
+@media (min-width:1024px){
+  main section:not(.hero) p{font-size:18px!important;line-height:1.8!important}
+  main .sec-hd p{font-size:19px!important}
+  main section:not(.hero) small,main section:not(.hero) li small{font-size:15px!important;line-height:1.6!important}
+  main .mgc small{font-size:14px!important}
+  main .mgc b{font-size:18px!important}
+  main .chips span,main .num span,main .vs-sys span,main .ph-chips li,main .fact span{font-size:15px!important}
+  main .news-item h3{font-size:19px!important}
+  main .news-item .tag,main .rk-up,main .rk-chip{font-size:14px!important}
+  main .od small{font-size:15px!important}
+  main .bz,main .rk-card h3 small{font-size:14px!important}
+  main .gs-badge,main .nmx-sub{font-size:17px!important}
+  main .crumb a,main .crumb span{font-size:16px!important}
+  .subnav a{font-size:17px!important}
+}
+/* 11-22 ユーザー「暖色に暖色をかさねるな」：赤い字＋黄色のマーカーをやめ、黒い字＋黄色のマーカーに */
+.about-lead em,.pt-t h3 strong,.fit-list b,.pg-il b{color:var(--ink)!important}
+.fit-call b,.pt-nado b{color:var(--ink)!important;background:linear-gradient(transparent 58%,var(--gold) 58%)}
+/* 11-22 ユーザー「暖色に暖色をかさねるな」：英語の大見出しは、黄色・ピンク・クリームの地では葵の青、青の地では黄色 */
+main .sec-hd .en{color:#2f6fd6!important;text-shadow:5px 5px 0 var(--ink)!important}
+main section.bg-b .sec-hd .en{color:var(--gold)!important;text-shadow:5px 5px 0 var(--ink)!important}
+main section.gassen .sec-hd .en,main section.mgsec .sec-hd .en{color:#fff!important}
+main section.bg-p .sec-hd h2::before,main section.bg-y .sec-hd h2::before{background:#2f6fd6!important}
+main section.mgsec .sec-hd .en{color:#2f6fd6!important}

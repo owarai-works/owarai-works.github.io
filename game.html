@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<script src="assets/js/prep.js?v=11220929"></script>
+<script src="assets/js/prep.js?v=11220933"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>ゲーム紹介｜お題合戦・大喜利対戦・ランクマッチ｜ボケて！ツッコんで！お笑い道場なんでやねん！</title>
 <meta name="description" content="お題合戦（ランクマッチ・友達対戦・カスタムマッチ）、AIが採点する大喜利・ボケ・ツッコミなど12種類のお題、週間・月間・永世の全国ランキング、1先の鬼・格闘王への道・お笑いへの道モードまで。お笑いゲーム「お笑い道場なんでやねん」の遊び方とみどころ。">
@@ -31,9 +31,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@500;700&family=Dela+Gothic+One&family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=11220929">
-<link rel="stylesheet" href="assets/css/game.css?v=11220929">
-<link rel="stylesheet" href="assets/css/pop.css?v=11220929">
+<link rel="stylesheet" href="assets/css/site.css?v=11220933">
+<link rel="stylesheet" href="assets/css/game.css?v=11220933">
+<link rel="stylesheet" href="assets/css/pop.css?v=11220933">
 <!-- Google アナリティクス（アクセス解析） -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VZ29R3E1TW"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-VZ29R3E1TW");</script>
@@ -255,17 +255,17 @@
   </section>
 </main>
 
-<script src="assets/js/site.js?v=11220929"></script>
-<script src="assets/js/sfx.js?v=11220929" defer></script>
-<script src="assets/js/fun2.js?v=11220929" defer></script>
-<script src="assets/js/fun.js?v=11220929" defer></script>
-<script src="assets/js/faq-bot.js?v=11220929" defer></script>
+<script src="assets/js/site.js?v=11220933"></script>
+<script src="assets/js/sfx.js?v=11220933" defer></script>
+<script src="assets/js/fun2.js?v=11220933" defer></script>
+<script src="assets/js/fun.js?v=11220933" defer></script>
+<script src="assets/js/faq-bot.js?v=11220933" defer></script>
 <script>
 /* 目次：いま見ている所を光らせる */
 (() => {
   const links = [...document.querySelectorAll(".subnav a")], secs = links.map(a => document.querySelector(a.getAttribute("href")));
   let last = -1;
-  const on = () => { let k = 0; secs.forEach((s, i) => { if (s.getBoundingClientRect().top < innerHeight * .35) k = i; }); if (k === last) return; last = k; links.forEach((a, i) => a.classList.toggle("on", i === k)); const a = links[k]; const ol = a.closest("ol"); if (ol.scrollWidth > ol.clientWidth) ol.scrollTo({left: a.offsetLeft - 16, behavior: "smooth"}); };
+  const on = () => { let k = 0; secs.forEach((s, i) => { if (s.getBoundingClientRect().top < innerHeight * .35) k = i; }); if (k === last) return; last = k; links.forEach((a, i) => a.classList.toggle("on", i === k)); const a = links[k]; const ol = a.closest("ol"); if (ol.scrollWidth > ol.clientWidth) ol.scrollTo({left: Math.max(0, a.getBoundingClientRect().left - ol.getBoundingClientRect().left + ol.scrollLeft - 24), behavior: "smooth"})  /* 11-22：左はしの札が切れないように、ol の左から24pxあけて止める */; };
   addEventListener("scroll", () => requestAnimationFrame(on), {passive: true}); on();
 })();
 </script>
