@@ -1631,3 +1631,17 @@ html body .art-pager .t{min-width:0;overflow:hidden;text-overflow:ellipsis;white
   html body .subnav li{scroll-snap-align:start}
 }
 .tod-badge{display:none!important}  /* 11-22：目次や見出しに重なるので、時間帯の札は出さない */
+/* ===== 11-22 ユーザー「最低のデザイン、色を重ねるな、もっと見やすく」：白いカードの中の見出しは、黒い字だけ（影・ふち・重ねなし）。カードの内側の線もなし ===== */
+html body main :is(.bzc,.vsc,.rm,.mc,.step,.lvl,.mode,.od,.nm,.rk3c,.pt,.gs-feat li,.pm,.mgc,.nmx,.gi,.fit-list li,.fact,.hc,.rk-card,.news-item,.way,.cs-card .t) :is(b,h3,h4,strong,em):not(.hc-sc *):not(.odai-mini li>b):not(.od>b){
+  color:var(--ink)!important;text-shadow:none!important;-webkit-text-stroke:0!important;paint-order:normal!important;font-family:var(--f-disp)!important;font-weight:900!important}
+html body main .bzc::before{display:none!important}
+html body main .bzc{padding:28px 28px 30px!important;border-radius:16px!important;display:flex;flex-direction:column;gap:12px}
+html body main .bzc .ic{display:flex;align-items:center;gap:12px;font-size:36px}
+html body main .bzc b{margin:0!important;font-size:clamp(24px,2vw,30px)!important;line-height:1.3!important}
+html body main .bzc p{margin:0!important;color:#3a2a25!important}
+html body main .bzc .chips{margin-top:auto!important;gap:8px!important}
+html body main .bzc .chips span{font-size:15px!important;padding:6px 14px!important;background:var(--bg-yel,#ffe680)!important;color:var(--ink)!important;border:2px solid var(--ink)}
+/* 見出しの強調色は、カードの左上の色の帯で出す（字に色を重ねない） */
+html body main .bzc{border-top:10px solid var(--shu)!important}
+html body main .bzc:nth-child(2n){border-top-color:#2f6fd6!important}
+html body main .bzc:nth-child(3n){border-top-color:var(--sakura-d)!important}
