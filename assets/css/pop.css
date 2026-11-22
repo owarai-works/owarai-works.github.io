@@ -2656,3 +2656,6 @@ html body main section.comicsec{background:radial-gradient(circle,rgba(255,255,2
 html body main section.comicsec>.wrap{position:relative;z-index:1}
 html body .cm-left{padding-left:60px;padding-top:50px}@media (max-width:760px){html body .cm-left{padding-left:44px;padding-top:40px}}
 .cmp-k{background-color:#1c1012!important}  /* 読みこみ前に白く光らない */
+/* 11-22 ユーザー「HOME〜SUPPORTを左のロゴのすぐ右に」 */
+@media (min-width:1081px){html body .hd .hd-nav{margin-left:12px!important}html body .hd .hd-cta{margin-left:auto!important}}
+@media (min-width:1081px) and (max-width:1250px){html body .hd .hd-nav{gap:0!important;margin-left:4px!important}html body .hd .hd-nav a{padding-inline:6px!important}html body .hd .hd-in{gap:10px!important}}
