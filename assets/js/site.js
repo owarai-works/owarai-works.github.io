@@ -287,7 +287,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
   /* 11-22 ユーザー「スマホ版は、下にスワイプするたびに1画面にきれいにそのコンテンツを収めて」：
      HOME とゲーム紹介だけ（幅760px以下）。1つの話題＝1画面（pop.css の html.snap）。横に並べたカード（HS）は横スワイプにし、
      それでも入らない話題は、中身（.wrap）を少し縮めて（zoom）1画面に入れる */
-  const SNAP_PAGES = ["home", "game"];
+  const SNAP_PAGES = ["home"];  /* 11-22 ユーザー「ゲーム紹介は字が重なる・いきなり下に飛ぶ」：ゲーム紹介は1画面ずつ止めない（長い話題が多いため） */
   const HS = ".pts,.gs-phones,.feat,#rankbox .rk-grid,.more3,.vs-cards,.banzuke,.lvls,.modes,.road-map,.steps";
   function owSnap(){
     const on = SNAP_PAGES.includes(document.body.dataset.page || "") && matchMedia("(max-width:760px)").matches, R = document.documentElement;

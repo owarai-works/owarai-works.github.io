@@ -1968,3 +1968,47 @@ html body .wow-chips li,html body .wow-chips li.c-rank{transform:none!important;
 .rk-hall .k-ic{margin-bottom:4px}
 .hc-k{background:none!important;border:0!important;padding:0!important;box-shadow:none!important}
 .hc-k .k-ic{width:48px;height:48px}
+
+/* ===== 11-22 ユーザー「ゲーム紹介：字が重なる・いきなり最下部へ・スペーシングが酷い。徹底的に直せ」 =====
+   ゲーム紹介は1画面ずつ止めない（site.js の SNAP_PAGES）。ここではスマホの見た目を作り直す */
+body[data-page="game"] main>section.sec{padding:56px 0!important}
+body[data-page="game"] .sec-hd{margin-bottom:28px!important}
+body[data-page="game"] .jk{display:none!important}
+body[data-page="game"] .subnav{top:var(--hd,58px)!important}
+@media (max-width:760px){
+  body[data-page="game"] main>section.sec{padding:44px 0!important}
+  body[data-page="game"] .wrap{width:calc(100% - 40px)!important}
+  /* 目次：左右に余白・選んだ札がまん中に来る */
+  body[data-page="game"] .subnav ol{padding:10px 20px 14px!important;gap:6px}
+  body[data-page="game"] .subnav a{font-size:15px!important;padding:8px 14px!important}
+  /* 上の見出し */
+  body[data-page="game"] .ph{padding:28px 0 32px!important}
+  body[data-page="game"] .ph p{font-size:15px!important;line-height:1.8!important}
+  /* お題のカード：2列で、絵・アイコン・名前を整える */
+  body[data-page="game"] .odai{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+  body[data-page="game"] .odai .od{padding:10px 8px 14px!important}
+  body[data-page="game"] .odai .od img.shot{width:100%;height:auto;max-height:none;border-radius:10px}
+  body[data-page="game"] .odai .od>b{font-size:15px!important}
+  body[data-page="game"] .odai .od small{display:block!important;font-size:12.5px!important;margin-top:8px!important}
+  /* 対戦の VS：名前と担当を1行に */
+  body[data-page="game"] .vs-side{padding:34px 6px 18px!important}
+  body[data-page="game"] .vs-side b{font-size:17px!important}
+  body[data-page="game"] .vs-side small{font-size:12px!important;white-space:nowrap}
+  /* ランキングの数字の欄 */
+  body[data-page="game"] .nums{gap:10px!important}
+  body[data-page="game"] .num{padding:12px 6px!important}
+  body[data-page="game"] .num span{font-size:12.5px!important;line-height:1.5}
+  body[data-page="game"] .bz-lead{font-size:24px!important;line-height:1.5!important;margin-bottom:12px}
+  /* カード類：すき間をそろえる */
+  body[data-page="game"] :is(.banzuke,.vs-cards,.road-map,.lvls,.modes,.steps,.more3){gap:16px!important}
+}
+/* ずっと出る「遊ぶ」帯 */
+.g-sticky{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:80;display:flex;align-items:center;gap:14px;width:min(760px,calc(100% - 32px));padding:10px 14px 10px 10px;background:#fff;border:4px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink)}
+.g-sticky img{width:56px;height:56px;object-fit:contain;flex:0 0 56px;animation:woBounce 1.4s ease-in-out infinite}
+.g-sticky p{flex:1;min-width:0;line-height:1.35}
+.g-sticky p b{display:block;font-family:var(--f-disp);font-weight:900;font-size:18px;color:var(--ink)}
+.g-sticky p small{font-size:13px;font-weight:800;color:var(--shu-d)}
+.g-sticky .store{flex:0 0 auto}
+body[data-page="game"] main{padding-bottom:110px}
+body[data-page="game"] .bgm,body[data-page="game"] .bgm-vol,body[data-page="game"] .faqb,body[data-page="game"] .fb-open{bottom:120px!important}
+@media (max-width:760px){.g-sticky{bottom:10px;gap:10px;padding:8px}.g-sticky img{width:44px;height:44px;flex-basis:44px}.g-sticky p b{font-size:14px}.g-sticky p small{font-size:11px}.g-sticky .store{transform:scale(.85);transform-origin:right center}}
