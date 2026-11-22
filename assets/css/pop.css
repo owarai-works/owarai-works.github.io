@@ -2864,3 +2864,53 @@ html body .gc-tiers{background:linear-gradient(#2a0a4a,#12001f)!important}
 @media (max-width:760px){html body .gc-logo{margin-top:-10%!important}}
 html body .gc-stage .gc-mach{height:66%!important;bottom:-2%!important}html body .gc-stage{-webkit-mask:linear-gradient(#000 85%,transparent);mask:linear-gradient(#000 85%,transparent)}
 html body .gc-stage{-webkit-mask:linear-gradient(#000 82%,transparent),linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(#000 82%,transparent) intersect,linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+
+/* ===== 11-22 トップ：ホーム画面のカスタム（いつもの画面・スマホ風画面・衣装で着せかえ） ===== */
+html body main section.homesec{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(circle,rgba(255,255,255,.7) 2px,transparent 2.6px) 0 0/24px 24px,linear-gradient(160deg,#fff0f8 0%,#ffe0f0 35%,#e8e0ff 70%,#d8f0ff 100%)!important}
+.hm-petals{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+html body main section.homesec>.wrap{position:relative;z-index:1}
+html body .homesec .sec-hd .en{color:#ff5aa0!important}
+html body .homesec .sec-hd h2 em{font-style:normal;color:#ff3d8b;background:linear-gradient(transparent 62%,#ffe14d 62%)}
+.hm-lead{font-family:var(--f-disp)!important;font-weight:900!important;font-size:clamp(18px,2vw,26px)!important;color:var(--ink)!important}
+.hm-lead b{color:#ff3d8b}
+.hm-two{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:clamp(12px,3vw,44px);max-width:900px;margin:10px auto 0}
+.hm-ph{position:relative;margin:0;text-align:center}
+.hm-ph img{display:block;width:100%;height:auto;border:7px solid #1c1012;border-radius:34px;background:#fff;box-shadow:0 0 0 4px #fff,10px 14px 0 rgba(255,90,160,.55)}
+.hm-ph.p1{transform:rotate(-4deg)}.hm-ph.p2{transform:rotate(4deg)}
+.hm-ph.p2 img{box-shadow:0 0 0 4px #fff,10px 14px 0 rgba(120,110,255,.5)}
+.hm-tag{position:absolute;left:50%;top:-18px;transform:translateX(-50%);z-index:2;white-space:nowrap;padding:6px 18px;border-radius:999px;background:#ff5aa0;color:#fff;border:3px solid #1c1012;box-shadow:3px 3px 0 #1c1012;font-family:var(--f-disp);font-weight:900;font-size:17px}
+.hm-tag.ios{background:#7b6bff}
+.hm-ph figcaption{margin-top:16px;font-family:var(--f-disp);font-weight:900;font-size:17px;line-height:1.4;color:var(--ink)}
+.hm-or{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:var(--f-disp);font-weight:900;font-size:18px;color:var(--ink);text-align:center}
+.hm-or b{font-size:30px;color:#ff3d8b}
+.hm-or i{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:#ffe14d;border:4px solid #1c1012;box-shadow:3px 3px 0 #1c1012;font-style:normal;font-size:30px;animation:woBounce 1.3s ease-in-out infinite}
+.hm-or small{font-size:13px;color:#7a4a6a}
+.hm-dress{max-width:1080px;margin:56px auto 0;padding:26px 22px 22px;background:#fff;border:4px solid #1c1012;border-radius:28px;box-shadow:8px 8px 0 #ff9ec7;text-align:center}
+.hm-dress h3{margin:0;font-family:var(--f-disp);font-weight:900;font-size:clamp(20px,2.4vw,32px);line-height:1.4;color:var(--ink)}
+.hm-dress h3 span{display:inline-block;margin-right:10px;padding:2px 12px;border-radius:8px;background:#ff3d8b;color:#fff;font-size:.7em;vertical-align:4px;transform:rotate(-6deg);animation:woBounce 1.2s ease-in-out infinite}
+.hm-dress h3 b{color:#ff3d8b}
+.hm-drs{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.hm-dr{position:relative;border-radius:16px;overflow:hidden;border:3px solid #1c1012;box-shadow:3px 3px 0 #1c1012;background:#fff;transition:transform .25s}
+.hm-dr:hover{transform:translateY(-6px) rotate(-2deg)}
+.hm-dr img{display:block;width:100%;aspect-ratio:9/15;object-fit:cover;object-position:center 20%}
+.hm-dr em{position:absolute;left:8px;top:8px;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#fff;border:2px solid #1c1012;font-style:normal;font-weight:900;font-size:15px;color:#ff3d8b}
+.hm-dr.d0{animation:hmFloat 3.2s ease-in-out infinite}.hm-dr.d1{animation:hmFloat 3.2s ease-in-out -1s infinite}.hm-dr.d2{animation:hmFloat 3.2s ease-in-out -2s infinite}
+@keyframes hmFloat{0%,100%{translate:0 0}50%{translate:0 -6px}}
+.hm-note{margin:18px 0 0;font-weight:800;font-size:16px;line-height:1.8;color:var(--ink)}
+.hm-note i{font-style:normal;margin-right:6px}
+.hm-note b{color:#ff3d8b;font-size:1.2em}
+.hm-call{margin:40px 0 0;text-align:center;font-family:var(--f-disp);font-weight:900;font-size:clamp(22px,3vw,38px);color:var(--ink)}
+.hm-call b{color:#ff3d8b}
+@media (min-width:1024px){.hm-ph figcaption{font-size:22px}.hm-note{font-size:20px}.hm-tag{font-size:20px}}
+@media (max-width:760px){
+  .hm-two{gap:6px}.hm-or b{font-size:18px}.hm-or i{width:40px;height:40px;font-size:18px}.hm-or{font-size:12px}.hm-or small{display:none}
+  .hm-ph img{border-width:4px;border-radius:18px}.hm-tag{font-size:12px;padding:3px 10px;top:-12px}.hm-ph figcaption{font-size:12px;margin-top:8px}
+  .hm-drs{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.hm-dress{margin-top:28px;padding:18px 12px}.hm-note{font-size:13px}
+  html.snap #myhome .hm-dress,html.snap #myhome .hm-call,html.snap #myhome .hm-lead,html.snap #myhome .hm-ph figcaption,html.snap #myhome .hm-or small{display:none!important}
+  html.snap #myhome .hm-two{max-width:330px}
+}
+@media (max-width:760px){html.snap body #myhome .hm-dress{display:block!important;margin-top:14px;padding:10px 10px 12px;border-width:3px;box-shadow:4px 4px 0 #ff9ec7}
+  html.snap body #myhome .hm-dress h3{font-size:14px}html.snap body #myhome .hm-drs{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:8px}
+  html.snap body #myhome .hm-drs li:nth-child(n+5){display:none}html.snap body #myhome .hm-dr img{aspect-ratio:3/4}html.snap body #myhome .hm-dr em{width:22px;height:22px;font-size:11px;left:4px;top:4px}
+  html.snap body #myhome .hm-two{max-width:280px}}
+.hm-dress h3{word-break:keep-all;overflow-wrap:anywhere}@media (max-width:760px){html.snap body #myhome .hm-dress h3 span{display:none}html.snap body #myhome .hm-dress h3{font-size:13px}}
