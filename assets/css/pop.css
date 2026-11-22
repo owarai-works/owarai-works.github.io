@@ -2496,3 +2496,19 @@ html body .cm-feat small{word-break:keep-all;overflow-wrap:anywhere}
 @media (max-width:760px){html body #comic .sec-hd h2{white-space:nowrap;font-size:clamp(18px,5.6vw,24px)!important;display:flex;align-items:center;justify-content:center;gap:4px}html body #comic .sec-hd h2 .mg-n{font-size:1.5em!important;display:inline}
   html body #comic .cm-feat b{font-size:clamp(12px,3.8vw,15px)!important}}
 @media (max-width:760px) and (max-height:700px){html.snap #comic .cm-cover{max-height:30vh}html.snap #comic .cm-feat small{font-size:10px!important}html.snap #comic .cm-q{font-size:14px!important}}
+
+/* 11-22 開演の「なんでやねん！」を小さく */
+html body .wo-stamp b{font-size:clamp(26px,5vw,52px)!important;padding:8px 20px!important;border-width:4px!important}
+/* 11-22 ユーザー「円の中センタリング」：メニューの三本線を丸のまん中に */
+html body .hd-menu{display:none;padding:0!important}
+@media (max-width:1080px){html body .hd-menu{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:5px}}
+html body .hd-menu i{position:static!important;display:block;width:20px;height:3px;margin:0!important;left:auto;right:auto;top:auto}
+html body .menu-open .hd-menu i:nth-child(1){transform:translateY(8px) rotate(45deg)}
+html body .menu-open .hd-menu i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+/* 11-22 ユーザー「スワイプで次へをもっと大きく」 */
+html body .hs-hint{font-size:19px!important;margin-top:8px!important;gap:6px}
+html body .hs-hint i{font-size:28px!important}
+/* 11-22 ユーザー「背景の絵はセクションにすき間なくぴったり」：うすいシスターズの絵を話題の枠いっぱいに */
+main>section.sec.bg-y::before,main>section.sec.bg-p::before,main>section.sec.bg-b::before{inset:0!important;left:0!important;right:0!important;width:auto!important;background-size:cover!important;background-position:center 20%!important;-webkit-mask-image:none!important;mask-image:none!important;opacity:.12!important}
+/* 11-22 ユーザー「コラボの枠をもう少し小さく、上へ」：右下のBGMのボタンに重ならない高さに */
+@media (min-width:761px){html body .hero .hero-co.hco2{width:min(170px,12.5vw)!important;bottom:auto!important;top:calc(var(--hd,80px) + 30px)!important}}
