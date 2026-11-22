@@ -152,7 +152,7 @@
 
   /* ---------- 7 パソコン：App Store・X・YouTube の列は、スクロールしても右上に出たまま（11-22 ユーザー） ---------- */
   function pinSns(){
-    if (document.body.dataset.page !== "home" || !matchMedia("(min-width:761px)").matches) return;
+    return;  /* 11-22 ユーザー「右のXとYouTubeのボタンを消して、アプリのボタンを上のYouTubeのとなりに」 */
     const el = $(".hero .hero-sns"); if (!el) return; el.classList.add("pinned"); document.body.append(el);
   }
 

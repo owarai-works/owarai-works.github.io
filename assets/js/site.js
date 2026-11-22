@@ -42,7 +42,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
   hd.innerHTML = `<div class="hd-in">
       <a class="hd-logo" href="index.html" aria-label="お笑い道場 なんでやねん ホーム"><img src="assets/img/logo.webp" alt="お笑い道場 なんでやねん" width="900" height="515"></a>
       <nav class="hd-nav" aria-label="メインメニュー">${navA}</nav>
-      <div class="hd-cta">${document.body.dataset.page === "home" ? "" : snsHTML("hd-sns")}</div>
+      <div class="hd-cta">${snsHTML("hd-sns")}${storeHTML("hd")}</div>
       <button class="hd-menu" type="button" aria-label="メニューを開く" aria-expanded="false"><i></i><i></i><i></i></button>
     </div>`;
   document.body.prepend(hd);
@@ -122,6 +122,11 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
       m.style.setProperty("transform", "none", "important"); const nat = m.offsetHeight, pad = parseFloat(getComputedStyle(w).paddingTop) || 0, room = h.clientHeight - pad - 24;
       const sc = Math.max(.7, Math.min(1.12, room / Math.max(1, nat))); m.style.setProperty("transform", `scale(${sc.toFixed(3)})`, "important"); };
     addEventListener("resize", heroFit); addEventListener("load", heroFit); heroFit(); setTimeout(heroFit, 800); if (document.fonts) document.fonts.ready.then(heroFit); }
+  /* 11-22 ユーザー「トップの背景をオープニング動画の自動再生（音なし）に」：パソコンは YouTube の横のOP、スマホはホームページの中の縦のOP（index.html の .hero-sp） */
+  if (document.body.dataset.page === "home" && innerWidth >= 761 && !matchMedia("(prefers-reduced-motion:reduce)").matches) { const bg = $(".hero-bg");
+    if (bg && !$(".hero-yt", bg)) { const f = document.createElement("iframe"); f.className = "hero-yt"; f.title = "オープニング映像（背景）"; f.setAttribute("aria-hidden", "true"); f.tabIndex = -1;
+      f.setAttribute("allow", "autoplay; encrypted-media"); f.src = `https://www.youtube-nocookie.com/embed/${YT.op.h}?autoplay=1&mute=1&loop=1&playlist=${YT.op.h}&controls=0&disablekb=1&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3`;
+      f.addEventListener("load", () => setTimeout(() => f.classList.add("on"), 1500)); bg.append(f); } }
   window.openMovie = src => {
     if (!modal) {
       modal = document.createElement("div"); modal.className = "modal"; modal.setAttribute("role", "dialog"); modal.setAttribute("aria-modal", "true"); modal.setAttribute("aria-label", "ムービー");
@@ -172,7 +177,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
   (() => {
     const KEY = "ow-bgm", POS = "ow-bgm-pos", XF = 1.2;  /* XF＝つなぎ目を重ねる秒数 */
     let VOL = (() => { let v = NaN; try { v = parseFloat(localStorage.getItem("ow-bgm-vol")); } catch (e) {} return isFinite(v) ? Math.min(1, Math.max(0, v)) : .5; })();  /* 音量（0〜1）。はじめはゲームと同じ 0.5 */
-    const FULL = "assets/bgm/title.mp3", HEAD = "assets/bgm/title_head.mp3";
+    const FULL = "assets/bgm/op.mp3", HEAD = "assets/bgm/op_head.mp3";  /* 11-22 ユーザー「BGMをOPソングに」 */
     const get = (s, k) => { try { return s.getItem(k); } catch (e) { return null; } };
     const set = (s, k, v) => { try { s.setItem(k, v); } catch (e) {} };
     const AC = window.AudioContext || window.webkitAudioContext;

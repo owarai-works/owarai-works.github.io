@@ -2407,3 +2407,32 @@ html body .wo-cur.l,html body .wo-cur.r{border:0!important}
 /* 11-22 ユーザー「YouTubeのアイコンをサムネイルのど真ん中に」：はずむ動きが位置合わせ（transform）を上書きしていたので、margin でまん中に置く */
 html body .ytc-play{left:0!important;right:0!important;top:0!important;bottom:0!important;margin:auto!important;transform:none}
 @keyframes ytcPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}html body .ytc-play{animation:ytcPulse 1.6s ease-in-out infinite!important}
+
+/* ===== 11-22 トップの背景をOP動画に（パソコン：YouTube を画面いっぱいに・音なし） ===== */
+.hero-yt{position:absolute;left:50%;top:50%;width:max(100%,177.78vh);height:max(100%,56.25vw);transform:translate(-50%,-50%);border:0;pointer-events:none;opacity:0;transition:opacity 1.2s;z-index:1}
+.hero-yt.on{opacity:1}
+@media (max-width:760px){.hero-yt{display:none}}
+/* 右の X・YouTube・アプリの列はやめ、上のメニューに並べる */
+@media (min-width:761px){html body .hero .hero-sns,html body>.hero-sns.pinned{display:none!important}
+  html body .hd-cta{display:flex;align-items:center;gap:10px}
+  html body .hd-cta .store{transform:scale(.8);transform-origin:left center;margin-right:-30px}}
+/* 11-22 ユーザー「全部数字で改行」：数字の下に説明 */
+html body .facts .fact{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center;text-align:center}
+html body .facts .fact b{display:block}
+html body .facts .fact span{display:block;margin-top:6px}
+@media (min-width:761px){
+  html body .hd .hd-cta{display:flex!important;align-items:center;gap:10px;position:relative}
+  html body .hd .hd-cta .sns{display:flex!important;gap:10px;position:static!important}
+  html body .hd .hd-cta .store{position:static!important;inset:auto!important;flex:none!important;width:auto!important;height:auto!important;min-width:0!important;transform:none!important;margin:0!important;padding:6px 14px 6px 10px!important;gap:8px;border-radius:999px!important;font-size:13px;animation:none!important}
+  html body .hd .hd-cta .store svg{width:18px;height:18px}
+  html body .hd .hd-cta .store small{font-size:10px}
+  html body .hd .hd-cta .store b{font-size:15px}
+}
+@media (min-width:761px) and (max-width:1760px){
+  html body .hd .hd-cta .sns a span{display:none!important}
+  html body .hd .hd-cta .sns a{width:46px!important;height:46px!important;padding:0!important;justify-content:center!important;border-radius:50%!important;min-width:0!important}
+  html body .hd .hd-cta .store small{display:none}
+}
+@media (min-width:761px) and (max-width:1180px){html body .hd .hd-cta .store em{display:none}}
+@media (min-width:761px) and (max-width:1400px){html body .hd .hd-cta .store em{display:none}html body .hd .hd-nav a{padding-inline:8px!important}html body .hd .hd-cta{gap:6px}html body .hd .hd-cta .sns{gap:6px}}
+@media (min-width:761px) and (max-width:1080px){html body .hd .hd-cta{margin-left:auto}html body .hd .hd-menu{margin-left:12px!important}}
