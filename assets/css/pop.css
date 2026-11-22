@@ -2726,3 +2726,10 @@ html body .ft a,html body .links3 a span,html body .sp-links a span{white-space:
 html body .ft nav a,html body .ft-nav a{white-space:nowrap}
 html body .ft .ft-nav{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(max-content,240px))!important;gap:10px 28px!important;min-width:0;max-width:100%}
 html body .ft .ft-top{flex-wrap:wrap}
+
+/* 11-22 ユーザー「実際のストーリーモードのマップ画面を乗せて」 */
+html body .road-pics{display:flex!important;justify-content:center;align-items:center}
+.road-ph{position:relative;margin:0;width:min(360px,100%);transform:rotate(-2deg)}
+.road-ph img{display:block;width:100%;height:auto;border:6px solid var(--ink);border-radius:30px;box-shadow:0 0 0 4px #fff,10px 12px 0 var(--ink);background:#fff}
+.road-ph figcaption{position:absolute;left:50%;bottom:-16px;transform:translateX(-50%) rotate(2deg);white-space:nowrap;padding:6px 18px;background:var(--shu);color:#fff;border:3px solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);font-weight:900;font-size:16px}
+@media (max-width:760px){.road-ph{width:min(260px,78%)}.road-ph figcaption{font-size:13px}}
