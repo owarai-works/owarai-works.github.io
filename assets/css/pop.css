@@ -3032,3 +3032,13 @@ html.snap body .hero::after{display:none!important;content:none!important}  /* 1
 @media (max-width:520px){.to-top{width:40px;height:40px}.to-top svg{width:22px;height:22px}}
 @media (max-width:760px){html body .wo-bust{width:100%!important;left:0!important;transform:none!important}html body .wo-bust img{width:100%!important}}  /* 11-22 スマホ：開演のシスターズの絵を画面の幅に収める（はしが切れない） */
 html body .wo-skip{display:none!important}
+/* 11-23 ユーザー「キャラ紹介：右の名前・詳細と英語が右すぎる。左につめて、いい感じのすき間に」（パソコン） */
+@media (min-width:1024px){
+  html body .cs-in{width:min(100% - 40px,1320px)!important;grid-template-columns:96px minmax(0,560px) minmax(0,620px)!important;justify-content:center!important;gap:clamp(28px,3vw,56px)!important}
+  html body .cs-info{max-width:620px}
+  html body .cs-en{right:clamp(8px,2vw,40px)!important;font-size:min(18vh,150px)!important}
+}
+@media (min-width:1024px){
+  html body .cs-in{width:min(calc(100% - 230px),1320px)!important;margin-left:max(20px,calc((100% - 230px - 1320px) / 2))!important;margin-right:auto!important;grid-template-columns:96px minmax(0,1fr) minmax(0,1.05fr)!important;justify-content:start!important}
+  html body .cs-en{right:24px!important;font-size:min(16vh,140px)!important}
+}
