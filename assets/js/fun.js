@@ -79,7 +79,8 @@
     if (e.target.closest("a,button,input,textarea,select,summary,label,video,.demo,.fb,.fb-inline,.cs,.modal,.og-gate,.curtain,.sp-menu,.hd,[role=tab]")) return;
     if (getSelection && String(getSelection()).length) return;
     const now = performance.now(); if (now - lastBoom < 250) return; lastBoom = now;
-    const b = document.createElement("div"); b.className = "fun-boom"; b.style.left = e.clientX + "px"; b.style.top = e.clientY + "px";
+    const z = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;  /* 11-22 ユーザー「知らんけど！がカーソルからずれる」：パソコンは全体を1.25倍にしているので、その分を割る */
+    const b = document.createElement("div"); b.className = "fun-boom"; b.style.left = e.clientX / z + "px"; b.style.top = e.clientY / z + "px";
     b.innerHTML = `<i></i><img src="${P}harisen.webp" alt=""><b>${pick(LINES)}</b>`;
     document.body.append(b); sfx("slap"); setTimeout(() => b.remove(), 1000);
   });
