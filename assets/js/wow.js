@@ -39,7 +39,7 @@
     const ov = document.createElement("div"); ov.className = "wow-open ready"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", "開演");
     ov.innerHTML = `<i class="wo-rays"></i><i class="wo-cur l"></i><i class="wo-cur r"></i>
       <div class="wo-ready"><img src="assets/img/logo.webp" alt="お笑い道場 なんでやねん"><button type="button" class="wo-go">▶ タップで開演！</button><small>音が出ます</small></div>
-      <div class="wo-sis wo-bust"><img src="assets/img/sis_bust.webp" alt=""></div>
+      <div class="wo-sis wo-bust"><img src="assets/img/sis_bust.webp?v=11231647" alt=""></div>
       <div class="wo-stamp"><b>なんでやねん！</b></div>
       <div class="wo-score"><small>AI SCORE</small><b><i>0</i>点</b></div>
       <canvas class="wo-cf"></canvas><p class="wo-skip">タップでスキップ</p>`;
