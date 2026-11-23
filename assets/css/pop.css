@@ -3031,3 +3031,4 @@ html.snap body .hero::after{display:none!important;content:none!important}  /* 1
 .to-top:hover{transform:translateY(-2px)}
 @media (max-width:520px){.to-top{width:40px;height:40px}.to-top svg{width:22px;height:22px}}
 @media (max-width:760px){html body .wo-bust{width:100%!important;left:0!important;transform:none!important}html body .wo-bust img{width:100%!important}}  /* 11-22 スマホ：開演のシスターズの絵を画面の幅に収める（はしが切れない） */
+html body .wo-skip{display:none!important}

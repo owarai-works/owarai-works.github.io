@@ -42,7 +42,7 @@
       <div class="wo-sis wo-bust"><img src="assets/img/sis_bust.webp?v=11231647" alt=""></div>
       <div class="wo-stamp"><b>なんでやねん！</b></div>
       <div class="wo-score"><small>AI SCORE</small><b><i>0</i>点</b></div>
-      <canvas class="wo-cf"></canvas><p class="wo-skip">タップでスキップ</p>`;
+      <canvas class="wo-cf"></canvas>`;  /* 11-23 ユーザー「タップでスキップを消して」 */
     document.body.append(ov); document.documentElement.classList.add("wow-lock");
     let started = false, done = false, sound = false;
     const end = () => { if (done) return; done = true; try { window.owHeroPlay && owHeroPlay(); } catch (e) {} const bgmGo = () => { try { if (window.owBgm) sound ? owBgm.play() : owBgm.start(); } catch (e) {} };
