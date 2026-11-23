@@ -129,7 +129,11 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
       /* 11-22 ユーザー「動画が終わったら、さっきの1枚絵を出す」：YouTube から「終わった」の知らせ（状態0）が来たら、動画を消して下の1枚絵（hero.webp）を見せる */
       const fin = () => { const sp = $(".hero .hero-sp"); if (sp && sp.tagName === "VIDEO") sp.dispatchEvent(new Event("ended"));  /* スマホ：YouTube が終わったら1枚絵に */ f.classList.remove("on"); setTimeout(() => f.remove(), 1300); };
       addEventListener("message", e => { if (e.source !== f.contentWindow) return; let d = e.data; try { d = typeof d === "string" ? JSON.parse(d) : d; } catch (x) { return; }
-        if (!d) return; if ((d.event === "onStateChange" && d.info === 1) || (d.event === "infoDelivery" && d.info && d.info.playerState === 1)) { const g = window.__owYtPlaying; if (g) { window.__owYtPlaying = null; g(); } } if ((d.event === "onStateChange" && d.info === 0) || (d.event === "infoDelivery" && d.info && d.info.playerState === 0)) fin(); });
+        if (!d) return;
+        /* 11-22 ユーザー「動画が音より1秒以上おそい」：YouTube の再生位置を BGM（OPソング）の位置にそろえる（ずれが0.25秒をこえたら、その位置へとばす） */
+        if (d.event === "infoDelivery" && d.info && typeof d.info.currentTime === "number" && window.owBgm && owBgm.opPos) { const bp = owBgm.opPos(), now = performance.now();
+          if (bp >= 0 && bp < 70 && Math.abs(d.info.currentTime - bp) > .25 && now - (f._sk || 0) > 1500) { f._sk = now; try { f.contentWindow.postMessage(JSON.stringify({event: "command", func: "seekTo", args: [bp + .35, true]}), "*"); } catch (x) {} } }
+        if ((d.event === "onStateChange" && d.info === 1) || (d.event === "infoDelivery" && d.info && d.info.playerState === 1)) { const g = window.__owYtPlaying; if (g) { window.__owYtPlaying = null; g(); } } if ((d.event === "onStateChange" && d.info === 0) || (d.event === "infoDelivery" && d.info && d.info.playerState === 0)) fin(); });
       f.addEventListener("load", () => { const hi = () => { try { f.contentWindow.postMessage(JSON.stringify({event: "listening", id: 1, channel: "widget"}), "*"); } catch (x) {} }; hi(); setTimeout(hi, 1000); setTimeout(hi, 3000); if (window.__owHeroGo) heroGo(); });
       /* 11-22 ユーザー「開演が終わった直後に動画をスタート」：wow.js の end() から呼ぶ */
       function heroGo(){ const cmd = (func, args = []) => { try { f.contentWindow.postMessage(JSON.stringify({event: "command", func, args}), "*"); } catch (x) {} };
@@ -272,13 +276,13 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
       const startAt = +get(sessionStorage, POS) || 0;  /* ほかのページから来たら、続きから */
       if (!loopP) loopP = Promise.all(LOOPS.map((u, i) => load(u).then(t => (loopTs[i] = t)).catch(() => null)));
       const tk = /^loop(\d?)$/.exec(get(sessionStorage, TRK) || ""); if (tk) { await loopP; const t = loopTs[+tk[1] || 0] || loopTs.find(Boolean); if (g0 !== gen) return true; if (t) { const L = t.end - t.start; voice(t, ac.currentTime + .02, .6, g0, startAt % L); return true; } }
-      if (!full) full = load(FULL).then(t => (opT = t)).catch(e => { full = null; throw e; });
+      if (!full) full = load(FULL).then(t => { t.isOp = true; return (opT = t); }).catch(e => { full = null; throw e; });
       if (!head && !startAt) head = load(HEAD).catch(() => null);
       let w = null; try { w = await Promise.race([full.then(t => ({f: t})), ...(head ? [head.then(t => t ? {h: t} : new Promise(() => {}))] : [])]); } catch (e) { playing = false; return false; }
       if (g0 !== gen) return true;
       if (w.f) { const L = w.f.end - w.f.start; voice(w.f, ac.currentTime + .02, .6, g0, startAt % L); return true; }
       /* 先に小さな版を鳴らし、全体が来たら同じ位置からつなぎかえる */
-      const h = w.h, t0 = ac.currentTime + .02; voice(h, t0, .4, g0, 0, false);
+      const h = w.h; h.isOp = true; const t0 = ac.currentTime + .02; voice(h, t0, .4, g0, 0, false);
       full.then(t => { if (g0 !== gen || !playing) return; const now = ac.currentTime, el = now + .06 - t0;
         const off = el < h.end - h.start - XF ? Math.max(0, h.start + el - t.start) : 0;
         stopVoices(.08); voice(t, now + .06, off ? .05 : .4, g0, off); }).catch(() => {});
@@ -312,7 +316,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
       g.onclick = e => { if (e.target === g) close(true); };
     }
     /* トップの「タップで開演」の幕から使う */
-    window.owBgm = {isOn: () => on, start: () => { if (on) start(); }, prime: () => { if (!AC || !on) return; if (!ac) { ac = new AC(); bus = ac.createGain(); bus.gain.value = 0; const mst = ac.createGain(); mst.gain.value = .15; bus.connect(mst); mst.connect(ac.destination);  /* 11-22 ユーザー「MAXを今より70%下げて」→さらに「今の半分」：いちばん大きくしても最初の15% */ } unlock(); try { ac.resume(); } catch (e) {} }, hush: () => { const w = playing; stop(); return w; }, resume: () => { if (on && !playing) play(); }, play: () => { if (on) play().then(ok => { if (ok) offWait(); }); }, off: () => { if (!on) return; on = false; set(localStorage, KEY, "0"); paint(); stop(); offWait(); }};
+    window.owBgm = {isOn: () => on, opPos: () => (playing && cur && cur.tr.isOp && ac) ? cur.tr.start + posNow() : -1, start: () => { if (on) start(); }, prime: () => { if (!AC || !on) return; if (!ac) { ac = new AC(); bus = ac.createGain(); bus.gain.value = 0; const mst = ac.createGain(); mst.gain.value = .15; bus.connect(mst); mst.connect(ac.destination);  /* 11-22 ユーザー「MAXを今より70%下げて」→さらに「今の半分」：いちばん大きくしても最初の15% */ } unlock(); try { ac.resume(); } catch (e) {} }, hush: () => { const w = playing; stop(); return w; }, resume: () => { if (on && !playing) play(); }, play: () => { if (on) play().then(ok => { if (ok) offWait(); }); }, off: () => { if (!on) return; on = false; set(localStorage, KEY, "0"); paint(); stop(); offWait(); }};
     btn.addEventListener("click", e => {
       e.stopPropagation(); noTip();
       if (on && !playing) { play(); return; }  /* ON なのにまだ鳴っていない（ブラウザに止められた）ときは、流すだけ */
