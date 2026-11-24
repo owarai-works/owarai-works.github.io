@@ -199,7 +199,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
      2MBの全体が読みこめるまでは、最初の14秒だけの小さな版（title_head.mp3）を先に鳴らし、用意できたら同じ位置からつなぎかえる */
   (() => {
     const KEY = "ow-bgm", POS = "ow-bgm-pos", XF = 1.2;  /* XF＝つなぎ目を重ねる秒数 */
-    let VOL = (() => { let v = NaN; try { v = parseFloat(localStorage.getItem("ow-bgm-vol")); } catch (e) {} return isFinite(v) ? Math.min(1, Math.max(0, v)) : 1; })();  /* 11-22 ユーザー「はじめの音量を30%下げて」0.5→0.35 */  /* 音量（0〜1）。はじめはゲームと同じ 0.5 */
+    let VOL = (() => { let v = NaN; try { v = parseFloat(localStorage.getItem("ow-bgm-vol")); } catch (e) {} return isFinite(v) ? Math.min(1, Math.max(0, v)) : .5; })();  /* 11-24 ユーザー「最大音量を通常に戻して」：いちばん大きい音を元に戻し、はじめの音量も元の 0.5 に */  /* 11-22 ユーザー「はじめの音量を30%下げて」0.5→0.35 */  /* 音量（0〜1）。はじめはゲームと同じ 0.5 */
     const FULL = "assets/bgm/op.mp3", HEAD = "assets/bgm/op_head.mp3", LOOPS = ["assets/bgm/title.mp3", "assets/bgm/title2.mp3", "assets/bgm/title3.mp3"], TRK = "ow-bgm-trk";  /* 11-22 ユーザー「歌のあとは開演のテーマ①②③をランダムで」 */  /* 11-22 ユーザー「OPソングを1曲流したら、あとは前の曲（開演のテーマ）をくり返す」 */  /* 11-22 ユーザー「BGMをOPソングに」 */
     const get = (s, k) => { try { return s.getItem(k); } catch (e) { return null; } };
     const set = (s, k, v) => { try { s.setItem(k, v); } catch (e) {} };
@@ -266,7 +266,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
     const unlock = () => { try { const b = ac.createBuffer(1, 1, 22050), s = ac.createBufferSource(); s.buffer = b; s.connect(ac.destination); s.start(0); } catch (e) {} };
     const play = async () => {
       if (!AC) return false;
-      if (!ac) { ac = new AC(); bus = ac.createGain(); bus.gain.value = 0; const mst = ac.createGain(); mst.gain.value = .15; bus.connect(mst); mst.connect(ac.destination);  /* 11-22 ユーザー「MAXを今より70%下げて」→さらに「今の半分」：いちばん大きくしても最初の15% */ }
+      if (!ac) { ac = new AC(); bus = ac.createGain(); bus.gain.value = 0; const mst = ac.createGain(); mst.gain.value = 1; bus.connect(mst); mst.connect(ac.destination);  /* 11-22 ユーザー「MAXを今より70%下げて」→さらに「今の半分」：いちばん大きくしても最初の15% */ }
       unlock();
       /* タップ前の resume() は返事がずっと来ないことがあるので、0.3秒で見切る */
       if (ac.state !== "running") await Promise.race([ac.resume().catch(() => {}), new Promise(r => setTimeout(r, 300))]);
@@ -316,7 +316,7 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
       g.onclick = e => { if (e.target === g) close(true); };
     }
     /* トップの「タップで開演」の幕から使う */
-    window.owBgm = {isOn: () => on, opPos: () => (playing && cur && cur.tr.isOp && ac) ? cur.tr.start + posNow() : -1, start: () => { if (on) start(); }, prime: () => { if (!AC || !on) return; if (!ac) { ac = new AC(); bus = ac.createGain(); bus.gain.value = 0; const mst = ac.createGain(); mst.gain.value = .15; bus.connect(mst); mst.connect(ac.destination);  /* 11-22 ユーザー「MAXを今より70%下げて」→さらに「今の半分」：いちばん大きくしても最初の15% */ } unlock(); try { ac.resume(); } catch (e) {} }, hush: () => { const w = playing; stop(); return w; }, resume: () => { if (on && !playing) play(); }, play: () => { if (on) play().then(ok => { if (ok) offWait(); }); }, off: () => { if (!on) return; on = false; set(localStorage, KEY, "0"); paint(); stop(); offWait(); }};
+    window.owBgm = {isOn: () => on, opPos: () => (playing && cur && cur.tr.isOp && ac) ? cur.tr.start + posNow() : -1, start: () => { if (on) start(); }, prime: () => { if (!AC || !on) return; if (!ac) { ac = new AC(); bus = ac.createGain(); bus.gain.value = 0; const mst = ac.createGain(); mst.gain.value = 1; bus.connect(mst); mst.connect(ac.destination);  /* 11-22 ユーザー「MAXを今より70%下げて」→さらに「今の半分」：いちばん大きくしても最初の15% */ } unlock(); try { ac.resume(); } catch (e) {} }, hush: () => { const w = playing; stop(); return w; }, resume: () => { if (on && !playing) play(); }, play: () => { if (on) play().then(ok => { if (ok) offWait(); }); }, off: () => { if (!on) return; on = false; set(localStorage, KEY, "0"); paint(); stop(); offWait(); }};
     btn.addEventListener("click", e => {
       e.stopPropagation(); noTip();
       if (on && !playing) { play(); return; }  /* ON なのにまだ鳴っていない（ブラウザに止められた）ときは、流すだけ */
