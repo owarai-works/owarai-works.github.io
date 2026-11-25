@@ -467,13 +467,14 @@ if (!window.__owClk) { window.__owClk = true; document.addEventListener("click",
   const hdb = () => parseFloat(getComputedStyle(R).getPropertyValue("--hdb")) || 58;
   const topOf = e => Math.max(0, Math.round(e.getBoundingClientRect().top + scrollY - (e.classList.contains("hero") ? 0 : hdb())));
   let busy = false;
+  let lastGo = 0;
   function go(dir){
-    if (busy) return; const P = panels(); if (!P.length) return;
+    const nw = Date.now(); if (busy || nw - lastGo < 450) return; lastGo = nw; const P = panels(); if (!P.length) return;
     const ys = P.map(topOf); let i = 0, best = 1e9; ys.forEach((y, k) => { const d = Math.abs(y - scrollY); if (d < best) { best = d; i = k; } });
     const j = Math.max(0, Math.min(P.length - 1, i + dir)); if (j === i && best < 4) return;
-    busy = true; R.classList.add("pg-fade");
+    busy = true; let veil = document.querySelector(".pg-veil"); if (!veil) { veil = document.createElement("div"); veil.className = "pg-veil"; veil.setAttribute("aria-hidden", "true"); document.body.append(veil); } veil.classList.add("on");
     setTimeout(() => { R.style.scrollSnapType = "none"; scrollTo({top: ys[j], behavior: "instant"});
-      requestAnimationFrame(() => { R.classList.remove("pg-fade"); setTimeout(() => { R.style.scrollSnapType = ""; busy = false; }, 320); }); }, 230);
+      requestAnimationFrame(() => requestAnimationFrame(() => { veil.classList.remove("on"); setTimeout(() => { R.style.scrollSnapType = ""; busy = false; }, 360); })); }, 230);
   }
   window.owFadeGo = go;
   let sx = 0, sy = 0, axis = "", startEl = null;
