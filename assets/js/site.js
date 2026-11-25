@@ -479,10 +479,13 @@ if (!window.__owClk) { window.__owClk = true; document.addEventListener("click",
       /* 11-25 ユーザー「トップ以外も同じスワイプで、画面ぴったりフェード」：次（前）の話題の頭へ。話題が1画面より長いときは1画面ずつ */
       const hd = document.querySelector(".hd"), sn = document.querySelector(".subnav"); let off = hd ? hd.getBoundingClientRect().height : 58; if (sn && getComputedStyle(sn).position === "sticky") off += sn.getBoundingClientRect().height;
       const page = innerHeight - off, max = document.documentElement.scrollHeight - innerHeight;
-      const tops = [0, ...P.map(e => Math.round(e.getBoundingClientRect().top + scrollY - off))].filter(y => y >= 0).sort((a, b) => a - b);
+      /* 11-25 ユーザー「スワイプしてもうまく表示」：切れ目の候補は main の中のすべてのかたまり（見出し・帯・話題）＋下の欄。
+         進むときは1画面の中でいちばん遠い切れ目へ（中身を飛ばさず、かたまりの頭がぴったり上に来る）。なければ1画面分 */
+      const els = [...document.querySelectorAll("main>*,main>section>.wrap>*,footer.ft,footer.ft>*>*")].filter(e => e.offsetHeight > 40 && getComputedStyle(e).position !== "fixed");
+      const tops = [...new Set([0, ...els.map(e => Math.round(e.getBoundingClientRect().top + scrollY - off - 12))])].filter(t => t >= 0).sort((a, b) => a - b);
       const y = scrollY;
-      if (dir > 0) { const nx = tops.find(t => t > y + 90); target = nx !== undefined && nx - y <= page ? nx : y + page; }
-      else { const pv = [...tops].reverse().find(t => t < y - 90); target = pv !== undefined && y - pv <= page ? pv : y - page; }
+      if (dir > 0) { const c = tops.filter(t => t > y + 90 && t <= y + page); target = c.length ? c[c.length - 1] : y + page; }
+      else { const c = tops.filter(t => t < y - 90 && t >= y - page); target = c.length ? c[0] : y - page; }
       target = Math.max(0, Math.min(max, Math.round(target))); if (Math.abs(target - y) < 4) { lastGo = 0; return; }
     }
     busy = true; let veil = document.querySelector(".pg-veil"); if (!veil) { veil = document.createElement("div"); veil.className = "pg-veil"; veil.setAttribute("aria-hidden", "true"); document.body.append(veil); } veil.classList.add("on");

@@ -3093,3 +3093,6 @@ html.snap main,html.snap footer.ft{transition:none!important;opacity:1!important
 @media (max-width:760px){html.snap body #comic{padding-top:22px!important;padding-bottom:22px!important}html.snap body #comic .cm-cover{max-height:30vh!important}html.snap body #comic .sec-hd .en{font-size:44px!important}html.snap body #comic .cm-grid{gap:10px!important}html.snap body #comic .cm-feat small{font-size:10px!important}}
 @media (max-width:760px) and (max-height:700px){html.snap body #comic .cm-cover{max-height:26vh!important}html.snap body #comic .cm-feat small{display:none!important}}
 @media (max-width:760px){html body .pm-catch{font-size:clamp(12px,3.8vw,17px)!important;letter-spacing:0}}
+
+/* 11-25 ユーザー「（ページの上の大きな絵で）顔が見えるように」：スマホはキャラの顔のある上側を見せる */
+@media (max-width:760px){html body .ph .ph-bg{background-position:72% 6%!important;background-size:cover!important}}
