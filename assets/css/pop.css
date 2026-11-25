@@ -3081,3 +3081,15 @@ html.snap main,html.snap footer.ft{transition:none!important;opacity:1!important
   html.snap body #comic .cm-feat i{font-size:18px!important}
 }
 @media (max-width:760px) and (max-height:700px){html.snap body #minigame .mg-row .mgc{width:80px!important}html.snap body #minigame .mg-rank{margin-top:4px!important}}
+
+/* ===== 11-25 ほかにも盛りだくさん：上にキャッチ1行 ===== */
+.pm-catch{margin:0 auto 22px;text-align:center;font-family:var(--f-disp);font-weight:900;font-size:clamp(24px,3vw,44px);line-height:1.3;color:var(--ink);white-space:nowrap}
+.pm-catch b{color:var(--shu-d);font-size:1.15em}
+.pm-catch em{font-style:normal;display:inline-block;padding:0 .15em;color:#fff;background:var(--shu);border:3px solid var(--ink);border-radius:10px;transform:rotate(-4deg);margin:0 .1em}
+@media (max-width:760px){.pm-catch{font-size:clamp(15px,4.6vw,20px);margin-bottom:12px}.pm-catch em{border-width:2px;border-radius:7px}html.snap body #point2 .pm-catch{margin:0 auto 10px!important}}
+/* ===== 11-25 お題合戦のスマホ写真：下の札が切れないように ===== */
+@media (max-width:760px){html.snap body #gassen .hs{padding-bottom:26px!important}html.snap body #gassen .gs-ph{margin-bottom:18px!important}html.snap body #gassen .gs-ph figcaption{bottom:-12px!important}}
+/* ===== 11-25 漫画（スマホのトップ）：上下に余白 ===== */
+@media (max-width:760px){html.snap body #comic{padding-top:22px!important;padding-bottom:22px!important}html.snap body #comic .cm-cover{max-height:30vh!important}html.snap body #comic .sec-hd .en{font-size:44px!important}html.snap body #comic .cm-grid{gap:10px!important}html.snap body #comic .cm-feat small{font-size:10px!important}}
+@media (max-width:760px) and (max-height:700px){html.snap body #comic .cm-cover{max-height:26vh!important}html.snap body #comic .cm-feat small{display:none!important}}
+@media (max-width:760px){html body .pm-catch{font-size:clamp(12px,3.8vw,17px)!important;letter-spacing:0}}

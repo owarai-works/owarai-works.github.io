@@ -462,7 +462,8 @@ if (!window.__owClk) { window.__owClk = true; document.addEventListener("click",
 (() => {
   if (window.__owFadeSnap) return; window.__owFadeSnap = true;
   const R = document.documentElement;
-  const on = () => R.classList.contains("snap") && !R.classList.contains("wow-lock") && !R.classList.contains("cmp-lock") && !document.body.classList.contains("menu-open") && !document.querySelector(".modal.open,.fb.open,.cm-read.open,.thx");
+  const mob = () => matchMedia("(max-width:760px)").matches;
+  const on = () => (R.classList.contains("snap") || mob()) && !R.classList.contains("wow-lock") && !R.classList.contains("cmp-lock") && !document.body.classList.contains("menu-open") && !document.querySelector(".modal.open,.fb.open,.cm-read.open,.thx");
   const panels = () => [...document.querySelectorAll("main>section,footer.ft")].filter(e => e.offsetHeight > 0);
   const hdb = () => parseFloat(getComputedStyle(R).getPropertyValue("--hdb")) || 58;
   const topOf = e => Math.max(0, Math.round(e.getBoundingClientRect().top + scrollY - (e.classList.contains("hero") ? 0 : hdb())));
@@ -470,10 +471,22 @@ if (!window.__owClk) { window.__owClk = true; document.addEventListener("click",
   let lastGo = 0;
   function go(dir){
     const nw = Date.now(); if (busy || nw - lastGo < 450) return; lastGo = nw; const P = panels(); if (!P.length) return;
-    const ys = P.map(topOf); let i = 0, best = 1e9; ys.forEach((y, k) => { const d = Math.abs(y - scrollY); if (d < best) { best = d; i = k; } });
-    const j = Math.max(0, Math.min(P.length - 1, i + dir)); if (j === i && best < 4) return;
+    let target;
+    if (R.classList.contains("snap")) {
+      const ys = P.map(topOf); let i = 0, best = 1e9; ys.forEach((y, k) => { const d = Math.abs(y - scrollY); if (d < best) { best = d; i = k; } });
+      const j = Math.max(0, Math.min(P.length - 1, i + dir)); if (j === i && best < 4) { lastGo = 0; return; } target = ys[j];
+    } else {
+      /* 11-25 ユーザー「トップ以外も同じスワイプで、画面ぴったりフェード」：次（前）の話題の頭へ。話題が1画面より長いときは1画面ずつ */
+      const hd = document.querySelector(".hd"), sn = document.querySelector(".subnav"); let off = hd ? hd.getBoundingClientRect().height : 58; if (sn && getComputedStyle(sn).position === "sticky") off += sn.getBoundingClientRect().height;
+      const page = innerHeight - off, max = document.documentElement.scrollHeight - innerHeight;
+      const tops = [0, ...P.map(e => Math.round(e.getBoundingClientRect().top + scrollY - off))].filter(y => y >= 0).sort((a, b) => a - b);
+      const y = scrollY;
+      if (dir > 0) { const nx = tops.find(t => t > y + 90); target = nx !== undefined && nx - y <= page ? nx : y + page; }
+      else { const pv = [...tops].reverse().find(t => t < y - 90); target = pv !== undefined && y - pv <= page ? pv : y - page; }
+      target = Math.max(0, Math.min(max, Math.round(target))); if (Math.abs(target - y) < 4) { lastGo = 0; return; }
+    }
     busy = true; let veil = document.querySelector(".pg-veil"); if (!veil) { veil = document.createElement("div"); veil.className = "pg-veil"; veil.setAttribute("aria-hidden", "true"); document.body.append(veil); } veil.classList.add("on");
-    setTimeout(() => { R.style.scrollSnapType = "none"; scrollTo({top: ys[j], behavior: "instant"});
+    setTimeout(() => { R.style.scrollSnapType = "none"; scrollTo({top: target, behavior: "instant"});
       requestAnimationFrame(() => requestAnimationFrame(() => { veil.classList.remove("on"); setTimeout(() => { R.style.scrollSnapType = ""; busy = false; }, 360); })); }, 230);
   }
   window.owFadeGo = go;
