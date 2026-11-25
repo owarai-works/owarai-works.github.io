@@ -3042,3 +3042,6 @@ html body .wo-skip{display:none!important}
   html body .cs-in{width:min(calc(100% - 230px),1320px)!important;margin-left:max(20px,calc((100% - 230px - 1320px) / 2))!important;margin-right:auto!important;grid-template-columns:96px minmax(0,1fr) minmax(0,1.05fr)!important;justify-content:start!important}
   html body .cs-en{right:24px!important;font-size:min(16vh,140px)!important}
 }
+/* スマホのトップ：話題の切りかえはフェード */
+html.snap main,html.snap footer.ft{transition:opacity .23s ease}
+html.snap.pg-fade main,html.snap.pg-fade footer.ft{opacity:0}

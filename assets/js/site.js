@@ -457,3 +457,32 @@ window.snsHTML = (cls = "") => `<div class="sns ${cls}">${SITE.sns.map(([k, u, n
 /* App Store ボタン（準備中）やお題合戦のボタンを押した数 */
 if (!window.__owClk) { window.__owClk = true; document.addEventListener("click", e => { const t = e.target.closest(".store,.og-go,.gate-go,.hero-co,.btn"); if (!t || t.matches(".dm-go,.dm-next,.dm-again,.dm-share")) return;
   owTrack(t.matches(".store") ? "store_click" : t.matches(".og-go,.gate-go") ? "gate_open" : t.matches(".hero-co") ? "collab_click" : "button_click", {label: (t.textContent || "").trim().slice(0, 40)}); }); }
+/* 11-25 ユーザー「スマホ版：上下にスライドしたら、スクロールではなくフェードアウト→フェードインで、1画面ぴったり次へ」
+   トップ（html.snap）だけ。縦のスワイプとホイールを受けて、いまの話題を消し、次の話題の頭へ一気に移ってから出す。横スワイプ（カードの列）はそのまま */
+(() => {
+  if (window.__owFadeSnap) return; window.__owFadeSnap = true;
+  const R = document.documentElement;
+  const on = () => R.classList.contains("snap") && !R.classList.contains("wow-lock") && !R.classList.contains("cmp-lock") && !document.body.classList.contains("menu-open") && !document.querySelector(".modal.open,.fb.open,.cm-read.open,.thx");
+  const panels = () => [...document.querySelectorAll("main>section,footer.ft")].filter(e => e.offsetHeight > 0);
+  const hdb = () => parseFloat(getComputedStyle(R).getPropertyValue("--hdb")) || 58;
+  const topOf = e => Math.max(0, Math.round(e.getBoundingClientRect().top + scrollY - (e.classList.contains("hero") ? 0 : hdb())));
+  let busy = false;
+  function go(dir){
+    if (busy) return; const P = panels(); if (!P.length) return;
+    const ys = P.map(topOf); let i = 0, best = 1e9; ys.forEach((y, k) => { const d = Math.abs(y - scrollY); if (d < best) { best = d; i = k; } });
+    const j = Math.max(0, Math.min(P.length - 1, i + dir)); if (j === i && best < 4) return;
+    busy = true; R.classList.add("pg-fade");
+    setTimeout(() => { R.style.scrollSnapType = "none"; scrollTo({top: ys[j], behavior: "instant"});
+      requestAnimationFrame(() => { R.classList.remove("pg-fade"); setTimeout(() => { R.style.scrollSnapType = ""; busy = false; }, 320); }); }, 230);
+  }
+  window.owFadeGo = go;
+  let sx = 0, sy = 0, axis = "", startEl = null;
+  const scrollableX = el => { for (let e = el; e && e !== document.body; e = e.parentElement) { const cs = getComputedStyle(e); if (/(auto|scroll)/.test(cs.overflowX) && e.scrollWidth > e.clientWidth + 2) return true; } return false; };
+  const innerScrollY = el => { for (let e = el; e && e !== document.body; e = e.parentElement) { if (e.matches && e.matches(".fb,.fb-log,.sp-menu,.modal,.cm-read,.cmp")) return true; } return false; };
+  addEventListener("touchstart", e => { if (!on() || e.touches.length !== 1) { axis = "x"; return; } sx = e.touches[0].clientX; sy = e.touches[0].clientY; axis = ""; startEl = e.target; }, {passive: true});
+  addEventListener("touchmove", e => { if (!on() || axis === "x" || innerScrollY(startEl)) return; const dx = e.touches[0].clientX - sx, dy = e.touches[0].clientY - sy;
+    if (!axis && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) axis = Math.abs(dy) > Math.abs(dx) ? "y" : (scrollableX(startEl) ? "x" : "y");
+    if (axis === "y" && e.cancelable) e.preventDefault(); }, {passive: false});
+  addEventListener("touchend", e => { if (!on() || axis !== "y" || innerScrollY(startEl)) return; const dy = (e.changedTouches[0] || {}).clientY - sy; if (Math.abs(dy) > 36) go(dy < 0 ? 1 : -1); }, {passive: true});
+  let wt = 0; addEventListener("wheel", e => { if (!on() || innerScrollY(e.target) || Math.abs(e.deltaY) < Math.abs(e.deltaX)) return; e.preventDefault(); const now = Date.now(); if (now - wt < 650 || Math.abs(e.deltaY) < 8) return; wt = now; go(e.deltaY > 0 ? 1 : -1); }, {passive: false});
+})();
